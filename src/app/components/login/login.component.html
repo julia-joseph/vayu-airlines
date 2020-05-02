@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+</head>
+
+<body style="font-family: san fancisco;">
+
+    <div class="row">
+        <div class="col-xs-10 col-sm-7 img-section">
+            <img src="./assets/images/bg_login.jpg" class="mx-auto d-block" class="img-style">
+        </div>
+        <div class="col-xs-10 col-sm-5">
+            <div class="main-title">
+                <img src="./assets/images/logo_VA.png">
+            </div>
+            <h4 class="sub-title">Log in </h4>
+            <h5 class="sub-title">Please enter your credentials to login </h5>
+            <div style="margin-top:70px">
+                <form #loginfrm="ngForm" class="example-form" (ngSubmit)="onSubmit(loginfrm)">
+
+                    <div class="form-group input-group mb-3 input-group-lg">
+                        <input type="email" class="form-control" id="email" placeholder="Email Address" name="email">
+                    </div>
+                    <div class="form-group input-group mb-3 input-group-lg">
+                        <input type="password" class="form-control" id="pwd" placeholder="Password" name="pswd">
+                    </div>
+
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="remember">Keep me logged in
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="button">Sign In</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

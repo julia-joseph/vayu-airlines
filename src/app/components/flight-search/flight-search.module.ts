@@ -6,6 +6,7 @@ import { FlightSearchContentComponent } from './flight-search-content/flight-sea
 import { BookFlightComponent } from './flight-search-content/book-flight/book-flight.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MainModule } from '../main/main.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   imports: [
     CommonModule,
-    NgbModule
+    NgbModule,
+    MainModule
   ]
 })
 export class FlightSearchModule { }

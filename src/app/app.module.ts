@@ -8,11 +8,13 @@ import { FlightSearchModule } from './components/flight-search/flight-search.mod
 import { MainModule } from './components/main/main.module';
 import { MainComponent } from './components/main/main.component';
 import { FlightListComponent } from './components/flight-list/flight-list.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FlightListComponent
+    FlightListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

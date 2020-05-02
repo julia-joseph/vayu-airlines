@@ -1,0 +1,41 @@
+.main-title{
+    text-align: center;
+    font-size: 1.5em;
+    padding: 1rem;
+}
+.sub-title{
+    font-weight: unset;
+    text-align: center;
+    font-size: 1.2em;
+    padding: 1rem;
+}
+.main-title span{
+    font-weight: bold;
+}
+.img-section{
+   padding-left: 0px;
+   padding-right: 0px;
+}
+.img-style{
+    width: 780px;
+    height: 700px;
+}
+.row{
+    margin-left: 0px;
+    margin-right: 0px;
+    height:-webkit-fill-available;
+}
+
+.button {
+    background-color: #ff530f;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    cursor: pointer;
+    width: 100%;
+  }
