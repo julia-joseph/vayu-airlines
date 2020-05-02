@@ -9,6 +9,7 @@ import { MainModule } from './components/main/main.module';
 import { MainComponent } from './components/main/main.component';
 import { FlightListComponent } from './components/flight-list/flight-list.component';
 import { LoginComponent } from './components/login/login.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { LoginComponent } from './components/login/login.component';
     ReactiveFormsModule,
     FormsModule,
     MainModule,
-    FlightSearchModule
+    FlightSearchModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
