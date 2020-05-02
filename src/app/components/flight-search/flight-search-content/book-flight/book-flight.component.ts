@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-book-flight',
@@ -12,14 +13,24 @@ export class BookFlightComponent implements OnInit {
     to: new FormControl(''),
     depart: new FormControl(''),
     return: new FormControl(''),
-    passengers: new FormControl(''),
-    children: new FormControl(''),
-    infants: new FormControl('')
+    passengers: new FormGroup({
+      adults: new FormControl(''),
+      children: new FormControl(''),
+      infants: new FormControl('')
+    }),
+    class: new FormControl('')
   });
   
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {
+  }
+
+  onFlightsearch() {
+    console.log('search flights');
+    this.router.navigate(['/flight-list']);
   }
 
 }

@@ -5,6 +5,10 @@
     margin-left: 30px;
     margin-right: 30px;
 
+    input:focus {
+        //change color to orange
+    }
+
     .card-title {
         color: orangered;
     }

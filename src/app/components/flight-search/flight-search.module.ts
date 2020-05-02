@@ -8,6 +8,7 @@ import { FlightSearchContentComponent } from './flight-search-content/flight-sea
 import { FlightSearchFooterComponent } from './flight-search-footer/flight-search-footer.component';
 import { BookFlightComponent } from './flight-search-content/book-flight/book-flight.component';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { BookFlightComponent } from './flight-search-content/book-flight/book-fl
     BookFlightComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    NgbModule
   ]
 })
 export class FlightSearchModule { }
