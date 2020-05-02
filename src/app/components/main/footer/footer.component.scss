@@ -1,7 +1,11 @@
-.flight-search-footer {
+.main-footer {
     position: fixed;
     bottom: 0;
     width: 100%;
     height: 30px;
     line-height: 30px;
+
+    .footer-text {
+        margin-left: 15px;
+    }
 }
