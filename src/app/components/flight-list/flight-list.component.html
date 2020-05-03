@@ -1,1 +1,44 @@
-<p>flight-list works!</p>
+<app-navbar></app-navbar>
+<app-header></app-header>
+<div class="card flight-list-section">
+    <div class="card-body">
+        <div class="row d-flex flex-row">
+            <div class="col-1-half pl-2">
+                <h4 class="card-title flight-list-title">Flight List</h4>
+            </div>
+            <div class="col-3">
+                <div class="row">
+                    <span>Toronto All Airports to New York All Airports</span>
+                </div>
+                <div class="row">
+                    <span>Friday 7 May 2020</span> <span><img src="../../../assets/images/ico_modify.png" class="edit-icon"></span>
+                </div>
+            </div>
+            <div class="col-7-half">
+                <div class="row ml-4">
+                    <div class="col-half-quarter">
+                        <span><img src="../../../assets/images/ico_scroll_left.png" class="scroll-left-icon"></span>
+                    </div>
+                    <div *ngFor="let numbers of [1,2,3,4,5,6,7]" class="col-1-half flight-list-options">
+                        <div class="d-flex flex-column" [ngClass]="{'selected-date': numbers === 4}">
+                            <div class="flight-list-options-price">
+                                $402
+                            </div>
+                            <div class="flight-list-options-date">
+                                Tue - May 4
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-half-quarter">
+                        <span><img src="../../../assets/images/ico_scroll_right.png" class="scroll-right-icon"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div *ngFor="number of [0,1,2,3,4]">
+            <app-flight-list-item></app-flight-list-item>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

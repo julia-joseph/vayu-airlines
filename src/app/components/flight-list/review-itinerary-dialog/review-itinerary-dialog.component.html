@@ -1,0 +1,133 @@
+<div class="card review-itinerary-section">
+    <div class="card-body">
+        <div class="row d-flex flex-row justify-content-between">
+            <h4 class="card-title review-itinerary-title">
+                Review Itinerary
+            </h4>
+            <button (click)="onShare()" class="btn btn-large review-itinerary-btn mr-3" disabled>Share Itinerary</button>
+        </div>
+        <hr class="mb-4"/>
+        <div class="row d-flex flex-row">
+            <div class="col-8">
+                <div class="row review-itinerary-flight-details-row">
+                    <div class="card h-100 w-100">
+                        <div class="card-body">
+                            <div class="row d-flex flex-row">
+                                <div class="col-3 d-flex flex-column">
+                                    <div class="review-itinerary-label">From</div>
+                                    <div>{{ data.from }}</div>
+                                </div>
+                                <div class="col-3d-flex flex-column">
+                                    <div class="review-itinerary-label">To</div>
+                                    <div>{{ data.to }}</div>
+                                </div>
+                                <div class="col-3 d-flex flex-column">
+                                    <div class="review-itinerary-label">Cabin Class</div>
+                                    <div>{{ data.class }}</div>
+                                </div>
+                                <div class="col-3 d-flex flex-column">
+                                    <div class="review-itinerary-label">Passenger</div>
+                                    <div>{{ data.passenger }}</div>
+                                </div>
+                            </div>
+                            <div class="row d-flex flex-row  mt-3">
+                                <div class="col-3 d-flex flex-column">
+                                    <div class="review-itinerary-label">Departure Date</div>
+                                    <div>{{ data.departDate }}</div>
+                                </div>
+                                <div class="col-3d-flex flex-column">
+                                    <div class="review-itinerary-label">Arrival Date</div>
+                                    <div>{{ data.returnDate }}</div>
+                                </div>
+                                <div class="col-3 d-flex flex-column">
+
+                                </div>
+                                <div class="col-3 d-flex flex-column-reverse">
+                                    <div class="review-itinerary-change-link" (click)="onChange()">Change</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row review-itinerary-flight-details-row">
+                    <div class="card h-100 w-100">
+                        <div class="card-body">
+                            <div class="row d-flex flex-row">
+                                <div class="col-3">
+                                    <div class="departing-flight-title">Departing Flight</div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="review-itinerary-label">{{data.flightNum}}</div>
+                                </div>
+                                <div class="col-3">
+                                    <div>{{data.departDate}}</div>
+                                </div>
+                                <div class="col-4">
+                                    <div>Toronto to New York {{data.flightDuration}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="important-notice-section">
+                        <span class="important-notice-label">Important Note: </span>The detailed fare conditions are available in the payment
+                    page, before you enter your payment details. The conditions most restrictive is applicable
+                    for this Itinerary.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="ml-4">
+                    <div class="row">
+                        <div class="review-itinerary-label-orange">Total Cost</div>
+                    </div>
+                    <div class="row">
+                        <div>USD {{data.totalFare + data.airportFee + data.surCharge | number : '.2'}}</div>
+                    </div>
+                    <div class="row">
+                        <div>(Includes Taxes and Surcharges)</div>
+                    </div>
+                    <div class="row">
+                        <div class="review-itinerary-label-orange mt-3"> Cost Breakdown </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="row d-flex flex-column">
+                                <div>Total Fare</div>
+                                <div>Airport Fee</div>
+                                <div>Surcharge</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="row d-flex flex-column">
+                                <div>USD {{data.totalFare | number : '.2'}}</div>
+                                <div>USD {{data.airportFee | number : '.2'}}</div>
+                                <div>USD {{data.surCharge | number : '.2'}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-6 d-flex flex-column pl-0">
+                            <div class="total-cost-title">Total Cost</div>
+                        </div>
+                        <div class="col-6 d-flex flex-column pl-0">
+                            <div  class="total-cost-price">USD {{data.totalFare + data.airportFee + data.surCharge | number : '.2'}}</div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-6">
+    
+                        </div>
+                        <div class="col-6 d-flex flex-row-reverse">
+                            <button (click)="onContinue()" class="btn btn-large review-itinerary-btn">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

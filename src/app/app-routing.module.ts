@@ -6,10 +6,9 @@ import { LoginComponent } from './components/login/login.component';
 
 
 const routes: Routes = [
+  { path: 'login', component: LoginComponent },
   { path: 'flight-search', component: FlightSearchComponent },
   { path: 'flight-list', component: FlightListComponent },
-  { path: 'login', component: LoginComponent },
-
   {
     path: '',
     redirectTo: '/login',
