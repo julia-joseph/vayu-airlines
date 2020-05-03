@@ -8,6 +8,10 @@ import { BookFlightComponent } from './flight-search-content/book-flight/book-fl
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MainModule } from '../main/main.module';
 
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 @NgModule({
   declarations: [
     FlightSearchComponent,
@@ -17,7 +21,18 @@ import { MainModule } from '../main/main.module';
   imports: [
     CommonModule,
     NgbModule,
-    MainModule
+    MainModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatExpansionModule
+  ],
+  exports: [
+    FlightSearchComponent,
+    FlightSearchContentComponent,
+    BookFlightComponent,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatExpansionModule
   ]
 })
 export class FlightSearchModule { }

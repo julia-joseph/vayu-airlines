@@ -21,6 +21,9 @@ export class BookFlightComponent implements OnInit {
     class: new FormControl('')
   });
   
+  adults: string = 'option1';
+  children: string ="option1";
+  infants: string = "option1";
   constructor(
     private router: Router
   ) { }

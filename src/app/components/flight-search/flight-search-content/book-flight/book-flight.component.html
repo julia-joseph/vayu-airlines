@@ -48,64 +48,66 @@
         </div>
         <div class="row">
             <div class="col-3">
-                <div><label>Adults </label></div>
-                <div>
-                    <select class="form-control select" formGroupName="adults">
-                        <option>
-                            1
-                        </option>
-                        <option>
-                            2
-                        </option>
-                        <option>
-                            3
-                        </option>
-                    </select>
-                </div>
+                <div><label>Passengers</label></div>
 
-                <!-- <mat-accordion>
+                <mat-accordion class="form-control passengers-field">
                     <mat-expansion-panel>
-                      <mat-expansion-panel-header>
+                      <mat-expansion-panel-header [collapsedHeight]="'30px'" [expandedHeight]="'70px'">
                         <mat-panel-title>
-                          Passengers
+                          
                         </mat-panel-title>
                       </mat-expansion-panel-header>
                   
-                      <mat-label>Adults</mat-label>
-                      <mat-form-field>
-                        <mat-select [(value)]="selected">
-                          <mat-option>None</mat-option>
-                          <mat-option value="option1">1</mat-option>
-                          <mat-option value="option2">2</mat-option>
-                          <mat-option value="option3">3</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                      <br>
-                      <mat-label>Children</mat-label>
-                      <mat-form-field>
-                        <mat-select [(value)]="selected">
-                          <mat-option>None</mat-option>
-                          <mat-option value="option1">1</mat-option>
-                          <mat-option value="option2">2</mat-option>
-                          <mat-option value="option3">3</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                      <br>
-                      <mat-label>Infants</mat-label>
-                      <mat-form-field>
-                        <mat-select [(value)]="selected">
-                          <mat-option>None</mat-option>
-                          <mat-option value="option1">1</mat-option>
-                          <mat-option value="option2">2</mat-option>
-                          <mat-option value="option3">3</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                  
+                      <div class="row d-flex flex-row justify-content-between m-0">
+                        <label class="passengers-title">Adults</label>
+                        <mat-form-field class="passengers-select">
+                            <mat-select [(value)]="adults">
+                            <mat-option>None</mat-option>
+                            <mat-option value="option1">1</mat-option>
+                            <mat-option value="option2">2</mat-option>
+                            <mat-option value="option3">3</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="row d-flex flex-row justify-content-between m-0">
+                        <label class="passengers-title">Children</label>
+                        <mat-form-field class="passengers-select">
+                            <mat-select [(value)]="children">
+                            <mat-option>None</mat-option>
+                            <mat-option value="option1">1</mat-option>
+                            <mat-option value="option2">2</mat-option>
+                            <mat-option value="option3">3</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                      </div>
+                      
+                      <div class="row d-flex flex-row justify-content-between m-0 mb-2">
+                        <label class="passengers-title">Infants</label>
+                        <mat-form-field class="passengers-select">
+                            <mat-select [(value)]="infants">
+                            <mat-option>None</mat-option>
+                            <mat-option value="option1">1</mat-option>
+                            <mat-option value="option2">2</mat-option>
+                            <mat-option value="option3">3</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                      </div>
+                      
                     </mat-expansion-panel>
-                  </mat-accordion> -->
+                  </mat-accordion>
             </div>
             <div class="col-3">
-                <div><label>Children </label></div>
+                <div><label>Class </label></div>
+                <div>
+                    <select class="form-control select" formControlName="classes">
+                        <option>Business</option>
+                        <option>Economy</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-3">
+                <!-- <div><label>Children </label></div>
                 <div>
                     <select class="form-control select" formGroupName="children">
                         <option>
@@ -118,16 +120,7 @@
                             3
                         </option>
                     </select>
-                </div>
-            </div>
-            <div class="col-3">
-                <div><label>Class </label></div>
-                <div>
-                    <select class="form-control select" formControlName="classes">
-                        <option>Business</option>
-                        <option>Economy</option>
-                    </select>
-                </div>
+                </div> -->
             </div>
             <div class="col-3">
                 <div></div>
