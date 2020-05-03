@@ -1,134 +1,123 @@
-
 <div class="card book-flight">
     <div class="card-body">
         <form formGroupName="bookFlightsForm" (ngSubmit)="onFlightsearch()">
-        <h4 class="card-title">Book Flights</h4>
-        <div class="radio-button-group">
-            <label class="radio-inline radio-item"><input type="radio" name="flightdirection" class="radio-button" checked >One Way</label>
-            <label class="radio-inline disabled radio-item"><input type="radio" name="flightdirection" class="radio-button" disabled>Round Trip</label>
-            <label class="radio-inline disabled radio-item"><input type="radio" name="flightdirection" class="radio-button" disabled>Multi-city</label>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                <div><label>From </label></div>
-                <div>
-                    <input list="from" class="form-control textbox" formControlName="from" value="Toronto All Airports">
-                    <datalist id="from">
-                        <option value="Toronto All Airports">
-                        <option value="Toronto All Airports">
-                        <option value="Toronto All Airports">
-                        <option value="Toronto All Airports">
-                        <option value="Toronto All Airports">
-                    </datalist>
-                    <!-- <input type="text" class="form-control textbox" formControlName="from" value="Toronto All Airports"> -->
+            <h4 class="card-title">Book Flights</h4>
+            <div class="radio-button-group">
+                <label class="radio-inline radio-item"><input type="radio" name="flightdirection" class="radio-button"
+                        checked>One Way</label>
+                <label class="radio-inline disabled radio-item"><input type="radio" name="flightdirection"
+                        class="radio-button" disabled>Round Trip</label>
+                <label class="radio-inline disabled radio-item"><input type="radio" name="flightdirection"
+                        class="radio-button" disabled>Multi-city</label>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                   <div><label>From </label></div> 
+                   <div>
+                        <select class="form-control select" formControlName="from"
+                                (change)="onSelect($event.target.value)">
+                            <option
+                                *ngFor="let origin of origins.data.origins" 
+                                [value]="origin.code">
+                                {{origin.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div><label>To </label></div>
+                    <div>
+                        <select class="form-control select" formControlName="to">
+                            <option
+                                *ngFor="let destination of destinations.data.destinations"
+                                [value]="destination.code">
+                                {{destination.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div><label>Depart </label></div>
+                    <div><input type="date"  class="form-control date" formControlName="return" value="2020-05-01"></div>
+                </div>
+                <div class="col-3">
+                    <div><label>Return </label></div>
+                    <div><input type="date" disabled class="form-control date" formControlName="return" value="2020-05-31"></div>
                 </div>
             </div>
-            <div class="col-3">
-                <div><label>To </label></div>
-                <div>
-                    <input list="to" class="form-control textbox" formControlName="to" value="New York All Airports">
-                    <datalist id="to">
-                        <option value="New York All Airports">
-                        <option value="Los Angeles All Airports">
-                        <option value="Atlanta All Airports">
-                        <option value="California All Airports">
-                        <option value="New Jersey All Airports">
-                    </datalist>
-                    <!-- <input type="text" class="form-control textbox" formControlName="to" value="New York All Airports"> -->
-                </div>
-            </div>
-            <div class="col-3">
-                <div><label>Depart </label></div>
-                <div><input type="date" class="form-control date" formControlName="return" value="2020-05-01"></div>
-            </div>
-            <div class="col-3">
-                <div><label>Return </label></div>
-                <div><input type="date" class="form-control date" formControlName="return" value="2020-05-04"></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                <div><label>Passengers</label></div>
+            <div class="row">
+                <div class="col-3">
+                    <div><label>Passengers</label></div>
 
-                <mat-accordion class="form-control passengers-field">
-                    <mat-expansion-panel>
-                      <mat-expansion-panel-header [collapsedHeight]="'30px'" [expandedHeight]="'70px'">
-                        <mat-panel-title>
-                          
-                        </mat-panel-title>
-                      </mat-expansion-panel-header>
-                  
-                      <div class="row d-flex flex-row justify-content-between m-0">
-                        <label class="passengers-title">Adults</label>
-                        <mat-form-field class="passengers-select">
-                            <mat-select [(value)]="adults">
-                            <mat-option>None</mat-option>
-                            <mat-option value="option1">1</mat-option>
-                            <mat-option value="option2">2</mat-option>
-                            <mat-option value="option3">3</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                      </div>
+                    <mat-accordion class="form-control passengers-field">
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header [collapsedHeight]="'34px'" [expandedHeight]="'40px'">
+                                <mat-panel-title>
 
-                      <div class="row d-flex flex-row justify-content-between m-0">
-                        <label class="passengers-title">Children</label>
-                        <mat-form-field class="passengers-select">
-                            <mat-select [(value)]="children">
-                            <mat-option>None</mat-option>
-                            <mat-option value="option1">1</mat-option>
-                            <mat-option value="option2">2</mat-option>
-                            <mat-option value="option3">3</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                      </div>
-                      
-                      <div class="row d-flex flex-row justify-content-between m-0 mb-2">
-                        <label class="passengers-title">Infants</label>
-                        <mat-form-field class="passengers-select">
-                            <mat-select [(value)]="infants">
-                            <mat-option>None</mat-option>
-                            <mat-option value="option1">1</mat-option>
-                            <mat-option value="option2">2</mat-option>
-                            <mat-option value="option3">3</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                      </div>
-                      
-                    </mat-expansion-panel>
-                  </mat-accordion>
-            </div>
-            <div class="col-3">
-                <div><label>Class </label></div>
-                <div>
-                    <select class="form-control select" formControlName="classes">
-                        <option>Business</option>
-                        <option>Economy</option>
-                    </select>
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+
+                            <div class="row d-flex flex-row justify-content-between m-0">
+                                <label class="passengers-title">Adults</label>
+                                <mat-form-field class="passengers-select">
+                                    <mat-select [(value)]="adults">
+                                        <mat-option>None</mat-option>
+                                        <mat-option value="option1">1</mat-option>
+                                        <mat-option value="option2">2</mat-option>
+                                        <mat-option value="option3">3</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="row d-flex flex-row justify-content-between m-0">
+                                <label class="passengers-title">Children</label>
+                                <mat-form-field class="passengers-select">
+                                    <mat-select [(value)]="children">
+                                        <mat-option>None</mat-option>
+                                        <mat-option value="option1">1</mat-option>
+                                        <mat-option value="option2">2</mat-option>
+                                        <mat-option value="option3">3</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="row d-flex flex-row justify-content-between m-0 mb-2">
+                                <label class="passengers-title">Infants</label>
+                                <mat-form-field class="passengers-select">
+                                    <mat-select [(value)]="infants">
+                                        <mat-option>None</mat-option>
+                                        <mat-option value="option1">1</mat-option>
+                                        <mat-option value="option2">2</mat-option>
+                                        <mat-option value="option3">3</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </div>
+                <div class="col-3">
+                    <div><label>Class </label></div>
+                    <div>
+                        <select class="form-control select" formControlName="classes">
+                            <option>Business</option>
+                            <option>Economy</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-3">
+
+                </div>
+                <div class="col-3">
+                    <div></div>
+                    <div>
+                        <button (click)="onFlightsearch()" 
+                                class="btn btn-primary btn-block search-button">
+                            Search Flights
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div class="col-3">
-                <!-- <div><label>Children </label></div>
-                <div>
-                    <select class="form-control select" formGroupName="children">
-                        <option>
-                            1
-                        </option>
-                        <option>
-                            2
-                        </option>
-                        <option>
-                            3
-                        </option>
-                    </select>
-                </div> -->
-            </div>
-            <div class="col-3">
-                <div></div>
-                <div>
-                    <button (click)="onFlightsearch()" class="btn btn-primary btn-block search-button">Search Flights</button>
-                </div>
-            </div>
-        </div>
         </form>
-      </div>
+    </div>
 </div>
