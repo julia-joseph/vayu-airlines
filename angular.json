@@ -128,5 +128,8 @@
       }
     }
   },
-  "defaultProject": "vayu-airlines"
+  "defaultProject": "vayu-airlines",
+  "cli": {
+    "analytics": "43b98f4d-8e41-4f38-9a13-0e053881b5be"
+  }
 }

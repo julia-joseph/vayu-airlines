@@ -8,12 +8,18 @@ import { FlightSearchModule } from './components/flight-search/flight-search.mod
 import { MainModule } from './components/main/main.module';
 import { LoginComponent } from './components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BookingDetailsComponent } from './components/booking-details/booking-details.component';
+import { PaymentSummaryComponent } from './components/payment-summary/payment-summary.component';
+import { AncillariesComponent } from './components/ancillaries/ancillaries.component';
 import { FlightListModule } from './components/flight-list/flight-list.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    BookingDetailsComponent,
+    PaymentSummaryComponent,
+    AncillariesComponent
   ],
   imports: [
     BrowserModule,

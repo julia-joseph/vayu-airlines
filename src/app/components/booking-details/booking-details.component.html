@@ -1,0 +1,43 @@
+<app-navbar></app-navbar>
+<app-header></app-header>
+<div class="card checkout">
+  <div class="card-body">
+    <h4 class="card-title">Booking Details</h4>
+    <div class="">
+      <div class="row">
+        <div class="col-lg-9 col-md-9 col-sm-9 ">
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <h4 class="font-weight-bold">Traveller Details</h4>
+              </mat-expansion-panel-header>
+              This the expansion 1 content
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <h4 class="font-weight-bold">Trip Contacts</h4>
+              </mat-expansion-panel-header>
+              This the expansion 2 content
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <h4 class="font-weight-bold">Seat Selection</h4>
+              </mat-expansion-panel-header>
+              This the expansion 2 content
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <h4 class="font-weight-bold">Ancillaries</h4>
+              </mat-expansion-panel-header>
+              <app-ancillaries></app-ancillaries>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3">
+          <app-payment-summary></app-payment-summary>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
