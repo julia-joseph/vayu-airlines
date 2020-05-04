@@ -42,8 +42,7 @@ export class FlightListItemComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result){
-        //should be booking details page
-        this.router.navigate(['/login']);
+        this.router.navigate(['/booking-details']);
       }
     });
   }
