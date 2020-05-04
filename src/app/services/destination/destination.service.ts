@@ -17,5 +17,13 @@ export class DestinationService {
     return this.destination[0];
 }
 
+  getDestinationName(code) {
+    const destination = DESTINATIONS.find(destination => 
+      destination.data.destinations.find(des => des.code === code )
+    );
+    const des = destination.data.destinations.find(des => des.code === code);
+    return des ? des.name : '';
+  }
+
 }
 

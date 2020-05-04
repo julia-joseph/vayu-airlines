@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ReviewItineraryDialogComponent } from '../review-itinerary-dialog/review-itinerary-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-flight-list-item',
@@ -9,6 +10,16 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./flight-list-item.component.scss']
 })
 export class FlightListItemComponent implements OnInit {
+  @Input() flightDetails: any;
+  @Input() show: number = 1;
+
+  from: string = 'New York City area (NYC)';
+  to: string = 'Los Angeles, CA (LAX)';
+  fromTime: string = '07:15';
+  toTime: string = '12:15';
+  connectionDetails: string = 'Non-Stop 4 hr 55 min';
+  economyPrice: string = '404';
+  businessPrice: string = '848';
 
   constructor(
     public dialog: MatDialog,
@@ -16,6 +27,10 @@ export class FlightListItemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(this.flightDetails) {
+      this.from = this.flightDetails.from;
+      this.to = this.flightDetails.to;
+    }
   }
 
   onFlightSelection() {
@@ -25,12 +40,17 @@ export class FlightListItemComponent implements OnInit {
       panelClass: 'custom-dialog-container',
       width: '1200px',
       data: {
-        from: 'Toronto (YYZ)',
-        to: 'New York (LGA)',
-        class: 'Economy',
-        passenger: '1 Adult 2 Children',
-        departDate: 'Fri, 7 May 2020',
-        returnDate: 'Fri, 7 May 2020',
+        from: this.from,
+        to: this.to,
+        class: this.flightDetails.class ? this.flightDetails.class : 'Economy',
+        passenger: 
+          (this.flightDetails.passengers.adults ? this.flightDetails.passengers.adults + ' Adult ' : '1 Adult ') +
+          (this.flightDetails.passengers.children ? this.flightDetails.passengers.children + ' Children ' : '2 Children '),
+          //breaks design + (this.flightDetails.passengers.infants ? this.flightDetails.passengers.infants + ' Infant' : '1 Infant'),   
+        departDate: 
+          this.flightDetails.depart ? moment(this.flightDetails.depart).format('ddd, D MMM YYYY') : 'Fri, 7 May 2020',
+        returnDate: 
+          this.flightDetails.depart ? moment(this.flightDetails.depart).format('ddd, D MMM YYYY') : 'Fri, 7 May 2020',
         flightNum:  'AC7952',
         flightDuration: '4 hr 55 min',
         totalFare: 60.00,

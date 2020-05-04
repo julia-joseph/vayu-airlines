@@ -11,6 +11,7 @@ import { MainModule } from '../main/main.module';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     NgbModule,
     MainModule,
     MatSelectModule,
@@ -32,7 +34,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     BookFlightComponent,
     MatSelectModule,
     MatFormFieldModule,
-    MatExpansionModule
+    MatExpansionModule,
+    ReactiveFormsModule
   ]
 })
 export class FlightSearchModule { }

@@ -8,10 +8,10 @@
             </div>
             <div class="col-3">
                 <div class="row">
-                    <span>Toronto All Airports to New York All Airports</span>
+                    <span>{{ flightDetails.from }} to {{ flightDetails.to }}</span>
                 </div>
                 <div class="row">
-                    <span>Friday 7 May 2020</span> <span><img src="../../../assets/images/ico_modify.png" class="edit-icon"></span>
+                    <span>{{ flightDetails.depart }}</span> <span><img src="../../../assets/images/ico_modify.png" class="edit-icon"></span>
                 </div>
             </div>
             <div class="col-7-half">
@@ -25,7 +25,7 @@
                                 $402
                             </div>
                             <div class="flight-list-options-date">
-                                Tue - May 4
+                                Fri - May 8
                             </div>
                         </div>
                     </div>
@@ -36,8 +36,11 @@
             </div>
         </div>
         <hr/>
-        <div *ngFor="number of [0,1,2,3,4]">
-            <app-flight-list-item></app-flight-list-item>
+        <div *ngFor="let number of [0,1,2,3,4]">
+            <app-flight-list-item 
+                [flightDetails]="flightDetails"
+                [show]="number">
+            </app-flight-list-item>
         </div>
     </div>
 </div>

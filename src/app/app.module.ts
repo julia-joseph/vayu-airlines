@@ -12,6 +12,7 @@ import { BookingDetailsComponent } from './components/booking-details/booking-de
 import { PaymentSummaryComponent } from './components/payment-summary/payment-summary.component';
 import { AncillariesComponent } from './components/ancillaries/ancillaries.component';
 import { FlightListModule } from './components/flight-list/flight-list.module';
+import { ItineraryConfirmationComponent } from './components/itinerary-confirmation/itinerary-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { FlightListModule } from './components/flight-list/flight-list.module';
     LoginComponent,
     BookingDetailsComponent,
     PaymentSummaryComponent,
-    AncillariesComponent
+    AncillariesComponent,
+    ItineraryConfirmationComponent
   ],
   imports: [
     BrowserModule,

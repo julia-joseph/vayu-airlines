@@ -17,6 +17,16 @@
         max-width: 12.499999995%;
     }
 
+    .col-1-half-n-quarter {
+        flex: 0 0 14.5833333275%;
+        max-width: 14.5833333275%;
+    }
+
+    .col-11-half {
+        flex: 0 0 95.833333295%;
+        max-width: 95.833333295%;
+    }
+
     .orange-line {
         border: 0.5px solid #ed3223;
     }
@@ -34,14 +44,36 @@
         font-size: 1.25rem;;
     }
 
-    .flight-list-item-class{
-        // font-size: 1.1rem;
+    .flight-list-item-details{
+        position: relative;
+        left: 25px;
+        padding: 1rem 0.2rem;
     }
 
-    .flight-selection-button {
-        margin-top: 10px;
-        margin-left: 13px;
+    .flight-list-item-selection {
+        padding-left: 10px;
+        background: orangered;
+        max-width: fit-content;
+        margin-left: 35px;
         cursor: pointer;
+
+        .flight-selection-button {
+            margin-top: 40px;
+            height: 28px;
+        }
+    }
+
+    .flight-list-item-selection-not {
+        padding-left: 10px;
+        background: rgb(255, 236, 228);
+        max-width: fit-content;
+        margin-left: 35px;
+        cursor: pointer;
+
+        .flight-selection-button {
+            margin-top: 40px;
+            height: 28px;
+        }
     }
 }
 

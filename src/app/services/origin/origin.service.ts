@@ -12,6 +12,11 @@ export class OriginService {
   getOrigins() {
     return ORIGIN_DATA_RESPONSE;
   }
+
+  getOriginName(code) {
+    const origin = ORIGIN_DATA_RESPONSE.data.origins.find(origin => origin.code === code);
+    return origin ? origin.name : '';
+  }
 }
 
 

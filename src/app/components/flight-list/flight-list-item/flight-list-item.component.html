@@ -1,13 +1,77 @@
 <div class="card flight-list-item">
-    <div class="card-body">
-        <div class="row d-flex flex-row">
-            <div class="col-1-half">
+    <div class="">
+        <div class="row">
+            <div class="col-11 flight-list-item-details">
+                <div class="row d-flex flex-row">
+                    <div class="col-1-half-n-quarter">
+                        <div class="d-flex flex-column flight-list-item-label">
+                            <div>
+                                {{ fromTime }}
+                            </div>
+                            <div>
+                                {{ from }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 d-flex flex-column">
+                        <div class="row">
+                            <div class="col-1">
+                                <img src="../../../../assets/images/ico_FL_Take.png" class="plane-icon">
+                            </div>
+                            <div class="col-10 d-flex flex-column mt-2">
+                                <div class="text-center">{{ connectionDetails }}</div>
+                                <div class="orange-line"></div>
+                            </div>
+                            <div class="col-1 pl-0">
+                                <img src="../../../../assets/images/ico_FL_Land.png" class="plane-icon">
+                            </div>                 
+                        </div>
+                    </div>
+                    <div class="col-1-half-n-quarter">
+                        <div class="row d-flex flex-column flight-list-item-label">
+                            <div>
+                                {{ toTime }}
+                            </div>
+                            <div>
+                                {{ to }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-1-quarter">
+                        <div class="row d-flex flex-column flight-list-item-label">
+                            <div  class="flight-list-item-class">
+                                Economy
+                            </div>
+                            <div class="flight-list-item-price">
+                                ${{ economyPrice }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-1-quarter">
+                        <div class="row d-flex flex-column flight-list-item-label">
+                            <div  class="flight-list-item-class">
+                                Business
+                            </div>
+                            <div class="flight-list-item-price">
+                                ${{ businessPrice }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-1 flight-list-item-selection"  (click)="onFlightSelection()" *ngIf="!show">
+                <img src="../../../../assets/images/ico_sel_white.png" class="flight-selection-button">
+            </div>
+            <div class="col-1 flight-list-item-selection-not" *ngIf="show">
+                <img src="../../../../assets/images/ico_sel_black.png" class="flight-selection-button">
+            </div>
+            <!-- <div class="col-1-half">
                 <div class="d-flex flex-column flight-list-item-label">
                     <div>
-                        07:15
+                        {{ fromTime }}
                     </div>
                     <div>
-                        Toronto (YVZ)
+                        {{ from }}
                     </div>
                 </div>
             </div>
@@ -17,10 +81,10 @@
                         <img src="../../../../assets/images/ico_FL_Take.png" class="plane-icon">
                     </div>
                     <div class="col-10 d-flex flex-column mt-2">
-                        <div class="text-center">Non-Stop 4 hr 55 min</div>
+                        <div class="text-center">{{ connectionDetails }}</div>
                         <div class="orange-line"></div>
                     </div>
-                    <div class="col-1">
+                    <div class="col-1 pl-0">
                         <img src="../../../../assets/images/ico_FL_Land.png" class="plane-icon">
                     </div>                 
                 </div>
@@ -28,10 +92,10 @@
             <div class="col-1-half">
                 <div class="row d-flex flex-column flight-list-item-label">
                     <div>
-                        12:10
+                        {{ toTime }}
                     </div>
                     <div>
-                        New York (LGA)
+                        {{ to }}
                     </div>
                 </div>
             </div>
@@ -41,7 +105,7 @@
                         Economy
                     </div>
                     <div class="flight-list-item-price">
-                        $402
+                        ${{ economyPrice }}
                     </div>
                 </div>
             </div>
@@ -51,13 +115,13 @@
                         Business
                     </div>
                     <div class="flight-list-item-price">
-                        $848
+                        ${{ businessPrice }}
                     </div>
                 </div>
             </div>
             <div class="col-half">
                 <img (click)="onFlightSelection()" src="../../../../assets/images/ico_scroll_right.png" class="flight-selection-button">
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

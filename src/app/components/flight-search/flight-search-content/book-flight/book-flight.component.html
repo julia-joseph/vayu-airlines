@@ -1,6 +1,6 @@
 <div class="card book-flight">
     <div class="card-body">
-        <form formGroupName="bookFlightsForm" (ngSubmit)="onFlightsearch()">
+        <form [formGroup]="bookFlightsForm" (ngSubmit)="onFlightSearch()">
             <h4 class="card-title">Book Flights</h4>
             <div class="radio-button-group">
                 <label class="radio-inline radio-item"><input type="radio" name="flightdirection" class="radio-button"
@@ -38,7 +38,7 @@
                 </div>
                 <div class="col-3">
                     <div><label>Depart </label></div>
-                    <div><input type="date"  class="form-control date" formControlName="return" value="2020-05-01"></div>
+                    <div><input type="date"  class="form-control date" formControlName="depart" value="2020-05-01"></div>
                 </div>
                 <div class="col-3">
                     <div><label>Return </label></div>
@@ -49,22 +49,25 @@
                 <div class="col-3">
                     <div><label>Passengers</label></div>
 
-                    <mat-accordion class="form-control passengers-field">
+                    <mat-accordion class="form-control passengers-field" formGroupName="passengers">
                         <mat-expansion-panel>
                             <mat-expansion-panel-header [collapsedHeight]="'34px'" [expandedHeight]="'40px'">
                                 <mat-panel-title>
-
+                                    {{ totalPassengers }} &nbsp;
+                                    <span *ngIf="totalPassengers == 1"> Passenger</span>
+                                    <span *ngIf="totalPassengers == 0"> Passengers</span>
+                                    <span *ngIf="totalPassengers > 1"> Passengers</span>
                                 </mat-panel-title>
                             </mat-expansion-panel-header>
 
                             <div class="row d-flex flex-row justify-content-between m-0">
                                 <label class="passengers-title">Adults</label>
                                 <mat-form-field class="passengers-select">
-                                    <mat-select [(value)]="adults">
-                                        <mat-option>None</mat-option>
-                                        <mat-option value="option1">1</mat-option>
-                                        <mat-option value="option2">2</mat-option>
-                                        <mat-option value="option3">3</mat-option>
+                                    <mat-select [(value)]="adults" formControlName="adults">
+                                        <mat-option value="0">0</mat-option>
+                                        <mat-option value="1">1</mat-option>
+                                        <mat-option value="2">2</mat-option>
+                                        <mat-option value="3">3</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
@@ -72,11 +75,11 @@
                             <div class="row d-flex flex-row justify-content-between m-0">
                                 <label class="passengers-title">Children</label>
                                 <mat-form-field class="passengers-select">
-                                    <mat-select [(value)]="children">
-                                        <mat-option>None</mat-option>
-                                        <mat-option value="option1">1</mat-option>
-                                        <mat-option value="option2">2</mat-option>
-                                        <mat-option value="option3">3</mat-option>
+                                    <mat-select [(value)]="children" formControlName="children">
+                                        <mat-option value="0">0</mat-option>
+                                        <mat-option value="1">1</mat-option>
+                                        <mat-option value="2">2</mat-option>
+                                        <mat-option value="3">3</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
@@ -84,11 +87,11 @@
                             <div class="row d-flex flex-row justify-content-between m-0 mb-2">
                                 <label class="passengers-title">Infants</label>
                                 <mat-form-field class="passengers-select">
-                                    <mat-select [(value)]="infants">
-                                        <mat-option>None</mat-option>
-                                        <mat-option value="option1">1</mat-option>
-                                        <mat-option value="option2">2</mat-option>
-                                        <mat-option value="option3">3</mat-option>
+                                    <mat-select [(value)]="infants" formControlName="infants">
+                                        <mat-option value="0">0</mat-option>
+                                        <mat-option value="1">1</mat-option>
+                                        <mat-option value="2">2</mat-option>
+                                        <mat-option value="3">3</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
@@ -99,7 +102,7 @@
                 <div class="col-3">
                     <div><label>Class </label></div>
                     <div>
-                        <select class="form-control select" formControlName="classes">
+                        <select class="form-control select" formControlName="class">
                             <option>Business</option>
                             <option>Economy</option>
                         </select>
@@ -111,7 +114,7 @@
                 <div class="col-3">
                     <div></div>
                     <div>
-                        <button (click)="onFlightsearch()" 
+                        <button type="submit" 
                                 class="btn btn-primary btn-block search-button">
                             Search Flights
                         </button>

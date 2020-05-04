@@ -1,0 +1,65 @@
+<app-navbar></app-navbar>
+<app-header></app-header>
+
+<div class="card itinerary-confirmation-section">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6">
+                <h4 class="card-title text-orange-red">Itinerary Confirmation</h4>
+            </div>
+            <div class="col-6">
+                <label class="font-weight-bold">You're all set</label>
+            </div>
+        </div>
+
+        <div class="row itinerary-confirmation-details-row">
+            <div class="card w-100">
+                <div class="card-body ml-3 mr-3">
+                    <div class="row d-flex flex-row justify-content-between">
+                        <div>
+                            <span class="font-weight-bold">Confirmation Code: </span>
+                            <span class="text-orange-red font-weight-bold">{{ confirmmationCode }}</span>
+                        </div>
+                        <div class="font-weight-bold">
+                            {{ flightNumber }}
+                        </div>
+                        <div>
+                            {{ departureDate }}
+                        </div>
+                        <div class="mr-4">
+                            {{ from }} to {{ to }} {{ flightDuration }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row itinerary-confirmation-details-row">
+            <div class="card w-100">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="d-flex flex-column justify-content-between">
+                                <div class="font-weight-bold mb-2"> {{ name }} </div>
+                                <div class="mb-2"> Seat </div>
+                                <div class="mb-2">  Checked Baggages </div>
+                                <div class="mb-2"> Wellness Kit </div>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="d-flex flex-column justify-content-between">
+                                <div class="mb-2"> {{ age }} </div>
+                                <div class="mb-2"> {{ seatNumber }} </div>
+                                <div class="mb-2"> {{ baggageCount }} </div>
+                                <div class="mb-2"> Masks({{ mask }}), Sanitizers({{ sanitizer }}), Gloves ({{ gloves }}) </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<app-footer></app-footer>

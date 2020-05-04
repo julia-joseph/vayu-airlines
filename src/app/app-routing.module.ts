@@ -4,13 +4,15 @@ import { FlightSearchComponent } from './components/flight-search/flight-search.
 import { FlightListComponent } from './components/flight-list/flight-list.component';
 import { LoginComponent } from './components/login/login.component';
 import { BookingDetailsComponent } from './components/booking-details/booking-details.component';
+import { ItineraryConfirmationComponent } from './components/itinerary-confirmation/itinerary-confirmation.component';
 
 
 const routes: Routes = [
-  { path: 'booking-details', component: BookingDetailsComponent},
   { path: 'login', component: LoginComponent },
   { path: 'flight-search', component: FlightSearchComponent },
   { path: 'flight-list', component: FlightListComponent },
+  { path: 'booking-details', component: BookingDetailsComponent},
+  { path: 'itinerary-confirmation', component: ItineraryConfirmationComponent},
   {
     path: '',
     redirectTo: '/login',

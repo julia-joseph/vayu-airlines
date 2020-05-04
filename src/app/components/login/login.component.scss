@@ -1,41 +1,79 @@
-.main-title{
-    text-align: center;
-    font-size: 1.5em;
-    padding: 1rem;
-}
-.sub-title{
-    font-weight: unset;
-    text-align: center;
-    font-size: 1.2em;
-    padding: 1rem;
-}
-.main-title span{
-    font-weight: bold;
-}
-.img-section{
-   padding-left: 0px;
-   padding-right: 0px;
-}
-.img-style{
-    width: 780px;
-    height: 700px;
-}
 .row{
     margin-left: 0px;
     margin-right: 0px;
     height:-webkit-fill-available;
+
+    .logo {
+        height: 130px;
+        width: 240px;
+        margin-top: 40px;
+    }
+    
+    .login-title{
+        font-weight: 480;
+        text-align: center;
+        font-size: 2rem;
+        padding: 1.5rem;
+        color: #383434a3;
+        margin-bottom: 0px;
+    }
+    
+    .credentials-title {
+        font-weight: 480;
+        text-align: center;
+        font-size: 1.4rem;
+        padding: 1rem;
+        color: #383434a3;
+    }
+    
+    .main-title {
+        text-align: center;
+    }
+    
+    .img-section{
+       padding-left: 0px;
+       padding-right: 0px;
+    }
+
+    .form {
+       margin-left: 20px;
+       margin-right: 20px;
+
+       .input-group-lg>.custom-select, .input-group-lg>.form-control:not(textarea) {
+            height: calc(1.5em + 1rem + 10px);
+        }
+
+        .input-group-lg>.custom-select, .input-group-lg>.form-control, .input-group-lg>.input-group-append>.btn, .input-group-lg>.input-group-append>.input-group-text, .input-group-lg>.input-group-prepend>.btn, .input-group-lg>.input-group-prepend>.input-group-text {
+            padding: .3rem 0.6rem;
+        }
+    }
+
+    .button {
+        background-color: #ff530f;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 20px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    .col-7-5 {
+        width: 62.499999975%;
+        flex: 0 0 62.499999975%
+    }
+
+    .col-4-5 {
+        width: 37.499999985%;
+        flex: 0 0 37.499999985%
+    }
 }
 
-.button {
-    background-color: #ff530f;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 20px;
-    margin: 4px 2px;
-    cursor: pointer;
-    width: 100%;
-  }
+
+
+
+
