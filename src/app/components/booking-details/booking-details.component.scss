@@ -12,4 +12,10 @@
     padding-left: 2rem;
     padding-right: 2rem;
   }
+  mat-expansion-panel {
+    .mat-expansion-indicator::after {
+      background: url(../../../assets/images/ico_accordion_closed.png) no-repeat !important;
+      content: "" !important;
+    }
+  }
 }

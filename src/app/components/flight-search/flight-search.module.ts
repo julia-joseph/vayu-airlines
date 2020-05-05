@@ -13,11 +13,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
+
 @NgModule({
   declarations: [
     FlightSearchComponent,
     FlightSearchContentComponent,
-    BookFlightComponent
+    BookFlightComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +37,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatExpansionModule,
     ReactiveFormsModule
-  ]
+  ],
 })
-export class FlightSearchModule { }
+export class FlightSearchModule {}

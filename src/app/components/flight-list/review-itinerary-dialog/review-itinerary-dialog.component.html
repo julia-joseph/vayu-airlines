@@ -102,7 +102,7 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="row d-flex flex-column">
+                            <div class="row d-flex flex-column text-right pr-4">
                                 <div>USD {{data.totalFare | number : '.2'}}</div>
                                 <div>USD {{data.airportFee | number : '.2'}}</div>
                                 <div>USD {{data.surCharge | number : '.2'}}</div>
@@ -111,10 +111,10 @@
                     </div>
                     <hr/>
                     <div class="row">
-                        <div class="col-6 d-flex flex-column pl-0">
+                        <div class="col-6 pl-0">
                             <div class="total-cost-title">Total Cost</div>
                         </div>
-                        <div class="col-6 d-flex flex-column pl-0">
+                        <div class="col-6 text-right pr-4 pl-0">
                             <div  class="total-cost-price">USD {{data.totalFare + data.airportFee + data.surCharge | number : '.2'}}</div>
                         </div>
                     </div>

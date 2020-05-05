@@ -1,0 +1,77 @@
+:host ::ng-deep {
+  .mat-tab-header {
+    height: 27vh;
+  }
+
+  .mat-ripple {
+    height: 30vh;
+  }
+
+  //mat-tab-label-container
+  .mat-tab-header {
+    position: relative;
+    bottom: 60px;
+    left: 3px;
+    padding: 0px 13px;
+  }
+
+  .mat-tab-labels {
+    justify-content: center;
+  }
+
+  .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: #ff530f;
+  }
+
+  .mat-tab-body-wrapper {
+    position: relative;
+    bottom: 50px;
+  }
+
+  .mat-expansion-panel-content {
+    position: relative;
+    bottom: 30px
+  }
+  
+}
+
+.cancel-button {
+  border: none;
+  background-color: #808080b3;
+  color: white;
+  width: 120px;
+  height: 40px;
+  font-size: 1.2rem;
+  margin-right: 13px;
+}
+
+.confirm-button {
+  border: none;
+  background-color: orangered;
+  color: white;
+  width: 120px;
+  height: 40px;
+  font-size: 1.2rem;
+}
+
+.delivery-select {
+  width: 120px;
+  position: relative;
+  bottom: 10px;
+  left: 10px;
+}
+
+.img-section {
+  height: 372px;
+  margin-top: 15px;
+}
+
+.tab-icon {
+  height: 60px;
+  margin-bottom: 15px;
+}
+
+.item-name {
+  position: relative;
+  left: 26px;
+}

@@ -21,7 +21,8 @@ export class ItineraryConfirmationComponent implements OnInit {
   mask: number = 2;
   sanitizer: number = 1;
   gloves: number = 1;
-
+  delivery: string = 'Gate';
+  
   constructor() { }
 
   ngOnInit(): void {

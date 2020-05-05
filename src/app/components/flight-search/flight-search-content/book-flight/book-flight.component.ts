@@ -46,8 +46,8 @@ export class BookFlightComponent implements OnInit {
     this.destinations = this.destinationService.getDestination(this.origins.data.origins[0].code);
 
     this.bookFlightsForm.setValue({
-      from: this.origins.data.origins[1].name,
-      to: this.destinations.data.destinations[0].name,
+      from: this.origins.data.origins[1].code,
+      to: this.destinations.data.destinations[0].code,
       depart: '2020-05-07',
       return: '2020-05-31',
       passengers: {

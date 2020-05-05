@@ -5,35 +5,36 @@
     <h4 class="card-title">Booking Details</h4>
     <div class="">
       <div class="row">
-        <div class="col-lg-9 col-md-9 col-sm-9 ">
+        <div class="col-lg-9 col-md-12 col-sm-12 pb-4">
           <mat-accordion>
-            <mat-expansion-panel>
+            <mat-expansion-panel class="mb-3 shadow-sm" disabled="isDisabled" hideToggle>
               <mat-expansion-panel-header>
-                <h4 class="font-weight-bold">Traveller Details</h4>
+                <h5 class="font-weight-bold">Traveller Details</h5>
+                <mat-icon>add</mat-icon>
               </mat-expansion-panel-header>
               This the expansion 1 content
             </mat-expansion-panel>
-            <mat-expansion-panel>
+            <mat-expansion-panel class="mb-3 shadow-sm" disabled="isDisabled">
               <mat-expansion-panel-header>
-                <h4 class="font-weight-bold">Trip Contacts</h4>
+                <h5 class="font-weight-bold">Trip Contacts</h5>
               </mat-expansion-panel-header>
               This the expansion 2 content
             </mat-expansion-panel>
-            <mat-expansion-panel>
+            <mat-expansion-panel class="mb-3 shadow-sm" disabled="isDisabled">
               <mat-expansion-panel-header>
-                <h4 class="font-weight-bold">Seat Selection</h4>
+                <h5 class="font-weight-bold">Seat Selection</h5>
               </mat-expansion-panel-header>
               This the expansion 2 content
             </mat-expansion-panel>
-            <mat-expansion-panel>
+            <mat-expansion-panel class="mb-3 shadow-sm">
               <mat-expansion-panel-header>
-                <h4 class="font-weight-bold">Ancillaries</h4>
+                <h5 class="font-weight-bold">Ancillaries</h5>
               </mat-expansion-panel-header>
               <app-ancillaries></app-ancillaries>
             </mat-expansion-panel>
           </mat-accordion>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-3">
+        <div class="col-lg-3 col-md-12 col-sm-12">
           <app-payment-summary></app-payment-summary>
         </div>
       </div>

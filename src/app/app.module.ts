@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +15,8 @@ import { PaymentSummaryComponent } from './components/payment-summary/payment-su
 import { AncillariesComponent } from './components/ancillaries/ancillaries.component';
 import { FlightListModule } from './components/flight-list/flight-list.module';
 import { ItineraryConfirmationComponent } from './components/itinerary-confirmation/itinerary-confirmation.component';
+import { MatSelectModule } from '@angular/material/select';
+import { AncillariesDialogComponent } from './components/ancillaries/ancillaries-dialog/ancillaries-dialog.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,8 @@ import { ItineraryConfirmationComponent } from './components/itinerary-confirmat
     BookingDetailsComponent,
     PaymentSummaryComponent,
     AncillariesComponent,
-    ItineraryConfirmationComponent
+    ItineraryConfirmationComponent,
+    AncillariesDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +36,10 @@ import { ItineraryConfirmationComponent } from './components/itinerary-confirmat
     MainModule,
     FlightSearchModule,
     BrowserAnimationsModule,
-    FlightListModule
+    FlightListModule,
+    MatIconModule,
+    MatTabsModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
