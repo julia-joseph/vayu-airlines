@@ -1,0 +1,21 @@
+.edit-link {
+    cursor: pointer;
+    text-decoration: underline;
+    color: orangered;
+}
+
+.edit-link:hover {
+    color: black;
+}
+
+.continue-button {
+    background-color: orangered;
+    border: 1px solid orangered;
+    color: white;
+    font-weight: 400;
+    text-align: center;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+}

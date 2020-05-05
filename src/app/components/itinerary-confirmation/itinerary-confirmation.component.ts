@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WellnessKitDetailsService } from 'src/app/services/wellness-kit-details/wellness-kit-details.service';
 
 @Component({
   selector: 'app-itinerary-confirmation',
@@ -18,14 +19,21 @@ export class ItineraryConfirmationComponent implements OnInit {
   seatNumber: string = 'A4';
   baggageCount: number = 0;
 
-  mask: number = 2;
-  sanitizer: number = 1;
-  gloves: number = 1;
-  delivery: string = 'Gate';
+  mask: number;
+  sanitizer: number;
+  gloves: number;
+  delivery: string;
   
-  constructor() { }
+  constructor(
+    private wellnessKitService: WellnessKitDetailsService
+  ) { }
 
   ngOnInit(): void {
+    const details = this.wellnessKitService.getWellnessKitDetails();
+    this.mask = details.maskQuantity;
+    this.sanitizer = details.sanitizerQuantity;
+    this.gloves = details.glovesQuantity;
+    this.delivery = details.delivery;
   }
 
 }

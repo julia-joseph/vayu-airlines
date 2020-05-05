@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AncillariesDialogComponent } from './ancillaries-dialog/ancillaries-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { WellnessKitDetailsService } from 'src/app/services/wellness-kit-details/wellness-kit-details.service';
 
 @Component({
   selector: 'app-ancillaries',
@@ -27,7 +28,8 @@ export class AncillariesComponent implements OnInit {
   
   constructor(
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private wellnessKitService: WellnessKitDetailsService
   ) { }
 
   ngOnInit(): void {
@@ -40,7 +42,7 @@ export class AncillariesComponent implements OnInit {
   onConfirm() {
     const dialogRef = this.dialog.open(AncillariesDialogComponent, {
       panelClass: 'custom-dialog-container',
-      width: '500px',
+      width: '700px',
       data: {
         flightCode: 'YYZ-LGA',
         maskQuantity: this.maskQuantity,
@@ -58,6 +60,17 @@ export class AncillariesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result){
+
+        this.wellnessKitService.setWellnessKitDetails({
+          maskQuantity: this.maskQuantity,
+          maskPrice: 5.24,
+          sanitizerQuantity: this.sanitizerQuantity,
+          sanitizerPrice: 2.30,
+          glovesQuantity: this.glovesQuantity,
+          glovesPrice: 1.20,
+          delivery: this.delivery
+        })
+        
         this.router.navigate(['/itinerary-confirmation']);
       }
     });

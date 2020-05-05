@@ -1,19 +1,114 @@
-<div class="card">
+<div class="card font-size1-2">
     <div class="card-body">
-        <div class="row">
-            <h4 class="card-title">Ancillaries Summary - Wellness Kit</h4>
+        <div class="row pl-3 pr-3">
+            <h4 class="card-title">
+                <span class="text-orange-red">Ancillaries Summary</span> - Wellness Kit
+            </h4>
         </div>
         <div class="row">
-            {{ data.flightCode }}
-        </div>
-        <div class="row">
+            <div class="card w-100 m-3">
+                <div class="card-body">
+                    <div class="row font-weight-bold d-flex justify-content-between mt-1 mb-1 border-bottom">
+                        <h5 class="ml-3"> {{ data.flightCode }} </h5>
+                        <div class="mr-3"> <a class="edit-link" (click)="onEdit()">Edit</a> </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="row font-weight-light text-muted mt-1 mb-1">
+                                <div class="col-3">
 
+                                </div>
+                                <div class="col-3">
+                                    Quantity
+                                </div>
+                                <div class="col-3">
+                                    Size
+                                </div>
+                                <div class="col-3">
+                                    Price
+                                </div>
+                            </div>
+                            <div class="row mb-1">
+                                <div class="col-3 font-weight-400">
+                                    Masks
+                                </div>
+                                <div class="col-3">
+                                    {{ data.maskQuantity }}
+                                </div>
+                                <div class="col-3">
+                                    {{ data.maskSize }}
+                                </div>
+                                <div class="col-3">
+                                    $ <span class="orange font-size1-3">{{ data.maskQuantity * data.maskPrice | number : '.2' }}</span>
+                                </div>
+                            </div>
+                            <div class="row mb-1">
+                                <div class="col-3 font-weight-400">
+                                    Sanitizers
+                                </div>
+                                <div class="col-3">
+                                    {{ data.sanitizerQuantity }}
+                                </div>
+                                <div class="col-3">
+                                    {{ data.sanitizerSize }}
+                                </div>
+                                <div class="col-3">
+                                    $ <span class="orange font-size1-3">{{ data.sanitizerQuantity * data.sanitizerPrice | number : '.2' }}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3 font-weight-400">
+                                    Gloves
+                                </div>
+                                <div class="col-3">
+                                    {{ data.glovesQuantity }}
+                                </div>
+                                <div class="col-3">
+                                    {{ data.glovesSize }}
+                                </div>
+                                <div class="col-3">
+                                    $ <span class="orange font-size1-3">{{ data.glovesQuantity * data.glovesPrice | number : '.2' }}</span>
+                                </div>
+                            </div>
+                            <!-- <div class="row">
+                                <div class="col-3 d-flex flex-column font-weight-400">
+                                    <div> &nbsp; </div>
+                                    <div>Masks</div>
+                                    <div>Sanitizers</div>
+                                    <div>Gloves</div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="font-weight-light text-muted">Quantity</div>
+                                    <div>{{ data.maskQuantity }}</div>
+                                    <div>{{ data.sanitizerQuantity }}</div>
+                                    <div>{{ data.glovesQuantity }}</div>
+                                    
+                                </div>
+                                <div class="col-3">
+                                    <div class="font-weight-light text-muted">Size</div>
+                                    <div>{{ data.maskSize }}</div>
+                                    <div>{{ data.sanitizerSize }}</div>
+                                    <div>{{ data.glovesSize }}</div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="font-weight-light text-muted">Price</div>
+                                    <div>$ <span class="orange font-size1-3">{{ data.maskQuantity * data.maskPrice | number : '.2' }}</span></div>
+                                    <div>$ <span class="orange font-size1-3">{{ data.sanitizerQuantity * data.sanitizerPrice | number : '.2' }}</span></div>
+                                    <div>$ <span class="orange font-size1-3">{{ data.glovesQuantity * data.glovesPrice | number : '.2' }}</span></div>
+                                </div> -->
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="row">
-            <div>Total: $</div>
+        <div class="row d-flex justify-content-between ml-1 mr-1">
+            <div>
+                <span class="font-weight-bold">Total: </span>
+                $ <span class="orange font-size1-5">{{ this.totalPrice | number : '.2'}}</span>
+            </div>
              <div>
-                 <button (click)="onEdit()">Edit</button>
-                 <button (click)="onContinue()">Continue</button>
+                 <button (click)="onContinue()" class="continue-button">Continue</button>
              </div>
         </div>
     </div>

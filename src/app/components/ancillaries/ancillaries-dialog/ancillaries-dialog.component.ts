@@ -21,6 +21,8 @@ export interface DialogData {
   styleUrls: ['./ancillaries-dialog.component.scss']
 })
 export class AncillariesDialogComponent implements OnInit {
+  
+  totalPrice: number = 0;
 
   constructor(
     public dialogRef: MatDialogRef<AncillariesDialogComponent>,
@@ -28,7 +30,10 @@ export class AncillariesDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-  }
+    this.totalPrice = ( this.data.maskQuantity * this.data.maskPrice ) +
+                      ( this.data.sanitizerQuantity * this.data.sanitizerPrice ) +
+                      ( this.data.glovesQuantity * this.data.glovesPrice );
+   }
 
   onEdit() {
     //stay

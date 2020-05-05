@@ -7,14 +7,14 @@ export class FlightDetailsService {
   flightDetails: any = {
     class: "Economy",
     depart: "Thursday May 07 2020",
-    from: "NYC",
+    from: "New York City area (NYC)",
     passengers: {
       adults: "0",
       children: "0",
       infants: "0"
     },
     return: "2020-05-31",
-    to: "LAX"
+    to: "Los Angeles, CA (LAX)"
   }
 
   constructor() { }

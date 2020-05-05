@@ -55,7 +55,6 @@
                                 <mat-panel-title>
                                     {{ totalPassengers }} &nbsp;
                                     <span *ngIf="totalPassengers == 1"> Passenger</span>
-                                    <span *ngIf="totalPassengers == 0"> Passengers</span>
                                     <span *ngIf="totalPassengers > 1"> Passengers</span>
                                 </mat-panel-title>
                             </mat-expansion-panel-header>
@@ -64,7 +63,6 @@
                                 <label class="passengers-title">Adults</label>
                                 <mat-form-field class="passengers-select">
                                     <mat-select [(value)]="adults" formControlName="adults">
-                                        <mat-option value="0">0</mat-option>
                                         <mat-option value="1">1</mat-option>
                                         <mat-option value="2">2</mat-option>
                                         <mat-option value="3">3</mat-option>

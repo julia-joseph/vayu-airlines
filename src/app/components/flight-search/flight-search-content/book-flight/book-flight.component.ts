@@ -5,6 +5,7 @@ import { OriginService } from '../../../../services/origin/origin.service';
 import {DestinationService} from '../../../../services/destination/destination.service';
 import { FlightDetailsService } from 'src/app/services/flight-details/flight-details.service';
 
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-book-flight',
@@ -16,10 +17,10 @@ export class BookFlightComponent implements OnInit {
   origins: any;
   destinations: any;
 
-  adults: string = "0";
+  adults: string = "1";
   children: string ="0";
   infants: string = "0";
-  totalPassengers: number = 0;
+  totalPassengers: number = 1;
 
   bookFlightsForm = new FormGroup({
     from: new FormControl(''),
@@ -36,13 +37,13 @@ export class BookFlightComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private OriginService : OriginService,
+    private originService : OriginService,
     private destinationService:DestinationService,
     private flightDetailsService: FlightDetailsService
   ) { }
 
   ngOnInit() {
-    this.origins = this.OriginService.getOrigins();
+    this.origins = this.originService.getOrigins();
     this.destinations = this.destinationService.getDestination(this.origins.data.origins[0].code);
 
     this.bookFlightsForm.setValue({
@@ -66,6 +67,9 @@ export class BookFlightComponent implements OnInit {
 
   onFlightSearch() {
     console.log('search flights');
+    this.bookFlightsForm.value.depart = moment(this.bookFlightsForm.value.depart).format('dddd MMMM DD YYYY');
+    this.bookFlightsForm.value.from = this.originService.getOriginName(this.bookFlightsForm.value.from);
+    this.bookFlightsForm.value.to = this.destinationService.getDestinationName(this.bookFlightsForm.value.to);
     this.flightDetailsService.setFlightDetails(this.bookFlightsForm.value);
     this.router.navigate(['/flight-list']);
   }
@@ -74,6 +78,10 @@ export class BookFlightComponent implements OnInit {
     console.log('selected')
     // fetches values from destination service
     this.destinations = this.destinationService.getDestination(value);
+    this.bookFlightsForm.patchValue({
+      from: value,
+      to: this.destinations.data.destinations[0].code
+    })
   }
 
 }
