@@ -6,31 +6,30 @@
   .card {
     position: relative;
     margin: 30px;
-  
-    .orange {
-      color: #ff530f;
-    }
-    .line-height {
-      line-height: 2rem;
-    }
+    
     .card-title {
       color: orangered;
     }
-    .font-size1-2 {
-      font-size: 1.2rem;
-    }
-    .font-size2 {
-      font-size: 2rem;
-    }
+
     .card-body {
       padding: 1.5rem;
       padding-left: 2rem;
       padding-right: 2rem;
     }
   }
-}  
-
-
+}
+.orange {
+  color: #ff530f;
+}
+.line-height {
+  line-height: 2rem;
+}
+.font-size1-2 {
+  font-size: 1.2rem;
+}
+.font-size2 {
+  font-size: 2rem;
+}
 .custom-dialog-container .mat-dialog-container {
-    padding: 0px !important;
+  padding: 0px !important;
 }
