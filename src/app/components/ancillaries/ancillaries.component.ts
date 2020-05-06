@@ -25,6 +25,7 @@ export class AncillariesComponent implements OnInit {
   glovesPrice: number = 1.20;
   glovesSize: string = 'Adult';
   delivery: string = 'Gate';
+  submitted: boolean = false;
   
   constructor(
     public dialog: MatDialog,
@@ -71,7 +72,10 @@ export class AncillariesComponent implements OnInit {
           delivery: this.delivery
         })
         
-        this.router.navigate(['/itinerary-confirmation']);
+        //disable select buttons
+        this.submitted = true;
+        //don't nagivate - enable payment button
+        //this.router.navigate(['/itinerary-confirmation']);
       }
     });
   }

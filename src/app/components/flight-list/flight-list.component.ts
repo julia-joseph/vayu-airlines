@@ -6,7 +6,7 @@ import { DestinationService } from 'src/app/services/destination/destination.ser
 
 const INIT_FLIGHT_DETAILS = {
   class: "Economy",
-  depart: "Thursday May 07 2020",
+  depart: "2020-05-08",
   from: "New York City area (NYC)",
   passengers: {
     adults: "0",

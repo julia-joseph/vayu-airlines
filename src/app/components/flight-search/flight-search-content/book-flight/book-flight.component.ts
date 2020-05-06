@@ -25,7 +25,7 @@ export class BookFlightComponent implements OnInit {
   bookFlightsForm = new FormGroup({
     from: new FormControl(''),
     to: new FormControl(''),
-    depart: new FormControl('2020-05-07'),
+    depart: new FormControl('2020-05-08'),
     return: new FormControl('2020-05-31'),
     passengers: new FormGroup({
       adults: new FormControl(this.adults),
@@ -49,7 +49,7 @@ export class BookFlightComponent implements OnInit {
     this.bookFlightsForm.setValue({
       from: this.origins.data.origins[1].code,
       to: this.destinations.data.destinations[0].code,
-      depart: '2020-05-07',
+      depart: '2020-05-08',
       return: '2020-05-31',
       passengers: {
         adults: this.adults,

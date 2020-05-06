@@ -48,9 +48,9 @@ export class FlightListItemComponent implements OnInit {
           (this.flightDetails.passengers.children ? this.flightDetails.passengers.children + ' Children ' : '2 Children '),
           //breaks design + (this.flightDetails.passengers.infants ? this.flightDetails.passengers.infants + ' Infant' : '1 Infant'),   
         departDate: 
-          this.flightDetails.depart ? moment(this.flightDetails.depart).format('ddd, D MMM YYYY') : 'Fri, 7 May 2020',
+          this.flightDetails.depart ? moment(this.flightDetails.depart).format('ddd, D MMM YYYY') : 'Fri, 8 May 2020',
         returnDate: 
-          this.flightDetails.depart ? moment(this.flightDetails.depart).format('ddd, D MMM YYYY') : 'Fri, 7 May 2020',
+          this.flightDetails.return ? moment(this.flightDetails.depart).format('ddd, D MMM YYYY') : 'Fri, 8 May 2020',
         flightNum:  'AC7952',
         flightDuration: '4 hr 55 min',
         totalFare: 60.00,
