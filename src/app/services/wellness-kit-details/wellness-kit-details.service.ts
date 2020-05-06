@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WellnessKitDetailsService {
    wellnessKitDetails = {
@@ -14,10 +14,11 @@ export class WellnessKitDetailsService {
      glovesQuantity: 0,
      glovesPrice: 1.20,
      glovesSize: 'Adult',
-     delivery: 'Gate'
+     delivery: 'Gate',
+     segment: 'NYC - LAX'
    }
 
-  constructor() { }
+  constructor() {}
 
   getWellnessKitDetails() {
     return this.wellnessKitDetails;

@@ -12,7 +12,8 @@ export interface DialogData {
   glovesQuantity: number,
   glovesSize: number,
   glovesPrice: number,
-  delivery: string
+  delivery: string,
+  segment: string,
 }
 
 @Component({

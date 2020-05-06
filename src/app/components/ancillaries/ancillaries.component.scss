@@ -19,7 +19,8 @@
     justify-content: center;
   }
 
-  .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  .mat-tab-group.mat-primary .mat-ink-bar,
+  .mat-tab-nav-bar.mat-primary .mat-ink-bar {
     background-color: #ff530f;
   }
 
@@ -30,9 +31,20 @@
 
   .mat-expansion-panel-content {
     position: relative;
-    bottom: 30px
+    bottom: 30px;
   }
-  
+
+  .segment-select .mat-select-value {
+    color: #ff530f;
+  }
+
+  .mat-select-arrow {
+    width: 20px;
+    height: 17px;
+    background: url(../../../assets/images/img_ddn_06.png) no-repeat;
+    border: none;
+    margin: 0 4px;
+  }
 }
 
 .cancel-button {
@@ -52,13 +64,6 @@
   width: 120px;
   height: 40px;
   font-size: 1.2rem;
-}
-
-.delivery-select {
-  width: 120px;
-  position: relative;
-  bottom: 10px;
-  left: 10px;
 }
 
 .img-section {
