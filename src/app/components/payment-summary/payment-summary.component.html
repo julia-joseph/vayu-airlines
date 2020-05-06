@@ -68,4 +68,4 @@
     </div>
   </li>
 </ul>
-<button [disabled]="confirmed" (click)="onPayment()" class="btn payment-button">Payment</button>
+<button *ngIf="!confirmed" [disabled]="confirmed" (click)="onPayment()" class="btn payment-button">Payment</button>
