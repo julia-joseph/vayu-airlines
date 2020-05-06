@@ -6,7 +6,7 @@
                     <div class="col-2">
                         <div class="d-flex flex-column flight-list-item-label">
                             <div>
-                                {{ fromTime }}
+                                {{ fromTimes[show] }}
                             </div>
                             <div>
                                 {{ from }}
@@ -30,7 +30,7 @@
                     <div class="col-2">
                         <div class="row d-flex flex-column flight-list-item-label">
                             <div>
-                                {{ toTime }}
+                                {{ toTimes[show] }}
                             </div>
                             <div>
                                 {{ to }}
@@ -43,7 +43,7 @@
                                 Economy
                             </div>
                             <div class="flight-list-item-price">
-                                ${{ economyPrice }}
+                                ${{ economyPrice[show] }}
                             </div>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                                 Business
                             </div>
                             <div class="flight-list-item-price">
-                                ${{ businessPrice }}
+                                ${{ businessPrice[show] }}
                             </div>
                         </div>
                     </div>

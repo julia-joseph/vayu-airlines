@@ -9,12 +9,14 @@ const INIT_FLIGHT_DETAILS = {
   depart: "2020-05-08",
   from: "New York City area (NYC)",
   passengers: {
-    adults: "0",
-    children: "0",
-    infants: "0"
+    adults: 1,
+    children: 0,
+    infants: 0
   },
   return: "2020-05-31",
-  to: "Los Angeles, CA (LAX)"
+  to: "Los Angeles, CA (LAX)",
+  fromCode: "NYC",
+  toCode: "LAX"
 }
 @Component({
   selector: 'app-flight-list',
@@ -23,6 +25,7 @@ const INIT_FLIGHT_DETAILS = {
 })
 export class FlightListComponent implements OnInit {
   flightDetails: any = INIT_FLIGHT_DETAILS;
+  dateFormat2: string[];
 
   constructor(
     private flightDetailsService: FlightDetailsService,
@@ -32,6 +35,20 @@ export class FlightListComponent implements OnInit {
 
   ngOnInit(): void {
     this.flightDetails = this.flightDetailsService.getFlightDetails() ? this.flightDetailsService.getFlightDetails() : INIT_FLIGHT_DETAILS;
-    console.log('passengerDetails', this.flightDetails)
+    this.dateFormat2 = this.flightDetails.depart ? this.setDates(this.flightDetails.depart) : this.setDates(moment().format('ddd - MMM D'));
   }
+
+  setDates(date: string): string[] {
+    const dates = [
+      moment(date).subtract(3,'day').format('ddd - MMM D'),
+      moment(date).subtract(2,'day').format('ddd - MMM D'),
+      moment(date).subtract(1,'day').format('ddd - MMM D'),
+      moment(date).format('ddd - MMM D'),
+      moment(date).add(1,'day').format('ddd - MMM D'),
+      moment(date).add(2,'day').format('ddd - MMM D'),
+      moment(date).add(2,'day').format('ddd - MMM D')
+    ];
+    return dates; 
+  }
+
 }

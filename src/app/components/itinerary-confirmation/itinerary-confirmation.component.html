@@ -3,31 +3,84 @@
 
 <div class="card itinerary-confirmation-section">
     <div class="card-body">
-        <div class="row">
+        <div class="row p-0 pb-2 mt-2 mb-2">
             <div class="col-6">
                 <h4 class="card-title text-orange-red">Itinerary Confirmation</h4>
             </div>
+        </div>
+
+        <div class="row border-bottom ml-1 mr-1 mb-4"></div>
+
+        <div class="row font-size-1-1 font-weight-bold mt-3 mb-3">
             <div class="col-6">
-                <label class="font-weight-bold">You're all set</label>
+                <div>
+                    <span class="">Confirmation Code: </span>
+                    <span class="text-orange-red">{{ confirmmationCode }}</span>
+                </div>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+                <div class=" ">
+                    {{ from }} to {{ to }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-1 mb-4">
+            <div class="col-6">
+                <span class="orange links">Manage Your Booking</span>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+                <div class="orange">
+                    <span class="links">Add to Calendar</span> |
+                    <span class="links">Email</span> |
+                    <span class="links">Print</span>
+                </div>
             </div>
         </div>
 
         <div class="row itinerary-confirmation-details-row">
             <div class="card w-100">
                 <div class="card-body ml-3 mr-3">
-                    <div class="row d-flex flex-row justify-content-between">
-                        <div>
-                            <span class="font-weight-bold">Confirmation Code: </span>
-                            <span class="text-orange-red font-weight-bold">{{ confirmmationCode }}</span>
+                    <div class="row">
+                        <div class="col-3 font-weight-bold">
+                            Departing: {{ departDateFormat1 }}
                         </div>
-                        <div class="font-weight-bold">
-                            {{ flightNumber }}
+                        <div class="col-3 text-muted font-weight-bold">
+                            {{ fromCode }} - {{ toCode }} 07:15 AM
                         </div>
-                        <div>
-                            {{ departureDate }}
+                        <div class="col-3">
+                            pts 5000+
                         </div>
-                        <div class="mr-4">
-                            {{ from }} to {{ to }} {{ flightDuration }}
+                        <div class="col-3">
+                            $ 355.00 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row m-4">
+            A confirmation email has been sent to anne@yahoo.com. If you haven't received it for some reason
+            please let us know at 1-800-VAYU
+        </div>
+
+        <div class="row itinerary-confirmation-details-row">
+            <div class="card w-100">
+                <div class="card-body ml-3 mr-3">
+                    <div class="row font-weight-bold">
+                        <div class="col-3">
+                            Passenger Details
+                        </div>
+                        <div class="col-3">
+                            Ms. Anne
+                        </div>
+                        <div class="col-3">
+                            Frank
+                        </div>
+                        <div class="col-3 text-muted">
+                            {{ totalPassengers }} 
+                            <span *ngIf="totalPassengers === 1">Passenger</span>
+                            <span *ngIf="totalPassengers > 1">Passengers</span>
                         </div>
                     </div>
                 </div>
@@ -36,27 +89,127 @@
 
         <div class="row itinerary-confirmation-details-row">
             <div class="card w-100">
-                <div class="card-body">
+                <div class="card-body m-3">
+                    <div class="row mb-3">
+                        <div class="col-12 orange font-weight-bold">
+                            Time to check in for your flight to {{ to }}
+                        </div>
+                    </div>
                     <div class="row">
-                        <div class="col-4">
-                            <div class="d-flex flex-column justify-content-between">
-                                <div class="font-weight-bold mb-2"> {{ name }} </div>
-                                <div class="mb-2"> Seat </div>
-                                <div class="mb-2">  Checked Baggages </div>
-                                <div class="mb-2"> Wellness Kit </div>
+                        <div class="col-9">
+                            Your flight for {{ departDateFormat2 }} is available for check-in. If you want to make a same day ticket
+                            change or other changes to your trip, review your options <span class="orange links">Here</span>
+                        </div>
+                        <div class="col-3 text-center">
+                            <button [disabled]="true" class="check-in-btn">Check-in Online</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row m-1 orange font-weight-bold font-size1-2">
+            Extra items for your flight to {{ to }}
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-6">
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <div class="row pl-3 pr-3">
+                            <h5 class="card-title">
+                                <!-- <span class="text-orange-red">Ancillaries Summary</span> -  -->
+                                Wellness Kit
+                            </h5>
+                        </div>
+                        <div class="row">
+                            <div class="card w-100 m-3">
+                                <div class="card-body">
+                                    <div class="row font-weight-bold d-flex justify-content-between mt-1 mb-1 border-bottom">
+                                        <h5 class="ml-3">{{ fromCode }} - {{ toCode }}</h5>
+                                        <div class="mr-3">Delivery - {{ wellnessKit.delivery }}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="row font-weight-light text-muted mt-1 mb-1">
+                                                <div class="col-3">
+                
+                                                </div>
+                                                <div class="col-3">
+                                                    Quantity
+                                                </div>
+                                                <div class="col-3">
+                                                    Size
+                                                </div>
+                                                <div class="col-3">
+                                                    Price
+                                                </div>
+                                            </div>
+                                            <div class="row mb-1">
+                                                <div class="col-3 font-weight-400">
+                                                    Masks
+                                                </div>
+                                                <div class="col-3">
+                                                    {{ wellnessKit.maskQuantity }}
+                                                </div>
+                                                <div class="col-3">
+                                                    {{ wellnessKit.maskSize }}
+                                                </div>
+                                                <div class="col-3">
+                                                    $ <span class="orange font-size1-3">{{ wellnessKit.maskQuantity * wellnessKit.maskPrice | number : '.2' }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-1">
+                                                <div class="col-3 font-weight-400">
+                                                    Sanitizers
+                                                </div>
+                                                <div class="col-3">
+                                                    {{ wellnessKit.sanitizerQuantity }}
+                                                </div>
+                                                <div class="col-3">
+                                                    {{ wellnessKit.sanitizerSize }}
+                                                </div>
+                                                <div class="col-3">
+                                                    $ <span class="orange font-size1-3">{{ wellnessKit.sanitizerQuantity * wellnessKit.sanitizerPrice | number : '.2' }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-3 font-weight-400">
+                                                    Gloves
+                                                </div>
+                                                <div class="col-3">
+                                                    {{ wellnessKit.glovesQuantity }}
+                                                </div>
+                                                <div class="col-3">
+                                                    {{ wellnessKit.glovesSize }}
+                                                </div>
+                                                <div class="col-3">
+                                                    $ <span class="orange font-size1-3">{{ wellnessKit.glovesQuantity * wellnessKit.glovesPrice | number : '.2' }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-8">
-                            <div class="d-flex flex-column justify-content-between">
-                                <div class="mb-2"> {{ age }} </div>
-                                <div class="mb-2"> {{ seatNumber }} </div>
-                                <div class="mb-2"> {{ baggageCount }} </div>
-                                <div class="mb-2"> Masks({{ mask }}), Sanitizers({{ sanitizer }}), Gloves ({{ gloves }}) &nbsp; Delivery - {{ delivery }} </div>
+                        <div class="row d-flex justify-content-end ml-1 mr-4">
+                            <div>
+                                <span class="font-weight-bold">Total: </span>
+                                $ <span class="orange font-size1-5">{{ this.totalPrice | number : '.2'}}</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- <div class="col-6 h-100">
+                <div class="card mt-3">
+                    <div class="card-body">
+
+                    </div>
+                </div>
+            </div> -->
+
         </div>
 
     </div>

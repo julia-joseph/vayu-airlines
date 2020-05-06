@@ -17,8 +17,10 @@ export class BookFlightComponent implements OnInit {
   origins: any;
   destinations: any;
 
+  minDate: string = moment().format('YYYY-MM-DD');
+
   adults: string = "1";
-  children: string ="0";
+  children: string = "0";
   infants: string = "0";
   totalPassengers: number = 1;
 
@@ -67,10 +69,24 @@ export class BookFlightComponent implements OnInit {
 
   onFlightSearch() {
     console.log('search flights');
-    this.bookFlightsForm.value.depart = moment(this.bookFlightsForm.value.depart).format('dddd MMMM DD YYYY');
+    const fromCode = this.bookFlightsForm.value.from;
+    const toCode = this.bookFlightsForm.value.to;
+
+    this.bookFlightsForm.value.depart = moment(this.bookFlightsForm.value.depart).format('dddd MMMM D YYYY');
     this.bookFlightsForm.value.from = this.originService.getOriginName(this.bookFlightsForm.value.from);
     this.bookFlightsForm.value.to = this.destinationService.getDestinationName(this.bookFlightsForm.value.to);
-    this.flightDetailsService.setFlightDetails(this.bookFlightsForm.value);
+
+    this.flightDetailsService.setFlightDetails({
+      ...this.bookFlightsForm.value,
+      passengers: {
+        adults: Number(this.adults),
+        children: Number(this.children),
+        infants: Number(this.infants)
+      },
+      fromCode: fromCode,
+      toCode: toCode
+    });
+    
     this.router.navigate(['/flight-list']);
   }
 

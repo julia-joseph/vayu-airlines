@@ -8,7 +8,7 @@
         <div class="row">
             <div class="card w-100 m-3">
                 <div class="card-body">
-                    <div class="row font-weight-bold d-flex justify-content-between mt-1 mb-1 border-bottom">
+                    <div class="row font-weight-bold d-flex justify-content-between mt-1 mb-1 pb-1 border-bottom">
                         <h5 class="ml-3"> {{ data.flightCode }} </h5>
                         <div>Delivery - {{ data.delivery }}</div>
                         <div class="mr-3"> <a class="edit-link" (click)="onEdit()">Edit</a> </div>
@@ -71,33 +71,6 @@
                                     $ <span class="orange font-size1-3">{{ data.glovesQuantity * data.glovesPrice | number : '.2' }}</span>
                                 </div>
                             </div>
-                            <!-- <div class="row">
-                                <div class="col-3 d-flex flex-column font-weight-400">
-                                    <div> &nbsp; </div>
-                                    <div>Masks</div>
-                                    <div>Sanitizers</div>
-                                    <div>Gloves</div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="font-weight-light text-muted">Quantity</div>
-                                    <div>{{ data.maskQuantity }}</div>
-                                    <div>{{ data.sanitizerQuantity }}</div>
-                                    <div>{{ data.glovesQuantity }}</div>
-                                    
-                                </div>
-                                <div class="col-3">
-                                    <div class="font-weight-light text-muted">Size</div>
-                                    <div>{{ data.maskSize }}</div>
-                                    <div>{{ data.sanitizerSize }}</div>
-                                    <div>{{ data.glovesSize }}</div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="font-weight-light text-muted">Price</div>
-                                    <div>$ <span class="orange font-size1-3">{{ data.maskQuantity * data.maskPrice | number : '.2' }}</span></div>
-                                    <div>$ <span class="orange font-size1-3">{{ data.sanitizerQuantity * data.sanitizerPrice | number : '.2' }}</span></div>
-                                    <div>$ <span class="orange font-size1-3">{{ data.glovesQuantity * data.glovesPrice | number : '.2' }}</span></div>
-                                </div> -->
-                            <!-- </div> -->
                         </div>
                     </div>
                 </div>

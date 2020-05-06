@@ -16,11 +16,11 @@ export class FlightListItemComponent implements OnInit {
   from: string = 'New York City area (NYC)';
   to: string = 'Los Angeles, CA (LAX)';
   class: string = 'Economy';
-  fromTime: string = '07:15';
-  toTime: string = '12:15';
+  fromTimes: string[] = ['07:15','08:30','09:45','10:10','12:15'];
+  toTimes: string[] = ['12:10','13:25','14:40','15:05','17:10'];
   connectionDetails: string = 'Non-Stop 4 hr 55 min';
-  economyPrice: string = '404';
-  businessPrice: string = '848';
+  economyPrice: string[] = ['404','410','414','430','444'];
+  businessPrice: string[] = ['848','854','858','879','894'];
 
   constructor(
     public dialog: MatDialog,
@@ -47,9 +47,9 @@ export class FlightListItemComponent implements OnInit {
         to: this.to,
         class: this.flightDetails.class ? this.flightDetails.class : 'Economy',
         passenger: 
-          (this.flightDetails.passengers.adults ? this.flightDetails.passengers.adults + ' Adult ' : '1 Adult ') +
-          (this.flightDetails.passengers.children ? this.flightDetails.passengers.children + ' Children ' : '2 Children '),
-          //breaks design + (this.flightDetails.passengers.infants ? this.flightDetails.passengers.infants + ' Infant' : '1 Infant'),   
+          (this.flightDetails.passengers.adults + ' Adult ') +
+          (this.flightDetails.passengers.children + ' Children ') +
+          (this.flightDetails.passengers.infants + ' Infant'),   
         departDate: 
           this.flightDetails.depart ? moment(this.flightDetails.depart).format('ddd, D MMM YYYY') : 'Fri, 8 May 2020',
         returnDate: 

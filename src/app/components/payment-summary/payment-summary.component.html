@@ -8,18 +8,19 @@
     <div class="border-bottom pb-3 w-100">
       <h4 class="orange">Flights</h4>
       <div class="font-weight-normal font-size1-2 line-height">
-        Flight1 : YYZ - YUL
+        Flight1 : {{ flightDetails.fromCode }} - {{ flightDetails.toCode }}
       </div>
-      <div class="font-weight-normal font-size1-2 line-height">May 7 07:15AM</div>
+      <div class="font-weight-normal font-size1-2 line-height">{{ depart }} 07:15AM</div>
       <div class="font-weight-normal font-size1-2 line-height">
-        Flight2 : YUL - LGA
+        {{ this.flightDetails.passengers.adults + 
+           this.flightDetails.passengers.children +
+           this.flightDetails.passengers.infants }} Tickets 
+        <span class="orange float-right">15000pts</span>
       </div>
-      <div class="font-weight-normal font-size1-2 line-height">May 7 11:225AM</div>
       <div class="font-weight-normal font-size1-2 line-height">
-        3 Tickets <span class="orange float-right">15000pts</span>
-      </div>
-      <div class="font-weight-normal font-size1-2 line-height">
-        (2 Adults 1 Child 1 Lap Infant)
+        ({{this.flightDetails.passengers.adults}} Adults 
+          {{this.flightDetails.passengers.children }} Child 
+          {{ this.flightDetails.passengers.infants }} Lap Infant)
       </div>
       <a href="#" class="orange lead">Fare Restrictions</a>
     </div>
@@ -67,4 +68,4 @@
     </div>
   </li>
 </ul>
-<button [disabled]="confirmed" (click)="onPayment()">Payment</button>
+<button [disabled]="confirmed" (click)="onPayment()" class="btn payment-button">Payment</button>

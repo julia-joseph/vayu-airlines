@@ -19,13 +19,13 @@
                     <div class="col-half-quarter">
                         <span><img src="../../../assets/images/ico_scroll_left.png" class="scroll-left-icon"></span>
                     </div>
-                    <div *ngFor="let numbers of [1,2,3,4,5,6,7]" class="col-1-half flight-list-options">
-                        <div class="d-flex flex-column" [ngClass]="{'selected-date': numbers === 4}">
+                    <div *ngFor="let numbers of [0,1,2,3,4,5,6]" class="col-1-half flight-list-options">
+                        <div class="d-flex flex-column" [ngClass]="{'selected-date': numbers === 3}">
                             <div class="flight-list-options-price">
-                                $402
+                                $404
                             </div>
                             <div class="flight-list-options-date">
-                                Fri - May 8
+                                {{ dateFormat2[numbers] }}
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { AncillariesDialogComponent } from './ancillaries-dialog/ancillaries-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -10,6 +10,9 @@ import { WellnessKitDetailsService } from 'src/app/services/wellness-kit-details
   styleUrls: ['./ancillaries.component.scss']
 })
 export class AncillariesComponent implements OnInit {
+  @Input() fromCode: string = 'NYC';
+  @Input() toCode: string = 'LAX';
+  @Output() onSubmit = new EventEmitter<void>();
   deliveryLocations: string[] = [
     'Gate',
     'Lounge'
@@ -45,7 +48,7 @@ export class AncillariesComponent implements OnInit {
       panelClass: 'custom-dialog-container',
       width: '700px',
       data: {
-        flightCode: 'YYZ-LGA',
+        flightCode: this.fromCode + ' - ' + this.toCode,
         maskQuantity: this.maskQuantity,
         maskSize: this.maskSize,
         maskPrice: this.maskPrice,
@@ -65,15 +68,20 @@ export class AncillariesComponent implements OnInit {
         this.wellnessKitService.setWellnessKitDetails({
           maskQuantity: this.maskQuantity,
           maskPrice: 5.24,
+          maskSize: this.maskSize,
           sanitizerQuantity: this.sanitizerQuantity,
           sanitizerPrice: 2.30,
+          sanitizerSize: this.sanitizerSize,
           glovesQuantity: this.glovesQuantity,
           glovesPrice: 1.20,
+          glovesSize: this.glovesSize,
           delivery: this.delivery
         })
         
         //disable select buttons
         this.submitted = true;
+
+        this.onSubmit.emit();
         //don't nagivate - enable payment button
         //this.router.navigate(['/itinerary-confirmation']);
       }

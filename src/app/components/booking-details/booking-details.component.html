@@ -30,12 +30,21 @@
               <mat-expansion-panel-header>
                 <h5 class="font-weight-bold">Ancillaries</h5>
               </mat-expansion-panel-header>
-              <app-ancillaries></app-ancillaries>
+              <app-ancillaries
+                (onSubmit)="onSubmitOfAncillaries()"
+                [fromCode]="flightDetails.fromCode"
+                [toCode]="flightDetails.toCode"
+              >
+              </app-ancillaries>
             </mat-expansion-panel>
           </mat-accordion>
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12">
-          <app-payment-summary></app-payment-summary>
+          <app-payment-summary
+            [confirmed]="confirmed"
+            [flightDetails]="flightDetails"
+          >
+          </app-payment-summary>
         </div>
       </div>
     </div>

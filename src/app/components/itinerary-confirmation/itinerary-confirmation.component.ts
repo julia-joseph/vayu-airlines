@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WellnessKitDetailsService } from 'src/app/services/wellness-kit-details/wellness-kit-details.service';
-
+import { FlightDetailsService } from 'src/app/services/flight-details/flight-details.service';
+import * as moment from 'moment';
 @Component({
   selector: 'app-itinerary-confirmation',
   templateUrl: './itinerary-confirmation.component.html',
@@ -9,31 +10,44 @@ import { WellnessKitDetailsService } from 'src/app/services/wellness-kit-details
 export class ItineraryConfirmationComponent implements OnInit {
   confirmmationCode: string = 'UIYEGY'
   flightNumber: string = 'AC7952'
-  departureDate: string ='Fri, 7 May 2020'
   from: string = 'Toronto';
   to: string = 'New York';
   flightDuration: string = '4 hr 55 min';
-
-  name: string = 'Ms. Anne Robin';
-  age: number = 42;
-  seatNumber: string = 'A4';
-  baggageCount: number = 0;
 
   mask: number;
   sanitizer: number;
   gloves: number;
   delivery: string;
+
+  wellnessKit: any;
+  totalPrice: number = 0;
+
+  fromCode: string = 'YYZ';
+  toCode: string = 'LGA';
+  departDateFormat1: string = 'May 7 2020';
+  departDateFormat2: string = 'Friday, May 7'
+
+  totalPassengers: number = 1;
   
   constructor(
-    private wellnessKitService: WellnessKitDetailsService
+    private wellnessKitService: WellnessKitDetailsService,
+    private flightDetailsService: FlightDetailsService
   ) { }
 
   ngOnInit(): void {
-    const details = this.wellnessKitService.getWellnessKitDetails();
-    this.mask = details.maskQuantity;
-    this.sanitizer = details.sanitizerQuantity;
-    this.gloves = details.glovesQuantity;
-    this.delivery = details.delivery;
+    this.wellnessKit = this.wellnessKitService.getWellnessKitDetails();
+    this.totalPrice = ( this.wellnessKit.maskQuantity * this.wellnessKit.maskPrice ) +
+                      ( this.wellnessKit.sanitizerQuantity * this.wellnessKit.sanitizerPrice ) +
+                      ( this.wellnessKit.glovesQuantity * this.wellnessKit.glovesPrice );
+    
+    const details = this.flightDetailsService.getFlightDetails();
+    this.fromCode = details.fromCode;
+    this.toCode = details.toCode;
+    this.from = details.from;
+    this.to = details.to;
+    this.departDateFormat1 = moment(details.depart).format('MMM D YYYY');
+    this.departDateFormat2 = moment(details.depart).format('dddd, MMM D');
+    this.totalPassengers = details.passengers.adults + details.passengers.children + details.passengers.infants;
   }
 
 }
