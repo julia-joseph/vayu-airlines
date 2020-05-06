@@ -46,7 +46,7 @@ export class FlightListComponent implements OnInit {
       moment(date).format('ddd - MMM D'),
       moment(date).add(1,'day').format('ddd - MMM D'),
       moment(date).add(2,'day').format('ddd - MMM D'),
-      moment(date).add(2,'day').format('ddd - MMM D')
+      moment(date).add(3,'day').format('ddd - MMM D')
     ];
     return dates; 
   }
