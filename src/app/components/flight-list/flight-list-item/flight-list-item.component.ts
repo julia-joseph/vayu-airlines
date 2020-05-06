@@ -15,6 +15,7 @@ export class FlightListItemComponent implements OnInit {
 
   from: string = 'New York City area (NYC)';
   to: string = 'Los Angeles, CA (LAX)';
+  class: string = 'Economy';
   fromTime: string = '07:15';
   toTime: string = '12:15';
   connectionDetails: string = 'Non-Stop 4 hr 55 min';
@@ -30,11 +31,13 @@ export class FlightListItemComponent implements OnInit {
     if(this.flightDetails) {
       this.from = this.flightDetails.from;
       this.to = this.flightDetails.to;
+      this.class = this.flightDetails.class;
     }
   }
 
   onFlightSelection() {
-    console.log('flight selected');
+    if(this.show !== 0)
+      return;
 
     const dialogRef = this.dialog.open(ReviewItineraryDialogComponent, {
       panelClass: 'custom-dialog-container',

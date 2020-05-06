@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-11 flight-list-item-details">
                 <div class="row d-flex flex-row">
-                    <div class="col-1-half-n-quarter">
+                    <div class="col-2">
                         <div class="d-flex flex-column flight-list-item-label">
                             <div>
                                 {{ fromTime }}
@@ -27,7 +27,7 @@
                             </div>                 
                         </div>
                     </div>
-                    <div class="col-1-half-n-quarter">
+                    <div class="col-2">
                         <div class="row d-flex flex-column flight-list-item-label">
                             <div>
                                 {{ toTime }}
@@ -37,7 +37,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-1-quarter">
+                    <div class="col-2" *ngIf="class === 'Economy'">
                         <div class="row d-flex flex-column flight-list-item-label">
                             <div  class="flight-list-item-class">
                                 Economy
@@ -47,7 +47,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-1-quarter">
+                    <div class="col-2" *ngIf="class === 'Business'">
                         <div class="row d-flex flex-column flight-list-item-label">
                             <div  class="flight-list-item-class">
                                 Business
@@ -59,11 +59,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-1 flight-list-item-selection"  (click)="onFlightSelection()" *ngIf="!show">
+            <div class="col-1"  (click)="onFlightSelection()" [ngClass]="{'flight-list-item-selection-not': show, ' flight-list-item-selection': !show}">
                 <img src="../../../../assets/images/ico_sel_white.png" class="flight-selection-button">
-            </div>
-            <div class="col-1 flight-list-item-selection-not" *ngIf="show">
-                <img src="../../../../assets/images/ico_sel_black.png" class="flight-selection-button">
             </div>
             <!-- <div class="col-1-half">
                 <div class="d-flex flex-column flight-list-item-label">

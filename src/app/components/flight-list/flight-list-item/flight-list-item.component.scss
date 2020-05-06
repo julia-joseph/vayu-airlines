@@ -65,7 +65,7 @@
 
     .flight-list-item-selection-not {
         padding-left: 10px;
-        background: rgb(255, 236, 228);
+        background: #ffc9b2;
         max-width: fit-content;
         margin-left: 35px;
         cursor: pointer;
@@ -74,6 +74,10 @@
             margin-top: 40px;
             height: 28px;
         }
+    }
+
+    .flight-list-item-selection-not:hover {
+        background: orangered
     }
 }
 
