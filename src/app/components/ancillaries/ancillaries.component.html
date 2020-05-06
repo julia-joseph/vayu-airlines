@@ -3,42 +3,62 @@
     <ng-template mat-tab-label>
       <div id="index-gallery">
         <div class="item">
-          <img src="../../../assets/images/ico_covid.png" class="tab-icon" alt="" />
-          <p class="orange font-weight-bold font-size1-2 ">
+          <img
+            src="../../../assets/images/ico_covid.png"
+            class="tab-icon"
+            alt=""
+          />
+          <p class="orange font-weight-bold font-size1-2">
             Wellness Kit
           </p>
         </div>
       </div>
     </ng-template>
-    
+
     <div>
       <div class="row w-100 font-size1-2">
         <div class="col-8">
           <div class="row pt-4 pb-3 pl-4 pr-4 border-bottom">
             <div class="col-6 orange font-weight-bold">
-              YYZ - LGA
+              <mat-select
+                class="form-control segment-select w-50"
+                [(value)]="segment"
+                [disabled]="submitted"
+              >
+                <mat-option
+                  *ngFor="let segment of segmentOptions"
+                  [value]="segment"
+                >
+                  {{ segment }}
+                </mat-option>
+              </mat-select>
             </div>
             <div class="col-6 d-flex pl-0">
-                <div class="pl-4">Deliver to: </div>
-                <mat-select class="form-control delivery-select" [(value)]="delivery" [disabled]="submitted">
-                  <mat-option *ngFor="let delivery of deliveryLocations" [value]="delivery">
-                    {{ delivery }}
-                  </mat-option>
-                </mat-select>
+              <div class="pl-4">Deliver to:</div>
+              <mat-select
+                class="form-control delivery-select w-50 ml-4"
+                [(value)]="delivery"
+                [disabled]="submitted"
+              >
+                <mat-option
+                  *ngFor="let delivery of deliveryLocations"
+                  [value]="delivery"
+                >
+                  {{ delivery }}
+                </mat-option>
+              </mat-select>
             </div>
           </div>
 
           <div class="row pt-3 pl-2 pr-2">
-            <div class="col-3">
-
-            </div>
+            <div class="col-3"></div>
             <div class="col-3">
               Quantity
             </div>
             <div class="col-3">
               Size
             </div>
-            <div class="col-3">
+            <div class="col-2 d-flex justify-content-center">
               Price
             </div>
           </div>
@@ -48,21 +68,35 @@
               Mask
             </div>
             <div class="col-3">
-              <mat-select [(value)]="maskQuantity" class="form-control" [disabled]="submitted">
-                <mat-option *ngFor="let qty of [0,1,2]" [value]="qty">
+              <mat-select
+                [(value)]="maskQuantity"
+                class="form-control"
+                [disabled]="submitted"
+              >
+                <mat-option *ngFor="let qty of [0, 1, 2]" [value]="qty">
                   {{ qty }}
                 </mat-option>
               </mat-select>
             </div>
             <div class="col-3">
-              <mat-select [(value)]="maskSize" class="form-control" [disabled]="submitted">
-                <mat-option *ngFor="let size of ['Adult','Kid']" [value]="size">
+              <mat-select
+                [(value)]="maskSize"
+                class="form-control"
+                [disabled]="submitted"
+              >
+                <mat-option
+                  *ngFor="let size of ['Adult', 'Kid']"
+                  [value]="size"
+                >
                   {{ size }}
                 </mat-option>
               </mat-select>
             </div>
-            <div class="col-3 mt-2">
-              $ <span class="font-size1-5 orange">  {{ maskQuantity * maskPrice | number : '.2' }} </span>
+            <div class="col-2 d-flex justify-content-end mt-2">
+              $
+              <span class="font-size1-5 orange">
+                {{ maskQuantity * maskPrice | number: ".2" }}
+              </span>
             </div>
           </div>
 
@@ -71,21 +105,35 @@
               Sanitizer
             </div>
             <div class="col-3">
-              <mat-select [(value)]="sanitizerQuantity" class="form-control" [disabled]="submitted">
-                <mat-option *ngFor="let qty of [0,1,2]" [value]="qty">
+              <mat-select
+                [(value)]="sanitizerQuantity"
+                class="form-control"
+                [disabled]="submitted"
+              >
+                <mat-option *ngFor="let qty of [0, 1, 2]" [value]="qty">
                   {{ qty }}
                 </mat-option>
               </mat-select>
             </div>
             <div class="col-3">
-              <mat-select [(value)]="sanitizerSize" class="form-control" [disabled]="submitted">
-                <mat-option *ngFor="let size of ['1 Oz','2 Oz']" [value]="size">
+              <mat-select
+                [(value)]="sanitizerSize"
+                class="form-control"
+                [disabled]="submitted"
+              >
+                <mat-option
+                  *ngFor="let size of ['1 Oz', '2 Oz']"
+                  [value]="size"
+                >
                   {{ size }}
                 </mat-option>
               </mat-select>
             </div>
-            <div class="col-3 mt-2">
-                $ <span class="font-size1-5 orange"> {{ sanitizerQuantity * sanitizerPrice | number : '.2' }} </span> 
+            <div class="col-2 d-flex justify-content-end mt-2">
+              $
+              <span class="font-size1-5 orange">
+                {{ sanitizerQuantity * sanitizerPrice | number: ".2" }}
+              </span>
             </div>
           </div>
 
@@ -94,58 +142,82 @@
               Gloves
             </div>
             <div class="col-3">
-              <mat-select [(value)]="glovesQuantity" class="form-control" [disabled]="submitted">
-                <mat-option *ngFor="let qty of [0,1,2]" [value]="qty">
+              <mat-select
+                [(value)]="glovesQuantity"
+                class="form-control"
+                [disabled]="submitted"
+              >
+                <mat-option *ngFor="let qty of [0, 1, 2]" [value]="qty">
                   {{ qty }}
                 </mat-option>
               </mat-select>
             </div>
             <div class="col-3">
-              <mat-select [(value)]="glovesSize" class="form-control" [disabled]="submitted">
-                <mat-option *ngFor="let size of ['Adult','Kid']" [value]="size">
+              <mat-select
+                [(value)]="glovesSize"
+                class="form-control"
+                [disabled]="submitted"
+              >
+                <mat-option
+                  *ngFor="let size of ['Adult', 'Kid']"
+                  [value]="size"
+                >
                   {{ size }}
                 </mat-option>
               </mat-select>
             </div>
-            <div class="col-3 mt-2">
-              $ <span class="font-size1-5 orange">  {{ glovesQuantity * glovesPrice | number : '.2'  }} </span>
+            <div class="col-2 d-flex justify-content-end mt-2">
+              $
+              <span class="font-size1-5 orange">
+                {{ glovesQuantity * glovesPrice | number: ".2" }}
+              </span>
             </div>
           </div>
 
-
           <div class="row p-4">
             <div class="col-6 d-flex pl-0 pr-0">
-                <button class="cancel-button" (click)="onCancel()">Cancel</button>
-                <button class="confirm-button" (click)="onConfirm()">Confirm</button>
+              <button class="cancel-button" (click)="onCancel()">Cancel</button>
+              <button class="confirm-button" (click)="onConfirm()">
+                Confirm
+              </button>
             </div>
             <div class="col-6 d-flex justify-content-end">
               <div class="d-flex mr-3 pt-3">
-                <div class="mr-3 font-size1-5">Total: </div>
-                <div class="ml-3">
-                  $ <span class="orange font-size1-5"> 
-                    {{  (maskQuantity * maskPrice) + 
-                           (sanitizerQuantity * sanitizerPrice) +
-                           (glovesQuantity * glovesPrice) | number : '.2' }} 
-                    </span>
+                <div class="mr-3 font-size1-5">Total:</div>
+                <div class="ml-3 mr-3">
+                  $
+                  <span class="orange font-size1-5">
+                    {{
+                      maskQuantity * maskPrice +
+                        sanitizerQuantity * sanitizerPrice +
+                        glovesQuantity * glovesPrice | number: ".2"
+                    }}
+                  </span>
                 </div>
               </div>
             </div>
           </div>
-          
         </div>
         <div class="col-4 pl-4 pr-0 img-section">
-          <img src="../../../assets/images/covid_banner.png" class="h-100 w-100">
+          <img
+            src="../../../assets/images/covid_banner.png"
+            class="h-100 w-100"
+          />
         </div>
       </div>
     </div>
   </mat-tab>
 
-  <mat-tab  [disabled]="true">
+  <mat-tab [disabled]="true">
     <ng-template mat-tab-label>
       <div id="index-gallery">
         <div class="item">
-          <img src="../../../assets/images/ico_car.png" class="tab-icon" alt="" />
-          <p class="font-weight-bold font-size1-2 ">
+          <img
+            src="../../../assets/images/ico_car.png"
+            class="tab-icon"
+            alt=""
+          />
+          <p class="font-weight-bold font-size1-2">
             Add Car
           </p>
         </div>
@@ -158,8 +230,12 @@
     <ng-template mat-tab-label>
       <div id="index-gallery">
         <div class="item">
-          <img src="../../../assets/images/ico_pet.png" class="tab-icon" alt="" />
-          <p class="font-weight-bold font-size1-2 ">
+          <img
+            src="../../../assets/images/ico_pet.png"
+            class="tab-icon"
+            alt=""
+          />
+          <p class="font-weight-bold font-size1-2">
             Add Pets
           </p>
         </div>
@@ -172,8 +248,12 @@
     <ng-template mat-tab-label>
       <div id="index-gallery">
         <div class="item">
-          <img src="../../../assets/images/ico_bag.png" class="tab-icon" alt="" />
-          <p class="font-weight-bold font-size1-2 ">
+          <img
+            src="../../../assets/images/ico_bag.png"
+            class="tab-icon"
+            alt=""
+          />
+          <p class="font-weight-bold font-size1-2">
             Add Bags
           </p>
         </div>

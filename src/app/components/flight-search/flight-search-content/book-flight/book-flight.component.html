@@ -14,7 +14,7 @@
                 <div class="col-3">
                    <div><label>From </label></div> 
                    <div>
-                        <select class="form-control select" formControlName="from"
+                        <select class="form-control select cursor-pointer" formControlName="from"
                                 (change)="onSelect($event.target.value)">
                             <option
                                 *ngFor="let origin of origins.data.origins" 
@@ -27,7 +27,7 @@
                 <div class="col-3">
                     <div><label>To </label></div>
                     <div>
-                        <select class="form-control select" formControlName="to">
+                        <select class="form-control select cursor-pointer" formControlName="to">
                             <option
                                 *ngFor="let destination of destinations.data.destinations"
                                 [value]="destination.code">

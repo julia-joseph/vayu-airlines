@@ -12,6 +12,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MainModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatIconModule,
   ],
   exports: [
     FlightSearchComponent,
@@ -36,7 +38,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatSelectModule,
     MatFormFieldModule,
     MatExpansionModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule,
   ],
 })
 export class FlightSearchModule {}
