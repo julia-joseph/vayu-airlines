@@ -5,17 +5,17 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class WellnessKitDetailsService {
-  totalPrice: Number;
-  totalKitQty: Number;
-  showPayment: Boolean;
+  totalPrice: number;
+  totalKitQty: number;
+  showPayment: boolean;
 
-  totalPriceChange: Subject<Number> = new Subject<Number>();
+  totalPriceChange: Subject<number> = new Subject<number>();
   public priceObs = this.totalPriceChange.asObservable();
 
-  totalKitQtyChange: Subject<Number> = new Subject<Number>();
+  totalKitQtyChange: Subject<number> = new Subject<number>();
   public kitQtyObs = this.totalKitQtyChange.asObservable();
 
-  showPaymentChange: Subject<Boolean> = new Subject<Boolean>();
+  showPaymentChange: Subject<boolean> = new Subject<boolean>();
   public showPayementObs = this.showPaymentChange.asObservable();
 
   wellnessKitDetails = {
@@ -53,15 +53,15 @@ export class WellnessKitDetailsService {
     this.wellnessKitDetails = kit;
   }
 
-  setTotalPrice(totalPrice: any) {
+  setTotalPrice(totalPrice: number) {
     this.totalPriceChange.next(totalPrice);
   }
 
-  settotalKitQty(totalKitQty: any) {
+  settotalKitQty(totalKitQty: number) {
     this.totalKitQtyChange.next(totalKitQty);
   }
 
-  setShowPayment(state: Boolean) {
+  setShowPayment(state: boolean) {
     this.showPaymentChange.next(state);
   }
 }

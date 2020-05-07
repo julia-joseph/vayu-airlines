@@ -15,8 +15,9 @@ export class PaymentSummaryComponent implements OnInit {
   depart: string = 'May 8';
   totalPrice: number = 0;
   totalKitQty: number = 0;
-  showPayment: Boolean = false;
-
+  showPayment: boolean = false;
+  finalPrice: number = 355.00;
+  
   constructor(
     private router: Router,
     private wellnessKitService: WellnessKitDetailsService
@@ -25,10 +26,11 @@ export class PaymentSummaryComponent implements OnInit {
   ngOnInit(): void {
     this.depart = moment(this.flightDetails.depart).format('MMM D');
     this.wellnessKitService.priceObs.subscribe((price) => {
-      this.totalPrice = Number(price);
+      this.totalPrice = price;
+      this.finalPrice = this.totalPrice + 355;
     });
     this.wellnessKitService.kitQtyObs.subscribe((kitQty) => {
-      this.totalKitQty = Number(kitQty);
+      this.totalKitQty = kitQty;
     });
 
     this.wellnessKitService.showPayementObs.subscribe((state) => {

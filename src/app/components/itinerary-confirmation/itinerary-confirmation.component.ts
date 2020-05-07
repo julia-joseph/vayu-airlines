@@ -28,6 +28,7 @@ export class ItineraryConfirmationComponent implements OnInit {
   departDateFormat2: string = 'Friday, May 7'
 
   totalPassengers: number = 1;
+  finalPrice: number = 355.00;
   
   constructor(
     private wellnessKitService: WellnessKitDetailsService,
@@ -39,6 +40,7 @@ export class ItineraryConfirmationComponent implements OnInit {
     this.totalPrice = ( this.wellnessKit.maskQuantity * this.wellnessKit.maskPrice ) +
                       ( this.wellnessKit.sanitizerQuantity * this.wellnessKit.sanitizerPrice ) +
                       ( this.wellnessKit.glovesQuantity * this.wellnessKit.glovesPrice );
+    this.finalPrice = this.finalPrice + this.totalPrice;
     
     const details = this.flightDetailsService.getFlightDetails();
     this.fromCode = details.fromCode;
