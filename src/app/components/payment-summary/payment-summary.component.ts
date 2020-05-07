@@ -9,11 +9,14 @@ import { WellnessKitDetailsService } from '../../services/wellness-kit-details/w
 })
 export class PaymentSummaryComponent implements OnInit {
   @Input() confirmed: boolean = true;
+
   @Input() flightDetails;
 
   depart: string = 'May 8';
   totalPrice: number = 0;
   totalKitQty: number = 0;
+  showPayment: Boolean = false;
+
   constructor(
     private router: Router,
     private wellnessKitService: WellnessKitDetailsService
@@ -26,6 +29,10 @@ export class PaymentSummaryComponent implements OnInit {
     });
     this.wellnessKitService.kitQtyObs.subscribe((kitQty) => {
       this.totalKitQty = Number(kitQty);
+    });
+
+    this.wellnessKitService.showPayementObs.subscribe((state) => {
+      this.showPayment = state;
     });
   }
 

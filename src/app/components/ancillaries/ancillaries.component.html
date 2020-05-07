@@ -179,10 +179,16 @@
           </div>
 
           <div class="row p-4">
-            <div class="col-6 d-flex pl-0 pr-0">
-              <button class="cancel-button" [disabled]="submitted" (click)="onCancel()">Cancel</button>
-              <button class="confirm-button" [disabled]="submitted" (click)="onConfirm()">
+            <div class="col-6 pl-0 pr-0" [style.display]="submitted == true ? 'none': 'block'">
+              <button class="cancel-button" (click)="onCancel()">Cancel</button>
+              <button class="confirm-button" (click)="onConfirm()">
                 Confirm
+              </button>
+            </div>
+            <div class="col-6 pl-0 pr-0" [style.display]="submitted == true ? 'block': 'none'">
+              <button class="edit-button float-left mr-3">Edit</button>
+              <button class="skip-button float-left" (click)= "onSkip()">
+                Skip to Payment
               </button>
             </div>
             <div class="col-6 d-flex justify-content-end">

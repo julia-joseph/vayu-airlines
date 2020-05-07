@@ -48,6 +48,14 @@
   }
 }
 
+[hidden] {
+  display: none !important;
+}
+
+[show] {
+  display: show !important;
+}
+
 .cancel-button {
   border: none;
   background-color: #808080b3;
@@ -63,6 +71,22 @@
   background-color: orangered;
   color: white;
   width: 120px;
+  height: 40px;
+  font-size: 1.2rem;
+}
+.edit-button {
+  border: none;
+  background-color: orangered;
+  color: white;
+  width: 5rem;
+  height: 40px;
+  font-size: 1.2rem;
+}
+.skip-button {
+  border: none;
+  background-color: orangered;
+  color: white;
+  width: 12rem;
   height: 40px;
   font-size: 1.2rem;
 }

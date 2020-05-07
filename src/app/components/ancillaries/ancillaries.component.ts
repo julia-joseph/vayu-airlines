@@ -27,6 +27,7 @@ export class AncillariesComponent implements OnInit {
   glovesSize: string = 'Adult/M';
   delivery: string = 'Gate';
   submitted: boolean = false;
+  showPayment: boolean = false;
   segment: string = 'YYZ - LGA';
 
   constructor(
@@ -79,9 +80,12 @@ export class AncillariesComponent implements OnInit {
         });
 
         this.submitted = true;
-
+       
         this.onSubmit.emit();
       }
     });
+  }
+  onSkip() { 
+    this.wellnessKitService.setShowPayment(true);
   }
 }
