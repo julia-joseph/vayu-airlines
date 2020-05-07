@@ -10,18 +10,18 @@ import { WellnessKitDetailsService } from 'src/app/services/wellness-kit-details
   styleUrls: ['./ancillaries.component.scss'],
 })
 export class AncillariesComponent implements OnInit {
-  @Input() fromCode: string = 'NYC';
-  @Input() toCode: string = 'LAX';
+  @Input() fromCode: string = 'JFK';
+  @Input() toCode: string = 'BOS';
   @Output() onSubmit = new EventEmitter<void>();
-  deliveryLocations: string[] = ['Gate','Lounge','In flight','Check-In'];
-  segmentOptions: string[] = ['YYZ - LGA'];
+  deliveryLocations: string[] = ['Gate','Lounge','In flight','Check-In Counter'];
+  segmentOptions: string[] = ['JFK - BOS'];
 
   maskQuantity: number = 1;
   maskPrice: number = 5.24;
   maskSize: string = 'Adult/M';
   sanitizerQuantity: number = 1;
   sanitizerPrice: number = 2.3;
-  sanitizerSize: string = '1 Oz';
+  sanitizerSize: string = '1 OZ (30 mL)';
   glovesQuantity: number = 1;
   glovesPrice: number = 1.2;
   glovesSize: string = 'Adult/M';

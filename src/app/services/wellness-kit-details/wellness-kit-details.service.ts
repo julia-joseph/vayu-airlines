@@ -10,12 +10,12 @@ export class WellnessKitDetailsService {
      maskSize: 'Adult/M',
      sanitizerQuantity: 0,
      sanitizerPrice: 2.30,
-     sanitizerSize: '1 Oz',
+     sanitizerSize: '1 OZ (30 mL)',
      glovesQuantity: 0,
      glovesPrice: 1.20,
      glovesSize: 'Adult/M',
      delivery: 'Gate',
-     segment: 'NYC - LAX'
+     segment: 'JFK - BOS'
    }
 
   constructor() {}

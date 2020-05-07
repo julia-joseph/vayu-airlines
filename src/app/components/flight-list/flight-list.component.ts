@@ -7,16 +7,16 @@ import { DestinationService } from 'src/app/services/destination/destination.ser
 const INIT_FLIGHT_DETAILS = {
   class: "Economy",
   depart: "2020-05-08",
-  from: "New York City area (NYC)",
+  from: "New York, NY (JFK)",
   passengers: {
     adults: 1,
     children: 0,
     infants: 0
   },
-  return: "2020-05-31",
-  to: "Los Angeles, CA (LAX)",
-  fromCode: "NYC",
-  toCode: "LAX"
+  return: "",
+  to: "Boston, MA (BOS)",
+  fromCode: "JFK",
+  toCode: "BOS"
 }
 @Component({
   selector: 'app-flight-list',

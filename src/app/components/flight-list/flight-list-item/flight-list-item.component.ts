@@ -13,8 +13,8 @@ export class FlightListItemComponent implements OnInit {
   @Input() flightDetails: any;
   @Input() show: number = 1;
 
-  from: string = 'New York City area (NYC)';
-  to: string = 'Los Angeles, CA (LAX)';
+  from: string = 'New York, NY (JFK)';
+  to: string = 'Boston, MA (BOS)';
   class: string = 'Economy';
   fromTimes: string[] = ['07:15','08:30','09:45','10:10','12:15'];
   toTimes: string[] = ['12:10','13:25','14:40','15:05','17:10'];
