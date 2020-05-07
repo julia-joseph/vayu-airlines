@@ -85,7 +85,8 @@
                 [disabled]="submitted"
               >
                 <mat-option
-                  *ngFor="let size of ['Adult', 'Kid']"
+                  *ngFor="let size of ['Infant','Child/XS','Child/S','Child/M','Child/L',
+                                        'Adult/XS','Adult/S','Adult/M','Adult/L']"
                   [value]="size"
                 >
                   {{ size }}
@@ -159,7 +160,10 @@
                 [disabled]="submitted"
               >
                 <mat-option
-                  *ngFor="let size of ['Adult', 'Kid']"
+                  *ngFor="let size of ['Size 1 Infant', 'Size 2 (age 3 to 4)', 'Size 3 (age 5 to 6)',
+                                      'Size 4 (age 7 to 8)', 'Size 5 (age 9 to 10)',
+                                      'Size 6 (age 11 to 13', 'Size 7 (age 14 to 17)',
+                                      'Adult/S', 'Adult/M', 'Adult/L']"
                   [value]="size"
                 >
                   {{ size }}

@@ -18,13 +18,13 @@ export class AncillariesComponent implements OnInit {
 
   maskQuantity: number = 1;
   maskPrice: number = 5.24;
-  maskSize: string = 'Adult';
+  maskSize: string = 'Adult/M';
   sanitizerQuantity: number = 1;
   sanitizerPrice: number = 2.3;
   sanitizerSize: string = '1 Oz';
   glovesQuantity: number = 1;
   glovesPrice: number = 1.2;
-  glovesSize: string = 'Adult';
+  glovesSize: string = 'Adult/M';
   delivery: string = 'Gate';
   submitted: boolean = false;
   segment: string = 'YYZ - LGA';
