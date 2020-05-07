@@ -13,10 +13,10 @@ export class AncillariesComponent implements OnInit {
   @Input() fromCode: string = 'NYC';
   @Input() toCode: string = 'LAX';
   @Output() onSubmit = new EventEmitter<void>();
-  deliveryLocations: string[] = ['Gate','Lounge'];
+  deliveryLocations: string[] = ['Gate','Lounge','In flight','Check-In'];
   segmentOptions: string[] = ['YYZ - LGA'];
 
-  maskQuantity: number = 2;
+  maskQuantity: number = 1;
   maskPrice: number = 5.24;
   maskSize: string = 'Adult';
   sanitizerQuantity: number = 1;
