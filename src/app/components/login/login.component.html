@@ -9,13 +9,23 @@
         <h4 class="login-title">Log in </h4>
         <h5 class="credentials-title">Please enter your credentials to login </h5>
         <div style="margin-top:30px">
-            <form #loginfrm="ngForm" class="form" (ngSubmit)="onSubmit(loginfrm)">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
                 <div class="form-group input-group mb-3 input-group-lg mb-4">
-                    <input type="email" class="form-control ml-4 mr-4" id="email" placeholder="Email Address" name="email">
+                    <input type="text" class="form-control ml-4 mr-4" formControlName="email"
+                        placeholder="Email Address" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required" class="err-msg">Email is required</div>
+                        <div *ngIf="f.email.errors.email" class="err-msg">Email must be a valid email address</div>
+                    </div>
                 </div>
+
                 <div class="form-group input-group mb-3 input-group-lg mb-4">
-                    <input type="password" class="form-control ml-4 mr-4" id="pwd" placeholder="Password" name="pswd">
+                    <input type="password" class="form-control ml-4 mr-4" formControlName="password"
+                        placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required" class="err-msg">Password is required</div>
+                    </div>
                 </div>
 
                 <div class="form-group form-check ml-4 mb-4">
