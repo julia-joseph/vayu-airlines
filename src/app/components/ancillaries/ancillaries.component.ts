@@ -13,7 +13,7 @@ export class AncillariesComponent implements OnInit {
   @Input() fromCode: string = 'NYC';
   @Input() toCode: string = 'LAX';
   @Output() onSubmit = new EventEmitter<void>();
-  deliveryLocations: string[] = ['Gate','Lounge'];
+  deliveryLocations: string[] = ['Gate', 'Lounge'];
   segmentOptions: string[] = ['YYZ - LGA'];
 
   maskQuantity: number = 2;
@@ -37,9 +37,7 @@ export class AncillariesComponent implements OnInit {
 
   ngOnInit(): void {
     this.segment = this.fromCode + ' - ' + this.toCode;
-    this.segmentOptions = [
-      this.segment
-    ]
+    this.segmentOptions = [this.segment];
   }
 
   onCancel() {}
@@ -71,15 +69,15 @@ export class AncillariesComponent implements OnInit {
           maskPrice: 5.24,
           maskSize: this.maskSize,
           sanitizerQuantity: this.sanitizerQuantity,
-          sanitizerPrice: 2.30,
+          sanitizerPrice: 2.3,
           sanitizerSize: this.sanitizerSize,
           glovesQuantity: this.glovesQuantity,
-          glovesPrice: 1.20,
+          glovesPrice: 1.2,
           glovesSize: this.glovesSize,
           delivery: this.delivery,
-          segment: this.segment
-        })
-        
+          segment: this.segment,
+        });
+
         //disable select buttons
         this.submitted = true;
 
