@@ -12,37 +12,44 @@
       </div>
       <div class="font-weight-normal line-height1-7">{{ depart }} 07:15AM</div>
       <div class="font-weight-normal line-height1-7">
-        {{ this.flightDetails.passengers.adults + 
-           this.flightDetails.passengers.children +
-           this.flightDetails.passengers.infants }} Tickets 
+        {{
+          this.flightDetails.passengers.adults +
+            this.flightDetails.passengers.children +
+            this.flightDetails.passengers.infants
+        }}
+        Tickets
         <span class="orange float-right font-weight-600">15000pts</span>
       </div>
       <div class="font-weight-normal line-height1-7">
-        ({{this.flightDetails.passengers.adults}} Adults 
-          {{this.flightDetails.passengers.children }} Child 
-          {{ this.flightDetails.passengers.infants }} Lap Infant)
+        ({{ this.flightDetails.passengers.adults }} Adults
+        {{ this.flightDetails.passengers.children }} Child
+        {{ this.flightDetails.passengers.infants }} Lap Infant)
       </div>
       <a href="#" class="orange font-weight-600">Fare Restrictions</a>
     </div>
   </li>
   <li class="d-flex justify-content-between lh-condensed bg-light pl-3 pr-3">
-    <div class="border-bottom pb-3 w-100">
-      <h5 class="orange">Extras (4)</h5>
-      <div class="font-weight-normal line-height1-7">
-        <span class="pr-2">6</span> Checked Bags
-        <span class="float-right">$ 180.00</span>
-      </div>
-      <div class="font-weight-normal line-height1-7">
-        <span class="pr-2">6</span> Wellness Kit
-        <span class="float-right">$ 8.74</span>
-      </div>
-      <div class="font-weight-normal line-height1-7">
-        <span class="pr-2">6</span> Pets
-        <span class="float-right">$ 125.00</span>
-      </div>
-      <div class="font-weight-normal line-height1-7">
-        <span class="pr-2">6</span> Car (6 days)
-        <span class="float-right">$ 350.00</span>
+    <div class="border-bottom pb-3 w-100" *ngIf="!confirmed">
+      <h5 class="orange">Extras (1)</h5>
+      <div>
+        <div class="font-weight-normal line-height1-7 d-none">
+          <span class="pr-2">6</span> Checked Bags
+          <span class="float-right">$ 180.00</span>
+        </div>
+        <div class="font-weight-normal line-height1-7">
+          <span class="pr-2"> {{ this.totalKitQty }} </span> Wellness Kit
+          <span class="float-right"
+            >$ {{ this.totalPrice | number: ".2" }}</span
+          >
+        </div>
+        <div class="font-weight-normal line-height1-7 d-none">
+          <span class="pr-2">6</span> Pets
+          <span class="float-right">$ 125.00</span>
+        </div>
+        <div class="font-weight-normal line-height1-7 d-none">
+          <span class="pr-2">6</span> Car (6 days)
+          <span class="float-right">$ 350.00</span>
+        </div>
       </div>
     </div>
   </li>
@@ -62,10 +69,27 @@
     <div class="border-bottom pb-3 w-100">
       <h5 class="orange float-left">Total</h5>
       <div class="font-weight-normal line-height1-7 float-right">
-       <h5>pts <span class="orange font-size1-7 font-weight-bold align-text-top">5000+</span></h5>
-       <h5 class="float-right">$ <span class="orange font-size1-7 font-weight-bold align-text-top">355.00</span></h5>
+        <h5>
+          pts
+          <span class="orange font-size1-7 font-weight-bold align-text-top"
+            >5000+</span
+          >
+        </h5>
+        <h5 class="float-right">
+          $
+          <span class="orange font-size1-7 font-weight-bold align-text-top"
+            >355.00</span
+          >
+        </h5>
       </div>
     </div>
   </li>
 </ul>
-<button *ngIf="!confirmed" [disabled]="confirmed" (click)="onPayment()" class="btn payment-button">Payment</button>
+<button
+  *ngIf="!confirmed"
+  [disabled]="confirmed"
+  (click)="onPayment()"
+  class="btn payment-button"
+>
+  Payment
+</button>

@@ -37,9 +37,7 @@ export class AncillariesComponent implements OnInit {
 
   ngOnInit(): void {
     this.segment = this.fromCode + ' - ' + this.toCode;
-    this.segmentOptions = [
-      this.segment
-    ]
+    this.segmentOptions = [this.segment];
   }
 
   onCancel() {}
@@ -71,21 +69,18 @@ export class AncillariesComponent implements OnInit {
           maskPrice: 5.24,
           maskSize: this.maskSize,
           sanitizerQuantity: this.sanitizerQuantity,
-          sanitizerPrice: 2.30,
+          sanitizerPrice: 2.3,
           sanitizerSize: this.sanitizerSize,
           glovesQuantity: this.glovesQuantity,
-          glovesPrice: 1.20,
+          glovesPrice: 1.2,
           glovesSize: this.glovesSize,
           delivery: this.delivery,
-          segment: this.segment
-        })
-        
-        //disable select buttons
+          segment: this.segment,
+        });
+
         this.submitted = true;
 
         this.onSubmit.emit();
-        //don't nagivate - enable payment button
-        //this.router.navigate(['/itinerary-confirmation']);
       }
     });
   }

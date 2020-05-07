@@ -53,7 +53,7 @@ export class FlightListItemComponent implements OnInit {
         departDate: 
           this.flightDetails.depart ? moment(this.flightDetails.depart).format('ddd, D MMM YYYY') : 'Fri, 8 May 2020',
         returnDate: 
-          this.flightDetails.return ? moment(this.flightDetails.depart).format('ddd, D MMM YYYY') : 'Fri, 8 May 2020',
+          this.flightDetails.depart ? moment(this.flightDetails.depart).format('ddd, D MMM YYYY') : 'Fri, 8 May 2020',
         flightNum:  'VY912',
         flightDuration: '4 hr 55 min',
         totalFare: 60.00,
