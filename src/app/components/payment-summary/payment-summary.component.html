@@ -86,8 +86,8 @@
   </li>
 </ul>
 <button
-  *ngIf="!confirmed"
-  [disabled]="confirmed"
+  *ngIf="showPayment"
+  [disabled]="!showPayment"
   (click)="onPayment()"
   class="btn payment-button"
 >

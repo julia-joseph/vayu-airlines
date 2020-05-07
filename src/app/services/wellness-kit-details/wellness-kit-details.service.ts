@@ -7,12 +7,16 @@ import { Subject } from 'rxjs';
 export class WellnessKitDetailsService {
   totalPrice: Number;
   totalKitQty: Number;
+  showPayment: Boolean;
 
   totalPriceChange: Subject<Number> = new Subject<Number>();
   public priceObs = this.totalPriceChange.asObservable();
 
   totalKitQtyChange: Subject<Number> = new Subject<Number>();
   public kitQtyObs = this.totalKitQtyChange.asObservable();
+
+  showPaymentChange: Subject<Boolean> = new Subject<Boolean>();
+  public showPayementObs = this.showPaymentChange.asObservable();
 
   wellnessKitDetails = {
     maskQuantity: 0,
@@ -35,6 +39,10 @@ export class WellnessKitDetailsService {
     this.totalKitQtyChange.subscribe((value) => {
       this.totalKitQty = value;
     });
+
+    this.showPaymentChange.subscribe((value) => {
+      this.showPayment = value;
+    });
   }
 
   getWellnessKitDetails() {
@@ -51,5 +59,9 @@ export class WellnessKitDetailsService {
 
   settotalKitQty(totalKitQty: any) {
     this.totalKitQtyChange.next(totalKitQty);
+  }
+
+  setShowPayment(state: Boolean) {
+    this.showPaymentChange.next(state);
   }
 }
