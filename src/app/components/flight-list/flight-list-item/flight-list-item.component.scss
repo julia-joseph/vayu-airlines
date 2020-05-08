@@ -45,39 +45,47 @@
     }
 
     .flight-list-item-details{
-        position: relative;
-        left: 25px;
+        // position: relative;
+        // left: 25px;
         padding: 1rem 0.2rem;
     }
 
     .flight-list-item-selection {
-        padding-left: 10px;
-        background: orangered;
-        max-width: fit-content;
-        margin-left: 35px;
+        // padding-left: 10px;
+        // background: #ff530f;
+        // max-width: fit-content;
+        // height: 100%;
+        // margin-left: 35px;
+        // cursor: pointer;
+        padding: 0px 10px;
+        background: #ff530f;
         cursor: pointer;
+        height: 100%;
 
         .flight-selection-button {
-            margin-top: 30px;
             height: 28px;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
         }
     }
 
     .flight-list-item-selection-not {
-        padding-left: 10px;
+        padding: 0px 10px;
         background: #ffc9b2;
-        max-width: fit-content;
-        margin-left: 35px;
         cursor: pointer;
+        height: 100%;
 
         .flight-selection-button {
-            margin-top: 40px;
             height: 28px;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
         }
     }
 
     .flight-list-item-selection-not:hover {
-        background: orangered
+        background: #ff530f;
     }
 }
 

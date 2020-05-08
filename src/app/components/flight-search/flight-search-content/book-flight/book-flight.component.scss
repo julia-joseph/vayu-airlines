@@ -75,7 +75,7 @@
     }
 
     .mat-expansion-panel-header-description, .mat-expansion-indicator::after {
-        color: orangered;
+        color: #ff530f;
     }
 
     .mat-expansion-panel .mat-expansion-panel-header.cdk-keyboard-focused:not([aria-disabled=true]), .mat-expansion-panel .mat-expansion-panel-header.cdk-program-focused:not([aria-disabled=true]), .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:hover:not([aria-disabled=true]) {
@@ -83,7 +83,7 @@
     }
 
     .card-title {
-        color: orangered;
+        color: #ff530f;
     }
 
     .card-body {
@@ -116,8 +116,8 @@
             .search-button {
                 position: relative;
                 top: 32px;
-                background-color: orangered;
-                border-color: orangered;
+                background-color: #ff530f;
+                border-color: #ff530f;
             }
         }
 

@@ -1,7 +1,7 @@
 <div class="card flight-list-item">
     <div class="">
         <div class="row">
-            <div class="col-11 flight-list-item-details">
+            <div class="col-11 pl-4 flight-list-item-details">
                 <div class="row d-flex flex-row">
                     <div class="col-2">
                         <div class="d-flex flex-column flight-list-item-label">
@@ -59,66 +59,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-1"  (click)="onFlightSelection()" [ngClass]="{'flight-list-item-selection-not': show, ' flight-list-item-selection': !show}">
-                <img src="../../../../assets/images/ico_sel_white.png" class="flight-selection-button">
-            </div>
-            <!-- <div class="col-1-half">
-                <div class="d-flex flex-column flight-list-item-label">
-                    <div>
-                        {{ fromTime }}
-                    </div>
-                    <div>
-                        {{ from }}
-                    </div>
+            <div class="col-1 pl-0 d-flex justify-content-end"  (click)="onFlightSelection()">
+                <div [ngClass]="{'flight-list-item-selection-not': show, ' flight-list-item-selection': !show}">
+                    <img src="../../../../assets/images/ico_sel_white.png" class="flight-selection-button">
                 </div>
             </div>
-            <div class="col-6 d-flex flex-column">
-                <div class="row">
-                    <div class="col-1">
-                        <img src="../../../../assets/images/ico_FL_Take.png" class="plane-icon">
-                    </div>
-                    <div class="col-10 d-flex flex-column mt-2">
-                        <div class="text-center">{{ connectionDetails }}</div>
-                        <div class="orange-line"></div>
-                    </div>
-                    <div class="col-1 pl-0">
-                        <img src="../../../../assets/images/ico_FL_Land.png" class="plane-icon">
-                    </div>                 
-                </div>
-            </div>
-            <div class="col-1-half">
-                <div class="row d-flex flex-column flight-list-item-label">
-                    <div>
-                        {{ toTime }}
-                    </div>
-                    <div>
-                        {{ to }}
-                    </div>
-                </div>
-            </div>
-            <div class="col-1-quarter">
-                <div class="row d-flex flex-column flight-list-item-label">
-                    <div  class="flight-list-item-class">
-                        Economy
-                    </div>
-                    <div class="flight-list-item-price">
-                        ${{ economyPrice }}
-                    </div>
-                </div>
-            </div>
-            <div class="col-1-quarter">
-                <div class="row d-flex flex-column flight-list-item-label">
-                    <div  class="flight-list-item-class">
-                        Business
-                    </div>
-                    <div class="flight-list-item-price">
-                        ${{ businessPrice }}
-                    </div>
-                </div>
-            </div>
-            <div class="col-half">
-                <img (click)="onFlightSelection()" src="../../../../assets/images/ico_scroll_right.png" class="flight-selection-button">
-            </div> -->
         </div>
     </div>
 </div>
