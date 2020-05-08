@@ -91,5 +91,6 @@ export class AncillariesComponent implements OnInit {
 
   onEdit() {
     this.submitted = false;
+    this.wellnessKitService.setShowPayment(false);
   }
 }
