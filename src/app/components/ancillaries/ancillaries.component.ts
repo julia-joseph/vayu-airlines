@@ -88,4 +88,8 @@ export class AncillariesComponent implements OnInit {
   onSkip() { 
     this.wellnessKitService.setShowPayment(true);
   }
+
+  onEdit() {
+    this.submitted = false;
+  }
 }

@@ -179,22 +179,22 @@
           </div>
 
           <div class="row p-4">
-            <div class="col-6 pl-0 pr-0" [style.display]="submitted == true ? 'none': 'block'">
+            <div class="col-8 pl-0 pr-0" *ngIf="!submitted">
               <button class="cancel-button" (click)="onCancel()">Cancel</button>
               <button class="confirm-button" (click)="onConfirm()">
                 Confirm
               </button>
             </div>
-            <div class="col-6 pl-0 pr-0" [style.display]="submitted == true ? 'block': 'none'">
-              <button class="edit-button float-left mr-3">Edit</button>
-              <button class="skip-button float-left" (click)= "onSkip()">
+            <div class="col-8 pl-0 pr-0" *ngIf="submitted">
+              <button class="edit-button" (click)="onEdit()">Edit</button>
+              <button class="skip-button" (click)= "onSkip()">
                 Skip to Payment
               </button>
             </div>
-            <div class="col-6 d-flex justify-content-end">
+            <div class="col-4 pl-0 d-flex justify-content-end">
               <div class="d-flex mr-3 pt-3">
-                <div class="mr-3 font-size1-5">Total:</div>
-                <div class="ml-3 mr-3">
+                <div class="mr-2 font-size1-5">Total:</div>
+                <div class="">
                   $
                   <span class="orange font-size1-5">
                     {{
