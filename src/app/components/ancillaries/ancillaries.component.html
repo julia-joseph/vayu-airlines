@@ -15,41 +15,57 @@
       </div>
     </ng-template>
 
+    <form [formGroup]="wellnessKitForm">
     <div>
-      <div class="row w-100 font-size1-2">
-        <div class="col-8">
-          <div class="row pt-4 pb-3 pl-4 pr-4 border-bottom">
-            <div class="col-6 orange font-weight-bold">
-              <mat-select
-                class="form-control segment-select w-50"
-                [(value)]="segment"
-                [disabled]="submitted"
+      <div class="row font-size1-2 pt-3 pb-4 pl-4 pr-4 mr-1 border-bottom">
+          <div class="col-3 font-weight-bold">
+            <mat-select
+              class="form-control segment-select w-75"
+              [disabled]="submitted"
+              formControlName="segment"
+            >
+              <mat-option
+                *ngFor="let segment of segmentOptions"
+                [value]="segment"
               >
-                <mat-option
-                  *ngFor="let segment of segmentOptions"
-                  [value]="segment"
-                >
-                  {{ segment }}
-                </mat-option>
-              </mat-select>
-            </div>
-            <div class="col-6 d-flex pl-0">
-              <div class="pl-4">Deliver to:</div>
-              <mat-select
-                class="form-control delivery-select w-50 ml-4"
-                [(value)]="delivery"
-                [disabled]="submitted"
+                {{ segment }}
+              </mat-option>
+            </mat-select>
+          </div>
+          <div class="col-5 d-flex pl-0">
+            <div class="pl-4 pt-2">Deliver to:</div>
+            <mat-select
+              class="form-control w-50 ml-4"
+              [disabled]="submitted"
+              formControlName="delivery"
+            >
+              <mat-option
+                *ngFor="let delivery of deliveryLocations"
+                [value]="delivery"
               >
-                <mat-option
-                  *ngFor="let delivery of deliveryLocations"
-                  [value]="delivery"
-                >
-                  {{ delivery }}
-                </mat-option>
-              </mat-select>
+                {{ delivery }}
+              </mat-option>
+            </mat-select>
+          </div>
+          <div class="col-4 pr-0">
+            <div class="d-flex flex-row justify-content-end pt-2">
+              <div class="orange add-items-link mr-4" (click)="addAdditionalItems()">Add additional items</div>
+              <!-- <mat-icon>fullscreen</mat-icon> -->
+              <div (click)="openExpandedAncDialog()">
+                <svg class="bi bi-arrows-fullscreen cursor-pointer orange" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M1.464 10.536a.5.5 0 01.5.5v3h3a.5.5 0 010 1h-3.5a.5.5 0 01-.5-.5v-3.5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+                  <path fill-rule="evenodd" d="M5.964 10a.5.5 0 010 .707l-4.146 4.147a.5.5 0 01-.707-.708L5.257 10a.5.5 0 01.707 0zm8.854-8.854a.5.5 0 010 .708L10.672 6a.5.5 0 01-.708-.707l4.147-4.147a.5.5 0 01.707 0z" clip-rule="evenodd"/>
+                  <path fill-rule="evenodd" d="M10.5 1.5A.5.5 0 0111 1h3.5a.5.5 0 01.5.5V5a.5.5 0 01-1 0V2h-3a.5.5 0 01-.5-.5zm4 9a.5.5 0 00-.5.5v3h-3a.5.5 0 000 1h3.5a.5.5 0 00.5-.5V11a.5.5 0 00-.5-.5z" clip-rule="evenodd"/>
+                  <path fill-rule="evenodd" d="M10 9.964a.5.5 0 000 .708l4.146 4.146a.5.5 0 00.708-.707l-4.147-4.147a.5.5 0 00-.707 0zM1.182 1.146a.5.5 0 000 .708L5.328 6a.5.5 0 00.708-.707L1.889 1.146a.5.5 0 00-.707 0z" clip-rule="evenodd"/>
+                  <path fill-rule="evenodd" d="M5.5 1.5A.5.5 0 005 1H1.5a.5.5 0 00-.5.5V5a.5.5 0 001 0V2h3a.5.5 0 00.5-.5z" clip-rule="evenodd"/>
+                </svg>
+              </div>
             </div>
           </div>
+      </div>
 
+      <div class="row w-100 font-size1-2">
+        <div class="col-8">
           <div class="row pt-3 pl-2 pr-2">
             <div class="col-3"></div>
             <div class="col-3">
@@ -63,15 +79,16 @@
             </div>
           </div>
 
+          <div [ngClass]="{'overflow-items': itemAdded}" #scrollMe (scroll)="onScroll()">
           <div class="row pt-3 pb-3 border-bottom">
             <div class="col-3 item-name mt-2">
               Mask
             </div>
             <div class="col-3">
               <mat-select
-                [(value)]="maskQuantity"
                 class="form-control"
                 [disabled]="submitted"
+                formControlName="maskQuantity"
               >
                 <mat-option *ngFor="let qty of [0, 1, 2]" [value]="qty">
                   {{ qty }}
@@ -80,9 +97,9 @@
             </div>
             <div class="col-3">
               <mat-select
-                [(value)]="maskSize"
                 class="form-control"
                 [disabled]="submitted"
+                formControlName="maskSize"
               >
                 <mat-option
                   *ngFor="let size of ['Infant','Child/XS','Child/S','Child/M','Child/L',
@@ -96,7 +113,7 @@
             <div class="col-2 d-flex justify-content-end mt-2">
               $
               <span class="font-size1-5 orange">
-                {{ maskQuantity * maskPrice | number: ".2" }}
+                {{ wellnessKitForm.get('maskQuantity').value * wellnessKitForm.get('maskPrice').value | number: ".2" }}
               </span>
             </div>
           </div>
@@ -107,9 +124,9 @@
             </div>
             <div class="col-3">
               <mat-select
-                [(value)]="sanitizerQuantity"
                 class="form-control"
                 [disabled]="submitted"
+                formControlName="sanitizerQuantity"
               >
                 <mat-option *ngFor="let qty of [0, 1, 2]" [value]="qty">
                   {{ qty }}
@@ -118,9 +135,9 @@
             </div>
             <div class="col-3">
               <mat-select
-                [(value)]="sanitizerSize"
                 class="form-control"
                 [disabled]="submitted"
+                formControlName="sanitizerSize"
               >
                 <mat-option
                   *ngFor="let size of ['1 OZ (30 mL)', '2 OZ (60 mL)']"
@@ -133,7 +150,7 @@
             <div class="col-2 d-flex justify-content-end mt-2">
               $
               <span class="font-size1-5 orange">
-                {{ sanitizerQuantity * sanitizerPrice | number: ".2" }}
+                {{ wellnessKitForm.get('sanitizerQuantity').value * wellnessKitForm.get('sanitizerPrice').value | number: ".2" }}
               </span>
             </div>
           </div>
@@ -144,9 +161,9 @@
             </div>
             <div class="col-3">
               <mat-select
-                [(value)]="glovesQuantity"
                 class="form-control"
                 [disabled]="submitted"
+                formControlName="glovesQuantity"
               >
                 <mat-option *ngFor="let qty of [0, 1, 2]" [value]="qty">
                   {{ qty }}
@@ -155,9 +172,9 @@
             </div>
             <div class="col-3">
               <mat-select
-                [(value)]="glovesSize"
                 class="form-control"
                 [disabled]="submitted"
+                formControlName="glovesSize"
               >
                 <mat-option
                   *ngFor="let size of ['Size 1 Infant', 'Size 2 (age 3 to 4)', 'Size 3 (age 5 to 6)',
@@ -173,10 +190,73 @@
             <div class="col-2 d-flex justify-content-end mt-2">
               $
               <span class="font-size1-5 orange">
-                {{glovesQuantity * glovesPrice | number: ".2" }}
+                {{ wellnessKitForm.get('glovesQuantity').value * wellnessKitForm.get('glovesPrice').value | number: ".2" }}
               </span>
             </div>
           </div>
+
+          <ng-container *ngIf="wellnessKitForm.get('additionalItems')">
+
+          <ng-container  
+            *ngFor="let itemGroup of additionalItems.controls; let i = index"
+          >
+            <div class="row pt-3 pb-3 border-bottom" [formGroup]="itemGroup">
+              <div class="col-3">
+                <button *ngIf="!submitted"
+                        class="btn btn-sm p-0 remove-button rounded-circle" 
+                        (click)="removeItem(i)">
+                  <svg class="bi bi-x remove-icon" width="1.4em" height="1.4em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z" clip-rule="evenodd"/>
+                    <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z" clip-rule="evenodd"/>
+                  </svg>
+                </button>
+                <mat-select
+                  class="form-control"
+                  [disabled]="submitted"
+                  formControlName="item"
+                  [ngClass]="{'w-100':submitted, 'w-75':!submitted}"
+                >
+                  <mat-option *ngFor="let item of itemNameOptions" [value]="item">
+                    {{ item }}
+                  </mat-option>
+                </mat-select>
+              </div>
+              <div class="col-3">
+                <mat-select
+                  class="form-control"
+                  [disabled]="submitted"
+                  formControlName="quantity"
+                >
+                  <mat-option *ngFor="let qty of itemQuantityOptions" [value]="qty">
+                    {{ qty }}
+                  </mat-option>
+                </mat-select>
+              </div>
+              <div class="col-3">
+                <mat-select
+                  class="form-control"
+                  [disabled]="submitted"
+                  formControlName="size"
+                >
+                  <mat-option
+                    *ngFor="let size of itemSizeOptions"
+                    [value]="size"
+                  >
+                    {{ size }}
+                  </mat-option>
+                </mat-select>
+              </div>
+              <div class="col-2 d-flex justify-content-end mt-2">
+                $
+                <span class="font-size1-5 orange">
+                  {{ itemGroup.get('quantity').value * itemGroup.get('price').value | number: ".2" }}
+                </span>
+              </div>
+            </div>
+          </ng-container>
+
+        </ng-container>
+      </div>
 
           <div class="row p-4">
             <div class="col-8 pl-0 pr-0" *ngIf="!submitted">
@@ -197,25 +277,22 @@
                 <div class="">
                   $
                   <span class="orange font-size1-5">
-                    {{
-                      maskQuantity * maskPrice +
-                        sanitizerQuantity * sanitizerPrice +
-                        glovesQuantity * glovesPrice | number: ".2"
-                    }}
+                    {{ totalPrice | number: ".2" }}
                   </span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-4 pl-4 pr-0 img-section">
+        <div class="col-4 pl-4 pt-4">
           <img
             src="../../../assets/images/covid_banner.png"
-            class="h-100 w-100"
+            class="w-100 image"
           />
         </div>
       </div>
     </div>
+    </form>
   </mat-tab>
 
   <mat-tab [disabled]="true">

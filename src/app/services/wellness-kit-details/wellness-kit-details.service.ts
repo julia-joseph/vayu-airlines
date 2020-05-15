@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class WellnessKitDetailsService {
-  totalPrice: number;
+  totalPrice: number = 8.74;
   totalKitQty: number;
   showPayment: boolean;
 
@@ -19,17 +19,18 @@ export class WellnessKitDetailsService {
   public showPayementObs = this.showPaymentChange.asObservable();
 
   wellnessKitDetails = {
-    maskQuantity: 0,
+    maskQuantity: 1,
     maskPrice: 5.24,
     maskSize: 'Adult/M',
-    sanitizerQuantity: 0,
+    sanitizerQuantity: 1,
     sanitizerPrice: 2.30,
     sanitizerSize: '1 OZ (30 mL)',
-    glovesQuantity: 0,
+    glovesQuantity: 1,
     glovesPrice: 1.20,
     glovesSize: 'Adult/M',
     delivery: 'Gate',
-    segment: 'JFK - BOS'
+    segment: 'JFK - BOS',
+    additionalItems: []
   }
 
   constructor() {

@@ -190,6 +190,20 @@
                                                     $ <span class="orange font-size1-3">{{ wellnessKit.glovesQuantity * wellnessKit.glovesPrice | number : '.2' }}</span>
                                                 </div>
                                             </div>
+                                            <div class="row" *ngFor="let item of wellnessKit.additionalItems">
+                                                <div class="col-3 font-weight-400">
+                                                    {{ item.item }}
+                                                </div>
+                                                <div class="col-3">
+                                                    {{ item.quantity }}
+                                                </div>
+                                                <div class="col-3">
+                                                    {{ item.size }}
+                                                </div>
+                                                <div class="col-3">
+                                                    $ <span class="orange font-size1-3">{{ item.quantity * item.price | number : '.2' }}</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

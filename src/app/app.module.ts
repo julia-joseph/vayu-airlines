@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatSelectModule } from '@angular/material/select';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,8 +17,9 @@ import { PaymentSummaryComponent } from './components/payment-summary/payment-su
 import { AncillariesComponent } from './components/ancillaries/ancillaries.component';
 import { FlightListModule } from './components/flight-list/flight-list.module';
 import { ItineraryConfirmationComponent } from './components/itinerary-confirmation/itinerary-confirmation.component';
-import { MatSelectModule } from '@angular/material/select';
 import { AncillariesDialogComponent } from './components/ancillaries/ancillaries-dialog/ancillaries-dialog.component';
+import { RegulationsDialogComponent } from './components/regulations-dialog/regulations-dialog.component';
+import { ExpandedAncillariesDialogComponent } from './components/ancillaries/expanded-ancillaries-dialog/expanded-ancillaries-dialog.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,9 @@ import { AncillariesDialogComponent } from './components/ancillaries/ancillaries
     PaymentSummaryComponent,
     AncillariesComponent,
     ItineraryConfirmationComponent,
-    AncillariesDialogComponent
+    AncillariesDialogComponent,
+    RegulationsDialogComponent,
+    ExpandedAncillariesDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +45,9 @@ import { AncillariesDialogComponent } from './components/ancillaries/ancillaries
     MatIconModule,
     MatTabsModule,
     MatSelectModule
+  ],
+  entryComponents: [
+    RegulationsDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

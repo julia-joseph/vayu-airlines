@@ -1,0 +1,243 @@
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="wellnessKit">
+            <div>
+              <div class="row w-100 font-size1-2 pt-4 pb-3 pl-4 pr-4 border-bottom">
+                  <div class="col-3 orange font-weight-bold">
+                    <mat-select
+                      class="form-control segment-select w-75"
+                      formControlName="segment"
+                    >
+                    <!-- *ngFor="let segment of segmentOptions"  -->
+                      <mat-option
+                        [value]="wellnessKit.get('segment').value"
+                      >
+                        {{ wellnessKit.get('segment').value }}
+                      </mat-option>
+                    </mat-select>
+                  </div>
+                  <div class="col-5 d-flex pl-0">
+                    <div class="pl-4 pt-2">Deliver to:</div>
+                    <mat-select
+                      class="form-control delivery-select w-50 ml-4"
+                      formControlName="delivery"
+                    >
+                      <mat-option
+                        *ngFor="let delivery of ['Gate','Lounge','In flight','Check-In Counter']"
+                        [value]="delivery"
+                      >
+                        {{ delivery }}
+                      </mat-option>
+                    </mat-select>
+                  </div>
+              </div>
+        
+              <div class="row font-size1-2 pl-4 pr-4">
+                <div class="col-8">
+                  <div class="row pt-3 pl-2 pr-2">
+                    <div class="col-3"></div>
+                    <div class="col-3">
+                      Quantity
+                    </div>
+                    <div class="col-3">
+                      Size
+                    </div>
+                    <div class="col-2 d-flex justify-content-center">
+                      Price
+                    </div>
+                  </div>
+        
+                  <div class="overflow-items">
+                  <div class="row pt-3 pb-3 border-bottom">
+                    <div class="col-3 item-name mt-2">
+                      Mask
+                    </div>
+                    <div class="col-3">
+                      <mat-select
+                        class="form-control"
+                        formControlName="maskQuantity"
+                      >
+                        <mat-option *ngFor="let qty of [0, 1, 2]" [value]="qty">
+                          {{ qty }}
+                        </mat-option>
+                      </mat-select>
+                    </div>
+                    <div class="col-3">
+                      <mat-select
+                        class="form-control"
+                        formControlName="maskSize"
+                      >
+                        <mat-option
+                          *ngFor="let size of ['Infant','Child/XS','Child/S','Child/M','Child/L',
+                                                'Adult/XS','Adult/S','Adult/M','Adult/L']"
+                          [value]="size"
+                        >
+                          {{ size }}
+                        </mat-option>
+                      </mat-select>
+                    </div>
+                    <div class="col-2 d-flex justify-content-end mt-2">
+                      $
+                      <span class="font-size1-5 orange">
+                        {{ wellnessKit.get('maskQuantity').value * wellnessKit.get('maskPrice').value | number: ".2" }}
+                      </span>
+                    </div>
+                  </div>
+        
+                  <div class="row pt-3 pb-3 border-bottom">
+                    <div class="col-3 item-name mt-2">
+                      Sanitizer
+                    </div>
+                    <div class="col-3">
+                      <mat-select
+                        class="form-control"
+                        formControlName="sanitizerQuantity"
+                      >
+                        <mat-option *ngFor="let qty of [0, 1, 2]" [value]="qty">
+                          {{ qty }}
+                        </mat-option>
+                      </mat-select>
+                    </div>
+                    <div class="col-3">
+                      <mat-select
+                        class="form-control"
+                        formControlName="sanitizerSize"
+                      >
+                        <mat-option
+                          *ngFor="let size of ['1 OZ (30 mL)', '2 OZ (60 mL)']"
+                          [value]="size"
+                        >
+                          {{ size }}
+                        </mat-option>
+                      </mat-select>
+                    </div>
+                    <div class="col-2 d-flex justify-content-end mt-2">
+                      $
+                      <span class="font-size1-5 orange">
+                        {{ wellnessKit.get('sanitizerQuantity').value * wellnessKit.get('sanitizerPrice').value  | number: ".2" }}
+                      </span>
+                    </div>
+                  </div>
+        
+                  <div class="row pt-3 pb-3 border-bottom">
+                    <div class="col-3 item-name mt-2">
+                      Gloves
+                    </div>
+                    <div class="col-3">
+                      <mat-select
+                        class="form-control"
+                        formControlName="glovesQuantity"
+                      >
+                        <mat-option *ngFor="let qty of [0, 1, 2]" [value]="qty">
+                          {{ qty }}
+                        </mat-option>
+                      </mat-select>
+                    </div>
+                    <div class="col-3">
+                      <mat-select
+                        class="form-control"
+                        formControlName="glovesSize"
+                      >
+                        <mat-option
+                          *ngFor="let size of ['Size 1 Infant', 'Size 2 (age 3 to 4)', 'Size 3 (age 5 to 6)',
+                                              'Size 4 (age 7 to 8)', 'Size 5 (age 9 to 10)',
+                                              'Size 6 (age 11 to 13', 'Size 7 (age 14 to 17)',
+                                              'Adult/S', 'Adult/M', 'Adult/L']"
+                          [value]="size"
+                        >
+                          {{ size }}
+                        </mat-option>
+                      </mat-select>
+                    </div>
+                    <div class="col-2 d-flex justify-content-end mt-2">
+                      $
+                      <span class="font-size1-5 orange">
+                        {{wellnessKit.get('glovesQuantity').value * wellnessKit.get('glovesPrice').value | number: ".2" }}
+                      </span>
+                    </div>
+                  </div>
+        
+                  <ng-container *ngIf="wellnessKit.get('additionalItems')">
+        
+                  <ng-container  
+                    *ngFor="let itemGroup of additionalItems.controls; let i = index"
+                  >
+                    <div class="row pt-3 pb-3 border-bottom" [formGroup]="itemGroup">
+                      <div class="col-3 item-name mt-2">
+                        <!-- <mat-select
+                          class="form-control"
+                          formControlName="item"
+                        >
+                          <mat-option *ngFor="let item of ['Something1','Something2','Something3','Something4']" [value]="item">
+                            {{ item }}
+                          </mat-option>
+                        </mat-select> -->
+                        {{ itemGroup.get('item').value }}
+                      </div>
+                      <div class="col-3">
+                        <mat-select
+                          class="form-control"
+                          formControlName="quantity"
+                        >
+                          <mat-option *ngFor="let qty of [0,1,2]" [value]="qty">
+                            {{ qty }}
+                          </mat-option>
+                        </mat-select>
+                      </div>
+                      <div class="col-3">
+                        <mat-select
+                          class="form-control"
+                          formControlName="size"
+                        >
+                          <mat-option
+                            *ngFor="let size of ['Small','Medium','Large']"
+                            [value]="size"
+                          >
+                            {{ size }}
+                          </mat-option>
+                        </mat-select>
+                      </div>
+                      <div class="col-2 d-flex justify-content-end mt-2">
+                        $
+                        <span class="font-size1-5 orange">
+                          {{ itemGroup.get('quantity').value * itemGroup.get('price').value | number: ".2" }}
+                        </span>
+                      </div>
+                    </div>
+                  </ng-container>
+        
+                </ng-container>
+              </div>
+        
+                  <div class="row p-4">
+                    <div class="col-8 pl-0 pr-0">
+                      <button class="cancel-button" (click)="onCancel()">Cancel</button>
+                      <button class="confirm-button" (click)="onConfirm()">
+                        Confirm
+                      </button>
+                    </div>
+                    
+                    <div class="col-4 pl-0 d-flex justify-content-end">
+                      <div class="d-flex mr-3 pt-3">
+                        <div class="mr-2 font-size1-5">Total:</div>
+                        <div class="">
+                          $
+                          <span class="orange font-size1-5">
+                            {{ totalPrice | number: ".2" }}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4 pl-4 pr-0 img-section">
+                  <img
+                    src="../../../assets/images/covid_banner.png"
+                    class="h-100 w-100"
+                  />
+                </div>
+              </div>
+            </div>
+        </form>
+    </div>
+</div>

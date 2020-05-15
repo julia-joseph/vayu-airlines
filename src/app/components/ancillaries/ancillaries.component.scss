@@ -43,6 +43,15 @@
     color: #ff530f;
   }
 
+  image {
+    height: 300px;
+  }
+  
+  .overflow-items {
+    overflow: hidden auto;
+    height: 200px;
+  }
+
   .mat-select-arrow {
     width: 13px;
     height: 11px;
@@ -99,9 +108,9 @@
   font-size: 1.2rem;
 }
 
-.img-section {
-  height: 372px;
-  margin-top: 15px;
+.add-items-link {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .tab-icon {
@@ -112,4 +121,17 @@
 .item-name {
   position: relative;
   left: 26px;
+}
+
+.remove-button.focus, .remove-button:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(176, 185, 193, 0.25);
+}
+
+.remove-icon {
+  transition: 1s ease-in-out;
+}
+
+.remove-icon:hover {
+  transform: rotate(180deg);
 }

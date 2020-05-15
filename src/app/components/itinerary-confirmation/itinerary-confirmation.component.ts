@@ -37,9 +37,7 @@ export class ItineraryConfirmationComponent implements OnInit {
 
   ngOnInit(): void {
     this.wellnessKit = this.wellnessKitService.getWellnessKitDetails();
-    this.totalPrice = ( this.wellnessKit.maskQuantity * this.wellnessKit.maskPrice ) +
-                      ( this.wellnessKit.sanitizerQuantity * this.wellnessKit.sanitizerPrice ) +
-                      ( this.wellnessKit.glovesQuantity * this.wellnessKit.glovesPrice );
+    this.totalPrice = this.wellnessKitService.totalPrice;
     this.finalPrice = this.finalPrice + this.totalPrice;
     
     const details = this.flightDetailsService.getFlightDetails();

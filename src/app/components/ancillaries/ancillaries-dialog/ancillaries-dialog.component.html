@@ -71,6 +71,20 @@
                                     $ <span class="orange font-size1-3">{{ data.glovesQuantity * data.glovesPrice | number : '.2' }}</span>
                                 </div>
                             </div>
+                            <div class="row" *ngFor="let item of data.additionalItems">
+                                <div class="col-3 font-weight-400">
+                                    {{ item.item }}
+                                </div>
+                                <div class="col-3">
+                                    {{ item.quantity }}
+                                </div>
+                                <div class="col-3">
+                                    {{ item.size }}
+                                </div>
+                                <div class="col-3">
+                                    $ <span class="orange font-size1-3">{{ item.quantity * item.price | number : '.2' }}</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -79,7 +93,7 @@
         <div class="row d-flex justify-content-between ml-1 mr-1">
             <div>
                 <span class="font-weight-bold">Total: </span>
-                $ <span class="orange font-size1-5">{{ this.totalPrice | number : '.2'}}</span>
+                $ <span class="orange font-size1-5">{{ data.totalPrice | number : '.2'}}</span>
             </div>
              <div>
                  <button (click)="onContinue()" class="continue-button">Continue</button>

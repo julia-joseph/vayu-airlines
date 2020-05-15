@@ -18,6 +18,8 @@ export interface DialogData {
   glovesPrice: number;
   delivery: string;
   segment: string;
+  additionalItems: any[];
+  totalPrice: number;
 }
 
 @Component({
@@ -26,7 +28,6 @@ export interface DialogData {
   styleUrls: ['./ancillaries-dialog.component.scss'],
 })
 export class AncillariesDialogComponent implements OnInit {
-  totalPrice: number = 0;
   totalKitQty: number = 0;
 
   constructor(
@@ -36,10 +37,6 @@ export class AncillariesDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.totalPrice =
-      this.data.maskQuantity * this.data.maskPrice +
-      this.data.sanitizerQuantity * this.data.sanitizerPrice +
-      this.data.glovesQuantity * this.data.glovesPrice;
   }
 
   onEdit() {
@@ -48,15 +45,16 @@ export class AncillariesDialogComponent implements OnInit {
   }
 
   onContinue() {
-    this.totalPrice =
-      this.data.maskQuantity * this.data.maskPrice +
-      this.data.sanitizerQuantity * this.data.sanitizerPrice +
-      this.data.glovesQuantity * this.data.glovesPrice;
+    let itemsQty = 0;
+    this.data.additionalItems.forEach(e => {
+      itemsQty = itemsQty + e.quantity;
+    })
     this.totalKitQty =
       this.data.maskQuantity +
       this.data.sanitizerQuantity +
-      this.data.glovesQuantity;
-    this.wellnessKitService.setTotalPrice(this.totalPrice);
+      this.data.glovesQuantity +
+      itemsQty;
+    this.wellnessKitService.setTotalPrice(this.data.totalPrice);
     this.wellnessKitService.settotalKitQty(this.totalKitQty);
     //navigate to booking details
     this.dialogRef.close('Continue');

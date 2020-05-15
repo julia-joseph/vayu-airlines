@@ -1,0 +1,37 @@
+:host ::ng-deep .mat-select-arrow {
+    width: 13px;
+    height: 11px;
+    background: url(../../../../assets/images/img_ddn_06.png) no-repeat;
+    background-size: 13px;
+    border: none;
+    margin: 0 4px;
+}
+
+.overflow-items {
+    overflow: hidden auto;
+    height: 350px;
+  }
+
+.cancel-button {
+    border: none;
+    background-color: #808080b3;
+    color: white;
+    width: 120px;
+    height: 40px;
+    font-size: 1.2rem;
+    margin-right: 13px;
+}
+
+.confirm-button {
+    border: none;
+    background-color: #ff530f;
+    color: white;
+    width: 120px;
+    height: 40px;
+    font-size: 1.2rem;
+}
+
+.img-section {
+    height: 372px;
+    margin-top: 15px;
+}
