@@ -38,12 +38,18 @@ export class AncillariesComponent implements OnInit, AfterViewChecked {
     additionalItems: new FormArray([ ])
   });
 
-  itemNameOptions: string[] = ['Something1','Something2','Something3','Something4'];
+  itemNameOptions: string[] = ['Mask','Sanitizer','Gloves'];
   itemQuantityOptions: number[] = [0,1,2];
-  itemSizeOptions: string[] = ['Small','Medium','Large'];
+  itemSizeOptions: any[] = [
+    ['Infant','Child/XS','Child/S','Child/M','Child/L','Adult/XS','Adult/S','Adult/M','Adult/L'],
+    ['1 OZ (30 mL)', '2 OZ (60 mL)'],
+    ['Size 1 Infant', 'Size 2 (age 3 to 4)', 'Size 3 (age 5 to 6)','Size 4 (age 7 to 8)', 
+    'Size 5 (age 9 to 10)', 'Size 6 (age 11 to 13', 'Size 7 (age 14 to 17)', 'Adult/S', 'Adult/M', 'Adult/L']
+  ];
 
   itemAdded: boolean = false;
   totalPrice: number = 8.74;
+  totalQty: number = 0;
   ogForm;
 
   constructor(
@@ -101,10 +107,10 @@ export class AncillariesComponent implements OnInit, AfterViewChecked {
     if(this.submitted) return;
     this.itemAdded = true;
     this.additionalItems.push(new FormGroup({
-      item: new FormControl('Something1'),
+      item: new FormControl('Mask'),
       quantity: new FormControl(1),
-      size: new FormControl('Small'),
-      price: new FormControl(3.40)
+      size: new FormControl('Adult/M'),
+      price: new FormControl(5.24)
     }))
   }
 
@@ -115,30 +121,73 @@ export class AncillariesComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  setPriceOfNewItem(itemGroup){
+    console.log('something');
+    console.log('itemGroup',itemGroup)
+    const name = itemGroup.get('item').value;
+    let price = 5.24;
+    let size = 'Adult/M'
+
+    if(name === 'Sanitizer'){
+      price = 2.30;
+      size = '1 OZ (30 mL)';
+    }
+    else if(name === 'Gloves'){
+      price = 1.20;
+    }
+
+    itemGroup.patchValue({
+      size: size,
+      price: price
+    })
+  }
+
   onCancel() {}
 
+  calculateTotalQuantity(){
+    let itemsQty = 0;
+    this.additionalItems.value.forEach(e => {
+      itemsQty = itemsQty + e.quantity;
+    })
+    this.totalQty =
+      this.wellnessKitForm.get('maskQuantity').value+
+      this.wellnessKitForm.get('sanitizerQuantity').value +
+      this.wellnessKitForm.get('glovesQuantity').value +
+      itemsQty;
+  }
+
   onConfirm() {
-    const dialogRef = this.dialog.open(AncillariesDialogComponent, {
-      panelClass: 'custom-dialog-container',
-      width: '700px',
-      data: {
-        flightCode: this.fromCode + ' - ' + this.toCode,
-        ...this.wellnessKitForm.value,
-        totalPrice: this.totalPrice
-      },
+    this.calculateTotalQuantity();
+    this.wellnessKitService.setTotalPrice(this.totalPrice);
+    this.wellnessKitService.settotalKitQty(this.totalQty);
+    this.wellnessKitService.setWellnessKitDetails({
+      ...this.wellnessKitForm.value
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.wellnessKitService.setWellnessKitDetails({
-          ...this.wellnessKitForm.value
-        });
+    this.submitted = true;
+    
+    this.onSubmit.emit();
+    // const dialogRef = this.dialog.open(AncillariesDialogComponent, {
+    //   panelClass: 'custom-dialog-container',
+    //   width: '700px',
+    //   data: {
+    //     flightCode: this.fromCode + ' - ' + this.toCode,
+    //     ...this.wellnessKitForm.value,
+    //     totalPrice: this.totalPrice
+    //   },
+    // });
 
-        this.submitted = true;
+    // dialogRef.afterClosed().subscribe((result) => {
+    //   if (result) {
+    //     this.wellnessKitService.setWellnessKitDetails({
+    //       ...this.wellnessKitForm.value
+    //     });
+
+    //     this.submitted = true;
        
-        this.onSubmit.emit();
-      }
-    });
+    //     this.onSubmit.emit();
+    //   }
+    // });
   }
 
   onSkip() { 
@@ -158,7 +207,8 @@ export class AncillariesComponent implements OnInit, AfterViewChecked {
       width: '200vh',
       data: {
         wellnessKitForm: this.wellnessKitForm,
-        totalPrice: this.totalPrice
+        totalPrice: this.totalPrice,
+        itemSizeOptions: this.itemSizeOptions
       }
     });
 

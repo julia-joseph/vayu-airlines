@@ -5,6 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export interface DialogData {
   wellnessKitForm: FormGroup;
   totalPrice: number;
+  itemSizeOptions: any[];
 }
 
 @Component({
