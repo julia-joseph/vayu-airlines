@@ -47,7 +47,7 @@ export class AncillariesComponent implements OnInit, AfterViewChecked {
     'Size 5 (age 9 to 10)', 'Size 6 (age 11 to 13', 'Size 7 (age 14 to 17)', 'Adult/S', 'Adult/M', 'Adult/L']
   ];
 
-  itemAdded: boolean = false;
+  // itemAdded: boolean = false;
   totalPrice: number = 8.74;
   totalQty: number = 0;
   ogForm;
@@ -105,7 +105,7 @@ export class AncillariesComponent implements OnInit, AfterViewChecked {
 
   addAdditionalItems() {
     if(this.submitted) return;
-    this.itemAdded = true;
+    // this.itemAdded = true;
     this.additionalItems.push(new FormGroup({
       item: new FormControl('Mask'),
       quantity: new FormControl(1),
@@ -116,9 +116,9 @@ export class AncillariesComponent implements OnInit, AfterViewChecked {
 
   removeItem(i: number): void { 
     this.additionalItems.removeAt(i);
-    if(this.additionalItems.length === 0) {
-      this.itemAdded= false;
-    }
+    // if(this.additionalItems.length === 0) {
+    //   this.itemAdded= false;
+    // }
   }
 
   setPriceOfNewItem(itemGroup){
@@ -201,10 +201,10 @@ export class AncillariesComponent implements OnInit, AfterViewChecked {
 
   openExpandedAncDialog() {
     if(this.submitted) return;
-    this.ogForm = {...this.wellnessKitForm.value};
+    //this.ogForm = {...this.wellnessKitForm.value};
     const dialogRef = this.dialog.open(ExpandedAncillariesDialogComponent, {
       panelClass: 'custom-dialog-container',
-      width: '200vh',
+      width: '170vh',
       data: {
         wellnessKitForm: this.wellnessKitForm,
         totalPrice: this.totalPrice,
@@ -212,18 +212,23 @@ export class AncillariesComponent implements OnInit, AfterViewChecked {
       }
     });
 
-    dialogRef.afterClosed().subscribe(wellnessForm => {
-      if(wellnessForm) {
+    dialogRef.afterClosed().subscribe(result => {
+      if(result.confirmed) {
         this.wellnessKitForm.setValue({
-          ...wellnessForm.value
+          ...result.wellnessKit.value
         });
         this.onConfirm()
       }
       else {
         this.wellnessKitForm.setValue({
-          ...this.ogForm
+          ...result.wellnessKit.value
         });
-      }      
+      }
+      // else {
+      //   this.wellnessKitForm.setValue({
+      //     ...this.ogForm
+      //   });
+      // }      
     });
   }
 }

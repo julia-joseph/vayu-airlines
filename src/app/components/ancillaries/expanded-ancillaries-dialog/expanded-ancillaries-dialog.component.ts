@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormArray } from '@angular/forms';
+import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface DialogData {
@@ -16,7 +16,8 @@ export interface DialogData {
 export class ExpandedAncillariesDialogComponent implements OnInit {
   wellnessKit: FormGroup;
   totalPrice: number = 8.74;
-
+  itemNameOptions: string[] = ['Mask','Sanitizer','Gloves'];
+  
   constructor(
     public dialogRef: MatDialogRef<ExpandedAncillariesDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
@@ -44,11 +45,51 @@ export class ExpandedAncillariesDialogComponent implements OnInit {
     return this.wellnessKit.get('additionalItems') as FormArray;
   }
 
+  addAdditionalItems() {
+    this.additionalItems.push(new FormGroup({
+      item: new FormControl('Mask'),
+      quantity: new FormControl(1),
+      size: new FormControl('Adult/M'),
+      price: new FormControl(5.24)
+    }))
+  }
+
+  removeItem(i: number): void { 
+    this.additionalItems.removeAt(i);
+  }
+
+  setPriceOfNewItem(itemGroup){
+    console.log('something');
+    console.log('itemGroup',itemGroup)
+    const name = itemGroup.get('item').value;
+    let price = 5.24;
+    let size = 'Adult/M'
+
+    if(name === 'Sanitizer'){
+      price = 2.30;
+      size = '1 OZ (30 mL)';
+    }
+    else if(name === 'Gloves'){
+      price = 1.20;
+    }
+
+    itemGroup.patchValue({
+      size: size,
+      price: price
+    })
+  }
+
   onConfirm() {
-    this.dialogRef.close(this.wellnessKit);
+    this.dialogRef.close({
+      wellnessKit: this.wellnessKit,
+      confirmed: true
+    });
   }
 
   onCancel() {
-    this.dialogRef.close();
+    this.dialogRef.close({
+      wellnessKit: this.wellnessKit,
+      confirmed: false
+    });
   }
 }

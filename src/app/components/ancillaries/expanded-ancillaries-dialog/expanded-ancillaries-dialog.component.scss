@@ -9,7 +9,7 @@
 
 .overflow-items {
     overflow: hidden auto;
-    height: 350px;
+    height: 45vh;
   }
 
 .cancel-button {
@@ -18,7 +18,7 @@
     color: white;
     width: 120px;
     height: 40px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-right: 13px;
 }
 
@@ -28,10 +28,87 @@
     color: white;
     width: 120px;
     height: 40px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 .img-section {
     height: 372px;
     margin-top: 15px;
 }
+
+.add-items-link {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+.remove-button.focus, .remove-button:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(176, 185, 193, 0.25);
+  }
+  
+  .remove-icon {
+    transition: 1s ease-in-out;
+  }
+  
+  .remove-icon:hover {
+    transform: rotate(180deg);
+  }
+
+  .tab-icon {
+    height: 40px;
+    margin-bottom: 5px;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+  
+  [show] {
+    display: show !important;
+  }
+
+  :host ::ng-deep {
+    .mat-tab-header {
+      height: 15vh;
+    }
+  
+    .mat-ripple {
+      height: 18vh;
+    }
+  
+    //mat-tab-label-container
+    // .mat-tab-header {
+    //   position: relative;
+    //   bottom: 60px;
+    //   left: 3px;
+    //   padding: 0px 13px;
+    // }
+  
+    .mat-tab-labels {
+      justify-content: center;
+    }
+  
+    .mat-tab-group.mat-primary .mat-ink-bar,
+    .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+      background-color: #ff530f;
+    }
+
+    .mat-tab-body-content {
+        overflow: hidden !important;
+    }
+  
+    // .mat-tab-body-wrapper {
+    //   position: relative;
+    //   bottom: 50px;
+    // }
+  
+    // .mat-expansion-panel-content {
+    //   position: relative;
+    //   bottom: 30px;
+    // }
+  
+  //makes active tab color not faded
+    .mat-tab-label.mat-tab-label-active {
+      opacity: 1;
+    }
+  }
