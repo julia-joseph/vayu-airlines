@@ -213,6 +213,7 @@
                   [ngClass]="{'w-100':submitted, 'w-75':!submitted}"
                   (selectionChange)="setPriceOfNewItem(itemGroup)"
                 >
+                  <mat-option *ngIf="itemGroup.get('item').value === 'Select'" value='Select'>Select</mat-option>
                   <mat-option *ngFor="let item of itemNameOptions" [value]="item">
                     {{ item }}
                   </mat-option>
@@ -224,12 +225,22 @@
                   [disabled]="submitted"
                   formControlName="quantity"
                 >
+                  <mat-option *ngIf="itemGroup.get('quantity').value === 'Select'" value='Select'>Select</mat-option>
                   <mat-option *ngFor="let qty of itemQuantityOptions" [value]="qty">
                     {{ qty }}
                   </mat-option>
                 </mat-select>
               </div>
               <div class="col-3">
+                <mat-select
+                  class="form-control"
+                  [disabled]="submitted"
+                  formControlName="size"
+                  *ngIf="itemGroup.get('size').value === 'Select'"
+                >
+                  <mat-option *ngIf="itemGroup.get('size').value === 'Select'"  value='Select'>Select</mat-option>
+                </mat-select>
+
                 <mat-select
                   class="form-control"
                   [disabled]="submitted"
@@ -274,7 +285,10 @@
               </div>
               <div class="col-2 d-flex justify-content-end mt-2">
                 $
-                <span class="font-size1-5 orange">
+                <span class="font-size1-5 orange" *ngIf="itemGroup.get('quantity').value === 'Select'">
+                  {{ itemGroup.get('price').value | number: ".2" }}
+                </span>
+                <span class="font-size1-5 orange" *ngIf="itemGroup.get('quantity').value !== 'Select'">
                   {{ itemGroup.get('quantity').value * itemGroup.get('price').value | number: ".2" }}
                 </span>
               </div>

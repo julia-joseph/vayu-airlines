@@ -194,6 +194,7 @@
                           [ngClass]="{'w-75':true}"
                           (selectionChange)="setPriceOfNewItem(itemGroup)"
                         >
+                          <mat-option *ngIf="itemGroup.get('item').value === 'Select'" value='Select'>Select</mat-option>
                           <mat-option *ngFor="let item of itemNameOptions" [value]="item">
                             {{ item }}
                           </mat-option>
@@ -204,12 +205,21 @@
                           class="form-control"
                           formControlName="quantity"
                         >
+                          <mat-option *ngIf="itemGroup.get('quantity').value === 'Select'" value='Select'>Select</mat-option>
                           <mat-option *ngFor="let qty of [0,1,2]" [value]="qty">
                             {{ qty }}
                           </mat-option>
                         </mat-select>
                       </div>
                       <div class="col-3">
+                        <mat-select
+                          class="form-control"
+                          formControlName="size"
+                          *ngIf="itemGroup.get('size').value === 'Select'"
+                        >
+                          <mat-option *ngIf="itemGroup.get('size').value === 'Select'" value='Select'>Select</mat-option>
+                        </mat-select>
+        
                         <mat-select
                           class="form-control"
                           formControlName="size"
@@ -251,7 +261,10 @@
                       </div>
                       <div class="col-2 d-flex justify-content-end">
                         <span class="mt-1 mr-1">$</span>
-                        <span class="font-size1-2 orange">
+                        <span class="font-size1-2 orange" *ngIf="itemGroup.get('quantity').value === 'Select'">
+                          {{ itemGroup.get('price').value | number: ".2" }}
+                        </span>
+                        <span class="font-size1-2 orange" *ngIf="itemGroup.get('quantity').value !== 'Select'">
                           {{ itemGroup.get('quantity').value * itemGroup.get('price').value | number: ".2" }}
                         </span>
                       </div>

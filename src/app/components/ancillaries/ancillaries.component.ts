@@ -65,7 +65,8 @@ export class AncillariesComponent implements OnInit, AfterViewChecked {
     this.wellnessKitForm.valueChanges.subscribe(() => {
       let itemTotal = 0.00;
       this.wellnessKitForm.get('additionalItems').value.forEach(e => {
-        itemTotal = itemTotal + e.quantity * e.price;
+        let q = e.quantity === 'Select' ? 0 : e.quantity;
+        itemTotal = itemTotal + q * e.price;
       })
 
       this.totalPrice = 
@@ -107,10 +108,10 @@ export class AncillariesComponent implements OnInit, AfterViewChecked {
     if(this.submitted) return;
     // this.itemAdded = true;
     this.additionalItems.push(new FormGroup({
-      item: new FormControl('Mask'),
-      quantity: new FormControl(1),
-      size: new FormControl('Adult/M'),
-      price: new FormControl(5.24)
+      item: new FormControl('Select'),
+      quantity: new FormControl('Select'),
+      size: new FormControl('Select'),
+      price: new FormControl(0)
     }))
   }
 
@@ -138,7 +139,8 @@ export class AncillariesComponent implements OnInit, AfterViewChecked {
 
     itemGroup.patchValue({
       size: size,
-      price: price
+      price: price,
+      quantity: 1
     })
   }
 
