@@ -94,4 +94,16 @@ export class ExpandedAncillariesDialogComponent implements OnInit {
       confirmed: false
     });
   }
+
+  addToSubscription() {
+    console.log('subscription added');
+  }
+
+  removeFromSubscription() {
+    console.log('subscription removed');
+  }
+
+  openDetails() {
+    console.log('open details');
+  }
 }

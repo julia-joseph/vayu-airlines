@@ -1,10 +1,43 @@
-:host ::ng-deep .mat-select-arrow {
+:host ::ng-deep {
+  .mat-tab-header {
+    height: 15vh;
+  }
+
+  .mat-ripple {
+    height: 18vh;
+  }
+
+  .mat-tab-labels {
+    justify-content: center;
+  }
+
+  .mat-tab-group.mat-primary .mat-ink-bar,
+  .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: #ff530f;
+  }
+
+  .mat-tab-body-content {
+      overflow: hidden !important;
+  }
+
+  //add this when ancillaries title is added
+  // .mat-tab-group {
+  //   position: relative;
+  //   bottom: 51px;
+  // }
+
+  .mat-tab-label.mat-tab-label-active {
+    opacity: 1;
+  }
+
+  .mat-select-arrow {
     width: 13px;
     height: 11px;
     background: url(../../../../assets/images/img_ddn_06.png) no-repeat;
     background-size: 13px;
     border: none;
     margin: 0 4px;
+  }
 }
 
 .overflow-items {
@@ -46,69 +79,23 @@
     box-shadow: 0 0 0 0.2rem rgba(176, 185, 193, 0.25);
   }
   
-  .remove-icon {
-    transition: 1s ease-in-out;
-  }
-  
-  .remove-icon:hover {
-    transform: rotate(180deg);
-  }
+.remove-icon {
+  transition: 1s ease-in-out;
+}
 
-  .tab-icon {
-    height: 40px;
-    margin-bottom: 5px;
-  }
+.remove-icon:hover {
+  transform: rotate(180deg);
+}
 
-  [hidden] {
-    display: none !important;
-  }
-  
-  [show] {
-    display: show !important;
-  }
+.tab-icon {
+  height: 40px;
+  margin-bottom: 8px;
+}
 
-  :host ::ng-deep {
-    .mat-tab-header {
-      height: 15vh;
-    }
-  
-    .mat-ripple {
-      height: 18vh;
-    }
-  
-    //mat-tab-label-container
-    // .mat-tab-header {
-    //   position: relative;
-    //   bottom: 60px;
-    //   left: 3px;
-    //   padding: 0px 13px;
-    // }
-  
-    .mat-tab-labels {
-      justify-content: center;
-    }
-  
-    .mat-tab-group.mat-primary .mat-ink-bar,
-    .mat-tab-nav-bar.mat-primary .mat-ink-bar {
-      background-color: #ff530f;
-    }
+[hidden] {
+  display: none !important;
+}
 
-    .mat-tab-body-content {
-        overflow: hidden !important;
-    }
-  
-    // .mat-tab-body-wrapper {
-    //   position: relative;
-    //   bottom: 50px;
-    // }
-  
-    // .mat-expansion-panel-content {
-    //   position: relative;
-    //   bottom: 30px;
-    // }
-  
-  //makes active tab color not faded
-    .mat-tab-label.mat-tab-label-active {
-      opacity: 1;
-    }
-  }
+[show] {
+  display: show !important;
+}

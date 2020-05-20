@@ -49,7 +49,7 @@
   
   .overflow-items {
     overflow: hidden auto;
-    height: 285px;
+    height: 300px;
   }
 
   .mat-select-arrow {
@@ -134,4 +134,8 @@
 
 .remove-icon:hover {
   transform: rotate(180deg);
+}
+
+.subscription {
+  margin-left: 39px;
 }
