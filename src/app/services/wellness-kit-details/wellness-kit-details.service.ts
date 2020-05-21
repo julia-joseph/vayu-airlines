@@ -58,7 +58,7 @@ export class WellnessKitDetailsService {
     this.totalPriceChange.next(totalPrice);
   }
 
-  settotalKitQty(totalKitQty: number) {
+  setTotalKitQty(totalKitQty: number) {
     this.totalKitQtyChange.next(totalKitQty);
   }
 

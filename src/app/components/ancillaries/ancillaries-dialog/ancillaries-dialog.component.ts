@@ -55,7 +55,7 @@ export class AncillariesDialogComponent implements OnInit {
       this.data.glovesQuantity +
       itemsQty;
     this.wellnessKitService.setTotalPrice(this.data.totalPrice);
-    this.wellnessKitService.settotalKitQty(this.totalKitQty);
+    this.wellnessKitService.setTotalKitQty(this.totalKitQty);
     //navigate to booking details
     this.dialogRef.close('Continue');
   }

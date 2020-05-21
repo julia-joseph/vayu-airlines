@@ -13,17 +13,17 @@
       <div class="font-weight-normal line-height1-7">{{ depart }} 07:15AM</div>
       <div class="font-weight-normal line-height1-7">
         {{
-          this.flightDetails.passengers.adults +
-            this.flightDetails.passengers.children +
-            this.flightDetails.passengers.infants
+           flightDetails.passengers.adults +
+           flightDetails.passengers.children +
+           flightDetails.passengers.infants
         }}
         Tickets
         <span class="orange float-right font-weight-600">15000pts</span>
       </div>
       <div class="font-weight-normal line-height1-7">
-        ({{ this.flightDetails.passengers.adults }} Adults
-        {{ this.flightDetails.passengers.children }} Child
-        {{ this.flightDetails.passengers.infants }} Lap Infant)
+        ({{ flightDetails.passengers.adults }} Adults
+        {{ flightDetails.passengers.children }} Child
+        {{ flightDetails.passengers.infants }} Lap Infant)
       </div>
       <a href="#" class="orange font-weight-600">Fare Restrictions</a>
     </div>
@@ -36,10 +36,22 @@
           <span class="pr-2">6</span> Checked Bags
           <span class="float-right">$ 180.00</span>
         </div>
-        <div class="font-weight-normal line-height1-7">
-          <span class="pr-2"> {{ this.totalKitQty }} </span> Wellness Kit
+        <div class="font-weight-normal line-height1-7" *ngIf="totalWellnessKitQty !== 0">
+          <span class="pr-2"> {{ totalWellnessKitQty }} </span> Wellness Kit
           <span class="float-right"
-            >$ {{ this.totalPrice | number: ".2" }}</span
+            >$ {{ totalWellnessKitPrice | number: ".2" }}</span
+          >
+        </div>
+        <div class="font-weight-normal line-height1-7" *ngIf="totalDigitalIfeQuantity !== 0">
+          <span class="pr-2"> {{ totalDigitalIfeQuantity }} </span> Digital IFE
+          <span class="float-right"
+            >$ {{ totalDigitalIfePrice | number: ".2" }}</span
+          >
+        </div>
+        <div class="font-weight-normal line-height1-7" *ngIf="totalAdjacentSeatQuantity !== 0">
+          <span class="pr-2"> {{ totalAdjacentSeatQuantity }} </span> Adjacent Seats
+          <span class="float-right"
+            >$ {{ totalAdjacentSeatPrice | number: ".2" }}</span
           >
         </div>
         <div class="font-weight-normal line-height1-7 d-none">

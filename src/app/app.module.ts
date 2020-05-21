@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,7 @@ import { RegulationsDialogComponent } from './components/regulations-dialog/regu
 import { ExpandedAncillariesDialogComponent } from './components/ancillaries/expanded-ancillaries-dialog/expanded-ancillaries-dialog.component';
 import { WellnessKitComponent } from './components/ancillaries/wellness-kit/wellness-kit.component';
 import { DigitalIFEComponent } from './components/ancillaries/digital-ife/digital-ife.component';
+import { AdjacentSeatComponent } from './components/ancillaries/adjacent-seat/adjacent-seat.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { DigitalIFEComponent } from './components/ancillaries/digital-ife/digita
     RegulationsDialogComponent,
     ExpandedAncillariesDialogComponent,
     WellnessKitComponent,
-    DigitalIFEComponent
+    DigitalIFEComponent,
+    AdjacentSeatComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,8 @@ import { DigitalIFEComponent } from './components/ancillaries/digital-ife/digita
     MatIconModule,
     MatTabsModule,
     MatSelectModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatRadioModule
   ],
   entryComponents: [
     RegulationsDialogComponent
