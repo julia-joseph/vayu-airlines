@@ -5,6 +5,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,8 @@ import { ItineraryConfirmationComponent } from './components/itinerary-confirmat
 import { AncillariesDialogComponent } from './components/ancillaries/ancillaries-dialog/ancillaries-dialog.component';
 import { RegulationsDialogComponent } from './components/regulations-dialog/regulations-dialog.component';
 import { ExpandedAncillariesDialogComponent } from './components/ancillaries/expanded-ancillaries-dialog/expanded-ancillaries-dialog.component';
+import { WellnessKitComponent } from './components/ancillaries/wellness-kit/wellness-kit.component';
+import { DigitalIFEComponent } from './components/ancillaries/digital-ife/digital-ife.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,9 @@ import { ExpandedAncillariesDialogComponent } from './components/ancillaries/exp
     ItineraryConfirmationComponent,
     AncillariesDialogComponent,
     RegulationsDialogComponent,
-    ExpandedAncillariesDialogComponent
+    ExpandedAncillariesDialogComponent,
+    WellnessKitComponent,
+    DigitalIFEComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +49,8 @@ import { ExpandedAncillariesDialogComponent } from './components/ancillaries/exp
     FlightListModule,
     MatIconModule,
     MatTabsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTooltipModule
   ],
   entryComponents: [
     RegulationsDialogComponent
