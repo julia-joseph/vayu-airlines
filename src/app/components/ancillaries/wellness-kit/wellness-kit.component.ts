@@ -37,24 +37,31 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
     glovesSize: new FormControl('Adult/M'),
     glovesPrice: new FormControl(1.2),
     glovesSubscription: new FormControl(false),
+    boxedMealVegQuantity: new FormControl(1),
+    boxedMealVegSize: new FormControl('Adult'),
+    boxedMealVegPrice: new FormControl(20),
+    boxedMealVegSubscription: new FormControl(false),
     delivery: new FormControl('Gate'),
     segment: new FormControl('JFK - BOS'),
     additionalItems: new FormArray([ ])
   });
 
-  itemNameOptions: string[] = ['Mask','Sanitizer','Gloves'];
+  itemNameOptions: string[] = ['Mask','Sanitizer','Gloves','Boxed Meal/Veg Sandwich',
+  'Boxed Meal/Chicken Burger','Boxed Meal/Muffin','Boxed Meal/Rice Cake'];
   itemQuantityOptions: number[] = [0,1,2];
   itemSizeOptions: any[] = [
     ['Infant','Child/XS','Child/S','Child/M','Child/L','Adult/XS','Adult/S','Adult/M','Adult/L'],
     ['1 OZ (30 mL)', '2 OZ (60 mL)'],
     ['Size 1 Infant', 'Size 2 (age 3 to 4)', 'Size 3 (age 5 to 6)','Size 4 (age 7 to 8)', 
-    'Size 5 (age 9 to 10)', 'Size 6 (age 11 to 13', 'Size 7 (age 14 to 17)', 'Adult/S', 'Adult/M', 'Adult/L']
+    'Size 5 (age 9 to 10)', 'Size 6 (age 11 to 13', 'Size 7 (age 14 to 17)', 'Adult/S', 'Adult/M', 'Adult/L'],
+    ['Adult','Kid']
   ];
 
   // itemAdded: boolean = false;
-  totalPrice: number = 8.74;
+  totalPrice: number = 28.74;
   totalQty: number = 0;
   ogForm;
+  isNewItemsAdded: boolean = false;
 
   constructor(
     public dialog: MatDialog,
@@ -77,12 +84,15 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
         this.wellnessKitForm.get('maskQuantity').value * this.wellnessKitForm.get('maskPrice').value +
         this.wellnessKitForm.get('sanitizerQuantity').value * this.wellnessKitForm.get('sanitizerPrice').value +
         this.wellnessKitForm.get('glovesQuantity').value * this.wellnessKitForm.get('glovesPrice').value +
+        this.wellnessKitForm.get('boxedMealVegQuantity').value * this.wellnessKitForm.get('boxedMealVegPrice').value +
         itemTotal;
     });
   }
 
   ngAfterViewChecked() {
-      this.scrollToBottom();
+      if(this.isNewItemsAdded) {
+        this.scrollToBottom();
+      }
   }
 
   public onScroll() {
@@ -110,7 +120,7 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
 
   addAdditionalItems() {
     if(this.submitted) return;
-    // this.itemAdded = true;
+    this.isNewItemsAdded = true;
     this.additionalItems.push(new FormGroup({
       item: new FormControl('Select'),
       quantity: new FormControl('Select'),
@@ -134,12 +144,28 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
     let price = 5.24;
     let size = 'Adult/M'
 
-    if(name === 'Sanitizer'){
+    if(name === 'Sanitizer') {
       price = 2.30;
       size = '1 OZ (30 mL)';
     }
-    else if(name === 'Gloves'){
+    else if(name === 'Gloves') {
       price = 1.20;
+    }
+    else if(name === 'Boxed Meal/Veg Sandwich') {
+      price = 20.00;
+      size = 'Adult';
+    }
+    else if(name === 'Boxed Meal/Chicken Burger') {
+      price = 25.00;
+      size = 'Adult';
+    }
+    else if(name === 'Boxed Meal/Muffin') {
+      price = 15.00;
+      size = 'Adult';
+    }
+    else if(name === 'Boxed Meal/Rice Cake') {
+      price = 15.00;
+      size = 'Adult';
     }
 
     itemGroup.patchValue({
@@ -160,6 +186,7 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
       this.wellnessKitForm.get('maskQuantity').value+
       this.wellnessKitForm.get('sanitizerQuantity').value +
       this.wellnessKitForm.get('glovesQuantity').value +
+      this.wellnessKitForm.get('boxedMealVegQuantity').value +
       itemsQty;
   }
 

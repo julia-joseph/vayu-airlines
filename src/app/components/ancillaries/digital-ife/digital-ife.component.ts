@@ -60,7 +60,7 @@ export class DigitalIFEComponent implements OnInit {
 
       this.totalPrice = 
         this.digitalIfeForm.get('primaryScreens').value * this.digitalIfeForm.get('primaryPrice').value +
-        this.digitalIfeForm.get('secondaryScreens').value * this.digitalIfeForm.get('secondaryPrice').value 
+        this.digitalIfeForm.get('secondaryScreens').value * this.digitalIfeForm.get('secondaryPrice').value +
         itemTotal;
     });
   }

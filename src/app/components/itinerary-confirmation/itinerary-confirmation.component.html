@@ -165,7 +165,7 @@
                                                     Price
                                                 </div>
                                             </div>
-                                            <div class="row mb-1">
+                                            <div class="row mb-1" *ngIf="wellnessKit.maskQuantity">
                                                 <div class="col-3 font-weight-400">
                                                     Masks
                                                 </div>
@@ -179,7 +179,7 @@
                                                     $ <span class="orange font-size1-3">{{ wellnessKit.maskQuantity * wellnessKit.maskPrice | number : '.2' }}</span>
                                                 </div>
                                             </div>
-                                            <div class="row mb-1">
+                                            <div class="row mb-1" *ngIf="wellnessKit.sanitizerQuantity">
                                                 <div class="col-3 font-weight-400">
                                                     Sanitizers
                                                 </div>
@@ -193,7 +193,7 @@
                                                     $ <span class="orange font-size1-3">{{ wellnessKit.sanitizerQuantity * wellnessKit.sanitizerPrice | number : '.2' }}</span>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row" *ngIf="wellnessKit.glovesQuantity">
                                                 <div class="col-3 font-weight-400">
                                                     Gloves
                                                 </div>
@@ -205,6 +205,20 @@
                                                 </div>
                                                 <div class="col-3">
                                                     $ <span class="orange font-size1-3">{{ wellnessKit.glovesQuantity * wellnessKit.glovesPrice | number : '.2' }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="row" *ngIf="wellnessKit.boxedMealVegQuantity">
+                                                <div class="col-3 font-weight-400">
+                                                    Boxed Meal/Veg Sandwich
+                                                </div>
+                                                <div class="col-3">
+                                                    {{ wellnessKit.boxedMealVegQuantity }}
+                                                </div>
+                                                <div class="col-3">
+                                                    {{ wellnessKit.boxedMealVegSize }}
+                                                </div>
+                                                <div class="col-3">
+                                                    $ <span class="orange font-size1-3">{{ wellnessKit.boxedMealVegQuantity * wellnessKit.boxedMealVegPrice | number : '.2' }}</span>
                                                 </div>
                                             </div>
                                             <div class="row" *ngFor="let item of wellnessKit.additionalItems">

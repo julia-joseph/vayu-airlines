@@ -220,6 +220,58 @@
             </div>
           </div>
 
+          <div class="row pt-3 pb-3 border-bottom">
+            <div class="col-12">
+              <div class="row">
+                <div class="col-3 item-name mt-2">
+                  Boxed Meal/Veg Sandwich
+                </div>
+                <div class="col-3">
+                  <mat-select
+                    class="form-control"
+                    [disabled]="submitted"
+                    formControlName="boxedMealVegQuantity"
+                  >
+                    <mat-option *ngFor="let qty of [0, 1, 2]" [value]="qty">
+                      {{ qty }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+                <div class="col-3">
+                  <mat-select
+                    class="form-control"
+                    [disabled]="submitted"
+                    formControlName="boxedMealVegSize"
+                  >
+                    <mat-option
+                      *ngFor="let size of itemSizeOptions[3]"
+                      [value]="size"
+                    >
+                      {{ size }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+                <div class="col-2 d-flex justify-content-end mt-2">
+                  $
+                  <span class="font-size1-5 orange">
+                    {{ wellnessKitForm.get('boxedMealVegQuantity').value * wellnessKitForm.get('boxedMealVegPrice').value | number: ".2" }}
+                  </span>
+                </div>
+              </div>
+              <div class="row d-flex flex-row mt-3 ml-2">
+                <mat-radio-group formControlName="boxedMealVegSubscription">
+                    <mat-radio-button [value]="false" class="ml-3 mr-3">
+                        One-time Purchase
+                    </mat-radio-button>
+                    <mat-radio-button [value]="true" class="mr-2">
+                        Add to Subscription
+                    </mat-radio-button>
+                </mat-radio-group>
+                <div class="font-size-0-6 orange cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
+            </div>
+            </div>
+          </div>
+
           <ng-container *ngIf="wellnessKitForm.get('additionalItems')">
 
           <ng-container  
@@ -308,6 +360,23 @@
                     >
                       <mat-option
                         *ngFor="let size of itemSizeOptions[2]"
+                        [value]="size"
+                      >
+                        {{ size }}
+                      </mat-option>
+                    </mat-select>
+
+                    <mat-select
+                      class="form-control"
+                      [disabled]="submitted"
+                      formControlName="size"
+                      *ngIf="itemGroup.get('item').value === 'Boxed Meal/Veg Sandwich' ||
+                      itemGroup.get('item').value === 'Boxed Meal/Chicken Burger' ||
+                      itemGroup.get('item').value === 'Boxed Meal/Muffin' ||
+                      itemGroup.get('item').value === 'Boxed Meal/Rice Cake'"
+                    >
+                      <mat-option
+                        *ngFor="let size of itemSizeOptions[3]"
                         [value]="size"
                       >
                         {{ size }}

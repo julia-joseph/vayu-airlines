@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class WellnessKitDetailsService {
-  totalPrice: number = 8.74;
+  totalPrice: number = 28.74;
   totalKitQty: number;
   showPayment: boolean;
 
@@ -31,6 +31,10 @@ export class WellnessKitDetailsService {
     glovesPrice: 1.20,
     glovesSize: 'Adult/M',
     glovesSubscription: false,
+    boxedMealVegQuantity: 1,
+    boxedMealVegSize: 'Adult',
+    boxedMealVegPrice: 20,
+    boxedMealVegSubscription: false,
     delivery: 'Gate',
     segment: 'JFK - BOS',
     additionalItems: []
