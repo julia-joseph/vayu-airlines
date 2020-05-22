@@ -62,7 +62,7 @@
     }
 
     .mat-radio-label-content {
-      font-size: 0.8rem;
+      font-size: 0.9rem;
     }
 
     .mat-radio-button.mat-accent .mat-radio-inner-circle, .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
@@ -100,14 +100,13 @@
     display: show !important;
   }
   
-  .cancel-button {
+  .seat-button {
     border: none;
     background-color: #808080b3;
     color: white;
-    width: 120px;
+    width: 14rem;
     height: 40px;
     font-size: 1.2rem;
-    margin-right: 13px;
   }
   
   .confirm-button {
@@ -117,6 +116,7 @@
     width: 120px;
     height: 40px;
     font-size: 1.2rem;
+    margin-right: 13px;
   }
   
   .edit-button {

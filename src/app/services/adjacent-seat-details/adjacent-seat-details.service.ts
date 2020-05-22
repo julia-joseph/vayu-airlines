@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 export class AdjacentSeatDetailsService {
   totalPrice: number = 130.64;
   totalQuantity: number = 2;
+  showPayment: boolean  = false;
 
   adjacentSeatDetails = {
     seats: 2,
@@ -45,6 +46,7 @@ export class AdjacentSeatDetailsService {
   }
 
   setShowPayment(state: boolean) {
+    this.showPayment = state;
     this.showPaymentChange.next(state);
   }
 }

@@ -19,13 +19,21 @@ export class AncillariesComponent implements OnInit {
     this.onSubmit.emit();
   }
 
+  onSkipToDigitalIFE() {
+    this.selectedTab = 1;
+  }
+
   onSubmitOfDigitalIfe() {
     // this.selectedTab = 2;
     this.onSubmit.emit();
   }
 
+  onSkipToSeatRegrouping() {
+    this.selectedTab = 2;
+  }
+
   onSubmitOfAdjacentSeat() {
     // this.selectedTab = 3;
     this.onSubmit.emit();
-  }
+  }  
 }

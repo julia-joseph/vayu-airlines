@@ -64,11 +64,11 @@
                         <mat-radio-button [value]="false" class="ml-3 mr-3">
                             One-time Purchase
                         </mat-radio-button>
-                        <mat-radio-button [value]="true" class="mr-3">
+                        <mat-radio-button [value]="true" class="mr-2">
                             Add to Subscription
                         </mat-radio-button>
                     </mat-radio-group>
-                    <div class="font-size-0-8 navy-blue cursor-pointer font-weight-bold" (click)="openDetails()">Details</div>
+                    <div class="font-size-0-6 orange cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
                 </div>
                 <div class="row mt-4 pl-2 pr-2 ml-4">
                     <p><b>Heads-up</b></p>
@@ -85,10 +85,7 @@
 
         <div class="row p-4">
         <div class="col-8 pl-0 pr-0" *ngIf="!submitted">
-            <button class="cancel-button" (click)="onCancel()">Cancel</button>
-            <button class="confirm-button" (click)="onConfirm()">
-            Confirm
-            </button>
+            <button class="confirm-button" (click)="onConfirm()">Confirm</button>
         </div>
         <div class="col-8 pl-0 pr-0" *ngIf="submitted">
             <button class="edit-button" (click)="onEdit()">Edit</button>

@@ -25,6 +25,7 @@ import { ExpandedAncillariesDialogComponent } from './components/ancillaries/exp
 import { WellnessKitComponent } from './components/ancillaries/wellness-kit/wellness-kit.component';
 import { DigitalIFEComponent } from './components/ancillaries/digital-ife/digital-ife.component';
 import { AdjacentSeatComponent } from './components/ancillaries/adjacent-seat/adjacent-seat.component';
+import { ExpandedWellnessKitComponent } from './components/ancillaries/expanded-ancillaries-dialog/expanded-wellness-kit/expanded-wellness-kit.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { AdjacentSeatComponent } from './components/ancillaries/adjacent-seat/ad
     ExpandedAncillariesDialogComponent,
     WellnessKitComponent,
     DigitalIFEComponent,
-    AdjacentSeatComponent
+    AdjacentSeatComponent,
+    ExpandedWellnessKitComponent
   ],
   imports: [
     BrowserModule,

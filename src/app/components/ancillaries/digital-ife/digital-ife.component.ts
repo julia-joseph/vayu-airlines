@@ -13,6 +13,7 @@ export class DigitalIFEComponent implements OnInit {
   @Input() fromCode: string = 'JFK';
   @Input() toCode: string = 'BOS';
   @Output() onSubmit = new EventEmitter<void>();
+  @Output() onSkipToSR = new EventEmitter<void>();
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   disableScrollDown = false
   
@@ -181,7 +182,9 @@ export class DigitalIFEComponent implements OnInit {
     })
   }
 
-  onCancel() {}
+  onSkipToSeatRegrouping() {
+    this.onSkipToSR.emit();
+  }
 
   onSkip() { 
     this.digitalIfeService.setShowPayment(true);

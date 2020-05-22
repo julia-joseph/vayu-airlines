@@ -64,6 +64,10 @@ export class PaymentSummaryComponent implements OnInit {
     this.adjacentSeatService.totalQuantityObservable.subscribe(quantity => {
       this.totalAdjacentSeatQuantity = quantity;
     })
+
+    this.adjacentSeatService.showPayementObservable.subscribe((state) => {
+      this.showPayment = state;
+    });
   }
 
   onPayment() {

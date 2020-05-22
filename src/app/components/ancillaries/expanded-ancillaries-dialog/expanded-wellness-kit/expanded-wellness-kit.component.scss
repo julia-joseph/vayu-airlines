@@ -1,18 +1,10 @@
 :host ::ng-deep {
     .mat-tab-header {
-      height: 27vh;
+      height: 15vh;
     }
   
     .mat-ripple {
-      height: 30vh;
-    }
-  
-    //mat-tab-label-container
-    .mat-tab-header {
-      position: relative;
-      bottom: 60px;
-      left: 3px;
-      padding: 0px 13px;
+      height: 18vh;
     }
   
     .mat-tab-labels {
@@ -24,43 +16,30 @@
       background-color: #ff530f;
     }
   
-    .mat-tab-body-wrapper {
-      position: relative;
-      bottom: 50px;
+    .mat-tab-body-content {
+        overflow: hidden !important;
     }
   
-    .mat-expansion-panel-content {
-      position: relative;
-      bottom: 30px;
-    }
+    //add this when ancillaries title is added
+    // .mat-tab-group {
+    //   position: relative;
+    //   bottom: 51px;
+    // }
   
-  //makes active tab color not faded
     .mat-tab-label.mat-tab-label-active {
       opacity: 1;
-    }
-  
-    .segment-select .mat-select-value {
-      color: #ff530f;
-    }
-  
-    image {
-      height: 355px;
-    }
-    
-    .overflow-items {
-      overflow: hidden auto;
-      height: 345px;
     }
   
     .mat-select-arrow {
       width: 13px;
       height: 11px;
-      background: url(../../../../assets/images/img_ddn_06.png) no-repeat;
+      background: url(../../../../../assets/images/img_ddn_06.png) no-repeat;
       background-size: 13px;
       border: none;
       margin: 0 4px;
     }
 
+    
     .mat-radio-label-content {
       font-size: 0.9rem;
     }
@@ -92,72 +71,45 @@
     }
   }
   
-  [hidden] {
-    display: none !important;
-  }
-  
-  [show] {
-    display: show !important;
-  }
+  .overflow-items {
+      overflow: hidden auto;
+      height: 45vh;
+    }
   
   .cancel-button {
-    border: none;
-    background-color: #808080b3;
-    color: white;
-    width: 12rem;
-    height: 40px;
-    font-size: 1.2rem;
+      border: none;
+      background-color: #808080b3;
+      color: white;
+      width: 120px;
+      height: 40px;
+      font-size: 1.1rem;
+      margin-right: 13px;
   }
   
   .confirm-button {
-    border: none;
-    background-color: #ff530f;
-    color: white;
-    width: 120px;
-    height: 40px;
-    font-size: 1.2rem;
-    margin-right: 13px;
+      border: none;
+      background-color: #ff530f;
+      color: white;
+      width: 120px;
+      height: 40px;
+      font-size: 1.1rem;
   }
   
-  .edit-button {
-    border: none;
-    background-color: #ff530f;
-    color: white;
-    width: 120px;
-    height: 40px;
-    font-size: 1.2rem;
-    margin-right: 13px;
-  }
-  
-  .skip-button {
-    border: none;
-    background-color: #808080b3;
-    color: white;
-    width: 12rem;
-    height: 40px;
-    font-size: 1.2rem;
+  .img-section {
+      height: 372px;
+      margin-top: 15px;
   }
   
   .add-items-link {
-    text-decoration: underline;
-    cursor: pointer;
-  }
-  
-  .tab-icon {
-    height: 60px;
-    margin-bottom: 15px;
-  }
-  
-  .item-name {
-    position: relative;
-    left: 26px;
-  }
+      text-decoration: underline;
+      cursor: pointer;
+    }
   
   .remove-button.focus, .remove-button:focus {
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(176, 185, 193, 0.25);
-  }
-  
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(176, 185, 193, 0.25);
+    }
+    
   .remove-icon {
     transition: 1s ease-in-out;
   }
@@ -166,6 +118,16 @@
     transform: rotate(180deg);
   }
   
-  .subscription {
-    margin-left: 39px;
+  .tab-icon {
+    height: 40px;
+    margin-bottom: 8px;
   }
+  
+  [hidden] {
+    display: none !important;
+  }
+  
+  [show] {
+    display: show !important;
+  }
+  

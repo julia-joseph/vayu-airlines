@@ -16,6 +16,8 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
   @Input() fromCode: string = 'JFK';
   @Input() toCode: string = 'BOS';
   @Output() onSubmit = new EventEmitter<void>();
+  @Output() onSkipToIFE = new EventEmitter<void>();
+
   deliveryLocations: string[] = ['Gate','Lounge','In flight','Check-In Counter'];
   segmentOptions: string[] = ['JFK - BOS'];
   submitted: boolean = false;
@@ -26,12 +28,15 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
     maskQuantity: new FormControl(1),
     maskSize: new FormControl('Adult/M'),
     maskPrice: new FormControl(5.24),
+    maskSubscription: new FormControl(false),
     sanitizerQuantity: new FormControl(1),
     sanitizerSize: new FormControl('1 OZ (30 mL)'),
     sanitizerPrice: new FormControl(2.3),
+    sanitizerSubscription: new FormControl(false),
     glovesQuantity: new FormControl(1),
     glovesSize: new FormControl('Adult/M'),
     glovesPrice: new FormControl(1.2),
+    glovesSubscription: new FormControl(false),
     delivery: new FormControl('Gate'),
     segment: new FormControl('JFK - BOS'),
     additionalItems: new FormArray([ ])
@@ -110,7 +115,8 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
       item: new FormControl('Select'),
       quantity: new FormControl('Select'),
       size: new FormControl('Select'),
-      price: new FormControl(0)
+      price: new FormControl(0),
+      subscription: new FormControl(false)
     }))
   }
 
@@ -191,8 +197,9 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
     // });
   }
 
-  onSkip() { 
-    this.wellnessKitService.setShowPayment(true);
+  onSkipToDigitalIFE() {
+    //set form as null
+    this.onSkipToIFE.emit();
   }
 
   onEdit() {
@@ -209,7 +216,9 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
       data: {
         wellnessKitForm: this.wellnessKitForm,
         totalPrice: this.totalPrice,
-        itemSizeOptions: this.itemSizeOptions
+        itemSizeOptions: this.itemSizeOptions,
+        fromCode: this.fromCode,
+        toCode: this.toCode
       }
     });
 
@@ -231,14 +240,6 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
       //   });
       // }      
     });
-  }
-
-  addToSubscription() {
-    console.log('subscription added');
-  }
-
-  removeFromSubscription() {
-    console.log('subscription removed');
   }
 
   openDetails() {

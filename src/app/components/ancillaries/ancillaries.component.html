@@ -9,13 +9,14 @@
             alt=""
           />
           <p class="orange font-weight-bold font-size1-2">
-            Wellness Kit
+            Wellness Kit & Food Selection
           </p>
         </div>
       </div>
     </ng-template>
     <app-wellness-kit
       (onSubmit)="onSubmitOfWellnessKit()"
+      (onSkipToIFE)="onSkipToDigitalIFE()"
       [fromCode]="fromCode"
       [toCode]="toCode">
     </app-wellness-kit>
@@ -26,7 +27,7 @@
       <div id="index-gallery">
         <div class="item">
           <img
-            src="../../../assets/images/ico_car.png"
+            src="../../../assets/images/ico_IFE.png"
             class="tab-icon"
             alt=""
           />
@@ -38,6 +39,7 @@
     </ng-template>
     <app-digital-ife
         (onSubmit)="onSubmitOfDigitalIfe()"
+        (onSkipToSR)="onSkipToSeatRegrouping()"
         [fromCode]="fromCode"
         [toCode]="toCode">
     </app-digital-ife>
@@ -48,12 +50,12 @@
       <div id="index-gallery">
         <div class="item">
           <img
-            src="../../../assets/images/ico_pet.png"
+            src="../../../assets/images/ico_seat_regrouping.png"
             class="tab-icon"
             alt=""
           />
           <p class="font-weight-bold font-size1-2">
-            Adjacent Seat
+            Seat Regrouping
           </p>
         </div>
       </div>

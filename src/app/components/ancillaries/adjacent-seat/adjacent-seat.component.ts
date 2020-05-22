@@ -64,7 +64,7 @@ export class AdjacentSeatComponent implements OnInit {
     this.onSubmit.emit();
   }
 
-  onSkip() { 
+  onSkip() {
     this.adjacentSeatService.setShowPayment(true);
   }
 
