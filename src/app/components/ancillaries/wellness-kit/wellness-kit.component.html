@@ -102,7 +102,7 @@
                 </div>
               </div>
               <div class="row d-flex flex-row mt-3 ml-2">
-                <mat-radio-group formControlName="maskSubscription">
+                <mat-radio-group formControlName="maskSubscription" [disabled]="submitted">
                     <mat-radio-button [value]="false" class="ml-3 mr-3">
                         One-time Purchase
                     </mat-radio-button>
@@ -155,7 +155,7 @@
                 </div>
               </div>
               <div class="row d-flex flex-row mt-3 ml-2">
-                <mat-radio-group formControlName="sanitizerSubscription">
+                <mat-radio-group formControlName="sanitizerSubscription" [disabled]="submitted">
                     <mat-radio-button [value]="false" class="ml-3 mr-3">
                         One-time Purchase
                     </mat-radio-button>
@@ -207,7 +207,7 @@
                 </div>
               </div>
               <div class="row d-flex flex-row mt-3 ml-2">
-                <mat-radio-group formControlName="glovesSubscription">
+                <mat-radio-group formControlName="glovesSubscription" [disabled]="submitted">
                     <mat-radio-button [value]="false" class="ml-3 mr-3">
                         One-time Purchase
                     </mat-radio-button>
@@ -259,7 +259,7 @@
                 </div>
               </div>
               <div class="row d-flex flex-row mt-3 ml-2">
-                <mat-radio-group formControlName="boxedMealVegSubscription">
+                <mat-radio-group formControlName="boxedMealVegSubscription" [disabled]="submitted">
                     <mat-radio-button [value]="false" class="ml-3 mr-3">
                         One-time Purchase
                     </mat-radio-button>
@@ -394,7 +394,7 @@
                   </div>
                 </div>
                 <div class="row d-flex flex-row mt-3 ml-2" *ngIf="itemGroup.get('item').value !== 'Select'">
-                  <mat-radio-group formControlName="subscription">
+                  <mat-radio-group formControlName="subscription" [disabled]="submitted">
                       <mat-radio-button [value]="false" class="ml-3 mr-3">
                           One-time Purchase
                       </mat-radio-button>

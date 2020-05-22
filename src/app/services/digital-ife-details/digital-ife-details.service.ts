@@ -30,6 +30,9 @@ export class DigitalIfeDetailsService {
   showPaymentChange: Subject<boolean> = new Subject<boolean>();
   public showPayementObservable = this.showPaymentChange.asObservable();
 
+  performConfirmSubject: Subject<any> = new Subject<any>();
+  public performConfirmObservable = this.performConfirmSubject.asObservable();
+
   constructor() {
    }
 
@@ -53,5 +56,9 @@ export class DigitalIfeDetailsService {
 
   setShowPayment(state: boolean) {
     this.showPaymentChange.next(state);
+  }
+
+  setMiniViewDigitalIFE(digitalIFE) {
+    this.performConfirmSubject.next(digitalIFE);
   }
 }

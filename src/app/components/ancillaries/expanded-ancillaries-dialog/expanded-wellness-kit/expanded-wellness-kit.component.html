@@ -5,6 +5,7 @@
             <mat-select
               class="form-control segment-select w-75"
               formControlName="segment"
+              [disabled]="submitted"
             >
             <!-- *ngFor="let segment of segmentOptions"  -->
               <mat-option
@@ -19,6 +20,7 @@
             <mat-select
               class="form-control delivery-select w-50 ml-4"
               formControlName="delivery"
+              [disabled]="submitted"
             >
               <mat-option
                 *ngFor="let delivery of ['Gate','Lounge','In flight','Check-In Counter']"
@@ -61,6 +63,7 @@
                   <mat-select
                     class="form-control"
                     formControlName="maskQuantity"
+                    [disabled]="submitted"
                   >
                     <mat-option *ngFor="let qty of [0, 1, 2]" [value]="qty">
                       {{ qty }}
@@ -71,6 +74,7 @@
                   <mat-select
                     class="form-control"
                     formControlName="maskSize"
+                    [disabled]="submitted"
                   >
                     <mat-option
                       *ngFor="let size of itemSizeOptions[0]"
@@ -87,8 +91,8 @@
                   </span>
                 </div>
               </div>
-              <div class="row d-flex flex-row mt-3 ml-2">
-                <mat-radio-group formControlName="maskSubscription">
+              <div class="row d-flex flex-row mt-3">
+                <mat-radio-group formControlName="maskSubscription" [disabled]="submitted">
                     <mat-radio-button [value]="false" class="ml-3 mr-3">
                         One-time Purchase
                     </mat-radio-button>
@@ -111,6 +115,7 @@
                   <mat-select
                     class="form-control"
                     formControlName="sanitizerQuantity"
+                    [disabled]="submitted"
                   >
                     <mat-option *ngFor="let qty of [0, 1, 2]" [value]="qty">
                       {{ qty }}
@@ -121,6 +126,7 @@
                   <mat-select
                     class="form-control"
                     formControlName="sanitizerSize"
+                    [disabled]="submitted"
                   >
                     <mat-option
                       *ngFor="let size of itemSizeOptions[1]"
@@ -137,8 +143,8 @@
                   </span>
                 </div>
               </div>
-              <div class="row d-flex flex-row mt-3 ml-2">
-                <mat-radio-group formControlName="sanitizerSubscription">
+              <div class="row d-flex flex-row mt-3">
+                <mat-radio-group formControlName="sanitizerSubscription" [disabled]="submitted">
                     <mat-radio-button [value]="false" class="ml-3 mr-3">
                         One-time Purchase
                     </mat-radio-button>
@@ -161,6 +167,7 @@
                   <mat-select
                     class="form-control"
                     formControlName="glovesQuantity"
+                    [disabled]="submitted"
                   >
                     <mat-option *ngFor="let qty of [0, 1, 2]" [value]="qty">
                       {{ qty }}
@@ -171,6 +178,7 @@
                   <mat-select
                     class="form-control"
                     formControlName="glovesSize"
+                    [disabled]="submitted"
                   >
                     <mat-option
                       *ngFor="let size of itemSizeOptions[2]"
@@ -187,8 +195,60 @@
                   </span>
                 </div>
               </div>
+              <div class="row d-flex flex-row mt-3">
+                <mat-radio-group formControlName="glovesSubscription" [disabled]="submitted">
+                    <mat-radio-button [value]="false" class="ml-3 mr-3">
+                        One-time Purchase
+                    </mat-radio-button>
+                    <mat-radio-button [value]="true" class="mr-2">
+                        Add to Subscription
+                    </mat-radio-button>
+                </mat-radio-group>
+                <div class="font-size-0-6 orange cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
+            </div>
+            </div>
+          </div>
+
+          <div class="row pt-3 pb-3 border-bottom">
+            <div class="col-12">
+              <div class="row">
+                <div class="col-3 item-name mt-2">
+                  Boxed Meal/Veg Sandwich
+                </div>
+                <div class="col-3">
+                  <mat-select
+                    class="form-control"
+                    [disabled]="submitted"
+                    formControlName="boxedMealVegQuantity"
+                  >
+                    <mat-option *ngFor="let qty of [0, 1, 2]" [value]="qty">
+                      {{ qty }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+                <div class="col-3">
+                  <mat-select
+                    class="form-control"
+                    [disabled]="submitted"
+                    formControlName="boxedMealVegSize"
+                  >
+                    <mat-option
+                      *ngFor="let size of itemSizeOptions[3]"
+                      [value]="size"
+                    >
+                      {{ size }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+                <div class="col-2 d-flex justify-content-end mt-2">
+                  $
+                  <span class="font-size1-2 orange">
+                    {{ wellnessKit.get('boxedMealVegQuantity').value * wellnessKit.get('boxedMealVegPrice').value | number: ".2" }}
+                  </span>
+                </div>
+              </div>
               <div class="row d-flex flex-row mt-3 ml-2">
-                <mat-radio-group formControlName="glovesSubscription">
+                <mat-radio-group formControlName="boxedMealVegSubscription" [disabled]="submitted">
                     <mat-radio-button [value]="false" class="ml-3 mr-3">
                         One-time Purchase
                     </mat-radio-button>
@@ -221,6 +281,7 @@
                     <mat-select
                       class="form-control"
                       formControlName="item"
+                      [disabled]="submitted"
                       [ngClass]="{'w-75':true}"
                       (selectionChange)="setPriceOfNewItem(itemGroup)"
                     >
@@ -234,6 +295,7 @@
                     <mat-select
                       class="form-control"
                       formControlName="quantity"
+                      [disabled]="submitted"
                     >
                       <mat-option *ngIf="itemGroup.get('quantity').value === 'Select'" value='Select'>Select</mat-option>
                       <mat-option *ngFor="let qty of [0,1,2]" [value]="qty">
@@ -245,6 +307,7 @@
                     <mat-select
                       class="form-control"
                       formControlName="size"
+                      [disabled]="submitted"
                       *ngIf="itemGroup.get('size').value === 'Select'"
                     >
                       <mat-option *ngIf="itemGroup.get('size').value === 'Select'" value='Select'>Select</mat-option>
@@ -253,6 +316,7 @@
                     <mat-select
                       class="form-control"
                       formControlName="size"
+                      [disabled]="submitted"
                       *ngIf="itemGroup.get('item').value === 'Mask'"
                     >
                       <mat-option
@@ -266,6 +330,7 @@
                     <mat-select
                       class="form-control"
                       formControlName="size"
+                      [disabled]="submitted"
                       *ngIf="itemGroup.get('item').value === 'Sanitizer'"
                     >
                       <mat-option
@@ -279,10 +344,28 @@
                     <mat-select
                       class="form-control"
                       formControlName="size"
+                      [disabled]="submitted"
                       *ngIf="itemGroup.get('item').value === 'Gloves'"
                     >
                       <mat-option
                         *ngFor="let size of itemSizeOptions[2]"
+                        [value]="size"
+                      >
+                        {{ size }}
+                      </mat-option>
+                    </mat-select>
+
+                    <mat-select
+                      class="form-control"
+                      [disabled]="submitted"
+                      formControlName="size"
+                      *ngIf="itemGroup.get('item').value === 'Boxed Meal/Veg Sandwich' ||
+                      itemGroup.get('item').value === 'Boxed Meal/Chicken Burger' ||
+                      itemGroup.get('item').value === 'Boxed Meal/Muffin' ||
+                      itemGroup.get('item').value === 'Boxed Meal/Rice Cake'"
+                    >
+                      <mat-option
+                        *ngFor="let size of itemSizeOptions[3]"
                         [value]="size"
                       >
                         {{ size }}
@@ -299,8 +382,8 @@
                     </span>
                   </div>
                 </div>
-                <div class="row d-flex flex-row mt-3 ml-2">
-                  <mat-radio-group formControlName="subscription">
+                <div class="row d-flex flex-row mt-3">
+                  <mat-radio-group formControlName="subscription" [disabled]="submitted">
                       <mat-radio-button [value]="false" class="ml-3 mr-3">
                           One-time Purchase
                       </mat-radio-button>
@@ -319,10 +402,9 @@
 
           <div class="row p-4">
             <div class="col-8 pl-0 pr-0">
-              <button class="cancel-button" (click)="onCancel()">Cancel</button>
-              <button class="confirm-button" (click)="onConfirm()">
-                Confirm
-              </button>
+              <button class="confirm-button" (click)="onConfirm()" *ngIf="!submitted">Confirm</button>
+              <button class="edit-button" (click)="onEdit()" *ngIf="submitted">Edit</button>
+              <button class="skip-button" (click)="onSkip()">Skip To Digital IFE</button>
             </div>
             
             <div class="col-4 pl-0 d-flex justify-content-end">

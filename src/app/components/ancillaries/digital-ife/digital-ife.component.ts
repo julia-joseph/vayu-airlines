@@ -63,6 +63,13 @@ export class DigitalIFEComponent implements OnInit {
         this.digitalIfeForm.get('secondaryScreens').value * this.digitalIfeForm.get('secondaryPrice').value +
         itemTotal;
     });
+
+    this.digitalIfeService.performConfirmObservable.subscribe(digitalIFE => {
+      this.digitalIfeForm.setValue({
+        ...digitalIFE
+      })
+      this.onConfirm();
+    })
   }
 
   ngAfterViewChecked() {
@@ -81,7 +88,7 @@ export class DigitalIFEComponent implements OnInit {
 
   private scrollToBottom(): void {
       if (this.disableScrollDown) {
-          return
+          return 
       }
       try {
           this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
@@ -103,30 +110,34 @@ export class DigitalIFEComponent implements OnInit {
   }
 
   openExpandedAncDialog() {
-    // if(this.submitted) return;
-    // const dialogRef = this.dialog.open(ExpandedAncillariesDialogComponent, {
-    //   panelClass: 'custom-dialog-container',
-    //   width: '170vh',
-    //   data: {
-    //     wellnessKitForm: this.wellnessKitForm,
-    //     totalPrice: this.totalPrice,
-    //     itemSizeOptions: this.itemSizeOptions
-    //   }
-    // });
+    //if(this.submitted) return;
+    const dialogRef = this.dialog.open(ExpandedAncillariesDialogComponent, {
+      panelClass: 'custom-dialog-container',
+      width: '170vh',
+      data: {
+        wellnessKitForm: null,
+        wellnessKitTotalPrice: null,
+        digitalIfeForm: this.digitalIfeForm,
+        digitalIfeTotalPrice: this.totalPrice,
+        adjacentSeatForm: null,
+        adjacentSeatTotalPrice: null,
+        selectedTab: 1
+      }
+    });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if(result.confirmed) {
-    //     this.digitalIfeForm.setValue({
-    //       ...result.wellnessKit.value
-    //     });
-    //     this.onConfirm()
-    //   }
-    //   else {
-    //     this.digitalIfeForm.setValue({
-    //       ...result.wellnessKit.value
-    //     });
-    //   }
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+      // if(result.confirmed) {
+      //   this.digitalIfeForm.setValue({
+      //     ...result.wellnessKit.value
+      //   });
+      //   this.onConfirm()
+      // }
+      // else {
+      //   this.digitalIfeForm.setValue({
+      //     ...result.wellnessKit.value
+      //   });
+      // }
+    });
   }
 
   calculateTotalQuantity(){
@@ -183,6 +194,18 @@ export class DigitalIFEComponent implements OnInit {
   }
 
   onSkipToSeatRegrouping() {
+    if(!this.submitted){
+      this.digitalIfeForm.patchValue({
+        primaryScreens: 0,
+        secondaryScreens: 0
+      })
+      this.digitalIfeService.setTotalPrice(0);
+      this.digitalIfeService.setTotalQuantity(0);
+      this.digitalIfeService.setDigitalIfeDetails({
+        ...this.digitalIfeForm.value
+      });
+    }
+    
     this.onSkipToSR.emit();
   }
 

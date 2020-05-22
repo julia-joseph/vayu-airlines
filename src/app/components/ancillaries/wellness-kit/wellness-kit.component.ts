@@ -87,6 +87,13 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
         this.wellnessKitForm.get('boxedMealVegQuantity').value * this.wellnessKitForm.get('boxedMealVegPrice').value +
         itemTotal;
     });
+
+    this.wellnessKitService.performConfirmObservable.subscribe(wellnessKit => {
+      this.wellnessKitForm.setValue({
+        ...wellnessKit
+      })
+      this.onConfirm();
+    })
   }
 
   ngAfterViewChecked() {
@@ -225,7 +232,21 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
   }
 
   onSkipToDigitalIFE() {
-    //set form as null
+    //set form as null if not submitted
+    if(!this.submitted){
+      this.wellnessKitForm.patchValue({
+        maskQuantity: 0,
+        sanitizerQuantity: 0,
+        glovesQuantity: 0,
+        boxedMealVegQuantity: 0
+      })
+      this.wellnessKitService.setTotalPrice(0);
+      this.wellnessKitService.setTotalKitQty(0);
+      this.wellnessKitService.setWellnessKitDetails({
+        ...this.wellnessKitForm.value
+      });
+    }
+    
     this.onSkipToIFE.emit();
   }
 
@@ -235,37 +256,39 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
   }
 
   openExpandedAncDialog() {
-    if(this.submitted) return;
+    //if(this.submitted) return;
     //this.ogForm = {...this.wellnessKitForm.value};
     const dialogRef = this.dialog.open(ExpandedAncillariesDialogComponent, {
       panelClass: 'custom-dialog-container',
       width: '170vh',
       data: {
         wellnessKitForm: this.wellnessKitForm,
-        totalPrice: this.totalPrice,
-        itemSizeOptions: this.itemSizeOptions,
-        fromCode: this.fromCode,
-        toCode: this.toCode
+        wellnessKitTotalPrice: this.totalPrice,
+        digitalIfeForm: null,
+        digitalIfeTotalPrice: null,
+        adjacentSeatForm: null,
+        adjacentSeatTotalPrice: null,
+        selectedTab: 0
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result.confirmed) {
-        this.wellnessKitForm.setValue({
-          ...result.wellnessKit.value
-        });
-        this.onConfirm()
-      }
-      else {
-        this.wellnessKitForm.setValue({
-          ...result.wellnessKit.value
-        });
-      }
+      // if(result.confirmed) {
+      //   this.wellnessKitForm.setValue({
+      //     ...result.wellnessKit.value
+      //   });
+      //   this.onConfirm()
+      // }
       // else {
       //   this.wellnessKitForm.setValue({
-      //     ...this.ogForm
+      //     ...result.wellnessKit.value
       //   });
-      // }      
+      // }
+  // else {
+  //   this.wellnessKitForm.setValue({
+  //     ...this.ogForm
+  //   });
+  // }      
     });
   }
 

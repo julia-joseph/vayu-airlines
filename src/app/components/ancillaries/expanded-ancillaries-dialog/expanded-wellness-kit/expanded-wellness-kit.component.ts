@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormArray, FormGroup, FormControl } from '@angular/forms';
+import { WellnessKitDetailsService } from 'src/app/services/wellness-kit-details/wellness-kit-details.service';
 
 @Component({
   selector: 'app-expanded-wellness-kit',
@@ -9,12 +10,22 @@ import { FormArray, FormGroup, FormControl } from '@angular/forms';
 export class ExpandedWellnessKitComponent implements OnInit {
   @Input() wellnessKit = null;
   @Input() totalPrice = 0;
-  @Input() itemSizeOptions = [];
-  @Output() onWCancel = new EventEmitter<void>();
-  @Output() onWConfirm = new EventEmitter<void>();
-  itemNameOptions: string[] = ['Mask','Sanitizer','Gloves'];
+  @Output() onWSkip = new EventEmitter<void>();
 
-  constructor() { }
+  itemNameOptions: string[] = ['Mask','Sanitizer','Gloves'];
+  itemSizeOptions: any[] = [
+    ['Infant','Child/XS','Child/S','Child/M','Child/L','Adult/XS','Adult/S','Adult/M','Adult/L'],
+    ['1 OZ (30 mL)', '2 OZ (60 mL)'],
+    ['Size 1 Infant', 'Size 2 (age 3 to 4)', 'Size 3 (age 5 to 6)','Size 4 (age 7 to 8)', 
+    'Size 5 (age 9 to 10)', 'Size 6 (age 11 to 13', 'Size 7 (age 14 to 17)', 'Adult/S', 'Adult/M', 'Adult/L'],
+    ['Adult','Kid']
+  ];
+
+  submitted: boolean = false;
+
+  constructor(
+    private wellnessKitServices: WellnessKitDetailsService
+  ) { }
 
   ngOnInit(): void {
     this.wellnessKit.valueChanges.subscribe(() => {
@@ -84,11 +95,16 @@ export class ExpandedWellnessKitComponent implements OnInit {
     console.log('open details');
   }
   
-  onCancel() {
-    this.onWCancel.emit();
+  onSkip() {
+    this.onWSkip.emit();
   }
 
   onConfirm() {
-    this.onWConfirm.emit();
+    this.submitted = true;
+    this.wellnessKitServices.setMiniViewWellnessKit(this.wellnessKit.value);
+  }
+
+  onEdit() {
+    this.submitted = false;
   }
 }

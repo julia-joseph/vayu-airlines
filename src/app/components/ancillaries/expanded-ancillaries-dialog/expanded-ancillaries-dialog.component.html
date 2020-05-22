@@ -1,5 +1,5 @@
 <!-- <div class="orange font-weight-bold pl-4 pt-3"><h5>Ancillaries</h5></div> -->
-    <mat-tab-group [selectedIndex]="0">
+    <mat-tab-group [selectedIndex]="selectedTab">
       <mat-tab>
         <ng-template mat-tab-label>
           <div>
@@ -17,10 +17,8 @@
         </ng-template>
         <app-expanded-wellness-kit
           [wellnessKit]="wellnessKit"
-          [totalPrice]="totalPrice"
-          [itemSizeOptions]="data.itemSizeOptions"
-          (onWCancel)="onCancel()"
-          (onWConfirm)="onConfirm()">
+          [totalPrice]="wellnessKitTotalPrice"
+          (onWSkip)="onSkipToDigitalIFE()">
         </app-expanded-wellness-kit>
         <!-- <app-wellness-kit
       (onSubmit)="onSubmitOfWellnessKit()"
@@ -30,7 +28,7 @@
         </app-wellness-kit> -->
       </mat-tab>
 
-      <mat-tab [disabled]="true">
+      <mat-tab>
         <ng-template mat-tab-label>
           <div id="index-gallery">
             <div class="item">
@@ -40,15 +38,20 @@
                 alt=""
               />
               <h6 class="font-weight-bold">
-                Add Car
+                Digital IFE
               </h6>
             </div>
           </div>
         </ng-template>
-        Content 2
+        <app-expanded-digital-ife
+          [digitalIfeForm]="digitalIfeForm"
+          [totalPrice]="digitalIfeTotalPrice"
+          (onDIFESkip)="onSkipToSeatRegrouping()"
+        >
+        </app-expanded-digital-ife>
       </mat-tab>
     
-      <mat-tab [disabled]="true">
+      <mat-tab>
         <ng-template mat-tab-label>
           <div id="index-gallery">
             <div class="item">
@@ -58,12 +61,17 @@
                 alt=""
               />
               <h6 class="font-weight-bold">
-                Add Pets
+                Seat Regrouping
               </h6>
             </div>
           </div>
         </ng-template>
-        Content 3
+        <app-expanded-adjacent-seat
+          [adjacentSeatForm] = "adjacentSeatForm"
+          [totalPrice] = "adjacentSeatTotalPrice"
+          (onSRConfirm) = "onSeatRegroupingConfirm()"
+        >
+        </app-expanded-adjacent-seat>
       </mat-tab>
     
       <mat-tab [disabled]="true">

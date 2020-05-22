@@ -18,6 +18,9 @@ export class WellnessKitDetailsService {
   showPaymentChange: Subject<boolean> = new Subject<boolean>();
   public showPayementObs = this.showPaymentChange.asObservable();
 
+  performConfirmSubject: Subject<any> = new Subject<any>();
+  public performConfirmObservable = this.performConfirmSubject.asObservable();
+
   wellnessKitDetails = {
     maskQuantity: 1,
     maskPrice: 5.24,
@@ -71,5 +74,10 @@ export class WellnessKitDetailsService {
 
   setShowPayment(state: boolean) {
     this.showPaymentChange.next(state);
+  }
+
+  setMiniViewWellnessKit(wellnessKit) {
+    //observable to push confirm button on main screen
+    this.performConfirmSubject.next(wellnessKit);
   }
 }

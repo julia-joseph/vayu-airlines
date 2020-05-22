@@ -76,24 +76,34 @@
       height: 45vh;
     }
   
-  .cancel-button {
-      border: none;
-      background-color: #808080b3;
-      color: white;
-      width: 120px;
-      height: 40px;
-      font-size: 1.1rem;
-      margin-right: 13px;
-  }
-  
-  .confirm-button {
+    .confirm-button {
       border: none;
       background-color: #ff530f;
       color: white;
       width: 120px;
       height: 40px;
-      font-size: 1.1rem;
-  }
+      font-size: 1.2rem;
+      margin-right: 13px;
+    }
+    
+    .edit-button {
+      border: none;
+      background-color: #ff530f;
+      color: white;
+      width: 120px;
+      height: 40px;
+      font-size: 1.2rem;
+      margin-right: 13px;
+    }
+    
+    .skip-button {
+      border: none;
+      background-color: #808080b3;
+      color: white;
+      width: 12rem;
+      height: 40px;
+      font-size: 1.2rem;
+    }
   
   .img-section {
       height: 372px;
