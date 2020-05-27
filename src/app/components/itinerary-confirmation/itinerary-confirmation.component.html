@@ -52,8 +52,7 @@
                 <div class="card-body ml-3 mr-3">
                     <div class="row">
                         <div class="col-3">
-                            <span class=" font-weight-bold">Departing:</span> {{ departDateFormat1 }} 
-                            <span class=" font-weight-bold text-muted">VY912</span>
+                            <span class=" font-weight-bold">Departing:</span> {{ departDateFormat1 }},&nbsp;VY912
                         </div>
                         <div class="col-3">
                             {{ fromCode }} - {{ toCode }} 07:15 AM
@@ -132,9 +131,9 @@
             Extra items for your flight to {{ to }}
         </div>
 
-        <div class="row mb-3">
+        <div class="row mb-3 mt-4">
             <div class="col-6">
-                <div class="card mt-3">
+                <div class="card h-100">
                     <div class="card-body">
                         <div class="row pl-3 pr-3">
                             <h5 class="card-title">
@@ -143,7 +142,7 @@
                             </h5>
                         </div>
                         <div class="row">
-                            <div class="card w-100 m-3">
+                            <div class="card h-100 w-100 m-3">
                                 <div class="card-body">
                                     <div class="row font-weight-bold d-flex justify-content-between mt-1 mb-1 border-bottom">
                                         <h5 class="ml-3">{{ fromCode }} - {{ toCode }}</h5>
@@ -209,7 +208,7 @@
                                             </div>
                                             <div class="row" *ngIf="wellnessKit.boxedMealVegQuantity">
                                                 <div class="col-3 font-weight-400">
-                                                    Boxed Meal/Veg Sandwich
+                                                    Boxed Meal
                                                 </div>
                                                 <div class="col-3">
                                                     {{ wellnessKit.boxedMealVegQuantity }}
@@ -243,15 +242,15 @@
                         <div class="row d-flex justify-content-end ml-1 mr-4">
                             <div>
                                 <span class="font-weight-bold">Total: </span>
-                                $ <span class="orange font-size1-5">{{ this.totalPrice | number : '.2'}}</span>
+                                $ <span class="orange font-size1-5">{{ this.totalWellnessKitPrice | number : '.2'}}</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-6 h-100">
-                <div class="card mt-3">
+            <div class="col-6">
+                <div class="card h-100">
                     <div class="card-body">
                         <div class="row pl-3 pr-3">
                             <div class="col-6">
@@ -293,7 +292,92 @@
                     </div>
                 </div>
             </div>
+        </div>
 
+        <div class="row mb-3 mt-4">
+            <div class="col-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="row pl-3 pr-3">
+                            <h5 class="card-title">
+                                <!-- <span class="orange">Ancillaries Summary</span> -  -->
+                                <span class="orange">Digital IFE</span>
+                            </h5>
+                        </div>
+                        <div class="row">
+                            <div class="card h-100 w-100 m-3">
+                                <div class="card-body">
+                                    <div class="row font-weight-bold d-flex justify-content-between mt-1 mb-1 border-bottom">
+                                        <h5 class="ml-3">{{ fromCode }} - {{ toCode }}</h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="row font-weight-light text-muted mt-1 mb-1">
+                                                <div class="col-4">
+                                                    Package Type
+                                                </div>
+                                                <div class="col-4">
+                                                    Screens
+                                                </div>
+                                                <div class="col-4">
+                                                    Price
+                                                </div>
+                                            </div>
+                                            <div class="row mb-1" *ngIf="digitalIfe.primaryScreens">
+                                                <div class="col-4 font-weight-400">
+                                                    {{ digitalIfe.primaryPackageType }}
+                                                </div>
+                                                <div class="col-4">
+                                                    {{ digitalIfe.primaryScreens }}
+                                                </div>
+                                                <div class="col-4">
+                                                    $ <span class="orange font-size1-3">{{ digitalIfe.primaryScreens * digitalIfe.primaryPrice | number : '.2' }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-1" *ngIf="digitalIfe.secondaryScreens">
+                                                <div class="col-4">
+                                                    {{ digitalIfe.secondaryPackageType }}
+                                                </div>
+                                                <div class="col-4">
+                                                    {{ digitalIfe.secondaryScreens }}
+                                                </div>
+                                                <div class="col-4">
+                                                    $ <span class="orange font-size1-3">{{ digitalIfe.secondaryScreens * digitalIfe.secondaryPrice | number : '.2' }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="row" *ngFor="let item of digitalIfe.additionalItems">
+                                                <div class="col-4">
+                                                    {{ item.packageType }}
+                                                </div>
+                                                <div class="col-4">
+                                                    {{ item.screens }}
+                                                </div>
+                                                <div class="col-4">
+                                                    $ <span class="orange font-size1-3">{{ item.screens * item.price | number : '.2' }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row d-flex justify-content-end ml-1 mr-4">
+                            <div>
+                                <span class="font-weight-bold">Total: </span>
+                                $ <span class="orange font-size1-5">{{ totalDigitalIfePrice | number : '.2'}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="card h-100">
+                    <div class="card-body">
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

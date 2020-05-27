@@ -12,13 +12,17 @@ export class ExpandedWellnessKitComponent implements OnInit {
   @Input() totalPrice = 0;
   @Output() onWSkip = new EventEmitter<void>();
 
-  itemNameOptions: string[] = ['Mask','Sanitizer','Gloves'];
+  itemNameOptions: string[] = ['Mask','Sanitizer','Gloves','Boxed Meal'];
+  itemQuantityOptions: number[] = [0, 1, 2];
   itemSizeOptions: any[] = [
     ['Infant','Child/XS','Child/S','Child/M','Child/L','Adult/XS','Adult/S','Adult/M','Adult/L'],
     ['1 OZ (30 mL)', '2 OZ (60 mL)'],
     ['Size 1 Infant', 'Size 2 (age 3 to 4)', 'Size 3 (age 5 to 6)','Size 4 (age 7 to 8)', 
     'Size 5 (age 9 to 10)', 'Size 6 (age 11 to 13', 'Size 7 (age 14 to 17)', 'Adult/S', 'Adult/M', 'Adult/L'],
-    ['Adult','Kid']
+    ['Adult/Veg Sandwich','Kid/Veg Sandwich',
+    'Adult/Chicken Burger','Kid/Chicken Burger',
+    'Adult/Muffin','Kid/Muffin',
+    'Adult/Rice Cake','Kid/Rice Cake']
   ];
 
   submitted: boolean = false;
@@ -74,6 +78,10 @@ export class ExpandedWellnessKitComponent implements OnInit {
     }
     else if(name === 'Gloves'){
       price = 1.20;
+    }
+    else if(name === 'Boxed Meal') {
+      price = 20.00;
+      size = 'Adult/Veg Sandwich';
     }
 
     itemGroup.patchValue({

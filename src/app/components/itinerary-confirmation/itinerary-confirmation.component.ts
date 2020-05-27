@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WellnessKitDetailsService } from 'src/app/services/wellness-kit-details/wellness-kit-details.service';
 import { FlightDetailsService } from 'src/app/services/flight-details/flight-details.service';
 import * as moment from 'moment';
+import { DigitalIfeDetailsService } from 'src/app/services/digital-ife-details/digital-ife-details.service';
 @Component({
   selector: 'app-itinerary-confirmation',
   templateUrl: './itinerary-confirmation.component.html',
@@ -20,7 +21,7 @@ export class ItineraryConfirmationComponent implements OnInit {
   delivery: string;
 
   wellnessKit: any;
-  totalPrice: number = 0;
+  totalWellnessKitPrice: number = 0;
 
   fromCode: string = 'YYZ';
   toCode: string = 'LGA';
@@ -30,15 +31,23 @@ export class ItineraryConfirmationComponent implements OnInit {
   totalPassengers: number = 1;
   finalPrice: number = 355.00;
   
+  digitalIfe: any;
+  totalDigitalIfePrice: number = 0;
+
   constructor(
     private wellnessKitService: WellnessKitDetailsService,
-    private flightDetailsService: FlightDetailsService
+    private flightDetailsService: FlightDetailsService,
+    private digitalIfeService: DigitalIfeDetailsService
   ) { }
 
   ngOnInit(): void {
     this.wellnessKit = this.wellnessKitService.getWellnessKitDetails();
-    this.totalPrice = this.wellnessKitService.totalPrice;
-    this.finalPrice = this.finalPrice + this.totalPrice;
+    this.totalWellnessKitPrice = this.wellnessKitService.totalPrice;
+
+    this.digitalIfe = this.digitalIfeService.getDigitalIfeDetails();
+    this.totalDigitalIfePrice = this.digitalIfeService.totalPrice;
+
+    this.finalPrice = this.finalPrice + this.totalWellnessKitPrice + this.totalDigitalIfePrice;
     
     const details = this.flightDetailsService.getFlightDetails();
     this.fromCode = details.fromCode;

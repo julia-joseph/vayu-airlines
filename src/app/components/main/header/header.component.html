@@ -62,16 +62,17 @@
         <div class="col-3">
             <div class="row">
                 <div class="col-7 d-flex justify-content-end">
-                    <img src="../../../../assets/images/img_profile.png" class="profile-pic" [matMenuTriggerFor]="profileMenu">
+                    <img src="../../../../assets/images/img_profile.png" class="profile-pic">
                 </div>
                 <mat-menu #profileMenu="matMenu" yPosition="below" xPosition="after">
                     <button mat-menu-item>Edit Profile</button>
+                    <button mat-menu-item>My Cart</button>
                     <button mat-menu-item>My Points</button>
                     <button mat-menu-item>My Subscriptions</button>
                 </mat-menu>
                 <div class="col-5 d-flex flex-column profile-details">
                     <div class="d-flex flex-row">
-                        Welcome <span class="profile-name d-flex flex-row"> Anne <img src="../../../../assets/images/img_ddn_06.png" class="symbol"></span>
+                        Welcome <span class="profile-name d-flex flex-row"> Anne <img src="../../../../assets/images/img_ddn_06.png" class="symbol"  [matMenuTriggerFor]="profileMenu"></span>
                     </div> 
                     <div>
                         1050 Points

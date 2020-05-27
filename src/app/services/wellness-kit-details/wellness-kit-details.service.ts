@@ -35,7 +35,7 @@ export class WellnessKitDetailsService {
     glovesSize: 'Adult/M',
     glovesSubscription: false,
     boxedMealVegQuantity: 1,
-    boxedMealVegSize: 'Adult',
+    boxedMealVegSize: 'Adult/Veg Sandwich',
     boxedMealVegPrice: 20,
     boxedMealVegSubscription: false,
     delivery: 'Gate',

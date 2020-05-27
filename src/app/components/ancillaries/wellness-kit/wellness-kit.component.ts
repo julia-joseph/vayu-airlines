@@ -38,7 +38,7 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
     glovesPrice: new FormControl(1.2),
     glovesSubscription: new FormControl(false),
     boxedMealVegQuantity: new FormControl(1),
-    boxedMealVegSize: new FormControl('Adult'),
+    boxedMealVegSize: new FormControl('Adult/Veg Sandwich'),
     boxedMealVegPrice: new FormControl(20),
     boxedMealVegSubscription: new FormControl(false),
     delivery: new FormControl('Gate'),
@@ -46,15 +46,17 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
     additionalItems: new FormArray([ ])
   });
 
-  itemNameOptions: string[] = ['Mask','Sanitizer','Gloves','Boxed Meal/Veg Sandwich',
-  'Boxed Meal/Chicken Burger','Boxed Meal/Muffin','Boxed Meal/Rice Cake'];
-  itemQuantityOptions: number[] = [0,1,2];
+  itemNameOptions: string[] = ['Mask','Sanitizer','Gloves','Boxed Meal'];
+  itemQuantityOptions: number[] = [0, 1, 2];
   itemSizeOptions: any[] = [
     ['Infant','Child/XS','Child/S','Child/M','Child/L','Adult/XS','Adult/S','Adult/M','Adult/L'],
     ['1 OZ (30 mL)', '2 OZ (60 mL)'],
     ['Size 1 Infant', 'Size 2 (age 3 to 4)', 'Size 3 (age 5 to 6)','Size 4 (age 7 to 8)', 
     'Size 5 (age 9 to 10)', 'Size 6 (age 11 to 13', 'Size 7 (age 14 to 17)', 'Adult/S', 'Adult/M', 'Adult/L'],
-    ['Adult','Kid']
+    ['Adult/Veg Sandwich','Kid/Veg Sandwich',
+    'Adult/Chicken Burger','Kid/Chicken Burger',
+    'Adult/Muffin','Kid/Muffin',
+    'Adult/Rice Cake','Kid/Rice Cake']
   ];
 
   // itemAdded: boolean = false;
@@ -158,21 +160,9 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
     else if(name === 'Gloves') {
       price = 1.20;
     }
-    else if(name === 'Boxed Meal/Veg Sandwich') {
+    else if(name === 'Boxed Meal') {
       price = 20.00;
-      size = 'Adult';
-    }
-    else if(name === 'Boxed Meal/Chicken Burger') {
-      price = 25.00;
-      size = 'Adult';
-    }
-    else if(name === 'Boxed Meal/Muffin') {
-      price = 15.00;
-      size = 'Adult';
-    }
-    else if(name === 'Boxed Meal/Rice Cake') {
-      price = 15.00;
-      size = 'Adult';
+      size = 'Adult/Veg Sandwich';
     }
 
     itemGroup.patchValue({
