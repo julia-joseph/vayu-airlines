@@ -8,7 +8,8 @@ export class AdjacentSeatDetailsService {
   totalPrice: number = 130.64;
   totalQuantity: number = 2;
   showPayment: boolean  = false;
-
+  submitted: boolean = false;
+  
   adjacentSeatDetails = {
     seats: 2,
     price: 65.32,
@@ -24,6 +25,15 @@ export class AdjacentSeatDetailsService {
 
   showPaymentChange: Subject<boolean> = new Subject<boolean>();
   public showPayementObservable = this.showPaymentChange.asObservable();
+
+  performConfirmSubject: Subject<any> = new Subject<any>();
+  public performConfirmObservable = this.performConfirmSubject.asObservable();
+
+  performEditSubject: Subject<boolean> = new Subject<boolean>();
+  public performEditObservable = this.performEditSubject.asObservable();
+
+  performSkipSubject: Subject<boolean> = new Subject<boolean>();
+  public performSkipObservable = this.performSkipSubject.asObservable();
 
   constructor() { }
 
@@ -48,5 +58,17 @@ export class AdjacentSeatDetailsService {
   setShowPayment(state: boolean) {
     this.showPayment = state;
     this.showPaymentChange.next(state);
+  }
+
+  setConfirmMiniViewAdjacentSeat(adjacentSeat) {
+    this.performConfirmSubject.next(adjacentSeat);
+  }
+
+  setEditMiniViewAdjacentSeat() {
+    this.performEditSubject.next();
+  }
+
+  setSkipMiniViewAdjacentSeat() {
+    this.performSkipSubject.next();
   }
 }

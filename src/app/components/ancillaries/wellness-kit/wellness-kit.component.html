@@ -412,7 +412,10 @@
             <div class="col-8 pl-0 pr-0" >
               <button class="confirm-button" (click)="onConfirm()" *ngIf="!submitted">Confirm</button>
               <button class="edit-button" (click)="onEdit()" *ngIf="submitted">Edit</button>
-              <button class="cancel-button" (click)="onSkipToDigitalIFE()">Skip To Digital IFE</button>
+              <button class="cancel-button" (click)="onSkipToDigitalIFE()">
+                <span *ngIf="!submitted">Skip To Digital IFE</span>
+                <span *ngIf="submitted">Next: Digital IFE</span>
+              </button>
             </div>
             <div class="col-4 pl-0 d-flex justify-content-end">
               <div class="d-flex mr-3 pt-3">
@@ -430,7 +433,7 @@
         <div class="col-4 pl-3 pt-4">
           <img
             src="../../../../assets/images/covid_banner.png"
-            class="w-100 image"
+            class="w-100 h-75"
           />
         </div>
       </div>

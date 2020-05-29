@@ -43,13 +43,9 @@
       color: #ff530f;
     }
   
-    image {
-      height: 300px;
-    }
-    
     .overflow-items {
       overflow: hidden auto;
-      height: 300px;
+      height: 52.5vh;
     }
   
     .mat-select-arrow {
@@ -104,7 +100,7 @@
     border: none;
     background-color: #808080b3;
     color: white;
-    width: 14rem;
+    width: 14.5rem;
     height: 40px;
     font-size: 1.2rem;
   }

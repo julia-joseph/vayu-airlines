@@ -43,27 +43,32 @@ export class PaymentSummaryComponent implements OnInit {
       this.totalWellnessKitQty = kitQty;
     });
 
-    this.wellnessKitService.showPayementObs.subscribe((state) => {
+    this.digitalIfeService.showPayementObservable.subscribe((state) =>{
       this.showPayment = state;
     });
 
     this.digitalIfeService.totalPriceObservable.subscribe(price => {
       this.totalDigitalIfePrice = price;
       this.finalPrice = this.totalWellnessKitPrice + this.totalDigitalIfePrice + this.totalAdjacentSeatPrice + 355;
-    })
+    });
+
+    this.wellnessKitService.showPayementObs.subscribe((state) => {
+      this.showPayment = state;
+    });
+
 
     this.digitalIfeService.totalQuantityObservable.subscribe(quantity => {
       this.totalDigitalIfeQuantity = quantity;
-    })
+    });
 
     this.adjacentSeatService.totalPriceObservable.subscribe(price => {
       this.totalAdjacentSeatPrice = price;
       this.finalPrice = this.totalWellnessKitPrice + this.totalDigitalIfePrice + this.totalAdjacentSeatPrice + 355;
-    })
+    });
 
     this.adjacentSeatService.totalQuantityObservable.subscribe(quantity => {
       this.totalAdjacentSeatQuantity = quantity;
-    })
+    });
 
     this.adjacentSeatService.showPayementObservable.subscribe((state) => {
       this.showPayment = state;

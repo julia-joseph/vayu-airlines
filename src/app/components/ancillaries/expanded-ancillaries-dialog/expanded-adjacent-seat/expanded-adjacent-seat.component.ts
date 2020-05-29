@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { AdjacentSeatDetailsService } from 'src/app/services/adjacent-seat-details/adjacent-seat-details.service';
 
 @Component({
   selector: 'app-expanded-adjacent-seat',
@@ -20,9 +21,12 @@ export class ExpandedAdjacentSeatComponent implements OnInit {
 
   totalQuantity: number = 2;
 
-  constructor() { }
+  constructor(
+    private adjacentSeatService: AdjacentSeatDetailsService
+  ) { }
 
   ngOnInit(): void {
+    this.submitted = this.adjacentSeatService.submitted;
     this.adjacentSeatForm.valueChanges.subscribe(() => {
       console.log('form',this.adjacentSeatForm.value);
       this.totalPrice =  this.adjacentSeatForm.get('seats').value * this.adjacentSeatForm.get('price').value;
@@ -34,12 +38,17 @@ export class ExpandedAdjacentSeatComponent implements OnInit {
   }
 
   onConfirm() {
-    //maybe obs
     this.submitted = true;
-    this.onSRConfirm.emit();
+    this.adjacentSeatService.setConfirmMiniViewAdjacentSeat(this.adjacentSeatForm.value);
   }
 
-  // onEdit() {
-  //   this.submitted = false;
-  // }
+  onEdit() {
+    this.submitted = false;
+    this.adjacentSeatService.setEditMiniViewAdjacentSeat();
+  }
+
+  onSkip() {
+    this.adjacentSeatService.setSkipMiniViewAdjacentSeat();
+    this.onSRConfirm.emit();
+  }
 }

@@ -114,8 +114,8 @@ export class ExpandedAncillariesDialogComponent implements OnInit {
 
   onSeatRegroupingConfirm() {
     this.dialogRef.close({
-      adjacentSeatForm: this.adjacentSeatForm,
-      confirmed: true
+      // adjacentSeatForm: this.adjacentSeatForm,
+      // confirmed: true
     });
   }
 

@@ -70,6 +70,14 @@ export class DigitalIFEComponent implements OnInit {
       })
       this.onConfirm();
     })
+
+    this.digitalIfeService.performEditObservable.subscribe(() => {
+      this.onEdit();
+    })
+
+    this.digitalIfeService.performSkipObservable.subscribe(() => {
+      this.onSkipToSeatRegrouping();
+    })
   }
 
   ngAfterViewChecked() {
@@ -110,7 +118,6 @@ export class DigitalIFEComponent implements OnInit {
   }
 
   openExpandedAncDialog() {
-    //if(this.submitted) return;
     const dialogRef = this.dialog.open(ExpandedAncillariesDialogComponent, {
       panelClass: 'custom-dialog-container',
       width: '170vh',
@@ -125,43 +132,6 @@ export class DigitalIFEComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      // if(result.confirmed) {
-      //   this.digitalIfeForm.setValue({
-      //     ...result.wellnessKit.value
-      //   });
-      //   this.onConfirm()
-      // }
-      // else {
-      //   this.digitalIfeForm.setValue({
-      //     ...result.wellnessKit.value
-      //   });
-      // }
-    });
-  }
-
-  calculateTotalQuantity(){
-    let itemsQty = 0;
-    this.additionalItems.value.forEach(e => {
-      itemsQty = itemsQty + e.quantity;
-    })
-    this.totalQuantity =
-      this.digitalIfeForm.get('primaryScreens').value +
-      this.digitalIfeForm.get('secondaryScreens').value +
-      itemsQty;
-  }
-
-  onConfirm() {
-    this.calculateTotalQuantity();
-    this.digitalIfeService.setTotalPrice(this.totalPrice);
-    this.digitalIfeService.setTotalQuantity(this.totalQuantity);
-    this.digitalIfeService.setDigitalIfeDetails({
-      ...this.digitalIfeForm.value
-    });
-
-    this.submitted = true;
-    
-    this.onSubmit.emit();
   }
 
   openDetails() {
@@ -193,28 +163,49 @@ export class DigitalIFEComponent implements OnInit {
     })
   }
 
+  calculateTotalQuantity(){
+    let itemsQty = 0;
+    this.additionalItems.value.forEach(e => {
+      itemsQty = itemsQty + e.quantity;
+    })
+    this.totalQuantity =
+      this.digitalIfeForm.get('primaryScreens').value +
+      this.digitalIfeForm.get('secondaryScreens').value +
+      itemsQty;
+  }
+
+  setDigitalIfeDetails() {
+    this.digitalIfeService.setTotalPrice(this.totalPrice);
+    this.digitalIfeService.setTotalQuantity(this.totalQuantity);
+    this.digitalIfeService.setDigitalIfeDetails({
+      ...this.digitalIfeForm.value
+    });
+
+    this.submitted = true;
+    this.digitalIfeService.submitted = this.submitted;
+  }
+
+  onConfirm() {
+    this.calculateTotalQuantity();
+    this.setDigitalIfeDetails();
+    this.onSubmit.emit();
+  }
+
+  onEdit() {
+    this.submitted = false;
+    this.digitalIfeService.submitted = this.submitted;
+    this.digitalIfeService.setShowPayment(false);
+  }
+
   onSkipToSeatRegrouping() {
     if(!this.submitted){
       this.digitalIfeForm.patchValue({
         primaryScreens: 0,
         secondaryScreens: 0
       })
-      this.digitalIfeService.setTotalPrice(0);
-      this.digitalIfeService.setTotalQuantity(0);
-      this.digitalIfeService.setDigitalIfeDetails({
-        ...this.digitalIfeForm.value
-      });
+      this.setDigitalIfeDetails();
     }
     
     this.onSkipToSR.emit();
-  }
-
-  onSkip() { 
-    this.digitalIfeService.setShowPayment(true);
-  }
-
-  onEdit() {
-    this.submitted = false;
-    this.digitalIfeService.setShowPayment(false);
   }
 }

@@ -8,6 +8,7 @@ export class WellnessKitDetailsService {
   totalPrice: number = 28.74;
   totalKitQty: number;
   showPayment: boolean;
+  submitted: boolean = false;
 
   totalPriceChange: Subject<number> = new Subject<number>();
   public priceObs = this.totalPriceChange.asObservable();
@@ -20,6 +21,12 @@ export class WellnessKitDetailsService {
 
   performConfirmSubject: Subject<any> = new Subject<any>();
   public performConfirmObservable = this.performConfirmSubject.asObservable();
+
+  performEditSubject: Subject<boolean> = new Subject<boolean>();
+  public performEditObservable = this.performEditSubject.asObservable();
+
+  performSkipSubject: Subject<boolean> = new Subject<boolean>();
+  public performSkipObservable = this.performSkipSubject.asObservable();
 
   wellnessKitDetails = {
     maskQuantity: 1,
@@ -76,8 +83,16 @@ export class WellnessKitDetailsService {
     this.showPaymentChange.next(state);
   }
 
-  setMiniViewWellnessKit(wellnessKit) {
+  setConfirmMiniViewWellnessKit(wellnessKit) {
     //observable to push confirm button on main screen
     this.performConfirmSubject.next(wellnessKit);
+  }
+
+  setEditMiniViewWellnessKit() {
+    this.performEditSubject.next();
+  }
+
+  setSkipMiniViewWellnessKit() {
+    this.performSkipSubject.next();
   }
 }

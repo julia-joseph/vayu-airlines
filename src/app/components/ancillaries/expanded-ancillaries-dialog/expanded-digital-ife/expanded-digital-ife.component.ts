@@ -29,6 +29,7 @@ export class ExpandedDigitalIFEComponent implements OnInit, AfterViewChecked {
   ) { }
 
   ngOnInit(): void { 
+    this.submitted = this.digitalIfeService.submitted;
     this.digitalIfeForm.valueChanges.subscribe(() => {
       console.log('form',this.digitalIfeForm.value);
       let itemTotal = 0.00;
@@ -112,14 +113,18 @@ export class ExpandedDigitalIFEComponent implements OnInit, AfterViewChecked {
 
   onConfirm() {
     this.submitted = true;
-    this.digitalIfeService.setMiniViewDigitalIFE(this.digitalIfeForm.value);
+    this.digitalIfeService.setConfirmMiniViewDigitalIFE(this.digitalIfeForm.value);
   }
 
   onEdit() {
     this.submitted = false;
+    this.digitalIfeService.setEditMiniViewDigitalIFE();
   }
 
   onSkip() {
+    if(!this.submitted){
+      this.digitalIfeService.setSkipMiniViewDigitalIFE();
+    }
     this.onDIFESkip.emit();
   }
 }

@@ -1,6 +1,6 @@
 <form [formGroup]="adjacentSeatForm">
     <div>
-        <div class="row pt-3 pb-4 pl-4 pr-4 mr-1 border-bottom">
+        <div class="row w-100 pt-3 pb-3 pl-4 border-bottom">
             <div class="col-3 font-weight-bold">
             <mat-select
                 class="form-control segment-select w-75"
@@ -25,65 +25,71 @@
 
         <div class="row pl-4 pr-4">
             <div class="col-8">
-                <div class="row mt-4 pl-2 pr-2 pl-4">
-                <div class="col-4 d-flex justify-content-center">
-                    <img src="../../../../../assets/images/ico_seat.png" class="seat-image">
-                </div>
-                <div class="col-8">
-                    <div class="row">
-                        <div class="col-6">
-                            <b>Seat needed</b>
+                <div class="overflow-items">
+                    <div class="row mt-4 pl-2 pr-2">
+                        <div class="col-4 d-flex justify-content-center">
+                            <img src="../../../../../assets/images/ico_seat.png" class="seat-image">
                         </div>
-                        <div class="col-6">
-                            Price
+                        <div class="col-8">
+                            <div class="row">
+                                <div class="col-6">
+                                    <b>Seat needed</b>
+                                </div>
+                                <div class="col-6">
+                                    Price
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-6">
+                                    <mat-select
+                                        class="form-control"
+                                        [disabled]="submitted"
+                                        formControlName="seats"
+                                    >
+                                        <mat-option *ngFor="let seat of seatOptions" [value]="seat">
+                                        {{ seat }}
+                                        </mat-option>
+                                    </mat-select>
+                                </div>
+                                <div class="col-6 mt-2">
+                                    $
+                                    <span class="font-size1-2 orange">
+                                        {{ adjacentSeatForm.get('seats').value * adjacentSeatForm.get('price').value | number: ".2" }}
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-6">
-                            <mat-select
-                                class="form-control"
-                                [disabled]="submitted"
-                                formControlName="seats"
-                            >
-                                <mat-option *ngFor="let seat of seatOptions" [value]="seat">
-                                {{ seat }}
-                                </mat-option>
-                            </mat-select>
                         </div>
-                        <div class="col-6 mt-2">
-                            $
-                            <span class="font-size1-2 orange">
-                                {{ adjacentSeatForm.get('seats').value * adjacentSeatForm.get('price').value | number: ".2" }}
-                            </span>
+                        <div class="row d-flex flex-row mt-3 ml-4">
+                            <mat-radio-group formControlName="subscription" [disabled]="submitted">
+                                <mat-radio-button [value]="false" class="ml-3 mr-3">
+                                    One-time Purchase
+                                </mat-radio-button>
+                                <mat-radio-button [value]="true" class="mr-2">
+                                    Add to Subscription
+                                </mat-radio-button>
+                            </mat-radio-group>
+                            <div class="font-size-0-6 orange cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
                         </div>
-                    </div>
+                        <div class="row mt-4 pl-2 pr-2 ml-4">
+                            <p><b>Heads-up</b></p>
+                            <p>Adjacent seat selection is currently unavailable now. We will assign it to you on the day of travel.</p>
+                        </div>
                 </div>
-                </div>
-                <div class="row d-flex flex-row mt-3 ml-4">
-                    <mat-radio-group formControlName="subscription" [disabled]="submitted">
-                        <mat-radio-button [value]="false" class="ml-3 mr-3">
-                            One-time Purchase
-                        </mat-radio-button>
-                        <mat-radio-button [value]="true" class="mr-2">
-                            Add to Subscription
-                        </mat-radio-button>
-                    </mat-radio-group>
-                    <div class="font-size-0-6 orange cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
-                </div>
-                <div class="row mt-4 pl-2 pr-2 ml-4">
-                    <p><b>Heads-up</b></p>
-                    <p>Adjacent seat selection is currently unavailable now. We will assign it to you on the day of travel.</p>
-                </div>
+                
                 <div class="row p-4">
                     <div class="col-8 pl-0 pr-0" *ngIf="!submitted">
                         <button class="confirm-button" (click)="onConfirm()">Confirm</button>
+                        <button class="skip-button" (click)= "onSkip()">
+                            Skip to Payment
+                        </button>
                     </div>
-                    <!-- <div class="col-8 pl-0 pr-0" *ngIf="submitted">
+                    <div class="col-8 pl-0 pr-0" *ngIf="submitted">
                         <button class="edit-button" (click)="onEdit()">Edit</button>
                         <button class="skip-button" (click)= "onSkip()">
-                        Skip to Payment
+                            Next: Payment
                         </button>
-                    </div> -->
+                    </div>
                     <div class="col-4 pl-0 d-flex justify-content-end">
                         <div class="d-flex mr-3 pt-3">
                         <div class="mr-2 font-size1-2">Total:</div>
@@ -97,10 +103,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4 pl-4 pt-4">
+            <div class="col-4 pl-4 pt-4 pr-4">
                 <img
-                src="../../../../assets/images/covid_banner.png"
-                class="w-100 image"
+                src="../../../../assets/images/img_promo_seat_regrouping.jpg"
+                class="w-100 h-75"
                 />
             </div>
         </div>

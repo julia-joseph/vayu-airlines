@@ -41,7 +41,7 @@ export class FlightListItemComponent implements OnInit {
 
     const dialogRef = this.dialog.open(ReviewItineraryDialogComponent, {
       panelClass: 'custom-dialog-container',
-      width: '1200px',
+      width: '200vh',
       data: {
         from: this.from,
         to: this.to,

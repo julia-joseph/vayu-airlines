@@ -32,6 +32,7 @@ export class ExpandedWellnessKitComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.submitted = this.wellnessKitServices.submitted;
     this.wellnessKit.valueChanges.subscribe(() => {
       let itemTotal = 0.00;
       this.wellnessKit.get('additionalItems').value.forEach(e => {
@@ -102,17 +103,22 @@ export class ExpandedWellnessKitComponent implements OnInit {
   openDetails() {
     console.log('open details');
   }
-  
-  onSkip() {
-    this.onWSkip.emit();
-  }
 
   onConfirm() {
     this.submitted = true;
-    this.wellnessKitServices.setMiniViewWellnessKit(this.wellnessKit.value);
+    this.wellnessKitServices.setConfirmMiniViewWellnessKit(this.wellnessKit.value);
   }
 
   onEdit() {
     this.submitted = false;
+    this.wellnessKitServices.setEditMiniViewWellnessKit();
+  }
+
+  onSkip() {
+    if(!this.submitted){
+      this.wellnessKitServices.setSkipMiniViewWellnessKit();
+    }
+    
+    this.onWSkip.emit();
   }
 }

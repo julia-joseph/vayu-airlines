@@ -1,6 +1,6 @@
 <form [formGroup]="wellnessKit">
     <div>
-      <div class="row w-100 pt-4 pb-3 pl-4 border-bottom">
+      <div class="row w-100 pt-3 pb-3 pl-4 border-bottom">
           <div class="col-3 orange font-weight-bold">
             <mat-select
               class="form-control segment-select w-75"
@@ -247,7 +247,7 @@
                   </span>
                 </div>
               </div>
-              <div class="row d-flex flex-row mt-3 ml-2">
+              <div class="row d-flex flex-row mt-3">
                 <mat-radio-group formControlName="boxedMealVegSubscription" [disabled]="submitted">
                     <mat-radio-button [value]="false" class="ml-3 mr-3">
                         One-time Purchase
@@ -401,7 +401,10 @@
             <div class="col-8 pl-0 pr-0">
               <button class="confirm-button" (click)="onConfirm()" *ngIf="!submitted">Confirm</button>
               <button class="edit-button" (click)="onEdit()" *ngIf="submitted">Edit</button>
-              <button class="skip-button" (click)="onSkip()">Skip To Digital IFE</button>
+              <button class="skip-button" (click)="onSkip()">
+                <span *ngIf="!submitted">Skip To Digital IFE</span>
+                <span *ngIf="submitted">Next: Digital IFE</span>
+              </button>
             </div>
             
             <div class="col-4 pl-0 d-flex justify-content-end">
@@ -417,10 +420,10 @@
             </div>
           </div>
         </div>
-        <div class="col-4 pl-4 pr-0 img-section">
+        <div class="col-4 pl-4 pr-4 pt-4">
           <img
             src="../../../assets/images/covid_banner.png"
-            class="h-100 w-100"
+            class="h-75 w-100"
           />
         </div>
       </div>

@@ -44,6 +44,21 @@ export class AdjacentSeatComponent implements OnInit {
       console.log('form',this.adjacentSeatForm.value);
       this.totalPrice =  this.adjacentSeatForm.get('seats').value * this.adjacentSeatForm.get('price').value;
     });
+
+    this.adjacentSeatService.performConfirmObservable.subscribe(adjacentSeat => {
+      this.adjacentSeatForm.setValue({
+        ...adjacentSeat
+      })
+      this.onConfirm();
+    })
+
+    this.adjacentSeatService.performEditObservable.subscribe(() => {
+      this.onEdit();
+    })
+
+    this.adjacentSeatService.performSkipObservable.subscribe(() => {
+      this.onSkip();
+    })
   }
 
   openDetails() {
@@ -54,8 +69,7 @@ export class AdjacentSeatComponent implements OnInit {
 
   }
 
-  onConfirm() {
-    this.totalQuantity = this.adjacentSeatForm.get('seats').value;
+  setAjacentSeatDetails() {
     this.adjacentSeatService.setTotalPrice(this.totalPrice);
     this.adjacentSeatService.setTotalQuantity(this.totalQuantity);
     this.adjacentSeatService.setAdjacentSeatDetails({
@@ -63,20 +77,21 @@ export class AdjacentSeatComponent implements OnInit {
     });
 
     this.submitted = true;
-    
+    this.adjacentSeatService.submitted = this.submitted;
+  }
+
+  onConfirm() {
+    this.totalQuantity = this.adjacentSeatForm.get('seats').value;
+    this.setAjacentSeatDetails();
     this.onSubmit.emit();
   }
 
   onSkip() {
     if(!this.submitted){
       this.adjacentSeatForm.patchValue({
-        seat: 0
+        seats: 0
       })
-      this.adjacentSeatService.setTotalPrice(0);
-      this.adjacentSeatService.setTotalQuantity(0);
-      this.adjacentSeatService.setAdjacentSeatDetails({
-        ...this.adjacentSeatForm.value
-      });
+      this.setAjacentSeatDetails();
     }
 
     this.adjacentSeatService.setShowPayment(true);
@@ -84,11 +99,11 @@ export class AdjacentSeatComponent implements OnInit {
 
   onEdit() {
     this.submitted = false;
+    this.adjacentSeatService.submitted = this.submitted;
     this.adjacentSeatService.setShowPayment(false);
   }
 
   openExpandedAncDialog() {
-    //if(this.submitted) return;
     const dialogRef = this.dialog.open(ExpandedAncillariesDialogComponent, {
       panelClass: 'custom-dialog-container',
       width: '170vh',
@@ -103,18 +118,18 @@ export class AdjacentSeatComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if(result.confirmed) {
-        this.adjacentSeatForm.setValue({
-          ...result.adjacentSeatForm.value
-        });
-        this.onConfirm()
-      }
-      else {
-        this.adjacentSeatForm.setValue({
-          ...result.adjacentSeatForm.value
-        });
-      }
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if(result.confirmed) {
+    //     this.adjacentSeatForm.setValue({
+    //       ...result.adjacentSeatForm.value
+    //     });
+    //     this.onConfirm()
+    //   }
+    //   else {
+    //     this.adjacentSeatForm.setValue({
+    //       ...result.adjacentSeatForm.value
+    //     });
+    //   }
+    // });
   }
 }

@@ -96,6 +96,14 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
       })
       this.onConfirm();
     })
+
+    this.wellnessKitService.performEditObservable.subscribe(() => {
+      this.onEdit();
+    })
+
+    this.wellnessKitService.performSkipObservable.subscribe(() => {
+      this.onSkipToDigitalIFE();
+    })
   }
 
   ngAfterViewChecked() {
@@ -141,9 +149,6 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
 
   removeItem(i: number): void { 
     this.additionalItems.removeAt(i);
-    // if(this.additionalItems.length === 0) {
-    //   this.itemAdded= false;
-    // }
   }
 
   setPriceOfNewItem(itemGroup){
@@ -187,8 +192,7 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
       itemsQty;
   }
 
-  onConfirm() {
-    this.calculateTotalQuantity();
+  setWellnessKitDetails(){
     this.wellnessKitService.setTotalPrice(this.totalPrice);
     this.wellnessKitService.setTotalKitQty(this.totalQty);
     this.wellnessKitService.setWellnessKitDetails({
@@ -196,33 +200,16 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
     });
 
     this.submitted = true;
-    
+    this.wellnessKitService.submitted = this.submitted;
+  }
+
+  onConfirm() {
+    this.calculateTotalQuantity();
+    this.setWellnessKitDetails();
     this.onSubmit.emit();
-    // const dialogRef = this.dialog.open(AncillariesDialogComponent, {
-    //   panelClass: 'custom-dialog-container',
-    //   width: '700px',
-    //   data: {
-    //     flightCode: this.fromCode + ' - ' + this.toCode,
-    //     ...this.wellnessKitForm.value,
-    //     totalPrice: this.totalPrice
-    //   },
-    // });
-
-    // dialogRef.afterClosed().subscribe((result) => {
-    //   if (result) {
-    //     this.wellnessKitService.setWellnessKitDetails({
-    //       ...this.wellnessKitForm.value
-    //     });
-
-    //     this.submitted = true;
-       
-    //     this.onSubmit.emit();
-    //   }
-    // });
   }
 
   onSkipToDigitalIFE() {
-    //set form as null if not submitted
     if(!this.submitted){
       this.wellnessKitForm.patchValue({
         maskQuantity: 0,
@@ -230,11 +217,7 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
         glovesQuantity: 0,
         boxedMealVegQuantity: 0
       })
-      this.wellnessKitService.setTotalPrice(0);
-      this.wellnessKitService.setTotalKitQty(0);
-      this.wellnessKitService.setWellnessKitDetails({
-        ...this.wellnessKitForm.value
-      });
+      this.setWellnessKitDetails();
     }
     
     this.onSkipToIFE.emit();
@@ -242,12 +225,11 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
 
   onEdit() {
     this.submitted = false;
+    this.wellnessKitService.submitted = this.submitted;
     this.wellnessKitService.setShowPayment(false);
   }
 
   openExpandedAncDialog() {
-    //if(this.submitted) return;
-    //this.ogForm = {...this.wellnessKitForm.value};
     const dialogRef = this.dialog.open(ExpandedAncillariesDialogComponent, {
       panelClass: 'custom-dialog-container',
       width: '170vh',
@@ -260,25 +242,6 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
         adjacentSeatTotalPrice: null,
         selectedTab: 0
       }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      // if(result.confirmed) {
-      //   this.wellnessKitForm.setValue({
-      //     ...result.wellnessKit.value
-      //   });
-      //   this.onConfirm()
-      // }
-      // else {
-      //   this.wellnessKitForm.setValue({
-      //     ...result.wellnessKit.value
-      //   });
-      // }
-  // else {
-  //   this.wellnessKitForm.setValue({
-  //     ...this.ogForm
-  //   });
-  // }      
     });
   }
 

@@ -7,7 +7,8 @@ import { Subject } from 'rxjs';
 export class DigitalIfeDetailsService {
   totalPrice: number = 12.78;
   totalQuantity: number = 3;
-
+  submitted: boolean = false;
+  
   digitalIfeDetails = {
     primaryPackageType: 'Premium',
     primaryScreens: 2,
@@ -32,6 +33,12 @@ export class DigitalIfeDetailsService {
 
   performConfirmSubject: Subject<any> = new Subject<any>();
   public performConfirmObservable = this.performConfirmSubject.asObservable();
+
+  performEditSubject: Subject<boolean> = new Subject<boolean>();
+  public performEditObservable = this.performEditSubject.asObservable();
+
+  performSkipSubject: Subject<boolean> = new Subject<boolean>();
+  public performSkipObservable = this.performSkipSubject.asObservable();
 
   constructor() {
    }
@@ -58,7 +65,15 @@ export class DigitalIfeDetailsService {
     this.showPaymentChange.next(state);
   }
 
-  setMiniViewDigitalIFE(digitalIFE) {
+  setConfirmMiniViewDigitalIFE(digitalIFE) {
     this.performConfirmSubject.next(digitalIFE);
+  }
+
+  setEditMiniViewDigitalIFE() {
+    this.performEditSubject.next();
+  }
+
+  setSkipMiniViewDigitalIFE() {
+    this.performSkipSubject.next();
   }
 }
