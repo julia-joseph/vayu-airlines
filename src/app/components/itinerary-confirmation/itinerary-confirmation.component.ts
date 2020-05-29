@@ -3,6 +3,7 @@ import { WellnessKitDetailsService } from 'src/app/services/wellness-kit-details
 import { FlightDetailsService } from 'src/app/services/flight-details/flight-details.service';
 import * as moment from 'moment';
 import { DigitalIfeDetailsService } from 'src/app/services/digital-ife-details/digital-ife-details.service';
+import { AdjacentSeatDetailsService } from 'src/app/services/adjacent-seat-details/adjacent-seat-details.service';
 @Component({
   selector: 'app-itinerary-confirmation',
   templateUrl: './itinerary-confirmation.component.html',
@@ -34,10 +35,14 @@ export class ItineraryConfirmationComponent implements OnInit {
   digitalIfe: any;
   totalDigitalIfePrice: number = 0;
 
+  adjacentSeat: any;
+  totalAdjacentSeat: number = 0;
+
   constructor(
     private wellnessKitService: WellnessKitDetailsService,
     private flightDetailsService: FlightDetailsService,
-    private digitalIfeService: DigitalIfeDetailsService
+    private digitalIfeService: DigitalIfeDetailsService,
+    private adjacentSeatService: AdjacentSeatDetailsService
   ) { }
 
   ngOnInit(): void {
@@ -47,7 +52,10 @@ export class ItineraryConfirmationComponent implements OnInit {
     this.digitalIfe = this.digitalIfeService.getDigitalIfeDetails();
     this.totalDigitalIfePrice = this.digitalIfeService.totalPrice;
 
-    this.finalPrice = this.finalPrice + this.totalWellnessKitPrice + this.totalDigitalIfePrice;
+    this.adjacentSeat = this.adjacentSeatService.getAdjacentSeatDetails();
+    this.totalAdjacentSeat = this.adjacentSeatService.totalPrice;
+
+    this.finalPrice = this.finalPrice + this.totalWellnessKitPrice + this.totalDigitalIfePrice + this.totalAdjacentSeat;
     
     const details = this.flightDetailsService.getFlightDetails();
     this.fromCode = details.fromCode;
