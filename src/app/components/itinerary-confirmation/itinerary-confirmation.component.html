@@ -5,7 +5,7 @@
     <div class="card-body">
         <div class="row p-0 pb-2 mt-2 mb-2">
             <div class="col-6">
-                <h4 class="card-title orange">Itinerary Confirmation</h4>
+                <h4 class="card-title">Itinerary Confirmation</h4>
             </div>
             <div class="col-6">
                 <div class="row justify-content-end">
@@ -25,7 +25,7 @@
             <div class="col-6">
                 <div>
                     <span class="">Confirmation Code: </span>
-                    <span class="orange">{{ confirmmationCode }}</span>
+                    <span class="">{{ confirmmationCode }}</span>
                 </div>
             </div>
             <div class="col-6 d-flex justify-content-end">
@@ -37,12 +37,12 @@
 
         <div class="row mt-1 mb-4">
             <div class="col-6">
-                <span class="orange links">Manage Your Booking</span>
+                <span class="blue links">Manage Your Booking</span>
             </div>
             <div class="col-6 d-flex justify-content-end">
-                <div class="orange">
-                    <span class="links">Add to Calendar</span> |
-                    <span class="links">Email</span>
+                <div class="">
+                    <span class="blue links">Add to Calendar</span> |
+                    <span class="blue links">Email</span>
                 </div>
             </div>
         </div>
@@ -52,19 +52,19 @@
                 <div class="card-body ml-3 mr-3">
                     <div class="row">
                         <div class="col-3">
-                            <span class=" font-weight-bold">Departing:</span> {{ departDateFormat1 }},&nbsp; &nbsp;VY912
+                            <span class="font-weight-bold">Departing:</span> {{ departDateFormat1 }},&nbsp; &nbsp;VY912
                         </div>
                         <div class="col-3">
                             {{ fromCode }} - {{ toCode }} 07:15 AM
                         </div>
                         <div class="col-3">
                             <!-- pts 
-                            <span class="orange font-weight-bold font-size1-3">5000+</span> -->
+                            <span class="font-weight-bold font-size1-3">5000+</span> -->
                         </div>
                         <div class="col-3">
                             <div class="row justify-content-end">
                                 <span class="mt-1">Total &nbsp;</span>
-                                <span class="orange font-weight-bold font-size1-3">
+                                <span class="font-weight-bold font-size1-3">
                                     ${{ finalPrice | number: '.2'}}
                                 </span>
                                 <span class="material-icons mt-1">
@@ -110,14 +110,14 @@
             <div class="card w-100">
                 <div class="card-body m-3">
                     <div class="row mb-3">
-                        <div class="col-12 orange font-weight-bold">
+                        <div class="col-12 font-weight-bold">
                             Time to check in for your flight to {{ to }}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-9">
                             Your flight for {{ departDateFormat2 }} is available for check-in. If you want to make a same day ticket
-                            change or other changes to your trip, review your options <span class="orange links">Here</span>
+                            change or other changes to your trip, review your options <span class="blue links">Here</span>
                         </div>
                         <div class="col-3 text-center">
                             <button [disabled]="true" class="check-in-btn">Check-in Online</button>
@@ -127,7 +127,7 @@
             </div>
         </div>
 
-        <div class="row m-1 orange font-weight-bold font-size1-2">
+        <div class="row m-1 font-weight-bold font-size1-2">
             Extra items for your flight to {{ to }}
         </div>
 
@@ -137,8 +137,8 @@
                     <div class="card-body">
                         <div class="row pl-3 pr-3">
                             <h5 class="card-title">
-                                <!-- <span class="orange">Ancillaries Summary</span> -  -->
-                                <span class="orange">Wellness Kit</span>
+                                <!-- <span class=">Ancillaries Summary</span> -  -->
+                                <span class="">Wellness Kit</span>
                             </h5>
                         </div>
                         <div class="row">
@@ -175,7 +175,7 @@
                                                     {{ wellnessKit.maskSize }}
                                                 </div>
                                                 <div class="col-3">
-                                                    $ <span class="orange font-size1-3">{{ wellnessKit.maskQuantity * wellnessKit.maskPrice | number : '.2' }}</span>
+                                                    $ <span class="font-size1-3">{{ wellnessKit.maskQuantity * wellnessKit.maskPrice | number : '.2' }}</span>
                                                 </div>
                                             </div>
                                             <div class="row mb-1" *ngIf="wellnessKit.sanitizerQuantity">
@@ -189,7 +189,7 @@
                                                     {{ wellnessKit.sanitizerSize }}
                                                 </div>
                                                 <div class="col-3">
-                                                    $ <span class="orange font-size1-3">{{ wellnessKit.sanitizerQuantity * wellnessKit.sanitizerPrice | number : '.2' }}</span>
+                                                    $ <span class="font-size1-3">{{ wellnessKit.sanitizerQuantity * wellnessKit.sanitizerPrice | number : '.2' }}</span>
                                                 </div>
                                             </div>
                                             <div class="row" *ngIf="wellnessKit.glovesQuantity">
@@ -203,7 +203,7 @@
                                                     {{ wellnessKit.glovesSize }}
                                                 </div>
                                                 <div class="col-3">
-                                                    $ <span class="orange font-size1-3">{{ wellnessKit.glovesQuantity * wellnessKit.glovesPrice | number : '.2' }}</span>
+                                                    $ <span class="font-size1-3">{{ wellnessKit.glovesQuantity * wellnessKit.glovesPrice | number : '.2' }}</span>
                                                 </div>
                                             </div>
                                             <div class="row" *ngIf="wellnessKit.boxedMealVegQuantity">
@@ -217,7 +217,7 @@
                                                     {{ wellnessKit.boxedMealVegSize }}
                                                 </div>
                                                 <div class="col-3">
-                                                    $ <span class="orange font-size1-3">{{ wellnessKit.boxedMealVegQuantity * wellnessKit.boxedMealVegPrice | number : '.2' }}</span>
+                                                    $ <span class="font-size1-3">{{ wellnessKit.boxedMealVegQuantity * wellnessKit.boxedMealVegPrice | number : '.2' }}</span>
                                                 </div>
                                             </div>
                                             <div class="row" *ngFor="let item of wellnessKit.additionalItems">
@@ -231,7 +231,7 @@
                                                     {{ item.size }}
                                                 </div>
                                                 <div class="col-3">
-                                                    $ <span class="orange font-size1-3">{{ item.quantity * item.price | number : '.2' }}</span>
+                                                    $ <span class="font-size1-3">{{ item.quantity * item.price | number : '.2' }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -242,7 +242,7 @@
                         <div class="row d-flex justify-content-end ml-1 mr-4">
                             <div>
                                 <span class="font-weight-bold">Total: </span>
-                                $ <span class="orange font-size1-5">{{ this.totalWellnessKitPrice | number : '.2'}}</span>
+                                $ <span class="font-size1-5">{{ this.totalWellnessKitPrice | number : '.2'}}</span>
                             </div>
                         </div>
                     </div>
@@ -255,9 +255,9 @@
                         <div class="row pl-3 pr-3">
                             <div class="col-6">
                                 <div class="row">
-                                    <img src="../../../assets/images/ico_seat.png" class="icons mr-2">
-                                    <h5 class="card-title orange">
-                                        <!-- <span class="orange">Ancillaries Summary</span> -  -->
+                                    <img src="../../../assets/images/ico_checkin.png" class="icons mr-2">
+                                    <h5 class="card-title">
+                                        <!-- <span class=">Ancillaries Summary</span> -  -->
                                         Pick Your Seat
                                     </h5>
                                 </div>
@@ -265,7 +265,7 @@
                             <div class="col-6">
                                 <div class="row justify-content-end">
                                     <span class="mt-1">From</span>
-                                    <span class="orange font-size1-3 font-weight-bold ml-2">$35</span>
+                                    <span class="font-size1-3 font-weight-bold ml-2">$35</span>
                                 </div>
                             </div>
                         </div>
@@ -275,7 +275,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="row justify-content-end">
-                                    <span class="orange links">Add</span>
+                                    <span class="blue links">Add</span>
                                 </div>  
                             </div>
                         </div>
@@ -300,8 +300,8 @@
                     <div class="card-body">
                         <div class="row pl-3 pr-3">
                             <h5 class="card-title">
-                                <!-- <span class="orange">Ancillaries Summary</span> -  -->
-                                <span class="orange">Digital IFE</span>
+                                <!-- <span class=">Ancillaries Summary</span> -  -->
+                                <span class="">Digital IFE</span>
                             </h5>
                         </div>
                         <div class="row">
@@ -331,7 +331,7 @@
                                                     {{ digitalIfe.primaryScreens }}
                                                 </div>
                                                 <div class="col-4">
-                                                    $ <span class="orange font-size1-3">{{ digitalIfe.primaryScreens * digitalIfe.primaryPrice | number : '.2' }}</span>
+                                                    $ <span class="font-size1-3">{{ digitalIfe.primaryScreens * digitalIfe.primaryPrice | number : '.2' }}</span>
                                                 </div>
                                             </div>
                                             <div class="row mb-1" *ngIf="digitalIfe.secondaryScreens">
@@ -342,7 +342,7 @@
                                                     {{ digitalIfe.secondaryScreens }}
                                                 </div>
                                                 <div class="col-4">
-                                                    $ <span class="orange font-size1-3">{{ digitalIfe.secondaryScreens * digitalIfe.secondaryPrice | number : '.2' }}</span>
+                                                    $ <span class="font-size1-3">{{ digitalIfe.secondaryScreens * digitalIfe.secondaryPrice | number : '.2' }}</span>
                                                 </div>
                                             </div>
                                             <div class="row" *ngFor="let item of digitalIfe.additionalItems">
@@ -353,7 +353,7 @@
                                                     {{ item.screens }}
                                                 </div>
                                                 <div class="col-4">
-                                                    $ <span class="orange font-size1-3">{{ item.screens * item.price | number : '.2' }}</span>
+                                                    $ <span class="font-size1-3">{{ item.screens * item.price | number : '.2' }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -364,7 +364,7 @@
                         <div class="row d-flex justify-content-end ml-1 mr-4">
                             <div>
                                 <span class="font-weight-bold">Total: </span>
-                                $ <span class="orange font-size1-5">{{ totalDigitalIfePrice | number : '.2'}}</span>
+                                $ <span class="font-size1-5">{{ totalDigitalIfePrice | number : '.2'}}</span>
                             </div>
                         </div>
                     </div>

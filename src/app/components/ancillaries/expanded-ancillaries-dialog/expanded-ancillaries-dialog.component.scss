@@ -13,7 +13,7 @@
 
   .mat-tab-group.mat-primary .mat-ink-bar,
   .mat-tab-nav-bar.mat-primary .mat-ink-bar {
-    background-color: #ff530f;
+    background-color: #07b9e5;
   }
 
   .mat-tab-body-content {
@@ -33,58 +33,46 @@
   .mat-select-arrow {
     width: 13px;
     height: 11px;
-    background: url(../../../../assets/images/img_ddn_06.png) no-repeat;
+    background: url(../../../../assets/images/ico_chevron.png) no-repeat;
     background-size: 13px;
     border: none;
     margin: 0 4px;
   }
-}
 
-.overflow-items {
-    overflow: hidden auto;
-    height: 45vh;
+  .mat-radio-label-content {
+    font-size: 0.9rem;
   }
 
-.cancel-button {
-    border: none;
-    background-color: #808080b3;
-    color: white;
-    width: 120px;
-    height: 40px;
-    font-size: 1.1rem;
-    margin-right: 13px;
-}
-
-.confirm-button {
-    border: none;
-    background-color: #ff530f;
-    color: white;
-    width: 120px;
-    height: 40px;
-    font-size: 1.1rem;
-}
-
-.img-section {
-    height: 372px;
-    margin-top: 15px;
-}
-
-.add-items-link {
-    text-decoration: underline;
-    cursor: pointer;
+  .mat-radio-button.mat-accent .mat-radio-inner-circle, .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+      background-color: #07b9e5;
   }
 
-.remove-button.focus, .remove-button:focus {
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(176, 185, 193, 0.25);
+  .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
+      border-color: #07b9e5;
   }
-  
-.remove-icon {
-  transition: 1s ease-in-out;
-}
 
-.remove-icon:hover {
-  transform: rotate(180deg);
+  .mat-radio-container{
+      height: 15px;
+      width: 15px;
+  }
+
+  .mat-radio-outer-circle{
+      height: 15px;
+      width: 15px;
+  }
+
+  .mat-radio-inner-circle{
+      height: 15px;
+      width: 15px;
+  }
+
+  .mat-radio-button .mat-radio-ripple{
+      height: 30px; /*double of your required circle radius*/
+      width: 30px;  /*double of your required circle radius*/
+      left: calc(50% - 15px); /*'10px'-same as your required circle radius*/
+      top: calc(50% - 15px); /*'10px'-same as your required circle radius*/
+  }
+
 }
 
 .tab-icon {

@@ -20,7 +20,7 @@
           </div>
           <div class="col-4 pr-0">
             <div class="d-flex flex-row justify-content-end pt-2">
-              <div class="orange add-items-link mr-4" (click)="addAdditionalItems()">Add additional items</div>
+              <div class="blue add-items-link mr-4" (click)="addAdditionalItems()">Add additional items</div>
             </div>
           </div>
       </div>
@@ -70,7 +70,7 @@
                   </div>
                   <div class="col-4 pt-2">
                     $
-                    <span class="font-size1-2 orange">
+                    <span class="font-size1-2">
                       {{ digitalIfeForm.get('primaryScreens').value * digitalIfeForm.get('primaryPrice').value | number: ".2" }}
                     </span>
                   </div>
@@ -84,7 +84,7 @@
                               Add to Subscription
                           </mat-radio-button>
                       </mat-radio-group>
-                      <div class="font-size-0-6 orange cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
+                      <div class="blue font-size-0-6 cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
                 </div>
               </div>
               
@@ -120,7 +120,7 @@
                     </div>
                     <div class="col-4 pt-2">
                       $
-                      <span class="font-size1-2 orange">
+                      <span class="font-size1-2">
                         {{ digitalIfeForm.get('secondaryScreens').value * digitalIfeForm.get('secondaryPrice').value | number: ".2" }}
                       </span>
                     </div>
@@ -134,7 +134,7 @@
                               Add to Subscription
                           </mat-radio-button>
                       </mat-radio-group>
-                        <div class="font-size-0-6 orange cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
+                        <div class="blue font-size-0-6 cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
                   </div>
               </div>
             </div>
@@ -183,10 +183,10 @@
                     </div>
                     <div class="col-4 mt-2">
                       $
-                      <span class="font-size1-2 orange" *ngIf="itemGroup.get('packageType').value === 'Select'">
+                      <span class="font-size1-2" *ngIf="itemGroup.get('packageType').value === 'Select'">
                         {{ itemGroup.get('price').value | number: ".2" }}
                       </span>
-                      <span class="font-size1-2 orange mt-2" *ngIf="itemGroup.get('packageType').value !== 'Select'">
+                      <span class="font-size1-2 mt-2" *ngIf="itemGroup.get('packageType').value !== 'Select'">
                         {{ itemGroup.get('screens').value * itemGroup.get('price').value | number: ".2" }}
                       </span>
                     </div>
@@ -200,7 +200,7 @@
                               Add to Subscription
                           </mat-radio-button>
                       </mat-radio-group>
-                      <div class="font-size-0-6 orange cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
+                      <div class="blue font-size-0-6 cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
                   </div>
                 </div>
               </div>
@@ -223,7 +223,7 @@
                 <div class="mr-2 font-size1-2">Total:</div>
                 <div class="">
                   $
-                  <span class="orange font-size1-2">
+                  <span class="font-size1-2">
                     {{ totalPrice | number: ".2" }}
                   </span>
                 </div>

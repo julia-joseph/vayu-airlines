@@ -1,8 +1,12 @@
 .payment-button {
     width: 100%;
-    background: #ff530f;
+    background: #07b9e5;
     color: white;
     border: none;
     font-size: 1.3rem;
     padding: 10px;
+
+    &:hover {
+        background-color: #0cabd3;
+    }
 }

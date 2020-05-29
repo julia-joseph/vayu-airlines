@@ -2,22 +2,8 @@
 
 // html, body { height: 100%; }
 // body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-.checkout {
-  .card {
-    position: relative;
-    margin: 30px;
-    
-    .card-title {
-      color: #ff530f;
-    }
 
-    .card-body {
-      padding: 1.5rem;
-      padding-left: 2rem;
-      padding-right: 2rem;
-    }
-  }
-}
+@import '_variables.scss';
 
 .orange {
   color: #ff530f;
@@ -112,4 +98,20 @@
   &:hover {
     transform: rotate(180deg);
   }
+}
+
+.bg-blue {
+  background-color: #07b9e5;
+}
+
+.bg-violet {
+  background-color: #865e9a;
+}
+
+.blue {
+  color: #07b9e5;
+}
+
+.violet {
+  color: #865e9a;
 }

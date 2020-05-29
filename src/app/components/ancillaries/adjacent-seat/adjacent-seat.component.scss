@@ -21,7 +21,7 @@
 
     .mat-tab-group.mat-primary .mat-ink-bar,
     .mat-tab-nav-bar.mat-primary .mat-ink-bar {
-        background-color: #ff530f;
+        background-color: #07b9e5;
     }
 
     .mat-tab-body-wrapper {
@@ -40,51 +40,12 @@
     }
 
     .segment-select .mat-select-value {
-        color: #ff530f;
+        color: #07b9e5;
     }
 
     .overflow-items {
         overflow: hidden auto;
         height: 52.5vh;
-    }
-
-    .mat-select-arrow {
-        width: 13px;
-        height: 11px;
-        background: url(../../../../assets/images/img_ddn_06.png) no-repeat;
-        background-size: 13px;
-        border: none;
-        margin: 0 4px;
-    }
-
-    .mat-radio-label-content {
-        font-size: 0.9rem;
-    }
-
-    .mat-radio-button.mat-accent .mat-radio-inner-circle, .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
-        background-color: #ff530f;
-    }
-
-    .mat-radio-container{
-        height: 15px;
-        width: 15px;
-    }
-
-    .mat-radio-outer-circle{
-        height: 15px;
-        width: 15px;
-    }
-
-    .mat-radio-inner-circle{
-        height: 15px;
-        width: 15px;
-    }
-
-    .mat-radio-button .mat-radio-ripple{
-        height: 30px; /*double of your required circle radius*/
-        width: 30px;  /*double of your required circle radius*/
-        left: calc(50% - 15px); /*'10px'-same as your required circle radius*/
-        top: calc(50% - 15px); /*'10px'-same as your required circle radius*/
     }
 }
 
@@ -108,7 +69,7 @@
 
 .confirm-button {
     border: none;
-    background-color: #ff530f;
+    background-color: #07b9e5;
     color: white;
     width: 120px;
     height: 40px;
@@ -118,7 +79,7 @@
 
 .edit-button {
     border: none;
-    background-color: #ff530f;
+    background-color: #07b9e5;
     color: white;
     width: 120px;
     height: 40px;

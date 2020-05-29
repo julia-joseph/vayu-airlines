@@ -23,8 +23,8 @@
     margin-bottom: 70px;
 
     .form-control:focus {
-        border-color: #ffd980;
-        box-shadow: 0 0 0 0.1rem rgba(255, 162, 0, 0.39);
+        border-color: #07b9e5;
+        box-shadow: 0 0 0 0.1rem #07b9e563;
     }
 
     input[type="date"] {
@@ -32,7 +32,7 @@
     }
     
     input[type="date"]:after {
-        content: url(../../../../../assets/images/ico_calendar.png);
+        content: url(../../../../../assets/images/ico_calendar.jpg);
         zoom: 0.6;
         margin-left: 10px;
         margin-right: -10px;
@@ -67,7 +67,7 @@
         background-repeat: no-repeat;
         background-size: 1.5ex 0.7ex;
         background-origin: content-box;
-        background-image: url('../../../../../assets/images/img_ddn_06.png');
+        background-image: url('../../../../../assets/images/ico_chevron.png');
     }
 
     .mat-expansion-panel-header-title {
@@ -75,15 +75,11 @@
     }
 
     .mat-expansion-panel-header-description, .mat-expansion-indicator::after {
-        color: #ff530f;
+        // color: #07b9e5;
     }
 
     .mat-expansion-panel .mat-expansion-panel-header.cdk-keyboard-focused:not([aria-disabled=true]), .mat-expansion-panel .mat-expansion-panel-header.cdk-program-focused:not([aria-disabled=true]), .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:hover:not([aria-disabled=true]) {
         background: none;
-    }
-
-    .card-title {
-        color: #ff530f;
     }
 
     .card-body {
@@ -116,8 +112,8 @@
             .search-button {
                 position: relative;
                 top: 32px;
-                background-color: #ff530f;
-                border-color: #ff530f;
+                background-color: #07b9e5;
+                border-color: #07b9e5;
             }
         }
 

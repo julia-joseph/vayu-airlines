@@ -21,7 +21,7 @@
             <div class="col-4 pr-0">
                 <div class="d-flex flex-row justify-content-end pt-2">
                     <div (click)="openExpandedAncDialog()">
-                      <svg class="bi bi-arrows-fullscreen cursor-pointer orange" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <svg class="bi bi-arrows-fullscreen cursor-pointer blue" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M1.464 10.536a.5.5 0 01.5.5v3h3a.5.5 0 010 1h-3.5a.5.5 0 01-.5-.5v-3.5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
                         <path fill-rule="evenodd" d="M5.964 10a.5.5 0 010 .707l-4.146 4.147a.5.5 0 01-.707-.708L5.257 10a.5.5 0 01.707 0zm8.854-8.854a.5.5 0 010 .708L10.672 6a.5.5 0 01-.708-.707l4.147-4.147a.5.5 0 01.707 0z" clip-rule="evenodd"/>
                         <path fill-rule="evenodd" d="M10.5 1.5A.5.5 0 0111 1h3.5a.5.5 0 01.5.5V5a.5.5 0 01-1 0V2h-3a.5.5 0 01-.5-.5zm4 9a.5.5 0 00-.5.5v3h-3a.5.5 0 000 1h3.5a.5.5 0 00.5-.5V11a.5.5 0 00-.5-.5z" clip-rule="evenodd"/>
@@ -38,7 +38,7 @@
                 <div class="overflow-items">
                     <div class="row mt-4 pr-2">
                         <div class="col-4 d-flex justify-content-center">
-                            <img src="../../../../assets/images/ico_seat.png" class="seat-image">
+                            <img src="../../../../assets/images/ico_checkin.png" class="seat-image">
                         </div>
                         <div class="col-8">
                             <div class="row">
@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="col-6 mt-2">
                                     $
-                                    <span class="font-size1-5 orange">
+                                    <span class="font-size1-5">
                                         {{ adjacentSeatForm.get('seats').value * adjacentSeatForm.get('price').value | number: ".2" }}
                                     </span>
                                 </div>
@@ -79,9 +79,9 @@
                                     Add to Subscription
                                 </mat-radio-button>
                             </mat-radio-group>
-                            <div class="font-size-0-6 orange cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
+                            <div class="blue font-size-0-6 cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
                         </div>
-                        <div class="row mt-4 pl-4 pr-2">
+                        <div class="row mt-4 pl-4 pr-2 ml-4">
                             <p><b>Heads-up</b></p>
                             <p>Adjacent seat selection is currently unavailable now. We will assign it to you on the day of travel.</p>
                         </div>
@@ -105,7 +105,7 @@
                         <div class="mr-2 font-size1-5">Total:</div>
                         <div class="">
                             $
-                            <span class="orange font-size1-5">
+                            <span class="font-size1-5">
                             {{ totalPrice | number: ".2" }}
                             </span>
                         </div>

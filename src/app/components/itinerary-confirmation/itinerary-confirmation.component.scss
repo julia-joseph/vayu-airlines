@@ -13,6 +13,10 @@
 .links {
     text-decoration: underline;
     cursor: pointer;
+
+    &:hover {
+        color: #0cabd3;
+    }
 }
 
 .check-in-btn {
@@ -22,12 +26,16 @@
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
-    background-color: #ff530f;
+    background-color: #07b9e5;
     border: 1px solid transparent;
     padding: .375rem .75rem;
     font-size: 1rem;
     line-height: 1.5;
     border-radius: .25rem;
+
+    &:hover {
+        background-color: #0cabd3;
+    }
 }
 
 .font-size-1-1 {

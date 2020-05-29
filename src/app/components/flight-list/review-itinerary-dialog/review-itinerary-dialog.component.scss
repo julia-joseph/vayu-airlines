@@ -5,17 +5,15 @@
         margin-left: 3px;
         box-shadow: 0px 3px 10px -5px #00000030;
     }
-
-    .review-itinerary-title {
-        color: #ff530f;
-        font-weight: bold;
-        margin-left: 20px;
-    }
     
     .review-itinerary-btn {
-        background-color: #ff530f;
+        background-color: #07b9e5;
         color: white;
-        border: 1px solid rgb(230, 61, 0);
+        border: 1px solid #07b9e5;
+
+        &:hover {
+            background-color: #0cabd3;
+        }
     }
 
     .flight-number-label {
@@ -33,14 +31,9 @@
     }
 
     .review-itinerary-change-link {
-        color: #ff530f;
+        color: #07b9e5;
         text-decoration: underline;
         cursor: pointer;
-    }
-
-    .review-itinerary-label-orange {
-        color: #ff530f;
-        font-weight: bold;
     }
 
     .departing-flight-title {
@@ -50,11 +43,6 @@
 
     .total-cost-title {
         font-weight: bold;
-        color: #ff530f;
         font-size: 1.1rem;
-    }
-
-    .total-cost-price{
-        color: #ff530f;
     }
 }

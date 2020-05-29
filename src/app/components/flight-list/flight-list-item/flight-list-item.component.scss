@@ -27,8 +27,8 @@
         max-width: 95.833333295%;
     }
 
-    .orange-line {
-        border: 0.5px solid #ed3223;
+    .black-line {
+        border: 0.1px solid black;
     }
 
     .plane-icon {
@@ -58,7 +58,7 @@
         // margin-left: 35px;
         // cursor: pointer;
         padding: 0px 10px;
-        background: #ff530f;
+        background: #865e9a;
         cursor: pointer;
         height: 100%;
 
@@ -72,7 +72,7 @@
 
     .flight-list-item-selection-not {
         padding: 0px 10px;
-        background: #ffc9b2;
+        background: #e7b6ff;
         cursor: pointer;
         height: 100%;
 
@@ -85,7 +85,7 @@
     }
 
     .flight-list-item-selection-not:hover {
-        background: #ff530f;
+        background: #865e9a;
     }
 }
 

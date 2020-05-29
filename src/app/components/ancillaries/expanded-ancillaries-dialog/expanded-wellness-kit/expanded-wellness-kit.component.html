@@ -1,7 +1,7 @@
 <form [formGroup]="wellnessKit">
     <div>
       <div class="row w-100 pt-3 pb-3 pl-4 border-bottom">
-          <div class="col-3 orange font-weight-bold">
+          <div class="col-3 font-weight-bold">
             <mat-select
               class="form-control segment-select w-75"
               formControlName="segment"
@@ -32,7 +32,7 @@
           </div>
           <div class="col-4 pr-0">
             <div class="d-flex flex-row justify-content-end pt-1">
-              <div class="orange add-items-link" (click)="addAdditionalItems()">Add additional items</div>
+              <div class="blue add-items-link" (click)="addAdditionalItems()">Add additional items</div>
             </div>
           </div>
       </div>
@@ -86,7 +86,7 @@
                 </div>
                 <div class="col-2 d-flex justify-content-end">
                   <span class="mt-1 mr-1">$</span>
-                  <span class="font-size1-2 orange">
+                  <span class="font-size1-2">
                     {{ wellnessKit.get('maskQuantity').value * wellnessKit.get('maskPrice').value | number: ".2" }}
                   </span>
                 </div>
@@ -100,7 +100,7 @@
                         Add to Subscription
                     </mat-radio-button>
                 </mat-radio-group>
-                <div class="font-size-0-6 orange cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
+                <div class="blue font-size-0-6 cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
             </div>
             </div>
           </div>
@@ -138,7 +138,7 @@
                 </div>
                 <div class="col-2 d-flex justify-content-end">
                   <span class="mt-1 mr-1">$</span>
-                  <span class="font-size1-2 orange">
+                  <span class="font-size1-2">
                     {{ wellnessKit.get('sanitizerQuantity').value * wellnessKit.get('sanitizerPrice').value  | number: ".2" }}
                   </span>
                 </div>
@@ -152,7 +152,7 @@
                         Add to Subscription
                     </mat-radio-button>
                 </mat-radio-group>
-                <div class="font-size-0-6 orange cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
+                <div class="blue font-size-0-6 cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
             </div>
             </div>
           </div>
@@ -190,7 +190,7 @@
                 </div>
                 <div class="col-2 d-flex justify-content-end">
                   <span class="mt-1 mr-1">$</span>
-                  <span class="font-size1-2 orange">
+                  <span class="font-size1-2">
                     {{wellnessKit.get('glovesQuantity').value * wellnessKit.get('glovesPrice').value | number: ".2" }}
                   </span>
                 </div>
@@ -204,7 +204,7 @@
                         Add to Subscription
                     </mat-radio-button>
                 </mat-radio-group>
-                <div class="font-size-0-6 orange cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
+                <div class="blue font-size-0-6 cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
             </div>
             </div>
           </div>
@@ -242,7 +242,7 @@
                 </div>
                 <div class="col-2 d-flex justify-content-end mt-2">
                   $
-                  <span class="font-size1-2 orange">
+                  <span class="font-size1-2">
                     {{ wellnessKit.get('boxedMealVegQuantity').value * wellnessKit.get('boxedMealVegPrice').value | number: ".2" }}
                   </span>
                 </div>
@@ -256,7 +256,7 @@
                         Add to Subscription
                     </mat-radio-button>
                 </mat-radio-group>
-                <div class="font-size-0-6 orange cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
+                <div class="blue font-size-0-6 cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
             </div>
             </div>
           </div>
@@ -371,10 +371,10 @@
                   </div>
                   <div class="col-2 d-flex justify-content-end">
                     <span class="mt-1 mr-1">$</span>
-                    <span class="font-size1-2 orange" *ngIf="itemGroup.get('quantity').value === 'Select'">
+                    <span class="font-size1-2" *ngIf="itemGroup.get('quantity').value === 'Select'">
                       {{ itemGroup.get('price').value | number: ".2" }}
                     </span>
-                    <span class="font-size1-2 orange" *ngIf="itemGroup.get('quantity').value !== 'Select'">
+                    <span class="font-size1-2" *ngIf="itemGroup.get('quantity').value !== 'Select'">
                       {{ itemGroup.get('quantity').value * itemGroup.get('price').value | number: ".2" }}
                     </span>
                   </div>
@@ -388,7 +388,7 @@
                           Add to Subscription
                       </mat-radio-button>
                   </mat-radio-group>
-                  <div class="font-size-0-6 orange cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
+                  <div class="blue font-size-0-6 cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
               </div>
               </div>
             </div>
@@ -412,7 +412,7 @@
                 <div class="mr-2 font-size1-2">Total:</div>
                 <div class="">
                   $
-                  <span class="orange font-size1-2">
+                  <span class="font-size1-2">
                     {{ totalPrice | number: ".2" }}
                   </span>
                 </div>
