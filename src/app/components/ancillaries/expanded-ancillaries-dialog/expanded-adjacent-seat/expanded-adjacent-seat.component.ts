@@ -9,7 +9,7 @@ import { AdjacentSeatDetailsService } from 'src/app/services/adjacent-seat-detai
 })
 export class ExpandedAdjacentSeatComponent implements OnInit {
   @Input() adjacentSeatForm: FormGroup;
-  @Input() totalPrice = 130.64;
+  @Input() totalPrice;
   @Output() onSRConfirm = new EventEmitter<void>();
 
   submitted: boolean = false;
@@ -19,7 +19,7 @@ export class ExpandedAdjacentSeatComponent implements OnInit {
 
   seatOptions: number[] = [0, 1, 2];
 
-  totalQuantity: number = 2;
+  totalQuantity: number = 1;
 
   constructor(
     private adjacentSeatService: AdjacentSeatDetailsService
@@ -27,14 +27,19 @@ export class ExpandedAdjacentSeatComponent implements OnInit {
 
   ngOnInit(): void {
     this.submitted = this.adjacentSeatService.submitted;
+    this.calculateTotalPrice();
     this.adjacentSeatForm.valueChanges.subscribe(() => {
       console.log('form',this.adjacentSeatForm.value);
-      this.totalPrice =  this.adjacentSeatForm.get('seats').value * this.adjacentSeatForm.get('price').value;
+      this.calculateTotalPrice();
     });
   }
 
   openDetails() {
 
+  }
+
+  calculateTotalPrice() {
+    this.totalPrice =  this.adjacentSeatForm.get('seats').value * this.adjacentSeatForm.get('price').value;
   }
 
   onConfirm() {

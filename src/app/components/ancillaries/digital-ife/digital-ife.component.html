@@ -53,7 +53,7 @@
               Package Type
             </div>
             <div class="col-4">
-              Screens
+              Devices
             </div>
             <div class="col-4">
               Price
@@ -69,6 +69,7 @@
                     class="form-control"
                     [disabled]="submitted"
                     formControlName="primaryPackageType"
+                    (selectionChange)="mapPrimaryPackageToPrice()"
                   >
                     <mat-option *ngFor="let packageType of packageTypeOptions" [value]="packageType">
                       {{ packageType }}
@@ -119,6 +120,7 @@
                       class="form-control"
                       [disabled]="submitted"
                       formControlName="secondaryPackageType"
+                      (selectionChange)="mapSecondaryPackageToPrice()"
                     >
                       <mat-option *ngFor="let packageType of packageTypeOptions" [value]="packageType">
                         {{ packageType }}

@@ -33,18 +33,9 @@ export class ExpandedWellnessKitComponent implements OnInit {
 
   ngOnInit(): void {
     this.submitted = this.wellnessKitServices.submitted;
+    this.calculateTotalPrice();
     this.wellnessKit.valueChanges.subscribe(() => {
-      let itemTotal = 0.00;
-      this.wellnessKit.get('additionalItems').value.forEach(e => {
-        let q = e.quantity === 'Select' ? 0 : e.quantity;
-        itemTotal = itemTotal + q * e.price;
-      })
-
-      this.totalPrice = 
-        this.wellnessKit.get('maskQuantity').value * this.wellnessKit.get('maskPrice').value +
-        this.wellnessKit.get('sanitizerQuantity').value * this.wellnessKit.get('sanitizerPrice').value +
-        this.wellnessKit.get('glovesQuantity').value * this.wellnessKit.get('glovesPrice').value +
-        itemTotal;
+      this.calculateTotalPrice();
     });
   }
 
@@ -54,11 +45,13 @@ export class ExpandedWellnessKitComponent implements OnInit {
   }
 
   addAdditionalItems() {
+    if(this.submitted) return;
     this.additionalItems.push(new FormGroup({
       item: new FormControl('Select'),
       quantity: new FormControl('Select'),
       size: new FormControl('Select'),
-      price: new FormControl(0)
+      price: new FormControl(0),
+      subscription: new FormControl(false)
     }))
   }
 
@@ -104,8 +97,26 @@ export class ExpandedWellnessKitComponent implements OnInit {
     console.log('open details');
   }
 
+  calculateTotalPrice() {
+    let itemTotal = 0.00;
+      this.wellnessKit.get('additionalItems').value.forEach(e => {
+        let q = e.quantity === 'Select' ? 0 : e.quantity;
+        itemTotal = itemTotal + q * e.price;
+      })
+
+      this.totalPrice = 
+        this.wellnessKit.get('maskQuantity').value * this.wellnessKit.get('maskPrice').value +
+        this.wellnessKit.get('sanitizerQuantity').value * this.wellnessKit.get('sanitizerPrice').value +
+        this.wellnessKit.get('glovesQuantity').value * this.wellnessKit.get('glovesPrice').value +
+        this.wellnessKit.get('boxedMealVegQuantity').value * this.wellnessKit.get('boxedMealVegPrice').value +
+        itemTotal;
+  }
+
   onConfirm() {
     this.submitted = true;
+    this.wellnessKitServices.setWellnessKitDetails({
+      ...this.wellnessKit.value
+    });
     this.wellnessKitServices.setConfirmMiniViewWellnessKit(this.wellnessKit.value);
   }
 
@@ -115,10 +126,7 @@ export class ExpandedWellnessKitComponent implements OnInit {
   }
 
   onSkip() {
-    if(!this.submitted){
-      this.wellnessKitServices.setSkipMiniViewWellnessKit();
-    }
-    
+    this.wellnessKitServices.setSkipMiniViewWellnessKit();
     this.onWSkip.emit();
   }
 }

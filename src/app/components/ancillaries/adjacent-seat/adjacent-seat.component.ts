@@ -1,15 +1,16 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AdjacentSeatDetailsService } from 'src/app/services/adjacent-seat-details/adjacent-seat-details.service';
 import { ExpandedAncillariesDialogComponent } from '../expanded-ancillaries-dialog/expanded-ancillaries-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-adjacent-seat',
   templateUrl: './adjacent-seat.component.html',
   styleUrls: ['./adjacent-seat.component.scss']
 })
-export class AdjacentSeatComponent implements OnInit {
+export class AdjacentSeatComponent implements OnInit, OnDestroy {
   @Input() fromCode: string = 'JFK';
   @Input() toCode: string = 'BOS';
   @Output() onSubmit = new EventEmitter<void>();
@@ -17,7 +18,7 @@ export class AdjacentSeatComponent implements OnInit {
   submitted: boolean = false;
 
   adjacentSeatForm: FormGroup = new FormGroup({
-    seats: new FormControl(2),
+    seats: new FormControl(1),
     price: new FormControl(65.32),
     subscription: new FormControl(false),
     segment: new FormControl('JFK - BOS')
@@ -28,8 +29,13 @@ export class AdjacentSeatComponent implements OnInit {
 
   seatOptions: number[] = [0, 1, 2];
 
-  totalPrice: number = 130.64;
-  totalQuantity: number = 2;
+  totalPrice: number = 65.32;
+  totalQuantity: number = 1;
+
+  formValueChangesSubscription: Subscription;
+  performConfirmSubscription: Subscription;
+  performEditSubscription: Subscription;
+  performSkipSubscription: Subscription;
 
   constructor(
     public dialog: MatDialog,
@@ -40,23 +46,24 @@ export class AdjacentSeatComponent implements OnInit {
     this.segment = this.fromCode + ' - ' + this.toCode;
     this.segmentOptions = [this.segment];
 
-    this.adjacentSeatForm.valueChanges.subscribe(() => {
+    this.adjacentSeatService.setAdjacentSeatFormGroup(this.adjacentSeatForm);
+    this.formValueChangesSubscription = this.adjacentSeatForm.valueChanges.subscribe(() => {
       console.log('form',this.adjacentSeatForm.value);
       this.totalPrice =  this.adjacentSeatForm.get('seats').value * this.adjacentSeatForm.get('price').value;
     });
 
-    this.adjacentSeatService.performConfirmObservable.subscribe(adjacentSeat => {
+    this.performConfirmSubscription = this.adjacentSeatService.performConfirmObservable.subscribe(adjacentSeat => {
       this.adjacentSeatForm.setValue({
         ...adjacentSeat
       })
       this.onConfirm();
     })
 
-    this.adjacentSeatService.performEditObservable.subscribe(() => {
+    this.performEditSubscription = this.adjacentSeatService.performEditObservable.subscribe(() => {
       this.onEdit();
     })
 
-    this.adjacentSeatService.performSkipObservable.subscribe(() => {
+    this.performSkipSubscription = this.adjacentSeatService.performSkipObservable.subscribe(() => {
       this.onSkip();
     })
   }
@@ -131,5 +138,12 @@ export class AdjacentSeatComponent implements OnInit {
     //     });
     //   }
     // });
+  }
+
+  ngOnDestroy() {
+    this.formValueChangesSubscription.unsubscribe();
+    this.performConfirmSubscription.unsubscribe();
+    this.performEditSubscription.unsubscribe();
+    this.performSkipSubscription.unsubscribe();
   }
 }

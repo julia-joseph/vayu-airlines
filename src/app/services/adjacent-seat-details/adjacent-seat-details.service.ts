@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdjacentSeatDetailsService {
-  totalPrice: number = 130.64;
-  totalQuantity: number = 2;
+  totalPrice: number = 65.32;
+  totalQuantity: number = 1;
   showPayment: boolean  = false;
   submitted: boolean = false;
+  adjacentSeatForm: FormGroup;
   
   adjacentSeatDetails = {
-    seats: 2,
+    seats: 1,
     price: 65.32,
     subscription: false,
     segment: 'JFK - BOS'
@@ -70,5 +72,13 @@ export class AdjacentSeatDetailsService {
 
   setSkipMiniViewAdjacentSeat() {
     this.performSkipSubject.next();
+  }
+
+  setAdjacentSeatFormGroup(form) {
+    this.adjacentSeatForm = form;
+  }
+
+  getAdjacentSeatFormGroup() {
+    return this.adjacentSeatForm;
   }
 }

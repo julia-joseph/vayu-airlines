@@ -18,13 +18,13 @@ export class DigitalIFEComponent implements OnInit {
   disableScrollDown = false
   
   digitalIfeForm: FormGroup = new FormGroup({
-    primaryPackageType: new FormControl('Premium'),
-    primaryScreens: new FormControl(2),
-    primaryPrice: new FormControl(5.24),
+    primaryPackageType: new FormControl('Basic'),
+    primaryScreens: new FormControl(1),
+    primaryPrice: new FormControl(0.00),
     primarySubscription: new FormControl(false),
     secondaryPackageType: new FormControl('Kids Play'),
-    secondaryScreens: new FormControl(1),
-    secondaryPrice: new FormControl(2.30),
+    secondaryScreens: new FormControl(0),
+    secondaryPrice: new FormControl(1.00),
     secondarySubscription: new FormControl(false),
     segment: new FormControl('JFK - BOS'),
     additionalItems: new FormArray([ ])
@@ -38,8 +38,8 @@ export class DigitalIFEComponent implements OnInit {
   packageTypeOptions: string[] = ['Basic', 'Premium', 'VIP', 'Kids Play'];
   screenOptions: number[] = [0, 1, 2];
 
-  totalPrice: number = 12.78;
-  totalQuantity: number = 3;
+  totalPrice: number = 0.00;
+  totalQuantity: number = 1;
   
   constructor(
     public dialog: MatDialog,
@@ -49,19 +49,10 @@ export class DigitalIFEComponent implements OnInit {
   ngOnInit(): void {
     this.segment = this.fromCode + ' - ' + this.toCode;
     this.segmentOptions = [this.segment];
+    this.digitalIfeService.setDigitalIfeFormGroup(this.digitalIfeForm);
 
     this.digitalIfeForm.valueChanges.subscribe(() => {
-      console.log('form',this.digitalIfeForm.value);
-      let itemTotal = 0.00;
-      this.digitalIfeForm.get('additionalItems').value.forEach(e => {
-        let q = e.screens === 'Select' ? 0 : e.screens;
-        itemTotal = itemTotal + q * e.price;
-      })
-
-      this.totalPrice = 
-        this.digitalIfeForm.get('primaryScreens').value * this.digitalIfeForm.get('primaryPrice').value +
-        this.digitalIfeForm.get('secondaryScreens').value * this.digitalIfeForm.get('secondaryPrice').value +
-        itemTotal;
+      this.calculateTotalPrice();
     });
 
     this.digitalIfeService.performConfirmObservable.subscribe(digitalIFE => {
@@ -142,36 +133,74 @@ export class DigitalIFEComponent implements OnInit {
     this.additionalItems.removeAt(i);
   }
 
-  setPriceOfNewItem(itemGroup){
-    const name = itemGroup.get('packageType').value;
-    let price = 5.24;
-
+  mapSelectOptionPrice(name: string): number {
     if(name === 'Basic'){
-      price = 3.60;
+      return 0.00;
     }
     else if(name === 'VIP'){
-      price = 8.99;
+      return 1.00;
     }
     else if(name === 'Kids Play'){
-      price = 2.30;
+      return 1.00;
     }
+    return 1.50;
+  }
+
+  setPriceOfNewItem(itemGroup){
+    const name = itemGroup.get('packageType').value;
+    let price = this.mapSelectOptionPrice(name);
     
     itemGroup.patchValue({
-      screens: 2,
+      screens: 1,
       price: price,
       subscription: false
+    })
+  }
+
+  mapPrimaryPackageToPrice(){
+    const name = this.digitalIfeForm.get('primaryPackageType').value;
+    let price = this.mapSelectOptionPrice(name);
+    
+    this.digitalIfeForm.patchValue({
+      primaryScreens: 1,
+      primaryPrice: price,
+      primarySubscription: false
+    })
+  }
+
+  mapSecondaryPackageToPrice(){
+    const name = this.digitalIfeForm.get('secondaryPackageType').value;
+    let price = this.mapSelectOptionPrice(name);
+    
+    this.digitalIfeForm.patchValue({
+      secondaryScreens: 1,
+      secondaryPrice: price,
+      secondarySubscription: false
     })
   }
 
   calculateTotalQuantity(){
     let itemsQty = 0;
     this.additionalItems.value.forEach(e => {
-      itemsQty = itemsQty + e.quantity;
+      itemsQty = itemsQty + e.screens;
     })
     this.totalQuantity =
       this.digitalIfeForm.get('primaryScreens').value +
       this.digitalIfeForm.get('secondaryScreens').value +
       itemsQty;
+  }
+
+  calculateTotalPrice(){
+    let itemTotal = 0.00;
+    this.digitalIfeForm.get('additionalItems').value.forEach(e => {
+      let q = e.screens === 'Select' ? 0 : e.screens;
+      itemTotal = itemTotal + q * e.price;
+    })
+
+    this.totalPrice = 
+      this.digitalIfeForm.get('primaryScreens').value * this.digitalIfeForm.get('primaryPrice').value +
+      this.digitalIfeForm.get('secondaryScreens').value * this.digitalIfeForm.get('secondaryPrice').value +
+      itemTotal;
   }
 
   setDigitalIfeDetails() {

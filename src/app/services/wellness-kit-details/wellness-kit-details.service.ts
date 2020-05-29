@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,7 @@ export class WellnessKitDetailsService {
   totalKitQty: number;
   showPayment: boolean;
   submitted: boolean = false;
+  wellnessKitForm: FormGroup;
 
   totalPriceChange: Subject<number> = new Subject<number>();
   public priceObs = this.totalPriceChange.asObservable();
@@ -94,5 +96,13 @@ export class WellnessKitDetailsService {
 
   setSkipMiniViewWellnessKit() {
     this.performSkipSubject.next();
+  }
+
+  setWellnessKitFormGroup(form) {
+    this.wellnessKitForm = form;
+  }
+
+  getWellnessKitFormGroup() {
+    return this.wellnessKitForm;
   }
 }

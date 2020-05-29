@@ -1,22 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DigitalIfeDetailsService {
-  totalPrice: number = 12.78;
-  totalQuantity: number = 3;
+  totalPrice: number = 0.00;
+  totalQuantity: number = 1;
   submitted: boolean = false;
+  digitalIfeForm: FormGroup;
   
   digitalIfeDetails = {
-    primaryPackageType: 'Premium',
-    primaryScreens: 2,
-    primaryPrice: 5.24,
+    primaryPackageType: 'Basic',
+    primaryScreens: 1,
+    primaryPrice: 0.00,
     primarySubscription: false,
     secondaryPackageType: 'Kids Play',
-    secondaryScreens: 1,
-    secondaryPrice: 2.30,
+    secondaryScreens: 0,
+    secondaryPrice: 1.00,
     secondarySubscription: false,
     segment: 'JFK - BOS',
     additionalItems: []
@@ -75,5 +77,13 @@ export class DigitalIfeDetailsService {
 
   setSkipMiniViewDigitalIFE() {
     this.performSkipSubject.next();
+  }
+
+  setDigitalIfeFormGroup(form) {
+    this.digitalIfeForm = form;
+  }
+
+  getDigitalIfeFormGroup() {
+    return this.digitalIfeForm;
   }
 }

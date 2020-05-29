@@ -75,6 +75,7 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
     this.segment = this.fromCode + ' - ' + this.toCode;
     this.segmentOptions = [this.segment];
 
+    this.wellnessKitService.setWellnessKitFormGroup(this.wellnessKitForm);
     this.wellnessKitForm.valueChanges.subscribe(() => {
       let itemTotal = 0.00;
       this.wellnessKitForm.get('additionalItems').value.forEach(e => {
@@ -90,9 +91,9 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
         itemTotal;
     });
 
-    this.wellnessKitService.performConfirmObservable.subscribe(wellnessKit => {
+    this.wellnessKitService.performConfirmObservable.subscribe((wellnessKit) => {
       this.wellnessKitForm.setValue({
-        ...wellnessKit
+        ...this.wellnessKitService.getWellnessKitDetails()
       })
       this.onConfirm();
     })

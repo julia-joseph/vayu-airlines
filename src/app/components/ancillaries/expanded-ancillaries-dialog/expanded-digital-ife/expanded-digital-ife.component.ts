@@ -10,7 +10,7 @@ import { DigitalIfeDetailsService } from 'src/app/services/digital-ife-details/d
 export class ExpandedDigitalIFEComponent implements OnInit, AfterViewChecked {
   @Input() digitalIfeForm: FormGroup;
 
-  @Input() totalPrice = 0;
+  @Input() totalPrice;
   @Output() onDIFESkip = new EventEmitter<void>();
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   disableScrollDown = false;
@@ -22,7 +22,7 @@ export class ExpandedDigitalIFEComponent implements OnInit, AfterViewChecked {
   packageTypeOptions: string[] = ['Basic', 'Premium', 'VIP', 'Kids Play'];
   screenOptions: number[] = [0, 1, 2];
 
-  totalQuantity: number = 3;
+  totalQuantity: number = 1;
 
   constructor(
     private digitalIfeService: DigitalIfeDetailsService
@@ -30,18 +30,10 @@ export class ExpandedDigitalIFEComponent implements OnInit, AfterViewChecked {
 
   ngOnInit(): void { 
     this.submitted = this.digitalIfeService.submitted;
+    this.calculateTotalPrice();
     this.digitalIfeForm.valueChanges.subscribe(() => {
       console.log('form',this.digitalIfeForm.value);
-      let itemTotal = 0.00;
-      this.digitalIfeForm.get('additionalItems').value.forEach(e => {
-        let q = e.screens === 'Select' ? 0 : e.screens;
-        itemTotal = itemTotal + q * e.price;
-      })
-
-      this.totalPrice = 
-        this.digitalIfeForm.get('primaryScreens').value * this.digitalIfeForm.get('primaryPrice').value +
-        this.digitalIfeForm.get('secondaryScreens').value * this.digitalIfeForm.get('secondaryPrice').value +
-        itemTotal;
+      this.calculateTotalPrice();
     });
   }
 
@@ -86,25 +78,63 @@ export class ExpandedDigitalIFEComponent implements OnInit, AfterViewChecked {
     this.additionalItems.removeAt(i);
   }
 
-  setPriceOfNewItem(itemGroup){
-    const name = itemGroup.get('packageType').value;
-    let price = 5.24;
-
+  mapSelectOptionPrice(name: string): number {
     if(name === 'Basic'){
-      price = 3.60;
+      return 0.00;
     }
     else if(name === 'VIP'){
-      price = 8.99;
+      return 1.00;
     }
     else if(name === 'Kids Play'){
-      price = 2.30;
+      return 1.00;
     }
+    return 1.50;
+  }
+
+  setPriceOfNewItem(itemGroup){
+    const name = itemGroup.get('packageType').value;
+    let price = this.mapSelectOptionPrice(name);
     
     itemGroup.patchValue({
-      screens: 2,
+      screens: 1,
       price: price,
       subscription: false
     })
+  }
+
+  mapPrimaryPackageToPrice(){
+    const name = this.digitalIfeForm.get('primaryPackageType').value;
+    let price = this.mapSelectOptionPrice(name);
+    
+    this.digitalIfeForm.patchValue({
+      primaryScreens: 1,
+      primaryPrice: price,
+      primarySubscription: false
+    })
+  }
+
+  mapSecondaryPackageToPrice(){
+    const name = this.digitalIfeForm.get('secondaryPackageType').value;
+    let price = this.mapSelectOptionPrice(name);
+    
+    this.digitalIfeForm.patchValue({
+      secondaryScreens: 1,
+      secondaryPrice: price,
+      secondarySubscription: false
+    })
+  }
+
+  calculateTotalPrice() {
+    let itemTotal = 0.00;
+      this.digitalIfeForm.get('additionalItems').value.forEach(e => {
+        let q = e.screens === 'Select' ? 0 : e.screens;
+        itemTotal = itemTotal + q * e.price;
+      })
+
+      this.totalPrice = 
+        this.digitalIfeForm.get('primaryScreens').value * this.digitalIfeForm.get('primaryPrice').value +
+        this.digitalIfeForm.get('secondaryScreens').value * this.digitalIfeForm.get('secondaryPrice').value +
+        itemTotal;
   }
 
   openDetails() {
@@ -122,9 +152,7 @@ export class ExpandedDigitalIFEComponent implements OnInit, AfterViewChecked {
   }
 
   onSkip() {
-    if(!this.submitted){
-      this.digitalIfeService.setSkipMiniViewDigitalIFE();
-    }
+    this.digitalIfeService.setSkipMiniViewDigitalIFE();
     this.onDIFESkip.emit();
   }
 }
