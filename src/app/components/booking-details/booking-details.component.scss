@@ -28,7 +28,7 @@
   }
   mat-expansion-panel {
     .mat-icon {
-      background: url(../../../assets/images/ico_accordion_closed.png) no-repeat;
+      background: url(../../../assets/images/ico_acordion_closed.png) no-repeat;
       content: "" !important;
       height: 44px;
       width: 46px;
@@ -36,7 +36,7 @@
   }
   .mat-expansion-panel-header.mat-expanded {
     .mat-icon {
-      background: url(../../../assets/images/ico_accordion_open.png) no-repeat;
+      background: url(../../../assets/images/ico_acordion_open.png) no-repeat;
       content: "" !important;
     }
   }

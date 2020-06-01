@@ -17,11 +17,69 @@
 
   .mat-tab-labels {
     justify-content: center;
+    color: black;
+
+    .wellness-icon {
+      background: url(../../../assets/images/ico_wellness.png) no-repeat;
+      content: "" !important;
+    }
+
+    .digital-ife-icon {
+      background: url(../../../assets/images/ico_IFE.png) no-repeat;
+      content: "" !important;
+    }
+
+    .seat-regrouping-icon {
+      background: url(../../../assets/images/ico_seat_regrouping.png) no-repeat;
+      content: "" !important;
+    }
+
+    .bag-icon {
+      background: url(../../../assets/images/ico_bag.png) no-repeat;
+      content: "" !important;
+    }
+
+    .tab-icons {
+      background-size: 60px;
+      height: 70px;
+      width: 61px;
+    }
+  }
+
+  .mat-tab-label.mat-tab-label-active {
+    color: #865e9a;
+
+    .wellness-icon {
+      background: url(../../../assets/images/ico_wellness_act.png) no-repeat;
+      content: "" !important;
+    }
+
+    .digital-ife-icon {
+      background: url(../../../assets/images/ico_IFE_act.png) no-repeat;
+      content: "" !important;
+    }
+
+    .seat-regrouping-icon {
+      background: url(../../../assets/images/ico_seat_regrouping_act.png) no-repeat;
+      content: "" !important;
+    }
+
+
+    .bag-icon {
+      background: url(../../../assets/images/ico_bag_act.png) no-repeat;
+      content: "" !important;
+    }
+
+    .tab-icons {
+      background-size: 60px;
+      height: 70px;
+      width: 61px;
+    }
   }
 
   .mat-tab-group.mat-primary .mat-ink-bar,
   .mat-tab-nav-bar.mat-primary .mat-ink-bar {
-    background-color: #07b9e5;
+    background-color: #865e9a;
   }
 
   .mat-tab-body-wrapper {
@@ -39,9 +97,9 @@
     opacity: 1;
   }
 
-  .segment-select .mat-select-value {
-    color: #07b9e5;
-  }
+  // .segment-select .mat-select-value {
+  //   color: #07b9e5;
+  // }
 
   .mat-select-arrow {
     width: 13px;
@@ -61,7 +119,7 @@
   }
 
   .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
-      border-color: #07b9e5;
+    border-color: rgba(105, 103, 103, 0.5);
   }
 
   .mat-radio-container{
