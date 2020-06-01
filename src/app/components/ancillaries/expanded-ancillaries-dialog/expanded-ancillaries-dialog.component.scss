@@ -9,7 +9,66 @@
 
   .mat-tab-labels {
     justify-content: center;
+    color: black;
+
+    .wellness-icon {
+      background: url(../../../../assets/images/ico_wellness.png) no-repeat;
+      content: "" !important;
+    }
+
+    .digital-ife-icon {
+      background: url(../../../../assets/images/ico_IFE.png) no-repeat;
+      content: "" !important;
+    }
+
+    .seat-regrouping-icon {
+      background: url(../../../../assets/images/ico_seat_regrouping.png) no-repeat;
+      content: "" !important;
+    }
+
+    .bag-icon {
+      background: url(../../../../assets/images/ico_bag.png) no-repeat;
+      content: "" !important;
+    }
+
+    .tab-icons {
+      background-size: 42px;
+      height: 45px;
+      width: 54px;
+    }
   }
+
+  .mat-tab-label.mat-tab-label-active {
+    color: #865e9a;
+
+    .wellness-icon {
+      background: url(../../../../assets/images/ico_wellness_act.png) no-repeat;
+      content: "" !important;
+    }
+
+    .digital-ife-icon {
+      background: url(../../../../assets/images/ico_IFE_Act.png) no-repeat;
+      content: "" !important;
+    }
+
+    .seat-regrouping-icon {
+      background: url(../../../../assets/images/ico_seat_regrouping_act.png) no-repeat;
+      content: "" !important;
+    }
+
+
+    .bag-icon {
+      background: url(../../../../assets/images/ico_bag_act.png) no-repeat;
+      content: "" !important;
+    }
+
+    .tab-icons {
+      background-size: 42px;
+      height: 45px;
+      width: 54px;
+    }
+  }
+
 
   .mat-tab-group.mat-primary .mat-ink-bar,
   .mat-tab-nav-bar.mat-primary .mat-ink-bar {
