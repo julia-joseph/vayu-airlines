@@ -95,6 +95,7 @@ export class AdjacentSeatComponent implements OnInit, OnDestroy {
 
   onSkip() {
     if(!this.submitted){
+      this.totalQuantity = 0;
       this.adjacentSeatForm.patchValue({
         seats: 0
       })

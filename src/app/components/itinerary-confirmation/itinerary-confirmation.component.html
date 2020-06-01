@@ -221,17 +221,19 @@
                                                 </div>
                                             </div>
                                             <div class="row" *ngFor="let item of wellnessKit.additionalItems">
-                                                <div class="col-3 font-weight-400">
-                                                    {{ item.item }}
-                                                </div>
-                                                <div class="col-3">
-                                                    {{ item.quantity }}
-                                                </div>
-                                                <div class="col-3">
-                                                    {{ item.size }}
-                                                </div>
-                                                <div class="col-3">
-                                                    $ <span class="font-size1-3">{{ item.quantity * item.price | number : '.2' }}</span>
+                                                <div *ngIf="item.item !== 'Select'">
+                                                    <div class="col-3 font-weight-400">
+                                                        {{ item.item }}
+                                                    </div>
+                                                    <div class="col-3">
+                                                        {{ item.quantity }}
+                                                    </div>
+                                                    <div class="col-3">
+                                                        {{ item.size }}
+                                                    </div>
+                                                    <div class="col-3">
+                                                        $ <span class="font-size1-3">{{ item.quantity * item.price | number : '.2' }}</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -323,7 +325,7 @@
                                                     Price
                                                 </div>
                                             </div>
-                                            <div class="row mb-1" *ngIf="digitalIfe.primaryScreens">
+                                            <div class="row mb-1" *ngIf="digitalIfe.primaryScreens !== 0">
                                                 <div class="col-4 font-weight-400">
                                                     {{ digitalIfe.primaryPackageType }}
                                                 </div>
@@ -334,7 +336,7 @@
                                                     $ <span class="font-size1-3">{{ digitalIfe.primaryScreens * digitalIfe.primaryPrice | number : '.2' }}</span>
                                                 </div>
                                             </div>
-                                            <div class="row mb-1" *ngIf="digitalIfe.secondaryScreens">
+                                            <div class="row mb-1" *ngIf="digitalIfe.secondaryScreens !== 0 ">
                                                 <div class="col-4">
                                                     {{ digitalIfe.secondaryPackageType }}
                                                 </div>
@@ -346,14 +348,16 @@
                                                 </div>
                                             </div>
                                             <div class="row" *ngFor="let item of digitalIfe.additionalItems">
-                                                <div class="col-4">
-                                                    {{ item.packageType }}
-                                                </div>
-                                                <div class="col-4">
-                                                    {{ item.screens }}
-                                                </div>
-                                                <div class="col-4">
-                                                    $ <span class="font-size1-3">{{ item.screens * item.price | number : '.2' }}</span>
+                                                <div *ngIf="item.packageType !== 'Select'">
+                                                    <div class="col-4">
+                                                        {{ item.packageType }}
+                                                    </div>
+                                                    <div class="col-4">
+                                                        {{ item.screens }}
+                                                    </div>
+                                                    <div class="col-4">
+                                                        $ <span class="font-size1-3">{{ item.screens * item.price | number : '.2' }}</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

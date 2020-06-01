@@ -183,7 +183,8 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
   calculateTotalQuantity(){
     let itemsQty = 0;
     this.additionalItems.value.forEach(e => {
-      itemsQty = itemsQty + e.quantity;
+      let q = e.quantity === 'Select' ? 0 : e.quantity;
+      itemsQty = itemsQty + q;
     })
     this.totalQty =
       this.wellnessKitForm.get('maskQuantity').value+
@@ -212,6 +213,7 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
 
   onSkipToDigitalIFE() {
     if(!this.submitted){
+      this.totalQty = 0;
       this.wellnessKitForm.patchValue({
         maskQuantity: 0,
         sanitizerQuantity: 0,

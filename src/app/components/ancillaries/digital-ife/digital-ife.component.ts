@@ -182,7 +182,8 @@ export class DigitalIFEComponent implements OnInit {
   calculateTotalQuantity(){
     let itemsQty = 0;
     this.additionalItems.value.forEach(e => {
-      itemsQty = itemsQty + e.screens;
+      let q = e.screens === 'Select' ? 0 : e.screens;
+      itemsQty = itemsQty + q;
     })
     this.totalQuantity =
       this.digitalIfeForm.get('primaryScreens').value +
@@ -228,6 +229,7 @@ export class DigitalIFEComponent implements OnInit {
 
   onSkipToSeatRegrouping() {
     if(!this.submitted){
+      this.totalQuantity = 0;
       this.digitalIfeForm.patchValue({
         primaryScreens: 0,
         secondaryScreens: 0
