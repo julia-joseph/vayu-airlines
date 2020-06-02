@@ -11,7 +11,8 @@
                 <div class="row justify-content-end">
                     <button class="check-in-btn mr-2"
                             matTooltip="Donate for COVID-19"
-                            matTooltipPosition="above">
+                            matTooltipPosition="above"
+                            (click)="onDonate()">
                         Donate
                     </button>
                     <button [disabled]="true" class="check-in-btn mr-3">Print Itinerary</button>
@@ -132,8 +133,8 @@
         </div>
 
         <div class="row mb-3 mt-4">
-            <div class="col-6">
-                <div class="card h-100">
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="card h-100" *ngIf="totalWellnessKitPrice !== 0">
                     <div class="card-body">
                         <div class="row pl-3 pr-3">
                             <h5 class="card-title">
@@ -249,56 +250,22 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-6">
-                <div class="card h-100">
+                <div class="card h-100" *ngIf="totalWellnessKitPrice === 0">
                     <div class="card-body">
-                        <div class="row pl-3 pr-3">
-                            <div class="col-6">
-                                <div class="row">
-                                    <img src="../../../assets/images/ico_checkin.png" class="icons mr-2">
-                                    <h5 class="card-title">
-                                        <!-- <span class=">Ancillaries Summary</span> -  -->
-                                        Pick Your Seat
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="row justify-content-end">
-                                    <span class="mt-1">From</span>
-                                    <span class="font-size1-3 font-weight-bold ml-2">$35</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row pl-3 pr-3 mt-2">
-                            <div class="col-6 pl-0">
-                                Add even more space to yourself or anyone in your party
-                            </div>
-                            <div class="col-6">
-                                <div class="row justify-content-end">
-                                    <span class="blue links">Add</span>
-                                </div>  
-                            </div>
-                        </div>
-                        <div class="row pl-3 pr-3 mt-3">
-                            <div class="col-6 pl-0">
-                                <img src="../../../assets/images/ico_insurance.png" class="icons">
-                            </div>
-                            <div class="col-6">
-                                <div class="row justify-content-end">
-                                    <img src="../../../assets/images/ico_skipline.png" class="icons">
-                                </div>
-                            </div>
+                        <div class="d-flex flex-column align-items-center">
+                            <img src="../../../assets/images/ico_wellness.png">
+                            <h4 class="mt-2"> Wellness Kit & Food </h4>
+                            <span class="font-weight-bold cursor-pointer">
+                                Add &gt;
+                            </span>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row mb-3 mt-4">
-            <div class="col-6">
-                <div class="card h-100">
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="card h-100" *ngIf="totalDigitalIfeQuantity !== 0">
                     <div class="card-body">
                         <div class="row pl-3 pr-3">
                             <h5 class="card-title">
@@ -373,12 +340,88 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="card h-100" *ngIf="totalDigitalIfeQuantity === 0">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center">
+                            <img src="../../../assets/images/ico_IFE.png">
+                            <h4 class="mt-2"> Digital IFE </h4>
+                            <span class="font-weight-bold cursor-pointer">
+                                Add &gt;
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3 mt-4">
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="card h-100" *ngIf="false">
+                    <div class="card-body">
+                        <div class="row pl-3 pr-3">
+                            <div class="col-6">
+                                <div class="row">
+                                    <img src="../../../assets/images/ico_checkin.png" class="icons mr-2">
+                                    <h5 class="card-title">
+                                        <!-- <span class=">Ancillaries Summary</span> -  -->
+                                        Pick Your Seat
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="row justify-content-end">
+                                    <span class="mt-1">From</span>
+                                    <span class="font-size1-3 font-weight-bold ml-2">$35</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pl-3 pr-3 mt-2">
+                            <div class="col-6 pl-0">
+                                Add even more space to yourself or anyone in your party
+                            </div>
+                            <div class="col-6">
+                                <div class="row justify-content-end">
+                                    <span class="blue links">Add</span>
+                                </div>  
+                            </div>
+                        </div>
+                        <div class="row pl-3 pr-3 mt-3">
+                            <div class="col-6 pl-0">
+                                <img src="../../../assets/images/ico_insurance.png" class="icons">
+                            </div>
+                            <div class="col-6">
+                                <div class="row justify-content-end">
+                                    <img src="../../../assets/images/ico_skipline.png" class="icons">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card h-100" *ngIf="true">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center">
+                            <img src="../../../assets/images/ico_seat_regrouping.png">
+                            <h4 class="mt-2"> Seat Regrouping </h4>
+                            <span class="font-weight-bold cursor-pointer">
+                                Add &gt;
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="col-6">
+            <div class="col-lg-6 col-md-12 col-sm-12">
                 <div class="card h-100">
                     <div class="card-body">
-
+                        <div class="d-flex flex-column align-items-center">
+                            <img src="../../../assets/images/ico_bag.png">
+                            <h4 class="mt-2"> Check Bags </h4>
+                            <span class="font-weight-bold cursor-pointer">
+                                Add &gt;
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

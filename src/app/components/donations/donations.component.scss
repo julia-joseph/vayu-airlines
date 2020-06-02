@@ -1,0 +1,29 @@
+:host ::ng-deep {
+    .mat-expansion-panel-header {
+        .mat-icon {
+          background: url(../../../assets/images/ico_acordion_closed.png) no-repeat;
+          content: "" !important;
+          height: 44px;
+          width: 46px;
+        }
+
+        &.mat-expanded {
+            .mat-icon {
+              background: url(../../../assets/images/ico_acordion_open.png) no-repeat;
+              content: "" !important;
+              background-size: 43px;
+            }
+        }
+      }
+}
+
+.donations-section {
+    position: relative;
+    margin: 30px;
+
+  .card-body {
+    padding: 1.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}

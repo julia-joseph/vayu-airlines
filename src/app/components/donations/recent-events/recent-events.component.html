@@ -1,0 +1,21 @@
+<div class="most-recent-section">
+    <h5 class="mb-3">Most Recent Events</h5>
+    <div class="event mb-3" *ngFor="let event of events">
+        <div class="row">
+            <div class="col-3">
+                <!-- <img [src]="event.img"> -->
+                <div class="border h-100">
+
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="row">
+                    {{ event.title }}
+                </div>
+                <div class="row font-weight-bold">
+                    {{ event.date }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

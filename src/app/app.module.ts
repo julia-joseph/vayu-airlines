@@ -28,6 +28,8 @@ import { AdjacentSeatComponent } from './components/ancillaries/adjacent-seat/ad
 import { ExpandedWellnessKitComponent } from './components/ancillaries/expanded-ancillaries-dialog/expanded-wellness-kit/expanded-wellness-kit.component';
 import { ExpandedDigitalIFEComponent } from './components/ancillaries/expanded-ancillaries-dialog/expanded-digital-ife/expanded-digital-ife.component';
 import { ExpandedAdjacentSeatComponent } from './components/ancillaries/expanded-ancillaries-dialog/expanded-adjacent-seat/expanded-adjacent-seat.component';
+import { DonationsComponent } from './components/donations/donations.component';
+import { RecentEventsComponent } from './components/donations/recent-events/recent-events.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { ExpandedAdjacentSeatComponent } from './components/ancillaries/expanded
     AdjacentSeatComponent,
     ExpandedWellnessKitComponent,
     ExpandedDigitalIFEComponent,
-    ExpandedAdjacentSeatComponent
+    ExpandedAdjacentSeatComponent,
+    DonationsComponent,
+    RecentEventsComponent
   ],
   imports: [
     BrowserModule,
