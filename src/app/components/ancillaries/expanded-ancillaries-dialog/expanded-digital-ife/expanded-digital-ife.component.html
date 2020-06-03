@@ -40,104 +40,70 @@
           </div>
 
           <div class="overflow-items" #scrollMe (scroll)="onScroll()">
-            <div class="row pt-3 pb-3 border-bottom">
-              <div class="col-12">
-                <div class="row">
-                  <div class="col-4">
-                    <mat-select
-                      class="form-control"
-                      [disabled]="submitted"
-                      formControlName="primaryPackageType"
-                      (selectionChange)="mapPrimaryPackageToPrice()"
-                    >
-                      <mat-option *ngFor="let packageType of packageTypeOptions" [value]="packageType">
-                        {{ packageType }}
-                      </mat-option>
-                    </mat-select>
-                  </div>
-                  <div class="col-4">
-                    <mat-select
-                      class="form-control"
-                      [disabled]="submitted"
-                      formControlName="primaryScreens"
-                    >
-                      <mat-option
-                        *ngFor="let screens of screenOptions"
-                        [value]="screens"
-                      >
-                        {{ screens }}
-                      </mat-option>
-                    </mat-select>
-                  </div>
-                  <div class="col-4 pt-2">
-                    $
-                    <span class="font-size1-2">
-                      {{ digitalIfeForm.get('primaryScreens').value * digitalIfeForm.get('primaryPrice').value | number: ".2" }}
-                    </span>
-                  </div>
-                </div>
-                <div class="row d-flex flex-row mt-3">
-                      <mat-radio-group formControlName="primarySubscription" [disabled]="submitted">
-                          <mat-radio-button [value]="false" class="ml-3 mr-3">
-                              One-time Purchase
-                          </mat-radio-button>
-                          <mat-radio-button [value]="true" class="mr-2">
-                              Add to Subscription
-                          </mat-radio-button>
-                      </mat-radio-group>
-                      <div class="font-size-0-6 cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
-                </div>
-              </div>
-              
-            </div>
-
-            <div class="row pt-3 pb-3 border-bottom">
-              <div class="col-12">
-                  <div class="row">
-                    <div class="col-4">
-                      <mat-select
-                        class="form-control"
-                        [disabled]="submitted"
-                        formControlName="secondaryPackageType"
-                        (selectionChange)="mapSecondaryPackageToPrice()"
-                      >
-                        <mat-option *ngFor="let packageType of packageTypeOptions" [value]="packageType">
-                          {{ packageType }}
-                        </mat-option>
-                      </mat-select>
-                    </div>
-                    <div class="col-4">
-                      <mat-select
-                        class="form-control"
-                        [disabled]="submitted"
-                        formControlName="secondaryScreens"
-                      >
-                        <mat-option
-                          *ngFor="let screens of screenOptions"
-                          [value]="screens"
+            <div *ngFor="let itemGroup of items.controls; let i = index">
+              <div class="row pt-3 pb-3 border-bottom" [formGroup]="itemGroup">
+                <div class="col-12">
+                    <div class="row">
+                      <div class="col-4">
+                        <mat-select
+                          class="form-control"
+                          [disabled]="submitted"
+                          formControlName="packageType"
+                          (selectionChange)="setPriceOfNewItem(itemGroup)"
                         >
-                          {{ screens }}
-                        </mat-option>
-                      </mat-select>
+                          <mat-option *ngFor="let packageType of packageTypeOptions" [value]="packageType">
+                            {{ packageType }}
+                          </mat-option>
+                        </mat-select>
+                      </div>
+                      <div class="col-4">
+                        <mat-select
+                          class="form-control"
+                          [disabled]="submitted"
+                          formControlName="screens"
+                        >
+                          <mat-option
+                            *ngFor="let screens of screenOptions"
+                            [value]="screens"
+                          >
+                            {{ screens }}
+                          </mat-option>
+                        </mat-select>
+                      </div>
+                      <div class="col-4 pt-2">
+                        $
+                        <span class="font-size1-2">
+                          {{ itemGroup.get('screens').value * itemGroup.get('price').value | number: ".2" }}
+                        </span>
+                      </div>
                     </div>
-                    <div class="col-4 pt-2">
-                      $
-                      <span class="font-size1-2">
-                        {{ digitalIfeForm.get('secondaryScreens').value * digitalIfeForm.get('secondaryPrice').value | number: ".2" }}
-                      </span>
+                    <div class="row d-flex flex-row mt-3">
+                        <mat-radio-group formControlName="subscription" [disabled]="submitted" class="p-1">
+                            <mat-radio-button [value]="false" class="ml-3 mr-3">
+                                One-time Purchase
+                            </mat-radio-button>
+                            <mat-radio-button [value]="true" class="mr-2">
+                                Add to Subscription
+                            </mat-radio-button>
+                        </mat-radio-group>
+                        <div class="font-size-0-6 cursor-pointer font-weight-bold p-1" (click)="openDetails()"><u>Details</u></div>
+                        <div class="violet font-size-0-9 cursor-pointer  ml-3 border p-2"
+                            *ngIf="itemGroup.get('subscription').value">
+                          <span [matMenuTriggerFor]="passengerMenu">
+                            Select Passenger
+                            <img src="../../../../assets/images/ico_chevron.png" class="symbol">  
+                          </span>
+          
+                          <mat-menu #passengerMenu="matMenu" yPosition="below" xPosition="after">
+                            <div class="d-flex flex-column justify-content-between p-2">
+                              <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted">Self</mat-checkbox>
+                              <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted">Passenger 1</mat-checkbox>
+                              <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted">Passenger 2</mat-checkbox>
+                            </div>
+                          </mat-menu>
+                      </div>
                     </div>
-                  </div>
-                  <div class="row d-flex flex-row mt-3">
-                      <mat-radio-group formControlName="secondarySubscription" [disabled]="submitted">
-                          <mat-radio-button [value]="false" class="ml-3 mr-3">
-                              One-time Purchase
-                          </mat-radio-button>
-                          <mat-radio-button [value]="true" class="mr-2">
-                              Add to Subscription
-                          </mat-radio-button>
-                      </mat-radio-group>
-                        <div class="font-size-0-6 cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
-                  </div>
+                </div>
               </div>
             </div>
 
@@ -203,6 +169,21 @@
                           </mat-radio-button>
                       </mat-radio-group>
                       <div class="font-size-0-6 cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
+                      <div class="violet font-size-0-9 cursor-pointer  ml-3 border p-2"
+                          *ngIf="itemGroup.get('subscription').value">
+                        <span [matMenuTriggerFor]="passengerMenu">
+                          Select Passenger
+                          <img src="../../../../assets/images/ico_chevron.png" class="symbol">  
+                        </span>
+        
+                        <mat-menu #passengerMenu="matMenu" yPosition="below" xPosition="after">
+                          <div class="d-flex flex-column justify-content-between p-2">
+                            <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted">Self</mat-checkbox>
+                            <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted">Passenger 1</mat-checkbox>
+                            <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted">Passenger 2</mat-checkbox>
+                          </div>
+                        </mat-menu>
+                      </div>
                   </div>
                 </div>
               </div>

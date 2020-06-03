@@ -53,349 +53,269 @@
           </div>
 
           <div class="overflow-items">
-          <div class="row pt-3 pb-3 border-bottom">
-            <div class="col-12">
-              <div class="row">
-                <div class="col-3 item-name mt-2">
-                  Mask
-                </div>
-                <div class="col-3">
-                  <mat-select
-                    class="form-control"
-                    formControlName="maskQuantity"
-                    [disabled]="submitted"
-                  >
-                    <mat-option *ngFor="let qty of [0, 1, 2]" [value]="qty">
-                      {{ qty }}
-                    </mat-option>
-                  </mat-select>
-                </div>
-                <div class="col-3">
-                  <mat-select
-                    class="form-control"
-                    formControlName="maskSize"
-                    [disabled]="submitted"
-                  >
-                    <mat-option
-                      *ngFor="let size of itemSizeOptions[0]"
-                      [value]="size"
-                    >
-                      {{ size }}
-                    </mat-option>
-                  </mat-select>
-                </div>
-                <div class="col-2 d-flex justify-content-end">
-                  <span class="mt-1 mr-1">$</span>
-                  <span class="font-size1-2">
-                    {{ wellnessKit.get('maskQuantity').value * wellnessKit.get('maskPrice').value | number: ".2" }}
-                  </span>
-                </div>
-              </div>
-              <div class="row d-flex flex-row mt-3">
-                <mat-radio-group formControlName="maskSubscription" [disabled]="submitted">
-                    <mat-radio-button [value]="false" class="ml-3 mr-3">
-                        One-time Purchase
-                    </mat-radio-button>
-                    <mat-radio-button [value]="true" class="mr-2">
-                        Add to Subscription
-                    </mat-radio-button>
-                </mat-radio-group>
-                <div class="font-size-0-6 cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
-            </div>
-            </div>
-          </div>
+            <div *ngFor="let itemGroup of items.controls; let i = index">
+              <div class="row pt-3 pb-3 border-bottom" [formGroup]="itemGroup">
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-3 item-name mt-2">
+                      {{ itemGroup.get('item').value }}
+                    </div>
+                    <div class="col-3">
+                      <mat-select
+                        class="form-control"
+                        formControlName="quantity"
+                        [disabled]="submitted"
+                      >
+                        <mat-option *ngFor="let qty of [0, 1, 2]" [value]="qty">
+                          {{ qty }}
+                        </mat-option>
+                      </mat-select>
+                    </div>
+                    <div class="col-3">
+                      <mat-select
+                        class="form-control"
+                        formControlName="size"
+                        [disabled]="submitted"
+                        *ngIf="itemGroup.get('item').value === 'Mask'"
+                      >
+                        <mat-option
+                          *ngFor="let size of itemSizeOptions[0]"
+                          [value]="size"
+                        >
+                          {{ size }}
+                        </mat-option>
+                      </mat-select>
+      
+                      <mat-select
+                        class="form-control"
+                        formControlName="size"
+                        [disabled]="submitted"
+                        *ngIf="itemGroup.get('item').value === 'Sanitizer'"
+                      >
+                        <mat-option
+                          *ngFor="let size of itemSizeOptions[1]"
+                          [value]="size"
+                        >
+                          {{ size }}
+                        </mat-option>
+                      </mat-select>
+      
+                      <mat-select
+                        class="form-control"
+                        formControlName="size"
+                        [disabled]="submitted"
+                        *ngIf="itemGroup.get('item').value === 'Gloves'"
+                      >
+                        <mat-option
+                          *ngFor="let size of itemSizeOptions[2]"
+                          [value]="size"
+                        >
+                          {{ size }}
+                        </mat-option>
+                      </mat-select>
 
-          <div class="row pt-3 pb-3 border-bottom">
-            <div class="col-12">
-              <div class="row">
-                <div class="col-3 item-name mt-2">
-                  Sanitizer
-                </div>
-                <div class="col-3">
-                  <mat-select
-                    class="form-control"
-                    formControlName="sanitizerQuantity"
-                    [disabled]="submitted"
-                  >
-                    <mat-option *ngFor="let qty of [0, 1, 2]" [value]="qty">
-                      {{ qty }}
-                    </mat-option>
-                  </mat-select>
-                </div>
-                <div class="col-3">
-                  <mat-select
-                    class="form-control"
-                    formControlName="sanitizerSize"
-                    [disabled]="submitted"
-                  >
-                    <mat-option
-                      *ngFor="let size of itemSizeOptions[1]"
-                      [value]="size"
-                    >
-                      {{ size }}
-                    </mat-option>
-                  </mat-select>
-                </div>
-                <div class="col-2 d-flex justify-content-end">
-                  <span class="mt-1 mr-1">$</span>
-                  <span class="font-size1-2">
-                    {{ wellnessKit.get('sanitizerQuantity').value * wellnessKit.get('sanitizerPrice').value  | number: ".2" }}
-                  </span>
-                </div>
-              </div>
-              <div class="row d-flex flex-row mt-3">
-                <mat-radio-group formControlName="sanitizerSubscription" [disabled]="submitted">
-                    <mat-radio-button [value]="false" class="ml-3 mr-3">
-                        One-time Purchase
-                    </mat-radio-button>
-                    <mat-radio-button [value]="true" class="mr-2">
-                        Add to Subscription
-                    </mat-radio-button>
-                </mat-radio-group>
-                <div class="font-size-0-6 cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
-            </div>
-            </div>
-          </div>
-
-          <div class="row pt-3 pb-3 border-bottom">
-            <div class="col-12">
-              <div class="row">
-                <div class="col-3 item-name mt-2">
-                  Gloves
-                </div>
-                <div class="col-3">
-                  <mat-select
-                    class="form-control"
-                    formControlName="glovesQuantity"
-                    [disabled]="submitted"
-                  >
-                    <mat-option *ngFor="let qty of [0, 1, 2]" [value]="qty">
-                      {{ qty }}
-                    </mat-option>
-                  </mat-select>
-                </div>
-                <div class="col-3">
-                  <mat-select
-                    class="form-control"
-                    formControlName="glovesSize"
-                    [disabled]="submitted"
-                  >
-                    <mat-option
-                      *ngFor="let size of itemSizeOptions[2]"
-                      [value]="size"
-                    >
-                      {{ size }}
-                    </mat-option>
-                  </mat-select>
-                </div>
-                <div class="col-2 d-flex justify-content-end">
-                  <span class="mt-1 mr-1">$</span>
-                  <span class="font-size1-2">
-                    {{wellnessKit.get('glovesQuantity').value * wellnessKit.get('glovesPrice').value | number: ".2" }}
-                  </span>
-                </div>
-              </div>
-              <div class="row d-flex flex-row mt-3">
-                <mat-radio-group formControlName="glovesSubscription" [disabled]="submitted">
-                    <mat-radio-button [value]="false" class="ml-3 mr-3">
-                        One-time Purchase
-                    </mat-radio-button>
-                    <mat-radio-button [value]="true" class="mr-2">
-                        Add to Subscription
-                    </mat-radio-button>
-                </mat-radio-group>
-                <div class="font-size-0-6 cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
-            </div>
-            </div>
-          </div>
-
-          <div class="row pt-3 pb-3 border-bottom">
-            <div class="col-12">
-              <div class="row">
-                <div class="col-3 item-name mt-2">
-                  Boxed Meal
-                </div>
-                <div class="col-3">
-                  <mat-select
-                    class="form-control"
-                    [disabled]="submitted"
-                    formControlName="boxedMealVegQuantity"
-                  >
-                    <mat-option *ngFor="let qty of [0, 1, 2]" [value]="qty">
-                      {{ qty }}
-                    </mat-option>
-                  </mat-select>
-                </div>
-                <div class="col-3">
-                  <mat-select
-                    class="form-control"
-                    [disabled]="submitted"
-                    formControlName="boxedMealVegSize"
-                  >
-                    <mat-option
-                      *ngFor="let size of itemSizeOptions[3]"
-                      [value]="size"
-                    >
-                      {{ size }}
-                    </mat-option>
-                  </mat-select>
-                </div>
-                <div class="col-2 d-flex justify-content-end mt-2">
-                  $
-                  <span class="font-size1-2">
-                    {{ wellnessKit.get('boxedMealVegQuantity').value * wellnessKit.get('boxedMealVegPrice').value | number: ".2" }}
-                  </span>
-                </div>
-              </div>
-              <div class="row d-flex flex-row mt-3">
-                <mat-radio-group formControlName="boxedMealVegSubscription" [disabled]="submitted">
-                    <mat-radio-button [value]="false" class="ml-3 mr-3">
-                        One-time Purchase
-                    </mat-radio-button>
-                    <mat-radio-button [value]="true" class="mr-2">
-                        Add to Subscription
-                    </mat-radio-button>
-                </mat-radio-group>
-                <div class="font-size-0-6 cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
-            </div>
-            </div>
-          </div>
-
-          <ng-container *ngIf="wellnessKit.get('additionalItems')">
-
-          <ng-container  
-            *ngFor="let itemGroup of additionalItems.controls; let i = index"
-          >
-            <div class="row pt-3 pb-3 border-bottom" [formGroup]="itemGroup">
-              <div class="col-12">
-                <div class="row">
-                  <div class="col-3">
-                    <button
-                      class="btn btn-sm p-0 remove-button rounded-circle" 
-                      (click)="removeItem(i)">
-                      <svg class="bi bi-x remove-icon" width="1.4em" height="1.4em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z" clip-rule="evenodd"/>
-                        <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z" clip-rule="evenodd"/>
-                      </svg>
-                    </button>
-                    <mat-select
-                      class="form-control"
-                      formControlName="item"
-                      [disabled]="submitted"
-                      [ngClass]="{'w-75':true}"
-                      (selectionChange)="setPriceOfNewItem(itemGroup)"
-                    >
-                      <mat-option *ngIf="itemGroup.get('item').value === 'Select'" value='Select'>Select</mat-option>
-                      <mat-option *ngFor="let item of itemNameOptions" [value]="item">
-                        {{ item }}
-                      </mat-option>
-                    </mat-select>
+                      <mat-select
+                        class="form-control"
+                        [disabled]="submitted"
+                        formControlName="size"
+                        *ngIf="itemGroup.get('item').value === 'Boxed Meal'"
+                      >
+                        <mat-option
+                          *ngFor="let size of itemSizeOptions[3]"
+                          [value]="size"
+                        >
+                          {{ size }}
+                        </mat-option>
+                      </mat-select>
+                    </div>
+                    <div class="col-2 d-flex justify-content-end">
+                      <span class="mt-1 mr-1">$</span>
+                      <span class="font-size1-2">
+                        {{ itemGroup.get('quantity').value * itemGroup.get('price').value | number: ".2" }}
+                      </span>
+                    </div>
                   </div>
-                  <div class="col-3">
-                    <mat-select
-                      class="form-control"
-                      formControlName="quantity"
-                      [disabled]="submitted"
-                    >
-                      <mat-option *ngIf="itemGroup.get('quantity').value === 'Select'" value='Select'>Select</mat-option>
-                      <mat-option *ngFor="let qty of [0,1,2]" [value]="qty">
-                        {{ qty }}
-                      </mat-option>
-                    </mat-select>
-                  </div>
-                  <div class="col-3">
-                    <mat-select
-                      class="form-control"
-                      formControlName="size"
-                      [disabled]="submitted"
-                      *ngIf="itemGroup.get('size').value === 'Select'"
-                    >
-                      <mat-option *ngIf="itemGroup.get('size').value === 'Select'" value='Select'>Select</mat-option>
-                    </mat-select>
-    
-                    <mat-select
-                      class="form-control"
-                      formControlName="size"
-                      [disabled]="submitted"
-                      *ngIf="itemGroup.get('item').value === 'Mask'"
-                    >
-                      <mat-option
-                        *ngFor="let size of itemSizeOptions[0]"
-                        [value]="size"
-                      >
-                        {{ size }}
-                      </mat-option>
-                    </mat-select>
-    
-                    <mat-select
-                      class="form-control"
-                      formControlName="size"
-                      [disabled]="submitted"
-                      *ngIf="itemGroup.get('item').value === 'Sanitizer'"
-                    >
-                      <mat-option
-                        *ngFor="let size of itemSizeOptions[1]"
-                        [value]="size"
-                      >
-                        {{ size }}
-                      </mat-option>
-                    </mat-select>
-    
-                    <mat-select
-                      class="form-control"
-                      formControlName="size"
-                      [disabled]="submitted"
-                      *ngIf="itemGroup.get('item').value === 'Gloves'"
-                    >
-                      <mat-option
-                        *ngFor="let size of itemSizeOptions[2]"
-                        [value]="size"
-                      >
-                        {{ size }}
-                      </mat-option>
-                    </mat-select>
-
-                    <mat-select
-                      class="form-control"
-                      [disabled]="submitted"
-                      formControlName="size"
-                      *ngIf="itemGroup.get('item').value === 'Boxed Meal'"
-                    >
-                      <mat-option
-                        *ngFor="let size of itemSizeOptions[3]"
-                        [value]="size"
-                      >
-                        {{ size }}
-                      </mat-option>
-                    </mat-select>
-                  </div>
-                  <div class="col-2 d-flex justify-content-end">
-                    <span class="mt-1 mr-1">$</span>
-                    <span class="font-size1-2" *ngIf="itemGroup.get('quantity').value === 'Select'">
-                      {{ itemGroup.get('price').value | number: ".2" }}
-                    </span>
-                    <span class="font-size1-2" *ngIf="itemGroup.get('quantity').value !== 'Select'">
-                      {{ itemGroup.get('quantity').value * itemGroup.get('price').value | number: ".2" }}
-                    </span>
+                  <div class="row d-flex flex-row mt-3">
+                    <mat-radio-group formControlName="subscription" [disabled]="submitted" class="p-1">
+                        <mat-radio-button [value]="false" class="ml-3 mr-3">
+                            One-time Purchase
+                        </mat-radio-button>
+                        <mat-radio-button [value]="true" class="mr-2">
+                            Add to Subscription
+                        </mat-radio-button>
+                    </mat-radio-group>
+                    <div class="font-size-0-6 cursor-pointer font-weight-bold p-1" (click)="openDetails()"><u>Details</u></div>
+                    <div class="violet font-size-0-9 cursor-pointer border ml-3 p-2"
+                          *ngIf="itemGroup.get('subscription').value">
+                        <span [matMenuTriggerFor]="passengerMenu">
+                          Select Passenger
+                          <img src="../../../../assets/images/ico_chevron.png" class="symbol">  
+                        </span>
+            
+                        <mat-menu #passengerMenu="matMenu" yPosition="below" xPosition="after">
+                          <div class="d-flex flex-column justify-content-between p-2">
+                            <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted">Self</mat-checkbox>
+                            <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted">Passenger 1</mat-checkbox>
+                            <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted">Passenger 2</mat-checkbox>
+                          </div>
+                        </mat-menu>
+                    </div>
                   </div>
                 </div>
-                <div class="row d-flex flex-row mt-3">
-                  <mat-radio-group formControlName="subscription" [disabled]="submitted">
-                      <mat-radio-button [value]="false" class="ml-3 mr-3">
-                          One-time Purchase
-                      </mat-radio-button>
-                      <mat-radio-button [value]="true" class="mr-2">
-                          Add to Subscription
-                      </mat-radio-button>
-                  </mat-radio-group>
-                  <div class="font-size-0-6 cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
-              </div>
               </div>
             </div>
+
+
+            <ng-container *ngIf="wellnessKit.get('additionalItems')">
+
+            <ng-container  
+              *ngFor="let itemGroup of additionalItems.controls; let i = index"
+            >
+              <div class="row pt-3 pb-3 border-bottom" [formGroup]="itemGroup">
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-3">
+                      <button
+                        class="btn btn-sm p-0 remove-button rounded-circle" 
+                        (click)="removeAdditionalItem(i)">
+                        <svg class="bi bi-x remove-icon" width="1.4em" height="1.4em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z" clip-rule="evenodd"/>
+                          <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z" clip-rule="evenodd"/>
+                        </svg>
+                      </button>
+                      <mat-select
+                        class="form-control"
+                        formControlName="item"
+                        [disabled]="submitted"
+                        [ngClass]="{'w-75':true}"
+                        (selectionChange)="setPriceOfNewItem(itemGroup)"
+                      >
+                        <mat-option *ngIf="itemGroup.get('item').value === 'Select'" value='Select'>Select</mat-option>
+                        <mat-option *ngFor="let item of itemNameOptions" [value]="item">
+                          {{ item }}
+                        </mat-option>
+                      </mat-select>
+                    </div>
+                    <div class="col-3">
+                      <mat-select
+                        class="form-control"
+                        formControlName="quantity"
+                        [disabled]="submitted"
+                      >
+                        <mat-option *ngIf="itemGroup.get('quantity').value === 'Select'" value='Select'>Select</mat-option>
+                        <mat-option *ngFor="let qty of [0,1,2]" [value]="qty">
+                          {{ qty }}
+                        </mat-option>
+                      </mat-select>
+                    </div>
+                    <div class="col-3">
+                      <mat-select
+                        class="form-control"
+                        formControlName="size"
+                        [disabled]="submitted"
+                        *ngIf="itemGroup.get('size').value === 'Select'"
+                      >
+                        <mat-option *ngIf="itemGroup.get('size').value === 'Select'" value='Select'>Select</mat-option>
+                      </mat-select>
+      
+                      <mat-select
+                        class="form-control"
+                        formControlName="size"
+                        [disabled]="submitted"
+                        *ngIf="itemGroup.get('item').value === 'Mask'"
+                      >
+                        <mat-option
+                          *ngFor="let size of itemSizeOptions[0]"
+                          [value]="size"
+                        >
+                          {{ size }}
+                        </mat-option>
+                      </mat-select>
+      
+                      <mat-select
+                        class="form-control"
+                        formControlName="size"
+                        [disabled]="submitted"
+                        *ngIf="itemGroup.get('item').value === 'Sanitizer'"
+                      >
+                        <mat-option
+                          *ngFor="let size of itemSizeOptions[1]"
+                          [value]="size"
+                        >
+                          {{ size }}
+                        </mat-option>
+                      </mat-select>
+      
+                      <mat-select
+                        class="form-control"
+                        formControlName="size"
+                        [disabled]="submitted"
+                        *ngIf="itemGroup.get('item').value === 'Gloves'"
+                      >
+                        <mat-option
+                          *ngFor="let size of itemSizeOptions[2]"
+                          [value]="size"
+                        >
+                          {{ size }}
+                        </mat-option>
+                      </mat-select>
+
+                      <mat-select
+                        class="form-control"
+                        [disabled]="submitted"
+                        formControlName="size"
+                        *ngIf="itemGroup.get('item').value === 'Boxed Meal'"
+                      >
+                        <mat-option
+                          *ngFor="let size of itemSizeOptions[3]"
+                          [value]="size"
+                        >
+                          {{ size }}
+                        </mat-option>
+                      </mat-select>
+                    </div>
+                    <div class="col-2 d-flex justify-content-end">
+                      <span class="mt-1 mr-1">$</span>
+                      <span class="font-size1-2" *ngIf="itemGroup.get('quantity').value === 'Select'">
+                        {{ itemGroup.get('price').value | number: ".2" }}
+                      </span>
+                      <span class="font-size1-2" *ngIf="itemGroup.get('quantity').value !== 'Select'">
+                        {{ itemGroup.get('quantity').value * itemGroup.get('price').value | number: ".2" }}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="row d-flex flex-row mt-3">
+                    <mat-radio-group formControlName="subscription" [disabled]="submitted" class="p-1">
+                        <mat-radio-button [value]="false" class="ml-3 mr-3">
+                            One-time Purchase
+                        </mat-radio-button>
+                        <mat-radio-button [value]="true" class="mr-2">
+                            Add to Subscription
+                        </mat-radio-button>
+                    </mat-radio-group>
+                    <div class="font-size-0-6 cursor-pointer font-weight-bold p-1" (click)="openDetails()"><u>Details</u></div>
+                    <div class="violet font-size-0-9 cursor-pointer border ml-3 p-2"
+                          *ngIf="itemGroup.get('subscription').value">
+                        <span [matMenuTriggerFor]="passengerMenu">
+                          Select Passenger
+                          <img src="../../../../assets/images/ico_chevron.png" class="symbol">  
+                        </span>
+            
+                        <mat-menu #passengerMenu="matMenu" yPosition="below" xPosition="after">
+                          <div class="d-flex flex-column justify-content-between p-2">
+                            <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted">Self</mat-checkbox>
+                            <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted">Passenger 1</mat-checkbox>
+                            <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted">Passenger 2</mat-checkbox>
+                          </div>
+                        </mat-menu>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+
           </ng-container>
-
-        </ng-container>
-      </div>
+          </div>
 
           <div class="row p-4">
             <div class="col-8 pl-0 pr-0">

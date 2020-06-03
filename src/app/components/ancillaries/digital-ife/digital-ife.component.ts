@@ -3,6 +3,8 @@ import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { DigitalIfeDetailsService } from 'src/app/services/digital-ife-details/digital-ife-details.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ExpandedAncillariesDialogComponent } from '../expanded-ancillaries-dialog/expanded-ancillaries-dialog.component';
+import { FlightDetailsService } from 'src/app/services/flight-details/flight-details.service';
+import { SubscriptionService } from 'src/app/services/subscription/subscription.service';
 
 @Component({
   selector: 'app-digital-ife',
@@ -18,14 +20,7 @@ export class DigitalIFEComponent implements OnInit {
   disableScrollDown = false
   
   digitalIfeForm: FormGroup = new FormGroup({
-    primaryPackageType: new FormControl('Basic'),
-    primaryScreens: new FormControl(1),
-    primaryPrice: new FormControl(0.00),
-    primarySubscription: new FormControl(false),
-    secondaryPackageType: new FormControl('Kids Play'),
-    secondaryScreens: new FormControl(0),
-    secondaryPrice: new FormControl(1.00),
-    secondarySubscription: new FormControl(false),
+    items: new FormArray([ ]),
     segment: new FormControl('JFK - BOS'),
     additionalItems: new FormArray([ ])
   })
@@ -41,17 +36,26 @@ export class DigitalIFEComponent implements OnInit {
   totalPrice: number = 0.00;
   totalQuantity: number = 1;
   
+  isFirstBooking: boolean = false;
+  isSubscriptionAdded: boolean = false;
+
   constructor(
     public dialog: MatDialog,
-    public digitalIfeService: DigitalIfeDetailsService
+    public digitalIfeService: DigitalIfeDetailsService,
+    public flightDetailsService: FlightDetailsService,
+    public subscriptionService: SubscriptionService
   ) { }
 
   ngOnInit(): void {
+    this.isFirstBooking = this.flightDetailsService.isFirstBooking();
+    this.setInitialItems();
+
     this.segment = this.fromCode + ' - ' + this.toCode;
     this.segmentOptions = [this.segment];
     this.digitalIfeService.setDigitalIfeFormGroup(this.digitalIfeForm);
 
     this.digitalIfeForm.valueChanges.subscribe(() => {
+      console.log('ife form',this.digitalIfeForm.value);
       this.calculateTotalPrice();
     });
 
@@ -94,6 +98,38 @@ export class DigitalIFEComponent implements OnInit {
       } catch(err) { }
   }
 
+  setInitialItems() {
+    if(this.isFirstBooking) {
+      this.items.push(this.addItemAsFormGroup('Basic',1,0.00,false,false,false,false));
+      this.items.push(this.addItemAsFormGroup('Kids Play',0,1.00,false,false,false,false));
+    }
+    else {
+      this.subscriptionService.getDigitalIfeSubscription().forEach(item => {
+        this.items.push(this.addItemAsFormGroup(item.packageType,item.screens,item.price,
+                                                item.subscription,item.self,item.pone,item.ptwo))
+      })
+      console.log('actualitems',this.subscriptionService.getDigitalIfeSubscription());
+      console.log('subbeditems',this.items.value);
+    }
+  }
+
+  get items() {
+    return this.digitalIfeForm.get('items') as FormArray;
+  }
+
+  addItemAsFormGroup(packageType: string, screens: number, price: number,
+                    sub: boolean, self: boolean, pone: boolean, ptwo: boolean) {
+    return new FormGroup({
+      packageType: new FormControl(packageType),
+      screens: new FormControl(screens),
+      price: new FormControl(price),
+      subscription: new FormControl(sub),
+      self: new FormControl(self),
+      pone: new FormControl(pone),
+      ptwo: new FormControl(ptwo)
+    })
+  }
+
   get additionalItems() {
     return this.digitalIfeForm.get('additionalItems') as FormArray;
   }
@@ -104,7 +140,10 @@ export class DigitalIFEComponent implements OnInit {
       packageType: new FormControl('Select'),
       screens: new FormControl('Select'),
       price: new FormControl(0),
-      subscription: new FormControl(false)
+      subscription: new FormControl(false),
+      self: new FormControl(false),
+      pone: new FormControl(false),
+      ptwo: new FormControl(false)
     }))
   }
 
@@ -130,6 +169,10 @@ export class DigitalIFEComponent implements OnInit {
   }
 
   removeItem(i: number): void { 
+    this.items.removeAt(i);
+  }
+
+  removeAdditionalItem(i: number): void { 
     this.additionalItems.removeAt(i);
   }
 
@@ -153,55 +196,43 @@ export class DigitalIFEComponent implements OnInit {
     itemGroup.patchValue({
       screens: 1,
       price: price,
-      subscription: false
-    })
-  }
-
-  mapPrimaryPackageToPrice(){
-    const name = this.digitalIfeForm.get('primaryPackageType').value;
-    let price = this.mapSelectOptionPrice(name);
-    
-    this.digitalIfeForm.patchValue({
-      primaryScreens: 1,
-      primaryPrice: price,
-      primarySubscription: false
-    })
-  }
-
-  mapSecondaryPackageToPrice(){
-    const name = this.digitalIfeForm.get('secondaryPackageType').value;
-    let price = this.mapSelectOptionPrice(name);
-    
-    this.digitalIfeForm.patchValue({
-      secondaryScreens: 1,
-      secondaryPrice: price,
-      secondarySubscription: false
+      subscription: false,
+      self: false,
+      pone: false,
+      ptwo: false
     })
   }
 
   calculateTotalQuantity(){
     let itemsQty = 0;
+
+    this.items.value.forEach(e => {
+      let q = e.screens === 'Select' ? 0 : e.screens;
+      itemsQty = itemsQty + q;
+    });
+
     this.additionalItems.value.forEach(e => {
       let q = e.screens === 'Select' ? 0 : e.screens;
       itemsQty = itemsQty + q;
-    })
-    this.totalQuantity =
-      this.digitalIfeForm.get('primaryScreens').value +
-      this.digitalIfeForm.get('secondaryScreens').value +
-      itemsQty;
+    });
+
+    this.totalQuantity = itemsQty;
   }
 
   calculateTotalPrice(){
     let itemTotal = 0.00;
+
+    this.digitalIfeForm.get('items').value.forEach(e => {
+      let q = e.screens === 'Select' ? 0 : e.screens;
+      itemTotal = itemTotal + q * e.price;
+    })
+
     this.digitalIfeForm.get('additionalItems').value.forEach(e => {
       let q = e.screens === 'Select' ? 0 : e.screens;
       itemTotal = itemTotal + q * e.price;
     })
 
-    this.totalPrice = 
-      this.digitalIfeForm.get('primaryScreens').value * this.digitalIfeForm.get('primaryPrice').value +
-      this.digitalIfeForm.get('secondaryScreens').value * this.digitalIfeForm.get('secondaryPrice').value +
-      itemTotal;
+    this.totalPrice = itemTotal;
   }
 
   setDigitalIfeDetails() {
@@ -230,13 +261,35 @@ export class DigitalIFEComponent implements OnInit {
   onSkipToSeatRegrouping() {
     if(!this.submitted){
       this.totalQuantity = 0;
-      this.digitalIfeForm.patchValue({
-        primaryScreens: 0,
-        secondaryScreens: 0
-      })
+
+      this.items.controls.forEach((itemGroup) => {
+        itemGroup.patchValue({
+          screens: 0,
+          subscription: false,
+          self: false,
+          pone: false,
+          ptwo: false
+        })
+      });
+
+      this.additionalItems.controls.forEach((itemGroup) => {
+        itemGroup.patchValue({
+          screens: 0,
+          subscription: false,
+          self: false,
+          pone: false,
+          ptwo: false
+        })
+      });
+
       this.setDigitalIfeDetails();
     }
     
     this.onSkipToSR.emit();
+  }
+
+  checkSubscriptionAdded() {
+    //check if any checkboxes are chosen. If yes, make the boolean true. For now its just set to true
+    this.isSubscriptionAdded = true;
   }
 }

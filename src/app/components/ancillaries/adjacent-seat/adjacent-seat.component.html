@@ -15,63 +15,82 @@
                 </mat-option>
             </mat-select>
             </div>
-            <div class="col-5 d-flex pl-0">
-            <!-- delivery -->
+            <div class=""
+              [ngClass]="{'col-5':isFirstBooking, 'col-3':!isFirstBooking}">
+
             </div>
-            <div class="col-4 pr-0">
-                <div class="d-flex flex-row justify-content-end pt-2">
-                    <div (click)="openExpandedAncDialog()">
-                      <svg class="bi bi-arrows-fullscreen cursor-pointer" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M1.464 10.536a.5.5 0 01.5.5v3h3a.5.5 0 010 1h-3.5a.5.5 0 01-.5-.5v-3.5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
-                        <path fill-rule="evenodd" d="M5.964 10a.5.5 0 010 .707l-4.146 4.147a.5.5 0 01-.707-.708L5.257 10a.5.5 0 01.707 0zm8.854-8.854a.5.5 0 010 .708L10.672 6a.5.5 0 01-.708-.707l4.147-4.147a.5.5 0 01.707 0z" clip-rule="evenodd"/>
-                        <path fill-rule="evenodd" d="M10.5 1.5A.5.5 0 0111 1h3.5a.5.5 0 01.5.5V5a.5.5 0 01-1 0V2h-3a.5.5 0 01-.5-.5zm4 9a.5.5 0 00-.5.5v3h-3a.5.5 0 000 1h3.5a.5.5 0 00.5-.5V11a.5.5 0 00-.5-.5z" clip-rule="evenodd"/>
-                        <path fill-rule="evenodd" d="M10 9.964a.5.5 0 000 .708l4.146 4.146a.5.5 0 00.708-.707l-4.147-4.147a.5.5 0 00-.707 0zM1.182 1.146a.5.5 0 000 .708L5.328 6a.5.5 0 00.708-.707L1.889 1.146a.5.5 0 00-.707 0z" clip-rule="evenodd"/>
-                        <path fill-rule="evenodd" d="M5.5 1.5A.5.5 0 005 1H1.5a.5.5 0 00-.5.5V5a.5.5 0 001 0V2h3a.5.5 0 00.5-.5z" clip-rule="evenodd"/>
-                      </svg>
+            <div class="col-3 pt-2" *ngIf="!isFirstBooking">
+                <div class="violet font-weight-bold cursor-pointer">
+                  <span [matMenuTriggerFor]="subscriptionMenu" (click)="checkSubscriptionAdded()">
+                    Apply Subscription
+                    <img src="../../../../assets/images/ico_chevron.png" class="symbol">  
+                  </span>
+      
+                  <mat-menu #subscriptionMenu="matMenu" yPosition="below" xPosition="after">
+                    <div class="d-flex flex-column justify-content-between p-2">
+                      <mat-checkbox (click) = "$event.stopPropagation()">Self</mat-checkbox>
+                      <mat-checkbox (click) = "$event.stopPropagation()">Passenger 1</mat-checkbox>
+                      <mat-checkbox (click) = "$event.stopPropagation()">Passenger 2</mat-checkbox>
                     </div>
-                  </div>
+                  </mat-menu>
+                </div>
+            </div>
+            <div class="pr-0"
+                [ngClass]="{'col-4':isFirstBooking, 'col-3':!isFirstBooking}">
+            <div class="d-flex flex-row justify-content-end pt-2">
+                <div (click)="openExpandedAncDialog()">
+                    <svg class="bi bi-arrows-fullscreen cursor-pointer" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M1.464 10.536a.5.5 0 01.5.5v3h3a.5.5 0 010 1h-3.5a.5.5 0 01-.5-.5v-3.5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+                    <path fill-rule="evenodd" d="M5.964 10a.5.5 0 010 .707l-4.146 4.147a.5.5 0 01-.707-.708L5.257 10a.5.5 0 01.707 0zm8.854-8.854a.5.5 0 010 .708L10.672 6a.5.5 0 01-.708-.707l4.147-4.147a.5.5 0 01.707 0z" clip-rule="evenodd"/>
+                    <path fill-rule="evenodd" d="M10.5 1.5A.5.5 0 0111 1h3.5a.5.5 0 01.5.5V5a.5.5 0 01-1 0V2h-3a.5.5 0 01-.5-.5zm4 9a.5.5 0 00-.5.5v3h-3a.5.5 0 000 1h3.5a.5.5 0 00.5-.5V11a.5.5 0 00-.5-.5z" clip-rule="evenodd"/>
+                    <path fill-rule="evenodd" d="M10 9.964a.5.5 0 000 .708l4.146 4.146a.5.5 0 00.708-.707l-4.147-4.147a.5.5 0 00-.707 0zM1.182 1.146a.5.5 0 000 .708L5.328 6a.5.5 0 00.708-.707L1.889 1.146a.5.5 0 00-.707 0z" clip-rule="evenodd"/>
+                    <path fill-rule="evenodd" d="M5.5 1.5A.5.5 0 005 1H1.5a.5.5 0 00-.5.5V5a.5.5 0 001 0V2h3a.5.5 0 00.5-.5z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                </div>
             </div>
         </div>
 
         <div class="row w-100 font-size1-2">
             <div class="col-8">
                 <div class="overflow-items">
-                    <div class="row mt-4 pr-2">
-                        <div class="col-4 d-flex justify-content-center">
-                            <img src="../../../../assets/images/ico_checkin.png" class="seat-image">
-                        </div>
-                        <div class="col-8">
-                            <div class="row">
-                                <div class="col-6">
-                                    <b>Adjacent seats needed</b>
+                    <div *ngIf="isFirstBooking">
+                        <div class="row mt-4 pr-2">
+                            <div class="col-4 d-flex justify-content-center">
+                                <img src="../../../../assets/images/ico_checkin.png" class="seat-image">
+                            </div>
+                            <div class="col-8">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <b>Adjacent seats needed</b>
+                                    </div>
+                                    <div class="col-6">
+                                        Price
+                                    </div>
                                 </div>
-                                <div class="col-6">
-                                    Price
+                                <div class="row mt-3">
+                                    <div class="col-6">
+                                        <mat-select
+                                            class="form-control"
+                                            [disabled]="submitted"
+                                            formControlName="seats"
+                                        >
+                                            <mat-option *ngFor="let seat of seatOptions" [value]="seat">
+                                            {{ seat }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </div>
+                                    <div class="col-6 mt-2">
+                                        $
+                                        <span class="font-size1-5">
+                                            {{ adjacentSeatForm.get('seats').value * adjacentSeatForm.get('price').value | number: ".2" }}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row mt-3">
-                                <div class="col-6">
-                                    <mat-select
-                                        class="form-control"
-                                        [disabled]="submitted"
-                                        formControlName="seats"
-                                    >
-                                        <mat-option *ngFor="let seat of seatOptions" [value]="seat">
-                                        {{ seat }}
-                                        </mat-option>
-                                    </mat-select>
-                                </div>
-                                <div class="col-6 mt-2">
-                                    $
-                                    <span class="font-size1-5">
-                                        {{ adjacentSeatForm.get('seats').value * adjacentSeatForm.get('price').value | number: ".2" }}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
                         </div>
                         <div class="row d-flex flex-row mt-3 ml-4">
-                            <mat-radio-group formControlName="subscription" [disabled]="submitted">
+                            <mat-radio-group formControlName="subscription" [disabled]="submitted" class="p-1">
                                 <mat-radio-button [value]="false" class="ml-3 mr-3">
                                     One-time Purchase
                                 </mat-radio-button>
@@ -79,12 +98,39 @@
                                     Add to Subscription
                                 </mat-radio-button>
                             </mat-radio-group>
-                            <div class="font-size-0-6 cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
+                            <div class="font-size-0-6 cursor-pointer font-weight-bold p-1" (click)="openDetails()"><u>Details</u></div>
+                            <div class="violet font-size-0-9 cursor-pointer  ml-3 border p-2"
+                            *ngIf="adjacentSeatForm.get('subscription').value">
+                                <span [matMenuTriggerFor]="passengerMenu">
+                                Select Passenger
+                                <img src="../../../../assets/images/ico_chevron.png" class="symbol">  
+                                </span>
+                    
+                                <mat-menu #passengerMenu="matMenu" yPosition="below" xPosition="after">
+                                    <div class="d-flex flex-column justify-content-between p-2">
+                                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted">Self</mat-checkbox>
+                                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted">Passenger 1</mat-checkbox>
+                                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted">Passenger 2</mat-checkbox>
+                                    </div>
+                                </mat-menu>
+                            </div>
                         </div>
                         <div class="row mt-4 pl-4 pr-2 ml-4">
                             <p><b>Heads-up</b></p>
                             <p>Adjacent seat selection is currently unavailable now. We will assign it to you on the day of travel.</p>
                         </div>
+                    </div>
+                    <div *ngIf="!isFirstBooking && !isSubscriptionAdded">
+                        <div class="violet p-4">
+                            Click on the <span class="font-weight-bold">Apply Subscriptions</span> link to include
+                            existing subscriptions at a discounted rate. If not, click on 
+                            <span class="font-weight-bold">Add additional items</span> to make new selections.
+                        </div>
+                    </div>
+                    <div *ngIf="!isFirstBooking && isSubscriptionAdded">
+                        <!-- show all subscription items -->
+                        <div>Show Sub Items</div>
+                    </div>
                 </div>
 
                 <div class="row mt-4 pt-4">

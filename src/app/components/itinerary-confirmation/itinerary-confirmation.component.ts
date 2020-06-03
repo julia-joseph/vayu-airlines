@@ -49,6 +49,8 @@ export class ItineraryConfirmationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.flightDetailsService.setFirstBooking();
+    
     this.wellnessKit = this.wellnessKitService.getWellnessKitDetails();
     this.totalWellnessKitPrice = this.wellnessKitService.totalPrice;
 

@@ -16,6 +16,9 @@ export class AdjacentSeatDetailsService {
     seats: 1,
     price: 65.32,
     subscription: false,
+    self: false,
+    pone: false,
+    ptwo: false,
     segment: 'JFK - BOS'
   }
 

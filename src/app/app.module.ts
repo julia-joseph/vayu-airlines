@@ -7,6 +7,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,7 +20,6 @@ import { PaymentSummaryComponent } from './components/payment-summary/payment-su
 import { AncillariesComponent } from './components/ancillaries/ancillaries.component';
 import { FlightListModule } from './components/flight-list/flight-list.module';
 import { ItineraryConfirmationComponent } from './components/itinerary-confirmation/itinerary-confirmation.component';
-import { AncillariesDialogComponent } from './components/ancillaries/ancillaries-dialog/ancillaries-dialog.component';
 import { RegulationsDialogComponent } from './components/regulations-dialog/regulations-dialog.component';
 import { ExpandedAncillariesDialogComponent } from './components/ancillaries/expanded-ancillaries-dialog/expanded-ancillaries-dialog.component';
 import { WellnessKitComponent } from './components/ancillaries/wellness-kit/wellness-kit.component';
@@ -39,7 +39,6 @@ import { RecentEventsComponent } from './components/donations/recent-events/rece
     PaymentSummaryComponent,
     AncillariesComponent,
     ItineraryConfirmationComponent,
-    AncillariesDialogComponent,
     RegulationsDialogComponent,
     ExpandedAncillariesDialogComponent,
     WellnessKitComponent,
@@ -64,7 +63,8 @@ import { RecentEventsComponent } from './components/donations/recent-events/rece
     MatTabsModule,
     MatSelectModule,
     MatTooltipModule,
-    MatRadioModule
+    MatRadioModule,
+    MatCheckboxModule
   ],
   entryComponents: [
     RegulationsDialogComponent

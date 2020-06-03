@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class FlightDetailsService {
+  // set to true before you commit
+  private firstBooking: boolean = true;
   flightDetails: any = {
     class: "Economy",
     depart: "Thursday May 07 2020",
@@ -29,4 +31,11 @@ export class FlightDetailsService {
     this.flightDetails = flight;
   }
 
+  setFirstBooking() {
+    this.firstBooking = false;
+  }
+
+  isFirstBooking(): boolean {
+    return this.firstBooking;
+  }
 }

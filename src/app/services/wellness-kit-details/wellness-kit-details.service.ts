@@ -31,22 +31,48 @@ export class WellnessKitDetailsService {
   public performSkipObservable = this.performSkipSubject.asObservable();
 
   wellnessKitDetails = {
-    maskQuantity: 1,
-    maskPrice: 5.24,
-    maskSize: 'Adult/M',
-    maskSubscription: false,
-    sanitizerQuantity: 1,
-    sanitizerPrice: 2.30,
-    sanitizerSize: '1 OZ (30 mL)',
-    sanitizerSubscription: false,
-    glovesQuantity: 1,
-    glovesPrice: 1.20,
-    glovesSize: 'Adult/M',
-    glovesSubscription: false,
-    boxedMealVegQuantity: 1,
-    boxedMealVegSize: 'Adult/Veg Sandwich',
-    boxedMealVegPrice: 20,
-    boxedMealVegSubscription: false,
+    items: [
+      {
+        item: 'Mask',
+        quantity: 1,
+        price: 5.24,
+        size: 'Adult/M',
+        subscription: false,
+        self: false,
+        pone: false,
+        ptwo: false
+      },
+      {
+        item: 'Sanitizer',
+        quantity: 1,
+        price: 2.30,
+        size: '1 OZ (30 mL)',
+        subscription: false,
+        self: false,
+        pone: false,
+        ptwo: false
+      },
+      {
+        item: 'Gloves',
+        quantity: 1,
+        price: 1.20,
+        size: 'Adult/M',
+        subscription: false,
+        self: false,
+        pone: false,
+        ptwo: false
+      },
+      {
+        item: 'Boxed Meals',
+        quantity: 1,
+        price: 20,
+        size: 'Adult/Veg Sandwich',
+        subscription: false,
+        self: false,
+        pone: false,
+        ptwo: false
+      }
+    ],
     delivery: 'Gate',
     segment: 'JFK - BOS',
     additionalItems: []
@@ -86,7 +112,6 @@ export class WellnessKitDetailsService {
   }
 
   setConfirmMiniViewWellnessKit(wellnessKit) {
-    //observable to push confirm button on main screen
     this.performConfirmSubject.next(wellnessKit);
   }
 

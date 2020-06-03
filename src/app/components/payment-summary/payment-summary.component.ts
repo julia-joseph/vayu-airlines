@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { WellnessKitDetailsService } from '../../services/wellness-kit-details/wellness-kit-details.service';
 import { DigitalIfeDetailsService } from '../../services/digital-ife-details/digital-ife-details.service';
 import { AdjacentSeatDetailsService } from 'src/app/services/adjacent-seat-details/adjacent-seat-details.service';
+import { SubscriptionService } from 'src/app/services/subscription/subscription.service';
 @Component({
   selector: 'app-payment-summary',
   templateUrl: './payment-summary.component.html',
@@ -28,7 +29,8 @@ export class PaymentSummaryComponent implements OnInit {
     private router: Router,
     private wellnessKitService: WellnessKitDetailsService,
     private digitalIfeService: DigitalIfeDetailsService,
-    private adjacentSeatService: AdjacentSeatDetailsService
+    private adjacentSeatService: AdjacentSeatDetailsService,
+    private subscriptionService: SubscriptionService
   ) {}
 
   ngOnInit(): void {
@@ -76,6 +78,20 @@ export class PaymentSummaryComponent implements OnInit {
   }
 
   onPayment() {
+    const subbedItemWellness = this.wellnessKitService.getWellnessKitDetails().items.filter(item => item.subscription);
+    const subbedAdditionalWellness = this.wellnessKitService.getWellnessKitDetails().additionalItems.filter(item => item.subscription);
+    const subbedWellness = subbedItemWellness.concat(subbedAdditionalWellness);
+    this.subscriptionService.setWellnessKitSubscription(subbedWellness);
+
+    const subbedItemDigital = this.digitalIfeService.getDigitalIfeDetails().items.filter(item => item.subscription);
+    const subbedAdditionalDigital = this.digitalIfeService.getDigitalIfeDetails().additionalItems.filter(item => item.subscription);
+    const subbedDigital = subbedItemDigital.concat(subbedAdditionalDigital);
+    this.subscriptionService.setDigitalIfeSubscription(subbedDigital);
+
+    this.adjacentSeatService.getAdjacentSeatDetails().subscription ? 
+      this.subscriptionService.setAdjacentSeatSubscription(this.adjacentSeatService.getAdjacentSeatDetails()) :
+      this.subscriptionService.setAdjacentSeatSubscription([]);
+
     this.router.navigate(['/itinerary-confirmation']);
   }
 }

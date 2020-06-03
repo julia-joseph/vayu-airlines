@@ -4,6 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { WellnessKitDetailsService } from 'src/app/services/wellness-kit-details/wellness-kit-details.service';
 import { ExpandedAncillariesDialogComponent } from '../expanded-ancillaries-dialog/expanded-ancillaries-dialog.component';
+import { FlightDetailsService } from 'src/app/services/flight-details/flight-details.service';
+import { SubscriptionService } from 'src/app/services/subscription/subscription.service';
 
 @Component({
   selector: 'app-wellness-kit',
@@ -25,22 +27,7 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
   segment: string = 'JFK - BOS';
 
   wellnessKitForm: FormGroup = new FormGroup({
-    maskQuantity: new FormControl(1),
-    maskSize: new FormControl('Adult/M'),
-    maskPrice: new FormControl(5.24),
-    maskSubscription: new FormControl(false),
-    sanitizerQuantity: new FormControl(1),
-    sanitizerSize: new FormControl('1 OZ (30 mL)'),
-    sanitizerPrice: new FormControl(2.3),
-    sanitizerSubscription: new FormControl(false),
-    glovesQuantity: new FormControl(1),
-    glovesSize: new FormControl('Adult/M'),
-    glovesPrice: new FormControl(1.2),
-    glovesSubscription: new FormControl(false),
-    boxedMealVegQuantity: new FormControl(1),
-    boxedMealVegSize: new FormControl('Adult/Veg Sandwich'),
-    boxedMealVegPrice: new FormControl(20),
-    boxedMealVegSubscription: new FormControl(false),
+    items: new FormArray([ ]),
     delivery: new FormControl('Gate'),
     segment: new FormControl('JFK - BOS'),
     additionalItems: new FormArray([ ])
@@ -59,36 +46,49 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
     'Adult/Rice Cake','Kid/Rice Cake']
   ];
 
-  // itemAdded: boolean = false;
   totalPrice: number = 28.74;
   totalQty: number = 0;
   ogForm;
   isNewItemsAdded: boolean = false;
 
+  isFirstBooking: boolean = false;
+  isSubscriptionAdded: boolean = false;
+
+  selfChosen: boolean = false;
+  poneChosen: boolean = false;
+  ptwoChosen: boolean = false;
+
   constructor(
     public dialog: MatDialog,
     private router: Router,
-    private wellnessKitService: WellnessKitDetailsService
+    private wellnessKitService: WellnessKitDetailsService,
+    private flightService: FlightDetailsService,
+    private subscriptionService: SubscriptionService
   ) {}
 
   ngOnInit(): void {
+    this.isFirstBooking = this.flightService.isFirstBooking();
+    this.setInitialItems();
+
     this.segment = this.fromCode + ' - ' + this.toCode;
     this.segmentOptions = [this.segment];
 
     this.wellnessKitService.setWellnessKitFormGroup(this.wellnessKitForm);
     this.wellnessKitForm.valueChanges.subscribe(() => {
+      console.log('form',this.wellnessKitForm.value)
       let itemTotal = 0.00;
+
+      this.wellnessKitForm.get('items').value.forEach(e => {
+        let q = e.quantity === 'Select' ? 0 : e.quantity;
+        itemTotal = itemTotal + q * e.price;
+      })
+
       this.wellnessKitForm.get('additionalItems').value.forEach(e => {
         let q = e.quantity === 'Select' ? 0 : e.quantity;
         itemTotal = itemTotal + q * e.price;
       })
 
-      this.totalPrice = 
-        this.wellnessKitForm.get('maskQuantity').value * this.wellnessKitForm.get('maskPrice').value +
-        this.wellnessKitForm.get('sanitizerQuantity').value * this.wellnessKitForm.get('sanitizerPrice').value +
-        this.wellnessKitForm.get('glovesQuantity').value * this.wellnessKitForm.get('glovesPrice').value +
-        this.wellnessKitForm.get('boxedMealVegQuantity').value * this.wellnessKitForm.get('boxedMealVegPrice').value +
-        itemTotal;
+      this.totalPrice = itemTotal;
     });
 
     this.wellnessKitService.performConfirmObservable.subscribe((wellnessKit) => {
@@ -132,6 +132,41 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
       } catch(err) { }
   }
 
+  setInitialItems() {
+    if(this.isFirstBooking) {
+      this.items.push(this.addItemAsFormGroup('Mask',1,'Adult/M',5.24,false,false,false,false));
+      this.items.push(this.addItemAsFormGroup('Sanitizer',1,'1 OZ (30 mL)',2.3,false,false,false,false));
+      this.items.push(this.addItemAsFormGroup('Gloves',1,'Adult/M',1.2,false,false,false,false));
+      this.items.push(this.addItemAsFormGroup('Boxed Meal',1,'Adult/Veg Sandwich',20,false,false,false,false));
+    }
+    else {
+      this.subscriptionService.getWellnessKitSubscription().forEach(item => {
+        this.items.push(this.addItemAsFormGroup(item.item,item.quantity,item.size,item.price,
+                                                item.subscription,item.self,item.pone,item.ptwo))
+      })
+      console.log('actualitems',this.subscriptionService.getWellnessKitSubscription());
+      console.log('subbeditems',this.items.value);
+    }
+  }
+
+  get items() {
+    return this.wellnessKitForm.get('items') as FormArray;
+  }
+
+  addItemAsFormGroup(item: string, quantity: number, size: string, price: number, 
+                    sub: boolean, self: boolean, pone: boolean, ptwo: boolean) {
+    return new FormGroup({
+      item: new FormControl(item),
+      quantity: new FormControl(quantity),
+      size: new FormControl(size),
+      price: new FormControl(price),
+      subscription: new FormControl(sub),
+      self: new FormControl(self),
+      pone: new FormControl(pone),
+      ptwo: new FormControl(ptwo)
+    })
+  }
+
   get additionalItems() {
     return this.wellnessKitForm.get('additionalItems') as FormArray;
   }
@@ -144,12 +179,19 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
       quantity: new FormControl('Select'),
       size: new FormControl('Select'),
       price: new FormControl(0),
-      subscription: new FormControl(false)
+      subscription: new FormControl(false),
+      self: new FormControl(false),
+      pone: new FormControl(false),
+      ptwo: new FormControl(false)
     }))
   }
 
-  removeItem(i: number): void { 
+  removeAdditionalItem(i: number): void { 
     this.additionalItems.removeAt(i);
+  }
+
+  removeItem(i: number): void { 
+    this.items.removeAt(i);
   }
 
   setPriceOfNewItem(itemGroup){
@@ -174,7 +216,11 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
     itemGroup.patchValue({
       size: size,
       price: price,
-      quantity: 1
+      quantity: 1,
+      subscription: false,
+      self: false,
+      pone: false,
+      ptwo: false
     })
   }
 
@@ -182,16 +228,18 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
 
   calculateTotalQuantity(){
     let itemsQty = 0;
+
+    this.items.value.forEach(e => {
+      let q = e.quantity === 'Select' ? 0 : e.quantity;
+      itemsQty = itemsQty + q;
+    })
+
     this.additionalItems.value.forEach(e => {
       let q = e.quantity === 'Select' ? 0 : e.quantity;
       itemsQty = itemsQty + q;
     })
-    this.totalQty =
-      this.wellnessKitForm.get('maskQuantity').value+
-      this.wellnessKitForm.get('sanitizerQuantity').value +
-      this.wellnessKitForm.get('glovesQuantity').value +
-      this.wellnessKitForm.get('boxedMealVegQuantity').value +
-      itemsQty;
+
+    this.totalQty = itemsQty;
   }
 
   setWellnessKitDetails(){
@@ -214,11 +262,24 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
   onSkipToDigitalIFE() {
     if(!this.submitted){
       this.totalQty = 0;
-      this.wellnessKitForm.patchValue({
-        maskQuantity: 0,
-        sanitizerQuantity: 0,
-        glovesQuantity: 0,
-        boxedMealVegQuantity: 0
+      this.items.controls.forEach((itemGroup) => {
+        itemGroup.patchValue({
+          quantity: 0,
+          subscription: false,
+          self: false,
+          pone: false,
+          ptwo: false
+        })
+      });
+
+      this.additionalItems.controls.forEach((itemGroup) => {
+        itemGroup.patchValue({
+          quantity: 0,
+          subscription: false,
+          self: false,
+          pone: false,
+          ptwo: false
+        })
       })
       this.setWellnessKitDetails();
     }
@@ -250,5 +311,45 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
 
   openDetails() {
     console.log('open details');
+  }
+
+  clearFormArray() {
+    while(this.items.value.length !== 0) {
+      this.items.removeAt(0);
+    }
+  }
+
+  checkSubscriptionAdded() {
+    //check if any checkboxes are chosen. If yes, make the boolean true. For now its just set to true
+    this.isSubscriptionAdded = true;
+
+    // if(this.selfChosen || this.poneChosen || this.ptwoChosen) {
+    //   this.isSubscriptionAdded = true;
+
+    //   this.clearFormArray();
+
+    //   if(this.selfChosen) {
+    //       this.subscriptionService.getWellnessKitSubscription()
+    //       .filter(item => item.self)
+    //       .forEach(item => {
+    //         this.items.push(this.addItemAsFormGroup(item.item,item.quantity,item.size,item.price,
+    //                                               item.subscription,item.self,item.pone,item.ptwo))})
+    //   }
+
+    //   if(this.poneChosen) {
+    //     this.subscriptionService.getWellnessKitSubscription()
+    //     .filter(item => item.pone)
+    //     .forEach(item => {
+    //       this.items.push(this.addItemAsFormGroup(item.item,item.quantity,item.size,item.price,
+    //                                             item.subscription,item.self,item.pone,item.ptwo))})
+    //   }
+    //   if(this.ptwoChosen) {
+    //     this.subscriptionService.getWellnessKitSubscription()
+    //     .filter(item => item.pone)
+    //     .forEach(item => {
+    //       this.items.push(this.addItemAsFormGroup(item.item,item.quantity,item.size,item.price,
+    //                                             item.subscription,item.self,item.pone,item.ptwo))})
+    //   }
+    // }    
   }
 }

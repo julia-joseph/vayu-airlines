@@ -92,6 +92,10 @@
   font-size: 0.6rem;
 }
 
+.font-size-0-9 {
+  font-size: 0.9rem;
+}
+
 .close-icon {
   transition: 1s ease-in-out;
 
@@ -114,4 +118,9 @@
 
 .violet {
   color: #865e9a;
+}
+
+.symbol {
+  height: 10px;
+  cursor: pointer;
 }

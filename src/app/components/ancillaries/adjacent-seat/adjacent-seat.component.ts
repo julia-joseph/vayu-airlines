@@ -4,6 +4,7 @@ import { AdjacentSeatDetailsService } from 'src/app/services/adjacent-seat-detai
 import { ExpandedAncillariesDialogComponent } from '../expanded-ancillaries-dialog/expanded-ancillaries-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { FlightDetailsService } from 'src/app/services/flight-details/flight-details.service';
 
 @Component({
   selector: 'app-adjacent-seat',
@@ -21,6 +22,9 @@ export class AdjacentSeatComponent implements OnInit, OnDestroy {
     seats: new FormControl(1),
     price: new FormControl(65.32),
     subscription: new FormControl(false),
+    self:  new FormControl(false),
+    pone:  new FormControl(false),
+    ptwo:  new FormControl(false),
     segment: new FormControl('JFK - BOS')
   })
 
@@ -37,18 +41,24 @@ export class AdjacentSeatComponent implements OnInit, OnDestroy {
   performEditSubscription: Subscription;
   performSkipSubscription: Subscription;
 
+  isFirstBooking: boolean = false;
+  isSubscriptionAdded: boolean = false;
+
   constructor(
     public dialog: MatDialog,
-    private adjacentSeatService: AdjacentSeatDetailsService
+    private adjacentSeatService: AdjacentSeatDetailsService,
+    private flightService: FlightDetailsService
   ) { }
 
   ngOnInit(): void {
+    this.isFirstBooking = this.flightService.isFirstBooking();
+    
     this.segment = this.fromCode + ' - ' + this.toCode;
     this.segmentOptions = [this.segment];
 
     this.adjacentSeatService.setAdjacentSeatFormGroup(this.adjacentSeatForm);
     this.formValueChangesSubscription = this.adjacentSeatForm.valueChanges.subscribe(() => {
-      console.log('form',this.adjacentSeatForm.value);
+      console.log('adjseat form',this.adjacentSeatForm.value);
       this.totalPrice =  this.adjacentSeatForm.get('seats').value * this.adjacentSeatForm.get('price').value;
     });
 
@@ -97,7 +107,11 @@ export class AdjacentSeatComponent implements OnInit, OnDestroy {
     if(!this.submitted){
       this.totalQuantity = 0;
       this.adjacentSeatForm.patchValue({
-        seats: 0
+        seats: 0,
+        subscription: false,
+        self: false,
+        pone: false,
+        ptwo: false
       })
       this.setAjacentSeatDetails();
     }
@@ -146,5 +160,10 @@ export class AdjacentSeatComponent implements OnInit, OnDestroy {
     this.performConfirmSubscription.unsubscribe();
     this.performEditSubscription.unsubscribe();
     this.performSkipSubscription.unsubscribe();
+  }
+
+  checkSubscriptionAdded() {
+    //check if any checkboxes are chosen. If yes, make the boolean true. For now its just set to true
+    this.isSubscriptionAdded = true;
   }
 }

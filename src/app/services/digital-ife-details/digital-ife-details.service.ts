@@ -12,14 +12,26 @@ export class DigitalIfeDetailsService {
   digitalIfeForm: FormGroup;
   
   digitalIfeDetails = {
-    primaryPackageType: 'Basic',
-    primaryScreens: 1,
-    primaryPrice: 0.00,
-    primarySubscription: false,
-    secondaryPackageType: 'Kids Play',
-    secondaryScreens: 0,
-    secondaryPrice: 1.00,
-    secondarySubscription: false,
+    items: [
+      {
+        packageType: 'Basic',
+        screens: 1,
+        price: 0.00,
+        subscription: false,
+        self: false,
+        pone: false,
+        ptwo: false
+      },
+      {
+        packageType: 'Kids Play',
+        screens: 0,
+        price: 1.00,
+        subscription: false,
+        self: false,
+        pone: false,
+        ptwo: false
+      },
+    ],
     segment: 'JFK - BOS',
     additionalItems: []
   }

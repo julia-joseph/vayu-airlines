@@ -60,6 +60,10 @@ export class ExpandedDigitalIFEComponent implements OnInit, AfterViewChecked {
       } catch(err) { }
   }
 
+  get items() {
+    return this.digitalIfeForm.get('items') as FormArray;
+  }
+
   get additionalItems() {
     return this.digitalIfeForm.get('additionalItems') as FormArray;
   }
@@ -70,7 +74,10 @@ export class ExpandedDigitalIFEComponent implements OnInit, AfterViewChecked {
       packageType: new FormControl('Select'),
       screens: new FormControl('Select'),
       price: new FormControl(0),
-      subscription: new FormControl(false)
+      subscription: new FormControl(false),
+      self: new FormControl(false),
+      pone: new FormControl(false),
+      ptwo: new FormControl(false)
     }))
   }
 
@@ -98,43 +105,27 @@ export class ExpandedDigitalIFEComponent implements OnInit, AfterViewChecked {
     itemGroup.patchValue({
       screens: 1,
       price: price,
-      subscription: false
-    })
-  }
-
-  mapPrimaryPackageToPrice(){
-    const name = this.digitalIfeForm.get('primaryPackageType').value;
-    let price = this.mapSelectOptionPrice(name);
-    
-    this.digitalIfeForm.patchValue({
-      primaryScreens: 1,
-      primaryPrice: price,
-      primarySubscription: false
-    })
-  }
-
-  mapSecondaryPackageToPrice(){
-    const name = this.digitalIfeForm.get('secondaryPackageType').value;
-    let price = this.mapSelectOptionPrice(name);
-    
-    this.digitalIfeForm.patchValue({
-      secondaryScreens: 1,
-      secondaryPrice: price,
-      secondarySubscription: false
+      subscription: false,
+      self: false,
+      pone: false,
+      ptwo: false
     })
   }
 
   calculateTotalPrice() {
     let itemTotal = 0.00;
-      this.digitalIfeForm.get('additionalItems').value.forEach(e => {
-        let q = e.screens === 'Select' ? 0 : e.screens;
-        itemTotal = itemTotal + q * e.price;
-      })
 
-      this.totalPrice = 
-        this.digitalIfeForm.get('primaryScreens').value * this.digitalIfeForm.get('primaryPrice').value +
-        this.digitalIfeForm.get('secondaryScreens').value * this.digitalIfeForm.get('secondaryPrice').value +
-        itemTotal;
+    this.digitalIfeForm.get('items').value.forEach(e => {
+      let q = e.screens === 'Select' ? 0 : e.screens;
+      itemTotal = itemTotal + q * e.price;
+    })
+
+    this.digitalIfeForm.get('additionalItems').value.forEach(e => {
+      let q = e.screens === 'Select' ? 0 : e.screens;
+      itemTotal = itemTotal + q * e.price;
+    });
+
+    this.totalPrice = itemTotal;
   }
 
   openDetails() {

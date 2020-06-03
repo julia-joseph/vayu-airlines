@@ -39,7 +39,10 @@ export class ExpandedWellnessKitComponent implements OnInit {
     });
   }
 
-  
+  get items() {
+    return this.wellnessKit.get('items') as FormArray;
+  }
+
   get additionalItems() {
     return this.wellnessKit.get('additionalItems') as FormArray;
   }
@@ -51,11 +54,18 @@ export class ExpandedWellnessKitComponent implements OnInit {
       quantity: new FormControl('Select'),
       size: new FormControl('Select'),
       price: new FormControl(0),
-      subscription: new FormControl(false)
+      subscription: new FormControl(false),
+      self: new FormControl(false),
+      pone: new FormControl(false),
+      ptwo: new FormControl(false)
     }))
   }
 
   removeItem(i: number): void { 
+    this.items.removeAt(i);
+  }
+
+  removeAdditionalItem(i: number): void { 
     this.additionalItems.removeAt(i);
   }
 
@@ -81,7 +91,11 @@ export class ExpandedWellnessKitComponent implements OnInit {
     itemGroup.patchValue({
       size: size,
       price: price,
-      quantity: 1
+      quantity: 1,
+      subscription: false,
+      self: false,
+      pone: false,
+      ptwo: false
     })
   }
 
@@ -99,17 +113,18 @@ export class ExpandedWellnessKitComponent implements OnInit {
 
   calculateTotalPrice() {
     let itemTotal = 0.00;
-      this.wellnessKit.get('additionalItems').value.forEach(e => {
-        let q = e.quantity === 'Select' ? 0 : e.quantity;
-        itemTotal = itemTotal + q * e.price;
-      })
 
-      this.totalPrice = 
-        this.wellnessKit.get('maskQuantity').value * this.wellnessKit.get('maskPrice').value +
-        this.wellnessKit.get('sanitizerQuantity').value * this.wellnessKit.get('sanitizerPrice').value +
-        this.wellnessKit.get('glovesQuantity').value * this.wellnessKit.get('glovesPrice').value +
-        this.wellnessKit.get('boxedMealVegQuantity').value * this.wellnessKit.get('boxedMealVegPrice').value +
-        itemTotal;
+    this.wellnessKit.get('items').value.forEach(e => {
+      let q = e.quantity === 'Select' ? 0 : e.quantity;
+      itemTotal = itemTotal + q * e.price;
+    })
+
+    this.wellnessKit.get('additionalItems').value.forEach(e => {
+      let q = e.quantity === 'Select' ? 0 : e.quantity;
+      itemTotal = itemTotal + q * e.price;
+    })
+
+    this.totalPrice = itemTotal;
   }
 
   onConfirm() {
