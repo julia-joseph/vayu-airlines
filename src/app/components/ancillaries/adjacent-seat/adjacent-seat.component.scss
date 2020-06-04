@@ -1,99 +1,6 @@
-:host ::ng-deep {
-    .mat-tab-header {
-        height: 27vh;
-    }
-
-    .mat-ripple {
-        height: 30vh;
-    }
-
-    //mat-tab-label-container
-    .mat-tab-header {
-        position: relative;
-        bottom: 60px;
-        left: 3px;
-        padding: 0px 13px;
-    }
-
-    .mat-tab-labels {
-        justify-content: center;
-    }
-
-    .mat-tab-group.mat-primary .mat-ink-bar,
-    .mat-tab-nav-bar.mat-primary .mat-ink-bar {
-        background-color: #865e9a;
-    }
-
-    .mat-tab-body-wrapper {
-        position: relative;
-        bottom: 50px;
-    }
-
-    .mat-expansion-panel-content {
-        position: relative;
-        bottom: 30px;
-    }
-
-    //makes active tab color not faded
-    .mat-tab-label.mat-tab-label-active {
-        opacity: 1;
-    }
-
-    // .segment-select .mat-select-value {
-    //     color: #07b9e5;
-    // }
-
-    .overflow-items {
-        overflow: hidden auto;
-        height: 52.5vh;
-    }
-}
-
-[hidden] {
-    display: none !important;
-}
-
-[show] {
-    display: show !important;
-}
-
-.cancel-button {
-    border: none;
-    background-color: #808080b3;
-    color: white;
-    width: 120px;
-    height: 40px;
-    font-size: 1.2rem;
-    margin-right: 13px;
-}
-
-.confirm-button {
-    border: none;
-    background-color: #07b9e5;
-    color: white;
-    width: 120px;
-    height: 40px;
-    font-size: 1.2rem;
-    margin-right: 13px;
-}
-
-.edit-button {
-    border: none;
-    background-color: #07b9e5;
-    color: white;
-    width: 120px;
-    height: 40px;
-    font-size: 1.2rem;
-    margin-right: 13px;
-}
-
-.skip-button {
-    border: none;
-    background-color: #808080b3;
-    color: white;
-    width: 12rem;
-    height: 40px;
-    font-size: 1.2rem;
+.overflow-items {
+    overflow: hidden auto;
+    height: 52.5vh;
 }
 
 .add-items-link {
@@ -101,31 +8,9 @@
     cursor: pointer;
 }
 
-.tab-icon {
-    height: 60px;
-    margin-bottom: 15px;
-}
-
 .item-name {
     position: relative;
     left: 26px;
-}
-
-.remove-button.focus, .remove-button:focus {
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(176, 185, 193, 0.25);
-}
-
-.remove-icon {
-    transition: 1s ease-in-out;
-}
-
-.remove-icon:hover {
-    transform: rotate(180deg);
-}
-
-.subscription {
-    margin-left: 39px;
 }
 
 .seat-image {

@@ -133,16 +133,16 @@
                     </div> -->
                 </div>
 
-                <div class="row mt-4 pt-4">
+                <div class="row pl-4">
                     <div class="col-8 pl-0 pr-0" *ngIf="!submitted">
-                        <button class="confirm-button" (click)="onConfirm()">Confirm</button>
-                        <button class="skip-button" (click)= "onSkip()">
+                        <button class="blue-button mr-3" (click)="onConfirm()">Confirm</button>
+                        <button class="grey-button" (click)= "onSkip()">
                             Skip to Payment
                         </button>
                     </div>
                     <div class="col-8 pl-0 pr-0" *ngIf="submitted">
-                        <button class="edit-button" (click)="onEdit()">Edit</button>
-                        <button class="skip-button" (click)= "onSkip()">
+                        <button class="edit-button mr-3" (click)="onEdit()">Edit</button>
+                        <button class="grey-button" (click)= "onSkip()">
                             Next: Payment
                         </button>
                     </div>

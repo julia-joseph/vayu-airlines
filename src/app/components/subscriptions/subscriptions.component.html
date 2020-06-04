@@ -1,0 +1,77 @@
+<app-navbar></app-navbar>
+<app-header></app-header>
+<div class="min-vh-100">
+    <div class="card shadow-sm m-4">
+        <div class="card-body">
+            <h4 class="card-title">Subscriptions</h4>
+            <div class="card shadow-sm mt-2">
+                <div class="card-body">
+                    <mat-tab-group [selectedIndex]="selectedTab">
+                        <mat-tab>
+                          <ng-template mat-tab-label>
+                            <div>
+                              <div class="item">
+                                <mat-icon class="wellness-icon tab-icons"></mat-icon>
+                                <p class="font-weight-bold font-size1-2">
+                                  Wellness Kit & Food Selection
+                                </p>
+                              </div>
+                            </div>
+                          </ng-template>
+                          <app-wellness-subscription>
+
+                          </app-wellness-subscription>
+                        </mat-tab>
+                      
+                        <mat-tab>
+                          <ng-template mat-tab-label>
+                            <div>
+                              <div class="item">
+                                <mat-icon class="digital-ife-icon tab-icons"></mat-icon>  
+                                <p class="font-weight-bold font-size1-2">
+                                  Digital IFE
+                                </p>
+                              </div>
+                            </div>
+                          </ng-template>
+                          <app-digital-subscription>
+
+                          </app-digital-subscription>
+                        </mat-tab>
+                      
+                        <mat-tab>
+                          <ng-template mat-tab-label>
+                            <div id="index-gallery">
+                              <div class="item">
+                                <mat-icon class="seat-regrouping-icon tab-icons"></mat-icon>  
+                                <p class="font-weight-bold font-size1-2">
+                                  Seat Regrouping
+                                </p>
+                              </div>
+                            </div>
+                          </ng-template>
+                          <app-adjacent-subscription>
+
+                          </app-adjacent-subscription>
+                        </mat-tab>
+                      
+                        <mat-tab [disabled]="true">
+                          <ng-template mat-tab-label>
+                            <div id="index-gallery">
+                              <div class="item">
+                                <mat-icon class="bag-icon tab-icons"></mat-icon>  
+                                <p class="font-weight-bold font-size1-2">
+                                  Add Bags
+                                </p>
+                              </div>
+                            </div>
+                          </ng-template>
+                          Content 4
+                        </mat-tab>
+                      </mat-tab-group>                      
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer> 

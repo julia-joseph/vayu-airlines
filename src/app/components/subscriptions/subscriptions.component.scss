@@ -1,0 +1,164 @@
+:host ::ng-deep {
+    .mat-tab-header {
+      height: 120px;
+    }
+  
+    .mat-ripple {
+      height: 120px;
+    }
+  
+    // //mat-tab-label-container
+    // .mat-tab-header {
+    //   position: relative;
+    //   bottom: 60px;
+    //   left: 3px;
+    //   padding: 0px 13px;
+    // }
+  
+    .mat-tab-labels {
+      justify-content: center;
+      color: black;
+  
+      .wellness-icon {
+        background: url(../../../assets/images/ico_wellness.png) no-repeat;
+        content: "" !important;
+      }
+  
+      .digital-ife-icon {
+        background: url(../../../assets/images/ico_IFE.png) no-repeat;
+        content: "" !important;
+      }
+  
+      .seat-regrouping-icon {
+        background: url(../../../assets/images/ico_seat_regrouping.png) no-repeat;
+        content: "" !important;
+      }
+  
+      .bag-icon {
+        background: url(../../../assets/images/ico_bag.png) no-repeat;
+        content: "" !important;
+      }
+  
+      .tab-icons {
+        background-size: 60px;
+        height: 70px;
+        width: 61px;
+      }
+    }
+  
+    .mat-tab-label.mat-tab-label-active {
+      color: #865e9a;
+  
+      .wellness-icon {
+        background: url(../../../assets/images/ico_wellness_act.png) no-repeat;
+        content: "" !important;
+      }
+  
+      .digital-ife-icon {
+        background: url(../../../assets/images/ico_IFE_Act.png) no-repeat;
+        content: "" !important;
+      }
+  
+      .seat-regrouping-icon {
+        background: url(../../../assets/images/ico_seat_regrouping_act.png) no-repeat;
+        content: "" !important;
+      }
+  
+  
+      .bag-icon {
+        background: url(../../../assets/images/ico_bag_act.png) no-repeat;
+        content: "" !important;
+      }
+  
+      .tab-icons {
+        background-size: 60px;
+        height: 70px;
+        width: 61px;
+      }
+    }
+  
+    .mat-tab-group.mat-primary .mat-ink-bar,
+    .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+      background-color: #865e9a;
+    }
+  
+    // .mat-tab-body-wrapper {
+    //   position: relative;
+    //   bottom: 50px;
+    // }
+  
+    // .mat-expansion-panel-content {
+    //   position: relative;
+    //   bottom: 30px;
+    // }
+  
+  //makes active tab color not faded
+    .mat-tab-label.mat-tab-label-active {
+      opacity: 1;
+    }
+  
+    // .segment-select .mat-select-value {
+    //   color: #07b9e5;
+    // }
+  
+    .mat-select-arrow {
+      width: 13px;
+      height: 11px;
+      background: url(../../../assets/images/ico_chevron.png) no-repeat;
+      background-size: 13px;
+      border: none;
+      margin: 0 4px;
+    }
+  
+    .mat-radio-label-content {
+      font-size: 0.9rem;
+    }
+  
+    .mat-radio-button.mat-accent .mat-radio-inner-circle, .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+        background-color: #07b9e5;
+    }
+  
+    .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
+      border-color: rgba(105, 103, 103, 0.5);
+    }
+  
+    .mat-radio-container{
+        height: 15px;
+        width: 15px;
+    }
+  
+    .mat-radio-outer-circle{
+        height: 15px;
+        width: 15px;
+    }
+  
+    .mat-radio-inner-circle{
+        height: 15px;
+        width: 15px;
+    }
+  
+    .mat-radio-button .mat-radio-ripple{
+        height: 30px; /*double of your required circle radius*/
+        width: 30px;  /*double of your required circle radius*/
+        left: calc(50% - 15px); /*'10px'-same as your required circle radius*/
+        top: calc(50% - 15px); /*'10px'-same as your required circle radius*/
+    }
+  
+    .mat-checkbox-layout {
+      .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+        background-color: #865e9a!important;
+      }
+      .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+        opacity: 0.03 !important;
+        background-color: #865e9a!important;
+      }
+    }
+  }
+  
+  [hidden] {
+    display: none !important;
+  }
+  
+  [show] {
+    display: show !important;
+  }

@@ -18,4 +18,8 @@ export class HeaderComponent implements OnInit {
   redirect() {
     this.router.navigate(['/flight-search']);
   }
+
+  onMySubscriptions() {
+    this.router.navigate(['/subscriptions']);
+  }
 }

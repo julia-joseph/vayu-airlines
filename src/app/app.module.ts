@@ -30,6 +30,10 @@ import { ExpandedDigitalIFEComponent } from './components/ancillaries/expanded-a
 import { ExpandedAdjacentSeatComponent } from './components/ancillaries/expanded-ancillaries-dialog/expanded-adjacent-seat/expanded-adjacent-seat.component';
 import { DonationsComponent } from './components/donations/donations.component';
 import { RecentEventsComponent } from './components/donations/recent-events/recent-events.component';
+import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
+import { WellnessSubscriptionComponent } from './components/subscriptions/wellness-subscription/wellness-subscription.component';
+import { DigitalSubscriptionComponent } from './components/subscriptions/digital-subscription/digital-subscription.component';
+import { AdjacentSubscriptionComponent } from './components/subscriptions/adjacent-subscription/adjacent-subscription.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +52,11 @@ import { RecentEventsComponent } from './components/donations/recent-events/rece
     ExpandedDigitalIFEComponent,
     ExpandedAdjacentSeatComponent,
     DonationsComponent,
-    RecentEventsComponent
+    RecentEventsComponent,
+    SubscriptionsComponent,
+    WellnessSubscriptionComponent,
+    DigitalSubscriptionComponent,
+    AdjacentSubscriptionComponent
   ],
   imports: [
     BrowserModule,

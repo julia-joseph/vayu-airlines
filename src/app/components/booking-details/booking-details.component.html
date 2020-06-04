@@ -1,60 +1,62 @@
 <app-navbar></app-navbar>
 <app-header></app-header>
-<div class="card checkout">
-  <div class="card-body">
-    <h4 class="card-title">Booking Details</h4>
-    <div class="">
-      <div class="row">
-        <div class="col-lg-9 col-md-12 col-sm-12 pb-4">
-          <mat-accordion>
-            <mat-expansion-panel class="mb-3 shadow-sm" disabled="isDisabled" hideToggle>
-              <mat-expansion-panel-header>
-                <h5 class="font-weight-bold w-100 pt-2 mt-1">Traveller Details</h5>
-                <mat-icon></mat-icon>
-              </mat-expansion-panel-header>
-              This the expansion 1 content
-            </mat-expansion-panel>
-            <mat-expansion-panel class="mb-3 shadow-sm" disabled="isDisabled" hideToggle>
-              <mat-expansion-panel-header>
-                <h5 class="font-weight-bold w-100 pt-2 mt-1">Trip Contacts</h5>
-                <mat-icon></mat-icon>
-              </mat-expansion-panel-header>
-              This the expansion 2 content
-            </mat-expansion-panel>
-            <mat-expansion-panel class="mb-3 shadow-sm" disabled="isDisabled" hideToggle>
-              <mat-expansion-panel-header>
-                <h5 class="font-weight-bold w-100 pt-2 mt-1">Seat Selection</h5>
-                <mat-icon></mat-icon>
-              </mat-expansion-panel-header>
-              This the expansion 3 content
-            </mat-expansion-panel>
-            <mat-expansion-panel class="mb-3 shadow-sm" hideToggle>
-              <mat-expansion-panel-header>
-                <h5 class="font-weight-bold w-100 pt-2 mt-1">Ancillaries</h5>
-                <mat-icon></mat-icon>
-              </mat-expansion-panel-header>
-              <app-ancillaries
-                (onSubmit)="onSubmitOfAncillaries()"
-                [fromCode]="flightDetails.fromCode"
-                [toCode]="flightDetails.toCode"
-              >
-              </app-ancillaries>
-            </mat-expansion-panel>
-            <mat-expansion-panel class="mb-3 shadow-sm" disabled="isDisabled" hideToggle>
-              <mat-expansion-panel-header>
-                <h5 class="font-weight-bold w-100 pt-2 mt-1">Payment</h5>
-                <mat-icon></mat-icon>
-              </mat-expansion-panel-header>
-              This the expansion 2 content
-            </mat-expansion-panel>
-          </mat-accordion>
-        </div>
-        <div class="col-lg-3 col-md-12 col-sm-12">
-          <app-payment-summary
-            [confirmed]="confirmed"
-            [flightDetails]="flightDetails"
-          >
-          </app-payment-summary>
+<div class="min-vh-100">
+  <div class="card checkout">
+    <div class="card-body">
+      <h4 class="card-title">Booking Details</h4>
+      <div class="">
+        <div class="row">
+          <div class="col-lg-9 col-md-12 col-sm-12 pb-4">
+            <mat-accordion>
+              <mat-expansion-panel class="mb-3 shadow-sm" disabled="isDisabled" hideToggle>
+                <mat-expansion-panel-header>
+                  <h5 class="font-weight-bold w-100 pt-2 mt-1">Traveller Details</h5>
+                  <mat-icon></mat-icon>
+                </mat-expansion-panel-header>
+                This the expansion 1 content
+              </mat-expansion-panel>
+              <mat-expansion-panel class="mb-3 shadow-sm" disabled="isDisabled" hideToggle>
+                <mat-expansion-panel-header>
+                  <h5 class="font-weight-bold w-100 pt-2 mt-1">Trip Contacts</h5>
+                  <mat-icon></mat-icon>
+                </mat-expansion-panel-header>
+                This the expansion 2 content
+              </mat-expansion-panel>
+              <mat-expansion-panel class="mb-3 shadow-sm" disabled="isDisabled" hideToggle>
+                <mat-expansion-panel-header>
+                  <h5 class="font-weight-bold w-100 pt-2 mt-1">Seat Selection</h5>
+                  <mat-icon></mat-icon>
+                </mat-expansion-panel-header>
+                This the expansion 3 content
+              </mat-expansion-panel>
+              <mat-expansion-panel class="mb-3 shadow-sm" hideToggle>
+                <mat-expansion-panel-header>
+                  <h5 class="font-weight-bold w-100 pt-2 mt-1">Ancillaries</h5>
+                  <mat-icon></mat-icon>
+                </mat-expansion-panel-header>
+                <app-ancillaries
+                  (onSubmit)="onSubmitOfAncillaries()"
+                  [fromCode]="flightDetails.fromCode"
+                  [toCode]="flightDetails.toCode"
+                >
+                </app-ancillaries>
+              </mat-expansion-panel>
+              <mat-expansion-panel class="mb-3 shadow-sm" disabled="isDisabled" hideToggle>
+                <mat-expansion-panel-header>
+                  <h5 class="font-weight-bold w-100 pt-2 mt-1">Payment</h5>
+                  <mat-icon></mat-icon>
+                </mat-expansion-panel-header>
+                This the expansion 2 content
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+          <div class="col-lg-3 col-md-12 col-sm-12">
+            <app-payment-summary
+              [confirmed]="confirmed"
+              [flightDetails]="flightDetails"
+            >
+            </app-payment-summary>
+          </div>
         </div>
       </div>
     </div>

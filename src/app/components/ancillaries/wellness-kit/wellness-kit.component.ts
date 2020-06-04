@@ -14,7 +14,8 @@ import { SubscriptionService } from 'src/app/services/subscription/subscription.
 })
 export class WellnessKitComponent implements OnInit, AfterViewChecked {
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
-  disableScrollDown = false
+  disableScrollDown = false;
+  
   @Input() fromCode: string = 'JFK';
   @Input() toCode: string = 'BOS';
   @Output() onSubmit = new EventEmitter<void>();

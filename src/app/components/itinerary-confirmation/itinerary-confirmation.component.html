@@ -1,210 +1,211 @@
 <app-navbar></app-navbar>
 <app-header></app-header>
-
-<div class="card itinerary-confirmation-section">
-    <div class="card-body">
-        <div class="row p-0 pb-2 mt-2 mb-2">
-            <div class="col-6">
-                <h4 class="card-title">Itinerary Confirmation</h4>
-            </div>
-            <div class="col-6">
-                <div class="row justify-content-end">
-                    <button class="check-in-btn mr-2"
-                            matTooltip="Donate for COVID-19"
-                            matTooltipPosition="above"
-                            (click)="onDonate()">
-                        Donate
-                    </button>
-                    <button [disabled]="true" class="check-in-btn mr-3">Print Itinerary</button>
+<div class="min-vh-100">
+    <div class="card itinerary-confirmation-section">
+        <div class="card-body">
+            <div class="row p-0 pb-2 mt-2 mb-2">
+                <div class="col-6">
+                    <h4 class="card-title">Itinerary Confirmation</h4>
+                </div>
+                <div class="col-6">
+                    <div class="row justify-content-end">
+                        <button class="check-in-btn mr-2"
+                                matTooltip="Donate for COVID-19"
+                                matTooltipPosition="above"
+                                (click)="onDonate()">
+                            Donate
+                        </button>
+                        <button [disabled]="true" class="check-in-btn mr-3">Print Itinerary</button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row border-bottom ml-1 mr-1 mb-4"></div>
+            <div class="row border-bottom ml-1 mr-1 mb-4"></div>
 
-        <div class="row font-size-1-1 font-weight-bold mt-3 mb-3">
-            <div class="col-6">
-                <div>
-                    <span class="">Confirmation Code: </span>
-                    <span class="">{{ confirmmationCode }}</span>
+            <div class="row font-size-1-1 font-weight-bold mt-3 mb-3">
+                <div class="col-6">
+                    <div>
+                        <span class="">Confirmation Code: </span>
+                        <span class="">{{ confirmmationCode }}</span>
+                    </div>
+                </div>
+                <div class="col-6 d-flex justify-content-end">
+                    <div class=" ">
+                        {{ from }} to {{ to }}
+                    </div>
                 </div>
             </div>
-            <div class="col-6 d-flex justify-content-end">
-                <div class=" ">
-                    {{ from }} to {{ to }}
+
+            <div class="row mt-1 mb-4">
+                <div class="col-6">
+                    <span class="blue links">Manage Your Booking</span>
+                </div>
+                <div class="col-6 d-flex justify-content-end">
+                    <div class="">
+                        <span class="blue links">Add to Calendar</span> |
+                        <span class="blue links">Email</span>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row mt-1 mb-4">
-            <div class="col-6">
-                <span class="blue links">Manage Your Booking</span>
-            </div>
-            <div class="col-6 d-flex justify-content-end">
-                <div class="">
-                    <span class="blue links">Add to Calendar</span> |
-                    <span class="blue links">Email</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="row itinerary-confirmation-details-row">
-            <div class="card w-100">
-                <div class="card-body ml-3 mr-3">
-                    <div class="row">
-                        <div class="col-3">
-                            <span class="font-weight-bold">Departing:</span> {{ departDateFormat1 }},&nbsp; &nbsp;VY912
-                        </div>
-                        <div class="col-3">
-                            {{ fromCode }} - {{ toCode }} 07:15 AM
-                        </div>
-                        <div class="col-3">
-                            <!-- pts 
-                            <span class="font-weight-bold font-size1-3">5000+</span> -->
-                        </div>
-                        <div class="col-3">
-                            <div class="row justify-content-end">
-                                <span class="mt-1">Total &nbsp;</span>
-                                <span class="font-weight-bold font-size1-3">
-                                    ${{ finalPrice | number: '.2'}}
-                                </span>
-                                <span class="material-icons mt-1">
-                                    keyboard_arrow_down
-                                </span>
+            <div class="row itinerary-confirmation-details-row">
+                <div class="card w-100">
+                    <div class="card-body ml-3 mr-3">
+                        <div class="row">
+                            <div class="col-3">
+                                <span class="font-weight-bold">Departing:</span> {{ departDateFormat1 }},&nbsp; &nbsp;VY912
                             </div>
-                            
+                            <div class="col-3">
+                                {{ fromCode }} - {{ toCode }} 07:15 AM
+                            </div>
+                            <div class="col-3">
+                                <!-- pts 
+                                <span class="font-weight-bold font-size1-3">5000+</span> -->
+                            </div>
+                            <div class="col-3">
+                                <div class="row justify-content-end">
+                                    <span class="mt-1">Total &nbsp;</span>
+                                    <span class="font-weight-bold font-size1-3">
+                                        ${{ finalPrice | number: '.2'}}
+                                    </span>
+                                    <span class="material-icons mt-1">
+                                        keyboard_arrow_down
+                                    </span>
+                                </div>
+                                
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row m-4">
-            A confirmation email has been sent to anne@gmail.com. If you haven't received it for some reason
-            please let us know at 1-800-VAYU
-        </div>
+            <div class="row m-4">
+                A confirmation email has been sent to anne@gmail.com. If you haven't received it for some reason
+                please let us know at 1-800-VAYU
+            </div>
 
-        <!-- <div class="row itinerary-confirmation-details-row">
-            <div class="card w-100">
-                <div class="card-body ml-3 mr-3">
-                    <div class="row font-weight-bold">
-                        <div class="col-3">
-                            Passenger Details
-                        </div>
-                        <div class="col-3">
-                            Ms. Anne
-                        </div>
-                        <div class="col-3">
-                            Frank
-                        </div>
-                        <div class="col-3 text-muted">
-                            {{ totalPassengers }} 
-                            <span *ngIf="totalPassengers === 1">Passenger</span>
-                            <span *ngIf="totalPassengers > 1">Passengers</span>
+            <!-- <div class="row itinerary-confirmation-details-row">
+                <div class="card w-100">
+                    <div class="card-body ml-3 mr-3">
+                        <div class="row font-weight-bold">
+                            <div class="col-3">
+                                Passenger Details
+                            </div>
+                            <div class="col-3">
+                                Ms. Anne
+                            </div>
+                            <div class="col-3">
+                                Frank
+                            </div>
+                            <div class="col-3 text-muted">
+                                {{ totalPassengers }} 
+                                <span *ngIf="totalPassengers === 1">Passenger</span>
+                                <span *ngIf="totalPassengers > 1">Passengers</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div> -->
+            </div> -->
 
-        <div class="row itinerary-confirmation-details-row">
-            <div class="card w-100">
-                <div class="card-body m-3">
-                    <div class="row mb-3">
-                        <div class="col-12 font-weight-bold">
-                            Time to check in for your flight to {{ to }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-9">
-                            Your flight for {{ departDateFormat2 }} is available for check-in. If you want to make a same day ticket
-                            change or other changes to your trip, review your options <span class="blue links">Here</span>
-                        </div>
-                        <div class="col-3 text-center">
-                            <button [disabled]="true" class="check-in-btn">Check-in Online</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row m-1 font-weight-bold font-size1-2">
-            Extra items for your flight to {{ to }}
-        </div>
-
-        <div class="row mb-3 mt-4">
-            <div class="col-lg-6 col-md-12 col-sm-12">
-                <div class="card h-100" *ngIf="totalWellnessKitPrice !== 0">
-                    <div class="card-body">
-                        <div class="row pl-3 pr-3">
-                            <h5 class="card-title">
-                                <!-- <span class=">Ancillaries Summary</span> -  -->
-                                <span class="">Wellness Kit</span>
-                            </h5>
+            <div class="row itinerary-confirmation-details-row">
+                <div class="card w-100">
+                    <div class="card-body m-3">
+                        <div class="row mb-3">
+                            <div class="col-12 font-weight-bold">
+                                Time to check in for your flight to {{ to }}
+                            </div>
                         </div>
                         <div class="row">
-                            <div class="card h-100 w-100 m-3">
-                                <div class="card-body">
-                                    <div class="row font-weight-bold d-flex justify-content-between mt-1 mb-1 border-bottom">
-                                        <h5 class="ml-3">{{ fromCode }} - {{ toCode }}</h5>
-                                        <div class="mr-3">Delivery - {{ wellnessKit.delivery }}</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="row font-weight-light text-muted mt-1 mb-1">
-                                                <div class="col-3">
-                
+                            <div class="col-9">
+                                Your flight for {{ departDateFormat2 }} is available for check-in. If you want to make a same day ticket
+                                change or other changes to your trip, review your options <span class="blue links">Here</span>
+                            </div>
+                            <div class="col-3 text-center">
+                                <button [disabled]="true" class="check-in-btn">Check-in Online</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row m-1 font-weight-bold font-size1-2">
+                Extra items for your flight to {{ to }}
+            </div>
+
+            <div class="row mb-3 mt-4">
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <div class="card h-100" *ngIf="totalWellnessKitPrice !== 0">
+                        <div class="card-body">
+                            <div class="row pl-3 pr-3">
+                                <h5 class="card-title">
+                                    <!-- <span class=">Ancillaries Summary</span> -  -->
+                                    <span class="">Wellness Kit</span>
+                                </h5>
+                            </div>
+                            <div class="row">
+                                <div class="card h-100 w-100 m-3">
+                                    <div class="card-body">
+                                        <div class="row font-weight-bold d-flex justify-content-between mt-1 mb-1 border-bottom">
+                                            <h5 class="ml-3">{{ fromCode }} - {{ toCode }}</h5>
+                                            <div class="mr-3">Delivery - {{ wellnessKit.delivery }}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="row font-weight-light text-muted mt-1 mb-1">
+                                                    <div class="col-3">
+                    
+                                                    </div>
+                                                    <div class="col-3">
+                                                        Quantity
+                                                    </div>
+                                                    <div class="col-3">
+                                                        Size
+                                                    </div>
+                                                    <div class="col-3">
+                                                        Price
+                                                    </div>
                                                 </div>
-                                                <div class="col-3">
-                                                    Quantity
-                                                </div>
-                                                <div class="col-3">
-                                                    Size
-                                                </div>
-                                                <div class="col-3">
-                                                    Price
-                                                </div>
-                                            </div>
-                                            <div *ngFor="let item of wellnessKit.items">
-                                                <div *ngIf="item.quantity!== 0">
-                                                    <div class="row mb-2">
-                                                        <div class="col-3 font-weight-400">
-                                                            {{ item.item }}
-                                                        </div>
-                                                        <div class="col-3">
-                                                            <div class="border w-75 p-1">
-                                                                {{ item.quantity }}
+                                                <div *ngFor="let item of wellnessKit.items">
+                                                    <div *ngIf="item.quantity!== 0">
+                                                        <div class="row mb-2">
+                                                            <div class="col-3 font-weight-400">
+                                                                {{ item.item }}
                                                             </div>
-                                                        </div>
-                                                        <div class="col-3">
-                                                            <div class="border w-75 p-1 text-truncate">
-                                                                {{ item.size }}
+                                                            <div class="col-3">
+                                                                <div class="border w-75 p-1">
+                                                                    {{ item.quantity }}
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-3">
-                                                            $ <span class="font-size1-3">{{ item.quantity * item.price | number : '.2' }}</span>
+                                                            <div class="col-3">
+                                                                <div class="border w-75 p-1 text-truncate">
+                                                                    {{ item.size }}
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-3">
+                                                                $ <span class="font-size1-3">{{ item.quantity * item.price | number : '.2' }}</span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div *ngFor="let item of wellnessKit.additionalItems">
-                                                <div *ngIf="item.item !== 'Select'">
-                                                    <div class="row mb-2">
-                                                        <div class="col-3 font-weight-400">
-                                                            {{ item.item }}
-                                                        </div>
-                                                        <div class="col-3">
-                                                            <div class="border w-75 p-1">
-                                                                {{ item.quantity }}
+                                                <div *ngFor="let item of wellnessKit.additionalItems">
+                                                    <div *ngIf="item.item !== 'Select'">
+                                                        <div class="row mb-2">
+                                                            <div class="col-3 font-weight-400">
+                                                                {{ item.item }}
                                                             </div>
-                                                        </div>
-                                                        <div class="col-3">
-                                                            <div class="border w-75 p-1 text-truncate">
-                                                                {{ item.size }}
+                                                            <div class="col-3">
+                                                                <div class="border w-75 p-1">
+                                                                    {{ item.quantity }}
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-3">
-                                                            $ <span class="font-size1-3">{{ item.quantity * item.price | number : '.2' }}</span>
+                                                            <div class="col-3">
+                                                                <div class="border w-75 p-1 text-truncate">
+                                                                    {{ item.size }}
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-3">
+                                                                $ <span class="font-size1-3">{{ item.quantity * item.price | number : '.2' }}</span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -213,93 +214,93 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row d-flex justify-content-end ml-1 mr-4">
+                                <div>
+                                    <span class="font-weight-bold">Total: </span>
+                                    $ <span class="font-size1-5">{{ this.totalWellnessKitPrice | number : '.2'}}</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="row d-flex justify-content-end ml-1 mr-4">
-                            <div>
-                                <span class="font-weight-bold">Total: </span>
-                                $ <span class="font-size1-5">{{ this.totalWellnessKitPrice | number : '.2'}}</span>
+                    </div>
+
+                    <div class="card h-100" *ngIf="totalWellnessKitPrice === 0">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center">
+                                <img src="../../../assets/images/ico_wellness.png">
+                                <h4 class="mt-2"> Wellness Kit & Food </h4>
+                                <span class="font-weight-bold cursor-pointer">
+                                    Add &gt;
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="card h-100" *ngIf="totalWellnessKitPrice === 0">
-                    <div class="card-body">
-                        <div class="d-flex flex-column align-items-center">
-                            <img src="../../../assets/images/ico_wellness.png">
-                            <h4 class="mt-2"> Wellness Kit & Food </h4>
-                            <span class="font-weight-bold cursor-pointer">
-                                Add &gt;
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <div class="card h-100" *ngIf="totalDigitalIfeQuantity !== 0">
+                        <div class="card-body">
+                            <div class="row pl-3 pr-3">
+                                <h5 class="card-title">
+                                    <!-- <span class=">Ancillaries Summary</span> -  -->
+                                    <span class="">Digital IFE</span>
+                                </h5>
+                            </div>
+                            <div class="row">
+                                <div class="card h-100 w-100 m-3">
+                                    <div class="card-body">
+                                        <div class="row font-weight-bold d-flex justify-content-between mt-1 mb-1 border-bottom">
+                                            <h5 class="ml-3">{{ fromCode }} - {{ toCode }}</h5>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="row font-weight-light text-muted mt-1 mb-1">
+                                                    <div class="col-4">
+                                                        Package Type
+                                                    </div>
+                                                    <div class="col-4">
+                                                        Devices
+                                                    </div>
+                                                    <div class="col-4">
+                                                        Price
+                                                    </div>
+                                                </div>
 
-            <div class="col-lg-6 col-md-12 col-sm-12">
-                <div class="card h-100" *ngIf="totalDigitalIfeQuantity !== 0">
-                    <div class="card-body">
-                        <div class="row pl-3 pr-3">
-                            <h5 class="card-title">
-                                <!-- <span class=">Ancillaries Summary</span> -  -->
-                                <span class="">Digital IFE</span>
-                            </h5>
-                        </div>
-                        <div class="row">
-                            <div class="card h-100 w-100 m-3">
-                                <div class="card-body">
-                                    <div class="row font-weight-bold d-flex justify-content-between mt-1 mb-1 border-bottom">
-                                        <h5 class="ml-3">{{ fromCode }} - {{ toCode }}</h5>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="row font-weight-light text-muted mt-1 mb-1">
-                                                <div class="col-4">
-                                                    Package Type
-                                                </div>
-                                                <div class="col-4">
-                                                    Devices
-                                                </div>
-                                                <div class="col-4">
-                                                    Price
-                                                </div>
-                                            </div>
-
-                                            <div *ngFor="let item of digitalIfe.items">
-                                                <div *ngIf="item.screens!== 0">
-                                                    <div class="row mb-2">
-                                                        <div class="col-4">
-                                                            <div class="border w-75 p-1">
-                                                                {{ item.packageType }}
+                                                <div *ngFor="let item of digitalIfe.items">
+                                                    <div *ngIf="item.screens!== 0">
+                                                        <div class="row mb-2">
+                                                            <div class="col-4">
+                                                                <div class="border w-75 p-1">
+                                                                    {{ item.packageType }}
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <div class="border w-75 p-1">
-                                                                {{ item.screens }}
+                                                            <div class="col-4">
+                                                                <div class="border w-75 p-1">
+                                                                    {{ item.screens }}
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-3">
-                                                            $ <span class="font-size1-3">{{ item.screens * item.price | number : '.2' }}</span>
+                                                            <div class="col-3">
+                                                                $ <span class="font-size1-3">{{ item.screens * item.price | number : '.2' }}</span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <div *ngFor="let item of digitalIfe.items">
-                                                <div *ngIf="item.packageType !== 'Select' && item.screens!== 0">
-                                                    <div class="row mb-2">
-                                                        <div class="col-4">
-                                                            <div class="border w-75 p-1">
-                                                                {{ item.packageType }}
+                                                <div *ngFor="let item of digitalIfe.items">
+                                                    <div *ngIf="item.packageType !== 'Select' && item.screens!== 0">
+                                                        <div class="row mb-2">
+                                                            <div class="col-4">
+                                                                <div class="border w-75 p-1">
+                                                                    {{ item.packageType }}
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <div class="border w-75 p-1">
-                                                                {{ item.screens }}
+                                                            <div class="col-4">
+                                                                <div class="border w-75 p-1">
+                                                                    {{ item.screens }}
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-3">
-                                                            $ <span class="font-size1-3">{{ item.screens * item.price | number : '.2' }}</span>
+                                                            <div class="col-3">
+                                                                $ <span class="font-size1-3">{{ item.screens * item.price | number : '.2' }}</span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -308,96 +309,96 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row d-flex justify-content-end ml-1 mr-4">
-                            <div>
-                                <span class="font-weight-bold">Total: </span>
-                                $ <span class="font-size1-5">{{ totalDigitalIfePrice | number : '.2'}}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card h-100" *ngIf="totalDigitalIfeQuantity === 0">
-                    <div class="card-body">
-                        <div class="d-flex flex-column align-items-center">
-                            <img src="../../../assets/images/ico_IFE.png">
-                            <h4 class="mt-2"> Digital IFE </h4>
-                            <span class="font-weight-bold cursor-pointer">
-                                Add &gt;
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mb-3 mt-4">
-            <div class="col-lg-6 col-md-12 col-sm-12">
-                <div class="card h-100" *ngIf="false">
-                    <div class="card-body">
-                        <div class="row pl-3 pr-3">
-                            <div class="col-6">
-                                <div class="row">
-                                    <img src="../../../assets/images/ico_checkin.png" class="icons mr-2">
-                                    <h5 class="card-title">
-                                        <!-- <span class=">Ancillaries Summary</span> -  -->
-                                        Pick Your Seat
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="row justify-content-end">
-                                    <span class="mt-1">From</span>
-                                    <span class="font-size1-3 font-weight-bold ml-2">$35</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row pl-3 pr-3 mt-2">
-                            <div class="col-6 pl-0">
-                                Add even more space to yourself or anyone in your party
-                            </div>
-                            <div class="col-6">
-                                <div class="row justify-content-end">
-                                    <span class="blue links">Add</span>
-                                </div>  
-                            </div>
-                        </div>
-                        <div class="row pl-3 pr-3 mt-3">
-                            <div class="col-6 pl-0">
-                                <img src="../../../assets/images/ico_insurance.png" class="icons">
-                            </div>
-                            <div class="col-6">
-                                <div class="row justify-content-end">
-                                    <img src="../../../assets/images/ico_skipline.png" class="icons">
+                            <div class="row d-flex justify-content-end ml-1 mr-4">
+                                <div>
+                                    <span class="font-weight-bold">Total: </span>
+                                    $ <span class="font-size1-5">{{ totalDigitalIfePrice | number : '.2'}}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="card h-100" *ngIf="true">
-                    <div class="card-body">
-                        <div class="d-flex flex-column align-items-center">
-                            <img src="../../../assets/images/ico_seat_regrouping.png">
-                            <h4 class="mt-2"> Seat Regrouping </h4>
-                            <span class="font-weight-bold cursor-pointer">
-                                Add &gt;
-                            </span>
+                    <div class="card h-100" *ngIf="totalDigitalIfeQuantity === 0">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center">
+                                <img src="../../../assets/images/ico_IFE.png">
+                                <h4 class="mt-2"> Digital IFE </h4>
+                                <span class="font-weight-bold cursor-pointer">
+                                    Add &gt;
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-6 col-md-12 col-sm-12">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="d-flex flex-column align-items-center">
-                            <img src="../../../assets/images/ico_bag.png">
-                            <h4 class="mt-2"> Check Bags </h4>
-                            <span class="font-weight-bold cursor-pointer">
-                                Add &gt;
-                            </span>
+            <div class="row mb-3 mt-4">
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <div class="card h-100" *ngIf="false">
+                        <div class="card-body">
+                            <div class="row pl-3 pr-3">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <img src="../../../assets/images/ico_checkin.png" class="icons mr-2">
+                                        <h5 class="card-title">
+                                            <!-- <span class=">Ancillaries Summary</span> -  -->
+                                            Pick Your Seat
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="row justify-content-end">
+                                        <span class="mt-1">From</span>
+                                        <span class="font-size1-3 font-weight-bold ml-2">$35</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row pl-3 pr-3 mt-2">
+                                <div class="col-6 pl-0">
+                                    Add even more space to yourself or anyone in your party
+                                </div>
+                                <div class="col-6">
+                                    <div class="row justify-content-end">
+                                        <span class="blue links">Add</span>
+                                    </div>  
+                                </div>
+                            </div>
+                            <div class="row pl-3 pr-3 mt-3">
+                                <div class="col-6 pl-0">
+                                    <img src="../../../assets/images/ico_insurance.png" class="icons">
+                                </div>
+                                <div class="col-6">
+                                    <div class="row justify-content-end">
+                                        <img src="../../../assets/images/ico_skipline.png" class="icons">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card h-100" *ngIf="true">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center">
+                                <img src="../../../assets/images/ico_seat_regrouping.png">
+                                <h4 class="mt-2"> Seat Regrouping </h4>
+                                <span class="font-weight-bold cursor-pointer">
+                                    Add &gt;
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center">
+                                <img src="../../../assets/images/ico_bag.png">
+                                <h4 class="mt-2"> Check Bags </h4>
+                                <span class="font-weight-bold cursor-pointer">
+                                    Add &gt;
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -405,5 +406,4 @@
         </div>
     </div>
 </div>
-
 <app-footer></app-footer>

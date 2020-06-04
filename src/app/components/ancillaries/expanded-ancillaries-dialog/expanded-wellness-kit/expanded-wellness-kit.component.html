@@ -453,9 +453,9 @@
 
           <div class="row p-4">
             <div class="col-8 pl-0 pr-0">
-              <button class="confirm-button" (click)="onConfirm()" *ngIf="!submitted">Confirm</button>
-              <button class="edit-button" (click)="onEdit()" *ngIf="submitted">Edit</button>
-              <button class="skip-button" (click)="onSkip()">
+              <button class="blue-button mr-3" (click)="onConfirm()" *ngIf="!submitted">Confirm</button>
+              <button class="blue-button mr-3" (click)="onEdit()" *ngIf="submitted">Edit</button>
+              <button class="grey-button" (click)="onSkip()">
                 <span *ngIf="!submitted">Skip To Digital IFE</span>
                 <span *ngIf="submitted">Next: Digital IFE</span>
               </button>

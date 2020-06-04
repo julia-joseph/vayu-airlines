@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { BookingDetailsComponent } from './components/booking-details/booking-details.component';
 import { ItineraryConfirmationComponent } from './components/itinerary-confirmation/itinerary-confirmation.component';
 import { DonationsComponent } from './components/donations/donations.component';
+import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'booking-details', component: BookingDetailsComponent},
   { path: 'itinerary-confirmation', component: ItineraryConfirmationComponent},
   { path: 'donations', component: DonationsComponent},
+  { path: 'subscriptions', component: SubscriptionsComponent},
   {
     path: '',
     redirectTo: '/login',
