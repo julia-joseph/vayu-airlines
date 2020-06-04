@@ -33,6 +33,12 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
     additionalItems: new FormArray([ ])
   });
 
+  applySubForm: FormGroup = new FormGroup({
+    self: new FormControl(false),
+    pone: new FormControl(false),
+    ptwo: new FormControl(false),
+  });
+
   itemNameOptions: string[] = ['Mask','Sanitizer','Gloves','Boxed Meal'];
   itemQuantityOptions: number[] = [0, 1, 2];
   itemSizeOptions: any[] = [
@@ -46,17 +52,13 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
     'Adult/Rice Cake','Kid/Rice Cake']
   ];
 
-  totalPrice: number = 28.74;
+  totalPrice: number = 0;
   totalQty: number = 0;
   ogForm;
   isNewItemsAdded: boolean = false;
 
   isFirstBooking: boolean = false;
   isSubscriptionAdded: boolean = false;
-
-  selfChosen: boolean = false;
-  poneChosen: boolean = false;
-  ptwoChosen: boolean = false;
 
   constructor(
     public dialog: MatDialog,
@@ -69,26 +71,17 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
   ngOnInit(): void {
     this.isFirstBooking = this.flightService.isFirstBooking();
     this.setInitialItems();
+    this.calculateTotalPrice();
 
     this.segment = this.fromCode + ' - ' + this.toCode;
     this.segmentOptions = [this.segment];
 
     this.wellnessKitService.setWellnessKitFormGroup(this.wellnessKitForm);
+    this.wellnessKitService.setWellnessApplySubFormGroup(this.applySubForm);
     this.wellnessKitForm.valueChanges.subscribe(() => {
-      console.log('form',this.wellnessKitForm.value)
-      let itemTotal = 0.00;
-
-      this.wellnessKitForm.get('items').value.forEach(e => {
-        let q = e.quantity === 'Select' ? 0 : e.quantity;
-        itemTotal = itemTotal + q * e.price;
-      })
-
-      this.wellnessKitForm.get('additionalItems').value.forEach(e => {
-        let q = e.quantity === 'Select' ? 0 : e.quantity;
-        itemTotal = itemTotal + q * e.price;
-      })
-
-      this.totalPrice = itemTotal;
+      console.log('wellness form',this.wellnessKitForm.value);
+      console.log('wellness formGroup',this.wellnessKitForm);
+      this.calculateTotalPrice();
     });
 
     this.wellnessKitService.performConfirmObservable.subscribe((wellnessKit) => {
@@ -104,6 +97,10 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
 
     this.wellnessKitService.performSkipObservable.subscribe(() => {
       this.onSkipToDigitalIFE();
+    })
+
+    this.applySubForm.valueChanges.subscribe(() => {
+      this.checkSubscriptionAdded();
     })
   }
 
@@ -134,18 +131,10 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
 
   setInitialItems() {
     if(this.isFirstBooking) {
-      this.items.push(this.addItemAsFormGroup('Mask',1,'Adult/M',5.24,false,false,false,false));
-      this.items.push(this.addItemAsFormGroup('Sanitizer',1,'1 OZ (30 mL)',2.3,false,false,false,false));
-      this.items.push(this.addItemAsFormGroup('Gloves',1,'Adult/M',1.2,false,false,false,false));
-      this.items.push(this.addItemAsFormGroup('Boxed Meal',1,'Adult/Veg Sandwich',20,false,false,false,false));
-    }
-    else {
-      this.subscriptionService.getWellnessKitSubscription().forEach(item => {
-        this.items.push(this.addItemAsFormGroup(item.item,item.quantity,item.size,item.price,
-                                                item.subscription,item.self,item.pone,item.ptwo))
-      })
-      console.log('actualitems',this.subscriptionService.getWellnessKitSubscription());
-      console.log('subbeditems',this.items.value);
+      this.items.push(this.addItemAsFormGroup('Mask',1,'Adult/M',5.24));
+      this.items.push(this.addItemAsFormGroup('Sanitizer',1,'1 OZ (30 mL)',2.3));
+      this.items.push(this.addItemAsFormGroup('Gloves',1,'Adult/M',1.2));
+      this.items.push(this.addItemAsFormGroup('Boxed Meal',1,'Adult/Veg Sandwich',20));
     }
   }
 
@@ -154,7 +143,7 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
   }
 
   addItemAsFormGroup(item: string, quantity: number, size: string, price: number, 
-                    sub: boolean, self: boolean, pone: boolean, ptwo: boolean) {
+                    sub: boolean = false, self: boolean = false, pone: boolean = false, ptwo: boolean = false) {
     return new FormGroup({
       item: new FormControl(item),
       quantity: new FormControl(quantity),
@@ -226,7 +215,23 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
 
   onCancel() {}
 
-  calculateTotalQuantity(){
+  calculateTotalPrice() {
+    let itemTotal = 0.00;
+
+    this.wellnessKitForm.get('items').value.forEach(e => {
+      let q = e.quantity === 'Select' ? 0 : e.quantity;
+      itemTotal = itemTotal + q * e.price;
+    })
+
+    this.wellnessKitForm.get('additionalItems').value.forEach(e => {
+      let q = e.quantity === 'Select' ? 0 : e.quantity;
+      itemTotal = itemTotal + q * e.price;
+    })
+
+    this.totalPrice = itemTotal;
+  }
+
+  calculateTotalQuantity() {
     let itemsQty = 0;
 
     this.items.value.forEach(e => {
@@ -321,35 +326,58 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
 
   checkSubscriptionAdded() {
     //check if any checkboxes are chosen. If yes, make the boolean true. For now its just set to true
-    this.isSubscriptionAdded = true;
+    //this.isSubscriptionAdded = true;
 
-    // if(this.selfChosen || this.poneChosen || this.ptwoChosen) {
-    //   this.isSubscriptionAdded = true;
+    console.log('applysub',this.applySubForm.value);
+    if(this.applySubForm.get('self').value || this.applySubForm.get('pone').value || this.applySubForm.get('ptwo').value) {
+      this.isSubscriptionAdded = true;
+      console.log('chosen applysub',this.applySubForm.value);
+      this.clearFormArray();
+      let subbedItems = this.subscriptionService.getWellnessKitSubscription();
+      let finalItems = [];
 
-    //   this.clearFormArray();
+      if(this.applySubForm.get('self').value) {
+        console.log('true-self',subbedItems.filter(item => item.self));
+        const selfSubbed = subbedItems.filter(item => item.self);
+        if(selfSubbed.length){
+          subbedItems = subbedItems.filter(item => !item.self);
+          console.log('remaining subbed after self remove',subbedItems);
+          finalItems = [...selfSubbed];   
+        }     
+      }
 
-    //   if(this.selfChosen) {
-    //       this.subscriptionService.getWellnessKitSubscription()
-    //       .filter(item => item.self)
-    //       .forEach(item => {
-    //         this.items.push(this.addItemAsFormGroup(item.item,item.quantity,item.size,item.price,
-    //                                               item.subscription,item.self,item.pone,item.ptwo))})
-    //   }
+      if(this.applySubForm.get('pone').value) {
+        console.log('true-pone',subbedItems.filter(item => item.pone));
+        const poneSubbed = subbedItems.filter(item => item.pone);
+        if(poneSubbed.length){
+          subbedItems = subbedItems.filter(item => !item.pone);
+          console.log('remaining subbed after self remove',subbedItems);
+          finalItems = [...finalItems,...poneSubbed];   
+        }    
+      }
 
-    //   if(this.poneChosen) {
-    //     this.subscriptionService.getWellnessKitSubscription()
-    //     .filter(item => item.pone)
-    //     .forEach(item => {
-    //       this.items.push(this.addItemAsFormGroup(item.item,item.quantity,item.size,item.price,
-    //                                             item.subscription,item.self,item.pone,item.ptwo))})
-    //   }
-    //   if(this.ptwoChosen) {
-    //     this.subscriptionService.getWellnessKitSubscription()
-    //     .filter(item => item.pone)
-    //     .forEach(item => {
-    //       this.items.push(this.addItemAsFormGroup(item.item,item.quantity,item.size,item.price,
-    //                                             item.subscription,item.self,item.pone,item.ptwo))})
-    //   }
-    // }    
+      if(this.applySubForm.get('ptwo').value) {
+        console.log('true-pttwo',subbedItems.filter(item => item.ptwo));
+        const ptwoSubbed = subbedItems.filter(item => item.ptwo);
+        if(ptwoSubbed.length){
+          subbedItems = subbedItems.filter(item => !item.ptwo);
+          console.log('remaining subbed after self remove',subbedItems);
+          finalItems = [...finalItems,...ptwoSubbed];   
+        }            
+      }
+
+      console.log('finalSubbedItems',subbedItems)
+      console.log('finalItems',finalItems)
+
+      if(finalItems.length) {
+        finalItems.forEach(item => {
+          this.items.push(this.addItemAsFormGroup(item.item,item.quantity,item.size,item.price,
+                                                item.subscription,item.self,item.pone,item.ptwo))})
+      }
+      
+    }    
+    else if (!this.applySubForm.get('self').value && !this.applySubForm.get('pone').value && !this.applySubForm.get('ptwo').value){
+      this.isSubscriptionAdded = false;
+    }
   }
 }

@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DigitalIfeDetailsService } from 'src/app/services/digital-ife-details/digital-ife-details.service';
 import { WellnessKitDetailsService } from 'src/app/services/wellness-kit-details/wellness-kit-details.service';
 import { AdjacentSeatDetailsService } from 'src/app/services/adjacent-seat-details/adjacent-seat-details.service';
+import { FlightDetailsService } from 'src/app/services/flight-details/flight-details.service';
 
 export interface DialogData {
   wellnessKitForm?: FormGroup;
@@ -29,24 +30,32 @@ export class ExpandedAncillariesDialogComponent implements OnInit {
   adjacentSeatTotalPrice: number = 65.32;
   selectedTab: number = 0;
 
+  isFirstBooking: boolean = true;
+
   constructor(
     public dialogRef: MatDialogRef<ExpandedAncillariesDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private wellnessKitService: WellnessKitDetailsService,
     private digitalIfeService: DigitalIfeDetailsService,
-    private adjacentSeatService: AdjacentSeatDetailsService
+    private adjacentSeatService: AdjacentSeatDetailsService,
+    private flightService: FlightDetailsService
   ) { }
 
   ngOnInit(): void {
-    if(this.data.wellnessKitForm){
+    this.isFirstBooking = this.flightService.isFirstBooking();
+    
+    if(this.data.wellnessKitForm) {
       this.wellnessKit = this.data.wellnessKitForm;
       this.wellnessKitTotalPrice = this.data.wellnessKitTotalPrice;
     }
     else{
       this.wellnessKit = this.wellnessKitService.getWellnessKitFormGroup();
-      this.wellnessKit.setValue({
-        ...this.wellnessKitService.getWellnessKitDetails()
-      })
+      console.log('expanded wellnesskit', this.wellnessKit);
+      if(this.isFirstBooking){
+        this.wellnessKit.setValue({
+          ...this.wellnessKitService.getWellnessKitDetails()
+        })
+      }
     }
     
     if(this.data.digitalIfeForm){
@@ -55,9 +64,11 @@ export class ExpandedAncillariesDialogComponent implements OnInit {
     }
     else {
       this.digitalIfeForm = this.digitalIfeService.getDigitalIfeFormGroup();
-      this.digitalIfeForm.setValue({
-        ...this.digitalIfeService.getDigitalIfeDetails()
-      })
+      if(this.isFirstBooking) {
+        this.digitalIfeForm.setValue({
+          ...this.digitalIfeService.getDigitalIfeDetails()
+        })
+      }
     }
     
     if(this.data.adjacentSeatForm){
@@ -66,9 +77,11 @@ export class ExpandedAncillariesDialogComponent implements OnInit {
     }
     else {
       this.adjacentSeatForm = this.adjacentSeatService.getAdjacentSeatFormGroup();
-      this.adjacentSeatForm.setValue({
-        ...this.adjacentSeatService.getAdjacentSeatDetails()
-      })
+      if(this.isFirstBooking){
+        this.adjacentSeatForm.setValue({
+          ...this.adjacentSeatService.getAdjacentSeatDetails()
+        })
+      }
     }
     this.selectedTab = this.data.selectedTab;
   }

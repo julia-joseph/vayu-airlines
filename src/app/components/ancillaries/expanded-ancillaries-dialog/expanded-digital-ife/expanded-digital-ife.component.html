@@ -15,10 +15,28 @@
               </mat-option>
             </mat-select>
           </div>
-          <div class="col-5 d-flex pl-0">
+          <div class=""
+              [ngClass]="{'col-5':isFirstBooking, 'col-3':!isFirstBooking}">
 
           </div>
-          <div class="col-4 pr-0">
+          <div class="col-3 pt-2" *ngIf="!isFirstBooking" [formGroup]="applySubForm">
+            <div class="violet font-weight-bold cursor-pointer">
+              <span [matMenuTriggerFor]="subscriptionMenu">
+                Apply Subscription
+                <img src="../../../../assets/images/ico_chevron.png" class="symbol">  
+              </span>
+  
+              <mat-menu #subscriptionMenu="matMenu" yPosition="below" xPosition="after">
+                <div class="d-flex flex-column justify-content-between p-2">
+                  <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self">Self</mat-checkbox>
+                  <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone">Passenger 1</mat-checkbox>
+                  <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo">Passenger 2</mat-checkbox>
+                </div>
+              </mat-menu>
+            </div>
+          </div>
+          <div class="pr-0"
+               [ngClass]="{'col-4':isFirstBooking, 'col-3':!isFirstBooking}">
             <div class="d-flex flex-row justify-content-end pt-2">
               <div class="add-items-link mr-4" (click)="addAdditionalItems()">Add additional items</div>
             </div>
@@ -27,7 +45,7 @@
 
       <div class="row pl-4 pr-4">
         <div class="col-8">
-          <div class="row pt-3 pl-2 pr-2">
+          <div class="row pt-3 pl-2 pr-2" *ngIf="isFirstBooking || (!isFirstBooking && isSubscriptionAdded && items.length) || (!isFirstBooking && additionalItems.length)">
             <div class="col-4">
               Package Type
             </div>
@@ -40,17 +58,162 @@
           </div>
 
           <div class="overflow-items" #scrollMe (scroll)="onScroll()">
-            <div *ngFor="let itemGroup of items.controls; let i = index">
-              <div class="row pt-3 pb-3 border-bottom" [formGroup]="itemGroup">
-                <div class="col-12">
+            <div>
+              <div *ngFor="let itemGroup of items.controls; let i = index">
+                <div *ngIf="isFirstBooking">
+                  <div class="row pt-3 pb-3 border-bottom" [formGroup]="itemGroup">
+                    <div class="col-12">
+                        <div class="row">
+                          <div class="col-4">
+                            <mat-select
+                              class="form-control"
+                              [disabled]="submitted"
+                              formControlName="packageType"
+                              (selectionChange)="setPriceOfNewItem(itemGroup)"
+                            >
+                              <mat-option *ngFor="let packageType of packageTypeOptions" [value]="packageType">
+                                {{ packageType }}
+                              </mat-option>
+                            </mat-select>
+                          </div>
+                          <div class="col-4">
+                            <mat-select
+                              class="form-control"
+                              [disabled]="submitted"
+                              formControlName="screens"
+                            >
+                              <mat-option
+                                *ngFor="let screens of screenOptions"
+                                [value]="screens"
+                              >
+                                {{ screens }}
+                              </mat-option>
+                            </mat-select>
+                          </div>
+                          <div class="col-4 pt-2">
+                            $
+                            <span class="font-size1-2">
+                              {{ itemGroup.get('screens').value * itemGroup.get('price').value | number: ".2" }}
+                            </span>
+                          </div>
+                        </div>
+                        <div class="row d-flex flex-row mt-3">
+                            <mat-radio-group formControlName="subscription" [disabled]="submitted" class="p-1">
+                                <mat-radio-button [value]="false" class="ml-3 mr-3">
+                                    One-time Purchase
+                                </mat-radio-button>
+                                <mat-radio-button [value]="true" class="mr-2">
+                                    Add to Subscription
+                                </mat-radio-button>
+                            </mat-radio-group>
+                            <div class="font-size-0-6 cursor-pointer font-weight-bold p-1" (click)="openDetails()"><u>Details</u></div>
+                            <div class="violet font-size-0-9 cursor-pointer  ml-3 border p-2"
+                                *ngIf="itemGroup.get('subscription').value">
+                              <span [matMenuTriggerFor]="passengerMenu">
+                                Select Passenger
+                                <img src="../../../../assets/images/ico_chevron.png" class="symbol">  
+                              </span>
+              
+                              <mat-menu #passengerMenu="matMenu" yPosition="below" xPosition="after">
+                                <div class="d-flex flex-column justify-content-between p-2">
+                                  <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted">Self</mat-checkbox>
+                                  <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted">Passenger 1</mat-checkbox>
+                                  <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted">Passenger 2</mat-checkbox>
+                                </div>
+                              </mat-menu>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div *ngIf= "!isFirstBooking && isSubscriptionAdded">
+                  <div class="row pt-3 pb-3 border-bottom" [formGroup]="itemGroup">
+                    <div class="col-12">
+                        <div class="row">
+                          <div class="col-4">
+                            <button *ngIf="!submitted"
+                                class="btn btn-sm p-0 remove-button rounded-circle" 
+                                (click)="removeItem(i)">
+                              <svg class="bi bi-x remove-icon" width="1.4em" height="1.4em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z" clip-rule="evenodd"/>
+                                <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z" clip-rule="evenodd"/>
+                              </svg>
+                            </button>
+                            <mat-select
+                              class="form-control"
+                              [disabled]="true"
+                              formControlName="packageType"
+                              [ngClass]="{'w-100':submitted, 'w-75':!submitted}"
+                              (selectionChange)="setPriceOfNewItem(itemGroup)"
+                            >
+                              <mat-option *ngFor="let packageType of packageTypeOptions" [value]="packageType">
+                                {{ packageType }}
+                              </mat-option>
+                            </mat-select>
+                          </div>
+                          <div class="col-4">
+                            <mat-select
+                              class="form-control"
+                              [disabled]="true"
+                              formControlName="screens"
+                            >
+                              <mat-option
+                                *ngFor="let screens of screenOptions"
+                                [value]="screens"
+                              >
+                                {{ screens }}
+                              </mat-option>
+                            </mat-select>
+                          </div>
+                          <div class="col-4 pt-2">
+                            $
+                            <span class="font-size1-2">
+                              {{ itemGroup.get('screens').value * itemGroup.get('price').value | number: ".2" }}
+                            </span>
+                          </div>
+                        </div>
+                        <div class="row d-flex flex-row mt-3">
+                          <div class="col-3">
+  
+                          </div>
+                          <div class="col-9">
+                            Existing Subscription
+                            <span *ngIf="itemGroup.get('self').value">/Self</span>
+                            <span *ngIf="itemGroup.get('pone').value">/Passenger 1</span>
+                            <span *ngIf="itemGroup.get('ptwo').value">/Passenger 2</span>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <ng-container *ngIf="digitalIfeForm.get('additionalItems')">
+  
+              <ng-container  
+                *ngFor="let itemGroup of additionalItems.controls; let i = index"
+              >
+                <div class="row pt-3 pb-3 pl-3 border-bottom" [formGroup]="itemGroup">
+                  <div class="col-12">
                     <div class="row">
                       <div class="col-4">
+                        <button *ngIf="!submitted"
+                                class="btn btn-sm p-0 remove-button rounded-circle" 
+                                (click)="removeAdditionalItem(i)">
+                          <svg class="bi bi-x remove-icon" width="1.4em" height="1.4em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z" clip-rule="evenodd"/>
+                          </svg>
+                        </button>
                         <mat-select
                           class="form-control"
                           [disabled]="submitted"
                           formControlName="packageType"
+                          [ngClass]="{'w-100':submitted, 'w-75':!submitted}"
                           (selectionChange)="setPriceOfNewItem(itemGroup)"
                         >
+                          <mat-option *ngIf="itemGroup.get('packageType').value === 'Select'" value='Select'>Select</mat-option>
                           <mat-option *ngFor="let packageType of packageTypeOptions" [value]="packageType">
                             {{ packageType }}
                           </mat-option>
@@ -62,23 +225,24 @@
                           [disabled]="submitted"
                           formControlName="screens"
                         >
-                          <mat-option
-                            *ngFor="let screens of screenOptions"
-                            [value]="screens"
-                          >
-                            {{ screens }}
+                          <mat-option *ngIf="itemGroup.get('screens').value === 'Select'" value='Select'>Select</mat-option>
+                          <mat-option *ngFor="let screen of screenOptions" [value]="screen">
+                            {{ screen }}
                           </mat-option>
                         </mat-select>
                       </div>
-                      <div class="col-4 pt-2">
+                      <div class="col-4 mt-2">
                         $
-                        <span class="font-size1-2">
+                        <span class="font-size1-2" *ngIf="itemGroup.get('packageType').value === 'Select'">
+                          {{ itemGroup.get('price').value | number: ".2" }}
+                        </span>
+                        <span class="font-size1-2 mt-2" *ngIf="itemGroup.get('packageType').value !== 'Select'">
                           {{ itemGroup.get('screens').value * itemGroup.get('price').value | number: ".2" }}
                         </span>
                       </div>
                     </div>
-                    <div class="row d-flex flex-row mt-3">
-                        <mat-radio-group formControlName="subscription" [disabled]="submitted" class="p-1">
+                    <div class="row d-flex flex-row mt-3" *ngIf="itemGroup.get('packageType').value !== 'Select'">
+                        <mat-radio-group formControlName="subscription" [disabled]="submitted">
                             <mat-radio-button [value]="false" class="ml-3 mr-3">
                                 One-time Purchase
                             </mat-radio-button>
@@ -86,7 +250,7 @@
                                 Add to Subscription
                             </mat-radio-button>
                         </mat-radio-group>
-                        <div class="font-size-0-6 cursor-pointer font-weight-bold p-1" (click)="openDetails()"><u>Details</u></div>
+                        <div class="font-size-0-6 cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
                         <div class="violet font-size-0-9 cursor-pointer  ml-3 border p-2"
                             *ngIf="itemGroup.get('subscription').value">
                           <span [matMenuTriggerFor]="passengerMenu">
@@ -101,95 +265,23 @@
                               <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted">Passenger 2</mat-checkbox>
                             </div>
                           </mat-menu>
-                      </div>
+                        </div>
                     </div>
+                  </div>
                 </div>
-              </div>
+              </ng-container>
+  
+              </ng-container>
             </div>
 
-            <ng-container *ngIf="digitalIfeForm.get('additionalItems')">
-
-            <ng-container  
-              *ngFor="let itemGroup of additionalItems.controls; let i = index"
-            >
-              <div class="row pt-3 pb-3 pl-3 border-bottom" [formGroup]="itemGroup">
-                <div class="col-12">
-                  <div class="row">
-                    <div class="col-4">
-                      <button *ngIf="!submitted"
-                              class="btn btn-sm p-0 remove-button rounded-circle" 
-                              (click)="removeItem(i)">
-                        <svg class="bi bi-x remove-icon" width="1.4em" height="1.4em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                          <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z" clip-rule="evenodd"/>
-                          <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z" clip-rule="evenodd"/>
-                        </svg>
-                      </button>
-                      <mat-select
-                        class="form-control"
-                        [disabled]="submitted"
-                        formControlName="packageType"
-                        [ngClass]="{'w-100':submitted, 'w-75':!submitted}"
-                        (selectionChange)="setPriceOfNewItem(itemGroup)"
-                      >
-                        <mat-option *ngIf="itemGroup.get('packageType').value === 'Select'" value='Select'>Select</mat-option>
-                        <mat-option *ngFor="let packageType of packageTypeOptions" [value]="packageType">
-                          {{ packageType }}
-                        </mat-option>
-                      </mat-select>
-                    </div>
-                    <div class="col-4">
-                      <mat-select
-                        class="form-control"
-                        [disabled]="submitted"
-                        formControlName="screens"
-                      >
-                        <mat-option *ngIf="itemGroup.get('screens').value === 'Select'" value='Select'>Select</mat-option>
-                        <mat-option *ngFor="let screen of screenOptions" [value]="screen">
-                          {{ screen }}
-                        </mat-option>
-                      </mat-select>
-                    </div>
-                    <div class="col-4 mt-2">
-                      $
-                      <span class="font-size1-2" *ngIf="itemGroup.get('packageType').value === 'Select'">
-                        {{ itemGroup.get('price').value | number: ".2" }}
-                      </span>
-                      <span class="font-size1-2 mt-2" *ngIf="itemGroup.get('packageType').value !== 'Select'">
-                        {{ itemGroup.get('screens').value * itemGroup.get('price').value | number: ".2" }}
-                      </span>
-                    </div>
-                  </div>
-                  <div class="row d-flex flex-row mt-3" *ngIf="itemGroup.get('packageType').value !== 'Select'">
-                      <mat-radio-group formControlName="subscription" [disabled]="submitted">
-                          <mat-radio-button [value]="false" class="ml-3 mr-3">
-                              One-time Purchase
-                          </mat-radio-button>
-                          <mat-radio-button [value]="true" class="mr-2">
-                              Add to Subscription
-                          </mat-radio-button>
-                      </mat-radio-group>
-                      <div class="font-size-0-6 cursor-pointer font-weight-bold" (click)="openDetails()"><u>Details</u></div>
-                      <div class="violet font-size-0-9 cursor-pointer  ml-3 border p-2"
-                          *ngIf="itemGroup.get('subscription').value">
-                        <span [matMenuTriggerFor]="passengerMenu">
-                          Select Passenger
-                          <img src="../../../../assets/images/ico_chevron.png" class="symbol">  
-                        </span>
-        
-                        <mat-menu #passengerMenu="matMenu" yPosition="below" xPosition="after">
-                          <div class="d-flex flex-column justify-content-between p-2">
-                            <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted">Self</mat-checkbox>
-                            <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted">Passenger 1</mat-checkbox>
-                            <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted">Passenger 2</mat-checkbox>
-                          </div>
-                        </mat-menu>
-                      </div>
-                  </div>
-                </div>
+            <div *ngIf="(!isFirstBooking && !isSubscriptionAdded && !additionalItems.length) ||
+                        (!isFirstBooking && isSubscriptionAdded && !items.length && !additionalItems.length)">
+              <div class="violet p-4">
+                Click on the <span class="font-weight-bold">Apply Subscriptions</span> link to include
+                existing subscriptions at a discounted rate. If not, click on 
+                <span class="font-weight-bold">Add additional items</span> to make new selections.
               </div>
-            </ng-container>
-
-            </ng-container>
+            </div>
           </div>
 
           <div class="row p-4">

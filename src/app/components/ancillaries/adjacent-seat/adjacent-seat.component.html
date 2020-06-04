@@ -54,7 +54,7 @@
         <div class="row w-100 font-size1-2">
             <div class="col-8">
                 <div class="overflow-items">
-                    <div *ngIf="isFirstBooking">
+                    <div *ngIf="isFirstBooking || !isFirstBooking && isSubscriptionAdded">
                         <div class="row mt-4 pr-2">
                             <div class="col-4 d-flex justify-content-center">
                                 <img src="../../../../assets/images/ico_checkin.png" class="seat-image">
@@ -127,10 +127,10 @@
                             <span class="font-weight-bold">Add additional items</span> to make new selections.
                         </div>
                     </div>
-                    <div *ngIf="!isFirstBooking && isSubscriptionAdded">
-                        <!-- show all subscription items -->
+                    <!-- <div *ngIf="!isFirstBooking && isSubscriptionAdded">
+                         show all subscription items 
                         <div>Show Sub Items</div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="row mt-4 pt-4">

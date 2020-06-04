@@ -8,8 +8,8 @@ import { DigitalIfeDetailsService } from 'src/app/services/digital-ife-details/d
   styleUrls: ['./expanded-digital-ife.component.scss']
 })
 export class ExpandedDigitalIFEComponent implements OnInit, AfterViewChecked {
+  @Input() isFirstBooking = true;
   @Input() digitalIfeForm: FormGroup;
-
   @Input() totalPrice;
   @Output() onDIFESkip = new EventEmitter<void>();
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
@@ -24,11 +24,28 @@ export class ExpandedDigitalIFEComponent implements OnInit, AfterViewChecked {
 
   totalQuantity: number = 1;
 
+  applySubForm: FormGroup;
+  isSubscriptionAdded: boolean = false;
+  
   constructor(
     private digitalIfeService: DigitalIfeDetailsService
   ) { }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
+    this.applySubForm = this.digitalIfeService.getDigitalApplySubFormGroup();
+    if(this.applySubForm.get('self').value || this.applySubForm.get('pone').value || this.applySubForm.get('ptwo').value) {
+      this.isSubscriptionAdded = true;
+    }
+    
+    this.applySubForm.valueChanges.subscribe(() => {
+      if(this.applySubForm.get('self').value || this.applySubForm.get('pone').value || this.applySubForm.get('ptwo').value) {
+        this.isSubscriptionAdded = true;
+      }
+      if(!this.applySubForm.get('self').value && !this.applySubForm.get('pone').value && !this.applySubForm.get('ptwo').value) {
+        this.isSubscriptionAdded = false;
+      }
+    })
+
     this.submitted = this.digitalIfeService.submitted;
     this.calculateTotalPrice();
     this.digitalIfeForm.valueChanges.subscribe(() => {
@@ -81,7 +98,11 @@ export class ExpandedDigitalIFEComponent implements OnInit, AfterViewChecked {
     }))
   }
 
-  removeItem(i: number): void { 
+  removeItem(i: number): void {
+    this.items.removeAt(i);
+  }
+
+  removeAdditionalItem(i: number): void { 
     this.additionalItems.removeAt(i);
   }
 

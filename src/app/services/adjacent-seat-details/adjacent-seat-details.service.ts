@@ -11,7 +11,7 @@ export class AdjacentSeatDetailsService {
   showPayment: boolean  = false;
   submitted: boolean = false;
   adjacentSeatForm: FormGroup;
-  
+  adjacentApplySubForm: FormGroup;
   adjacentSeatDetails = {
     seats: 1,
     price: 65.32,
@@ -83,5 +83,13 @@ export class AdjacentSeatDetailsService {
 
   getAdjacentSeatFormGroup() {
     return this.adjacentSeatForm;
+  }
+
+  setAdjacentApplySubFormGroup(form) {
+    this.adjacentApplySubForm = form;
+  }
+
+  getAdjacentApplySubFormGroup() {
+    return this.adjacentApplySubForm;
   }
 }

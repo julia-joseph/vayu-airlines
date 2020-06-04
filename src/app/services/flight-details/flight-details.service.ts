@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class FlightDetailsService {
   // set to true before you commit
-  private firstBooking: boolean = true;
+  private firstBooking: boolean = false;
   flightDetails: any = {
     class: "Economy",
     depart: "Thursday May 07 2020",

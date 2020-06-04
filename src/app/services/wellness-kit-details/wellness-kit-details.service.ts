@@ -11,6 +11,7 @@ export class WellnessKitDetailsService {
   showPayment: boolean;
   submitted: boolean = false;
   wellnessKitForm: FormGroup;
+  wellnessApplySubForm: FormGroup;
 
   totalPriceChange: Subject<number> = new Subject<number>();
   public priceObs = this.totalPriceChange.asObservable();
@@ -129,5 +130,13 @@ export class WellnessKitDetailsService {
 
   getWellnessKitFormGroup() {
     return this.wellnessKitForm;
+  }
+
+  setWellnessApplySubFormGroup(form) {
+    this.wellnessApplySubForm = form;
+  }
+
+  getWellnessApplySubFormGroup() {
+    return this.wellnessApplySubForm;
   }
 }

@@ -25,6 +25,12 @@ export class DigitalIFEComponent implements OnInit {
     additionalItems: new FormArray([ ])
   })
 
+  applySubForm: FormGroup = new FormGroup({
+    self: new FormControl(false),
+    pone: new FormControl(false),
+    ptwo: new FormControl(false)
+  });
+
   segmentOptions: string[] = ['JFK - BOS'];
   submitted: boolean = false;
   showPayment: boolean = false;
@@ -49,10 +55,13 @@ export class DigitalIFEComponent implements OnInit {
   ngOnInit(): void {
     this.isFirstBooking = this.flightDetailsService.isFirstBooking();
     this.setInitialItems();
-
+    this.calculateTotalPrice();
+    
     this.segment = this.fromCode + ' - ' + this.toCode;
     this.segmentOptions = [this.segment];
+
     this.digitalIfeService.setDigitalIfeFormGroup(this.digitalIfeForm);
+    this.digitalIfeService.setDigitalApplySubFormGroup(this.applySubForm);
 
     this.digitalIfeForm.valueChanges.subscribe(() => {
       console.log('ife form',this.digitalIfeForm.value);
@@ -72,6 +81,10 @@ export class DigitalIFEComponent implements OnInit {
 
     this.digitalIfeService.performSkipObservable.subscribe(() => {
       this.onSkipToSeatRegrouping();
+    })
+
+    this.applySubForm.valueChanges.subscribe(() => {
+      this.checkSubscriptionAdded();
     })
   }
 
@@ -100,16 +113,8 @@ export class DigitalIFEComponent implements OnInit {
 
   setInitialItems() {
     if(this.isFirstBooking) {
-      this.items.push(this.addItemAsFormGroup('Basic',1,0.00,false,false,false,false));
-      this.items.push(this.addItemAsFormGroup('Kids Play',0,1.00,false,false,false,false));
-    }
-    else {
-      this.subscriptionService.getDigitalIfeSubscription().forEach(item => {
-        this.items.push(this.addItemAsFormGroup(item.packageType,item.screens,item.price,
-                                                item.subscription,item.self,item.pone,item.ptwo))
-      })
-      console.log('actualitems',this.subscriptionService.getDigitalIfeSubscription());
-      console.log('subbeditems',this.items.value);
+      this.items.push(this.addItemAsFormGroup('Basic',1,0.00));
+      this.items.push(this.addItemAsFormGroup('Kids Play',0,1.00));
     }
   }
 
@@ -118,7 +123,7 @@ export class DigitalIFEComponent implements OnInit {
   }
 
   addItemAsFormGroup(packageType: string, screens: number, price: number,
-                    sub: boolean, self: boolean, pone: boolean, ptwo: boolean) {
+                    sub: boolean = false, self: boolean = false, pone: boolean = false, ptwo: boolean = false) {
     return new FormGroup({
       packageType: new FormControl(packageType),
       screens: new FormControl(screens),
@@ -288,8 +293,66 @@ export class DigitalIFEComponent implements OnInit {
     this.onSkipToSR.emit();
   }
 
+  clearFormArray() {
+    while(this.items.value.length !== 0) {
+      this.items.removeAt(0);
+    }
+  }
+
   checkSubscriptionAdded() {
     //check if any checkboxes are chosen. If yes, make the boolean true. For now its just set to true
-    this.isSubscriptionAdded = true;
+    //this.isSubscriptionAdded = true;
+
+    console.log('applysub',this.applySubForm.value);
+    if(this.applySubForm.get('self').value || this.applySubForm.get('pone').value || this.applySubForm.get('ptwo').value) {
+      this.isSubscriptionAdded = true;
+      console.log('chosen applysub',this.applySubForm.value);
+      this.clearFormArray();
+      let subbedItems = this.subscriptionService.getDigitalIfeSubscription();
+      let finalItems = [];
+
+      if(this.applySubForm.get('self').value) {
+        console.log('true-self',subbedItems.filter(item => item.self));
+        const selfSubbed = subbedItems.filter(item => item.self);
+        if(selfSubbed.length){
+          subbedItems = subbedItems.filter(item => !item.self);
+          console.log('remaining subbed after self remove',subbedItems);
+          finalItems = [...selfSubbed];   
+        }     
+      }
+
+      if(this.applySubForm.get('pone').value) {
+        console.log('true-pone',subbedItems.filter(item => item.pone));
+        const poneSubbed = subbedItems.filter(item => item.pone);
+        if(poneSubbed.length){
+          subbedItems = subbedItems.filter(item => !item.pone);
+          console.log('remaining subbed after self remove',subbedItems);
+          finalItems = [...finalItems,...poneSubbed];   
+        }    
+      }
+
+      if(this.applySubForm.get('ptwo').value) {
+        console.log('true-pttwo',subbedItems.filter(item => item.ptwo));
+        const ptwoSubbed = subbedItems.filter(item => item.ptwo);
+        if(ptwoSubbed.length){
+          subbedItems = subbedItems.filter(item => !item.ptwo);
+          console.log('remaining subbed after self remove',subbedItems);
+          finalItems = [...finalItems,...ptwoSubbed];   
+        }            
+      }
+
+      console.log('finalSubbedItems',subbedItems)
+      console.log('finalItems',finalItems)
+
+      if(finalItems.length) {
+        finalItems.forEach(item => {
+          this.items.push(this.addItemAsFormGroup(item.packageType,item.screens,item.price,
+                                                item.subscription,item.self,item.pone,item.ptwo))})
+      }
+      
+    }    
+    else if (!this.applySubForm.get('self').value && !this.applySubForm.get('pone').value && !this.applySubForm.get('ptwo').value){
+      this.isSubscriptionAdded = false;
+    }
   }
 }

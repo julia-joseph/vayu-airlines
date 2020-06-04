@@ -28,6 +28,12 @@ export class AdjacentSeatComponent implements OnInit, OnDestroy {
     segment: new FormControl('JFK - BOS')
   })
 
+  applySubForm: FormGroup = new FormGroup({
+    self: new FormControl(false),
+    pone: new FormControl(false),
+    ptwo: new FormControl(false)
+  });
+
   segment: string = 'JFK - BOS';
   segmentOptions: string[] = ['JFK - BOS'];
 
@@ -42,7 +48,8 @@ export class AdjacentSeatComponent implements OnInit, OnDestroy {
   performSkipSubscription: Subscription;
 
   isFirstBooking: boolean = false;
-  isSubscriptionAdded: boolean = false;
+  //make false
+  isSubscriptionAdded: boolean = true;
 
   constructor(
     public dialog: MatDialog,
@@ -57,6 +64,8 @@ export class AdjacentSeatComponent implements OnInit, OnDestroy {
     this.segmentOptions = [this.segment];
 
     this.adjacentSeatService.setAdjacentSeatFormGroup(this.adjacentSeatForm);
+    this.adjacentSeatService.setAdjacentApplySubFormGroup(this.applySubForm);
+
     this.formValueChangesSubscription = this.adjacentSeatForm.valueChanges.subscribe(() => {
       console.log('adjseat form',this.adjacentSeatForm.value);
       this.totalPrice =  this.adjacentSeatForm.get('seats').value * this.adjacentSeatForm.get('price').value;

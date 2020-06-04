@@ -8,6 +8,7 @@ import { WellnessKitDetailsService } from 'src/app/services/wellness-kit-details
   styleUrls: ['./expanded-wellness-kit.component.scss']
 })
 export class ExpandedWellnessKitComponent implements OnInit {
+  @Input() isFirstBooking = true;
   @Input() wellnessKit = null;
   @Input() totalPrice = 0;
   @Output() onWSkip = new EventEmitter<void>();
@@ -27,11 +28,28 @@ export class ExpandedWellnessKitComponent implements OnInit {
 
   submitted: boolean = false;
 
+  applySubForm: FormGroup;
+  isSubscriptionAdded: boolean = false;
+
   constructor(
     private wellnessKitServices: WellnessKitDetailsService
   ) { }
 
   ngOnInit(): void {
+    this.applySubForm = this.wellnessKitServices.getWellnessApplySubFormGroup();
+    if(this.applySubForm.get('self').value || this.applySubForm.get('pone').value || this.applySubForm.get('ptwo').value) {
+      this.isSubscriptionAdded = true;
+    }
+    
+    this.applySubForm.valueChanges.subscribe(() => {
+      if(this.applySubForm.get('self').value || this.applySubForm.get('pone').value || this.applySubForm.get('ptwo').value) {
+        this.isSubscriptionAdded = true;
+      }
+      if(!this.applySubForm.get('self').value && !this.applySubForm.get('pone').value && !this.applySubForm.get('ptwo').value) {
+        this.isSubscriptionAdded = false;
+      }
+    })
+
     this.submitted = this.wellnessKitServices.submitted;
     this.calculateTotalPrice();
     this.wellnessKit.valueChanges.subscribe(() => {
@@ -97,14 +115,6 @@ export class ExpandedWellnessKitComponent implements OnInit {
       pone: false,
       ptwo: false
     })
-  }
-
-  addToSubscription() {
-    console.log('subscription added');
-  }
-
-  removeFromSubscription() {
-    console.log('subscription removed');
   }
 
   openDetails() {

@@ -8,6 +8,7 @@ import { AdjacentSeatDetailsService } from 'src/app/services/adjacent-seat-detai
   styleUrls: ['./expanded-adjacent-seat.component.scss']
 })
 export class ExpandedAdjacentSeatComponent implements OnInit {
+  @Input() isFirstBooking = true;
   @Input() adjacentSeatForm: FormGroup;
   @Input() totalPrice;
   @Output() onSRConfirm = new EventEmitter<void>();
@@ -21,11 +22,15 @@ export class ExpandedAdjacentSeatComponent implements OnInit {
 
   totalQuantity: number = 1;
 
+  applySubForm: FormGroup;
+
   constructor(
     private adjacentSeatService: AdjacentSeatDetailsService
   ) { }
 
   ngOnInit(): void {
+    this.applySubForm = this.adjacentSeatService.getAdjacentApplySubFormGroup();
+    
     this.submitted = this.adjacentSeatService.submitted;
     this.calculateTotalPrice();
     this.adjacentSeatForm.valueChanges.subscribe(() => {

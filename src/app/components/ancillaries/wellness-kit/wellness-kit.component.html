@@ -32,18 +32,18 @@
               </mat-option>
             </mat-select>
           </div>
-          <div class="col-3 pt-2" *ngIf="!isFirstBooking">
+          <div class="col-3 pt-2" *ngIf="!isFirstBooking" [formGroup]="applySubForm">
             <div class="violet font-weight-bold cursor-pointer">
-              <span [matMenuTriggerFor]="subscriptionMenu" (click)="checkSubscriptionAdded()">
+              <span [matMenuTriggerFor]="subscriptionMenu">
                 Apply Subscription
                 <img src="../../../../assets/images/ico_chevron.png" class="symbol">  
               </span>
   
               <mat-menu #subscriptionMenu="matMenu" yPosition="below" xPosition="after">
                 <div class="d-flex flex-column justify-content-between p-2">
-                  <mat-checkbox (click) = "$event.stopPropagation()">Self</mat-checkbox>
-                  <mat-checkbox (click) = "$event.stopPropagation()">Passenger 1</mat-checkbox>
-                  <mat-checkbox (click) = "$event.stopPropagation()">Passenger 2</mat-checkbox>
+                  <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self">Self</mat-checkbox>
+                  <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone">Passenger 1</mat-checkbox>
+                  <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo">Passenger 2</mat-checkbox>
                 </div>
               </mat-menu>
             </div>
@@ -67,7 +67,7 @@
 
       <div class="row w-100 font-size1-2">
         <div class="col-8">
-          <div class="row pt-3 pl-2 pr-2" *ngIf="!(!isFirstBooking && !isSubscriptionAdded)">
+          <div class="row pt-3 pl-2 pr-2" *ngIf="isFirstBooking || (!isFirstBooking && isSubscriptionAdded && items.length) || (!isFirstBooking && additionalItems.length)">
             <div class="col-3"></div>
             <div class="col-3">
               Quantity
@@ -214,7 +214,7 @@
                         <div class="col-3">
                           <mat-select
                             class="form-control"
-                            [disabled]="submitted"
+                            [disabled]="true"
                             formControlName="quantity"
                           >
                             <mat-option *ngFor="let qty of [0, 1, 2]" [value]="qty">
@@ -225,7 +225,7 @@
                         <div class="col-3">
                           <mat-select
                             class="form-control"
-                            [disabled]="submitted"
+                            [disabled]="true"
                             formControlName="size"
                             *ngIf="itemGroup.get('item').value === 'Mask'"
                           >
@@ -239,7 +239,7 @@
           
                           <mat-select
                             class="form-control"
-                            [disabled]="submitted"
+                            [disabled]="true"
                             formControlName="size"
                             *ngIf="itemGroup.get('item').value === 'Sanitizer'"
                           >
@@ -253,7 +253,7 @@
           
                           <mat-select
                             class="form-control"
-                            [disabled]="submitted"
+                            [disabled]="true"
                             formControlName="size"
                             *ngIf="itemGroup.get('item').value === 'Gloves'"
                           >
@@ -267,7 +267,7 @@
       
                           <mat-select
                             class="form-control"
-                            [disabled]="submitted"
+                            [disabled]="true"
                             formControlName="size"
                             *ngIf="itemGroup.get('item').value === 'Boxed Meal'"
                           >
@@ -291,12 +291,12 @@
 
                         </div>
                         <div class="col-9">
-                          Existing Subscription/
-                          <span *ngIf="itemGroup.get('self').value">Self</span>
-                          <span *ngIf="itemGroup.get('pone').value">Passenger 1</span>
-                          <span *ngIf="itemGroup.get('ptwo').value">Passenger 2</span>
+                          Existing Subscription
+                          <span *ngIf="itemGroup.get('self').value">/Self</span>
+                          <span *ngIf="itemGroup.get('pone').value">/Passenger 1</span>
+                          <span *ngIf="itemGroup.get('ptwo').value">/Passenger 2</span>
                         </div>
-                    </div>
+                      </div>
                     </div>
                     
                   </div>
@@ -454,16 +454,13 @@
               </ng-container>
             </div>
           
-            <div *ngIf="!isFirstBooking && !isSubscriptionAdded">
+            <div *ngIf="(!isFirstBooking && !isSubscriptionAdded && !additionalItems.length) ||
+                        (!isFirstBooking && isSubscriptionAdded && !items.length && !additionalItems.length)">
               <div class="violet p-4">
                 Click on the <span class="font-weight-bold">Apply Subscriptions</span> link to include
                 existing subscriptions at a discounted rate. If not, click on 
                 <span class="font-weight-bold">Add additional items</span> to make new selections.
               </div>
-            </div>
-            <div *ngIf="!isFirstBooking && isSubscriptionAdded">
-              <!-- show all subscription items -->
-              <div>Show Sub Items</div>
             </div>
           </div>
 

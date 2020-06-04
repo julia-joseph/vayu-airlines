@@ -10,7 +10,8 @@ export class DigitalIfeDetailsService {
   totalQuantity: number = 1;
   submitted: boolean = false;
   digitalIfeForm: FormGroup;
-  
+  digitalApplySubForm: FormGroup;
+
   digitalIfeDetails = {
     items: [
       {
@@ -97,5 +98,13 @@ export class DigitalIfeDetailsService {
 
   getDigitalIfeFormGroup() {
     return this.digitalIfeForm;
+  }
+  
+  setDigitalApplySubFormGroup(form) {
+    this.digitalApplySubForm = form;
+  }
+
+  getDigitalApplySubFormGroup() {
+    return this.digitalApplySubForm;
   }
 }

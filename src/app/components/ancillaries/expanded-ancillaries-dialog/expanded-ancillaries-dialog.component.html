@@ -15,16 +15,11 @@
           </div>
         </ng-template>
         <app-expanded-wellness-kit
+          [isFirstBooking]="isFirstBooking"
           [wellnessKit]="wellnessKit"
           [totalPrice]="wellnessKitTotalPrice"
           (onWSkip)="onSkipToDigitalIFE()">
         </app-expanded-wellness-kit>
-        <!-- <app-wellness-kit
-      (onSubmit)="onSubmitOfWellnessKit()"
-      (onSkipToIFE)="onSkipToDigitalIFE()"
-      [fromCode]="data.fromCode"
-      [toCode]="data.toCode">
-        </app-wellness-kit> -->
       </mat-tab>
 
       <mat-tab>
@@ -39,6 +34,7 @@
           </div>
         </ng-template>
         <app-expanded-digital-ife
+          [isFirstBooking]="isFirstBooking"
           [digitalIfeForm]="digitalIfeForm"
           [totalPrice]="digitalIfeTotalPrice"
           (onDIFESkip)="onSkipToSeatRegrouping()"
@@ -58,6 +54,7 @@
           </div>
         </ng-template>
         <app-expanded-adjacent-seat
+          [isFirstBooking]="isFirstBooking"
           [adjacentSeatForm] = "adjacentSeatForm"
           [totalPrice] = "adjacentSeatTotalPrice"
           (onSRConfirm) = "onSeatRegroupingConfirm()"
