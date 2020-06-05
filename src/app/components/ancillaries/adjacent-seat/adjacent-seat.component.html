@@ -28,9 +28,9 @@
       
                   <mat-menu #subscriptionMenu="matMenu" yPosition="below" xPosition="after">
                     <div class="d-flex flex-column justify-content-between p-2">
-                      <mat-checkbox (click) = "$event.stopPropagation()">Self</mat-checkbox>
-                      <mat-checkbox (click) = "$event.stopPropagation()">Passenger 1</mat-checkbox>
-                      <mat-checkbox (click) = "$event.stopPropagation()">Passenger 2</mat-checkbox>
+                      <mat-checkbox (click) = "$event.stopPropagation()">Annie</mat-checkbox>
+                      <mat-checkbox (click) = "$event.stopPropagation()">Pax 1</mat-checkbox>
+                      <mat-checkbox (click) = "$event.stopPropagation()">A B</mat-checkbox>
                     </div>
                   </mat-menu>
                 </div>
@@ -108,9 +108,9 @@
                     
                                 <mat-menu #passengerMenu="matMenu" yPosition="below" xPosition="after">
                                     <div class="d-flex flex-column justify-content-between p-2">
-                                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted">Self</mat-checkbox>
-                                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted">Passenger 1</mat-checkbox>
-                                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted">Passenger 2</mat-checkbox>
+                                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted">Annie</mat-checkbox>
+                                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted">Pax 1</mat-checkbox>
+                                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted">A B</mat-checkbox>
                                     </div>
                                 </mat-menu>
                             </div>

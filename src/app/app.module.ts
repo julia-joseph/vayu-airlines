@@ -8,6 +8,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,6 +36,9 @@ import { SubscriptionsComponent } from './components/subscriptions/subscriptions
 import { WellnessSubscriptionComponent } from './components/subscriptions/wellness-subscription/wellness-subscription.component';
 import { DigitalSubscriptionComponent } from './components/subscriptions/digital-subscription/digital-subscription.component';
 import { AdjacentSubscriptionComponent } from './components/subscriptions/adjacent-subscription/adjacent-subscription.component';
+import { WellnessDonationComponent } from './components/donations/wellness-donation/wellness-donation.component';
+import { ReliefFundsComponent } from './components/donations/relief-funds/relief-funds.component';
+import { PaymentDonationComponent } from './components/donations/payment-donation/payment-donation.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +61,10 @@ import { AdjacentSubscriptionComponent } from './components/subscriptions/adjace
     SubscriptionsComponent,
     WellnessSubscriptionComponent,
     DigitalSubscriptionComponent,
-    AdjacentSubscriptionComponent
+    AdjacentSubscriptionComponent,
+    WellnessDonationComponent,
+    ReliefFundsComponent,
+    PaymentDonationComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +80,9 @@ import { AdjacentSubscriptionComponent } from './components/subscriptions/adjace
     MatSelectModule,
     MatTooltipModule,
     MatRadioModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatButtonToggleModule,
+    NgbModule
   ],
   entryComponents: [
     RegulationsDialogComponent
