@@ -167,7 +167,7 @@
                                                 </div>
                                                 <div class="overflow-items">
                                                     <div *ngFor="let item of wellnessKit.items">
-                                                        <div *ngIf="item.quantity!== 0">
+                                                        <div *ngIf="item.quantity!== 0" class="border-bottom pt-3 pb-2">
                                                             <div class="row mb-2">
                                                                 <div class="col-3 font-weight-400">
                                                                     {{ item.item }}
@@ -186,10 +186,23 @@
                                                                     $ <span class="font-size1-3">{{ item.quantity * item.price | number : '.2' }}</span>
                                                                 </div>
                                                             </div>
+                                                            <div class="row mt-1 font-size-0-9 violet">
+                                                                <div class="col-3">
+
+                                                                </div>
+                                                                <div class="col-9">
+                                                                    <div *ngIf="!item.subscription">
+                                                                        One-time Purchase
+                                                                    </div>
+                                                                    <div *ngIf="item.subscription">
+                                                                        Added to Subscription
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div *ngFor="let item of wellnessKit.additionalItems">
-                                                        <div *ngIf="item.item !== 'Select'">
+                                                        <div *ngIf="item.item !== 'Select'" class="border-bottom pt-3 pb-2">
                                                             <div class="row mb-2">
                                                                 <div class="col-3 font-weight-400">
                                                                     {{ item.item }}
@@ -206,6 +219,19 @@
                                                                 </div>
                                                                 <div class="col-3">
                                                                     $ <span class="font-size1-3">{{ item.quantity * item.price | number : '.2' }}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mt-1 font-size-0-9 violet">
+                                                                <div class="col-3">
+
+                                                                </div>
+                                                                <div class="col-9">
+                                                                    <div *ngIf="!item.subscription">
+                                                                        One-time Purchase
+                                                                    </div>
+                                                                    <div *ngIf="item.subscription">
+                                                                        Added to Subscription
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -269,7 +295,7 @@
 
                                                 <div class="overflow-items">
                                                     <div *ngFor="let item of digitalIfe.items">
-                                                        <div *ngIf="item.screens!== 0">
+                                                        <div *ngIf="item.screens!== 0" class="border-bottom pt-3 pb-2">
                                                             <div class="row mb-2">
                                                                 <div class="col-4">
                                                                     <div class="border w-75 p-1">
@@ -285,11 +311,24 @@
                                                                     $ <span class="font-size1-3">{{ item.screens * item.price | number : '.2' }}</span>
                                                                 </div>
                                                             </div>
+                                                            <div class="row mt-1 font-size-0-9 violet">
+                                                                <div class="col-4">
+
+                                                                </div>
+                                                                <div class="col-8">
+                                                                    <div *ngIf="!item.subscription">
+                                                                        One-time Purchase
+                                                                    </div>
+                                                                    <div *ngIf="item.subscription">
+                                                                        Added to Subscription
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
     
                                                     <div *ngFor="let item of digitalIfe.additionalItems">
-                                                        <div *ngIf="item.packageType !== 'Select' && item.screens!== 0">
+                                                        <div *ngIf="item.packageType !== 'Select' && item.screens!== 0" class="border-bottom pt-3 pb-2"> 
                                                             <div class="row mb-2">
                                                                 <div class="col-4">
                                                                     <div class="border w-75 p-1">
@@ -303,6 +342,19 @@
                                                                 </div>
                                                                 <div class="col-3">
                                                                     $ <span class="font-size1-3">{{ item.screens * item.price | number : '.2' }}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mt-1 font-size-0-9 violet">
+                                                                <div class="col-4">
+
+                                                                </div>
+                                                                <div class="col-8">
+                                                                    <div *ngIf="!item.subscription">
+                                                                        One-time Purchase
+                                                                    </div>
+                                                                    <div *ngIf="item.subscription">
+                                                                        Added to Subscription
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -338,49 +390,83 @@
 
             <div class="row mb-3 mt-4">
                 <div class="col-lg-6 col-md-12 col-sm-12">
-                    <div class="card h-100" *ngIf="false">
+                    <div class="card h-100" *ngIf="adjacentSeat.seats">
                         <div class="card-body min-h-20">
                             <div class="row pl-3 pr-3">
-                                <div class="col-6">
-                                    <div class="row">
-                                        <img src="../../../assets/images/ico_checkin.png" class="icons mr-2">
-                                        <h5 class="card-title">
-                                            <!-- <span class=">Ancillaries Summary</span> -  -->
-                                            Pick Your Seat
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="row justify-content-end">
-                                        <span class="mt-1">From</span>
-                                        <span class="font-size1-3 font-weight-bold ml-2">$35</span>
+                                <h5 class="card-title">
+                                    <!-- <span class=">Ancillaries Summary</span> -  -->
+                                    <span class="">Seat Regrouping</span>
+                                </h5>
+                            </div>
+                            <div class="row">
+                                <div class="card h-100 w-100 m-3">
+                                    <div class="card-body min-h-20">
+                                        <div class="row font-weight-bold d-flex justify-content-between mt-1 mb-1 border-bottom">
+                                            <h5 class="ml-3">{{ fromCode }} - {{ toCode }}</h5>
+                                        </div>
+                                        <div class="row w-100">
+                                            <div class="col-12">
+                                                <div class="">            
+                                                    <div class="row mt-3">
+                                                        <div class="col-3 d-flex justify-content-center">
+                                                            <img src="../../../assets/images/ico_checkin.png" class="seat-image">
+                                                        </div>
+                                                        <div class="col-9">
+                                                            <div class="row">
+                                                                <div class="col-7">
+                                                                    <b>Adjacent seats needed</b>
+                                                                </div>
+                                                                <div class="col-5">
+                                                                    Price
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mt-2">
+                                                                <div class="col-7">
+                                                                    <div class="border w-75 p-1">
+                                                                        {{  adjacentSeat.seats }}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-5">
+                                                                    $
+                                                                    <span class="font-size1-3">
+                                                                       {{ adjacentSeat.seats * adjacentSeat.price | number: ".2" }}
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mt-1 font-size-0-9 violet">
+                                                                <div class="col-12">
+                                                                    <div *ngIf="!adjacentSeat.subscription">
+                                                                        One-time Purchase
+                                                                    </div>
+                                                                    <div *ngIf="adjacentSeat.subscription">
+                                                                        Added to Subscription
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row p-4">
+                                                        <div class="col-12">
+                                                            <div><b>Heads-up</b></div>
+                                                            <p>Adjacent seat selection is currently unavailable now. We will assign it to you on the day of travel.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row pl-3 pr-3 mt-2">
-                                <div class="col-6 pl-0">
-                                    Add even more space to yourself or anyone in your party
-                                </div>
-                                <div class="col-6">
-                                    <div class="row justify-content-end">
-                                        <span class="blue links">Add</span>
-                                    </div>  
-                                </div>
-                            </div>
-                            <div class="row pl-3 pr-3 mt-3">
-                                <div class="col-6 pl-0">
-                                    <img src="../../../assets/images/ico_insurance.png" class="icons">
-                                </div>
-                                <div class="col-6">
-                                    <div class="row justify-content-end">
-                                        <img src="../../../assets/images/ico_skipline.png" class="icons">
-                                    </div>
+                            <div class="row d-flex justify-content-end ml-1 mr-4">
+                                <div>
+                                    <span class="font-weight-bold">Total: </span>
+                                    $ <span class="font-size1-5">{{ this.totalAdjacentSeat | number : '.2'}}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="card h-100" *ngIf="true">
+                    <div class="card h-100" *ngIf="!adjacentSeat.seats">
                         <div class="card-body min-h-20">
                             <div class="d-flex flex-column align-items-center">
                                 <img src="../../../assets/images/ico_seat_regrouping.png">
@@ -411,3 +497,42 @@
     </div>
 </div>
 <app-footer></app-footer>
+
+
+<!-- <div class="row pl-3 pr-3">
+    <div class="col-6">
+        <div class="row">
+            <img src="../../../assets/images/ico_checkin.png" class="icons mr-2">
+            <h5 class="card-title">
+                <span class=">Ancillaries Summary</span> -  
+                Pick Your Seat
+            </h5>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="row justify-content-end">
+            <span class="mt-1">From</span>
+            <span class="font-size1-3 font-weight-bold ml-2">$35</span>
+        </div>
+    </div>
+</div>
+<div class="row pl-3 pr-3 mt-2">
+    <div class="col-6 pl-0">
+        Add even more space to yourself or anyone in your party
+    </div>
+    <div class="col-6">
+        <div class="row justify-content-end">
+            <span class="blue links">Add</span>
+        </div>  
+    </div>
+</div>
+<div class="row pl-3 pr-3 mt-3">
+    <div class="col-6 pl-0">
+        <img src="../../../assets/images/ico_insurance.png" class="icons">
+    </div>
+    <div class="col-6">
+        <div class="row justify-content-end">
+            <img src="../../../assets/images/ico_skipline.png" class="icons">
+        </div>
+    </div>
+</div> -->
