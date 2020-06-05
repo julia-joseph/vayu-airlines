@@ -81,12 +81,14 @@ export class PaymentSummaryComponent implements OnInit {
     const subbedItemWellness = this.wellnessKitService.getWellnessKitDetails().items.filter(item => item.subscription);
     const subbedAdditionalWellness = this.wellnessKitService.getWellnessKitDetails().additionalItems.filter(item => item.subscription);
     const subbedWellness = subbedItemWellness.concat(subbedAdditionalWellness);
-    this.subscriptionService.setWellnessKitSubscription(subbedWellness);
+    const finalWellnessSubbedItems = subbedWellness.concat(this.subscriptionService.getWellnessKitSubscription());
+    this.subscriptionService.setWellnessKitSubscription(finalWellnessSubbedItems);
 
     const subbedItemDigital = this.digitalIfeService.getDigitalIfeDetails().items.filter(item => item.subscription);
     const subbedAdditionalDigital = this.digitalIfeService.getDigitalIfeDetails().additionalItems.filter(item => item.subscription);
     const subbedDigital = subbedItemDigital.concat(subbedAdditionalDigital);
-    this.subscriptionService.setDigitalIfeSubscription(subbedDigital);
+    const finalDigitalSubbedItems = subbedDigital.concat(this.subscriptionService.getDigitalIfeSubscription());
+    this.subscriptionService.setDigitalIfeSubscription(finalDigitalSubbedItems);
 
     this.adjacentSeatService.getAdjacentSeatDetails().subscription ? 
       this.subscriptionService.setAdjacentSeatSubscription(this.adjacentSeatService.getAdjacentSeatDetails()) :

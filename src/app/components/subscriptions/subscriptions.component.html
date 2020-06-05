@@ -4,7 +4,7 @@
     <div class="card shadow-sm m-4">
         <div class="card-body">
             <h4 class="card-title">Subscriptions</h4>
-            <div class="card shadow-sm mt-2">
+            <div class="card shadow-sm mt-4">
                 <div class="card-body">
                     <mat-tab-group [selectedIndex]="selectedTab">
                         <mat-tab>
@@ -18,8 +18,10 @@
                               </div>
                             </div>
                           </ng-template>
-                          <app-wellness-subscription>
-
+                          <app-wellness-subscription
+                            [wellnessSub] = "wellnessSub"
+                            (onWSConfirm) = "setWellness($event)"
+                            (onSkipToDS) = "skipToDigitalTab()">
                           </app-wellness-subscription>
                         </mat-tab>
                       
@@ -34,8 +36,10 @@
                               </div>
                             </div>
                           </ng-template>
-                          <app-digital-subscription>
-
+                          <app-digital-subscription
+                            [digitalSub]="digitalSub"
+                            (onDSConfirm) = "setDigital($event)"
+                            (onSkipToAS)="skipToAdjacentTab()">
                           </app-digital-subscription>
                         </mat-tab>
                       
@@ -50,8 +54,9 @@
                               </div>
                             </div>
                           </ng-template>
-                          <app-adjacent-subscription>
-
+                          <app-adjacent-subscription
+                            [adjacentSub]="adjacentSub"
+                          >
                           </app-adjacent-subscription>
                         </mat-tab>
                       

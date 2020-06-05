@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormArray, FormControl } from '@angular/forms';
 
 @Component({
@@ -9,6 +9,10 @@ import { FormGroup, FormArray, FormControl } from '@angular/forms';
 export class WellnessSubscriptionComponent implements OnInit, AfterViewChecked {
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   disableScrollDown = false
+
+  @Input() wellnessSub;
+  @Output() onWSConfirm = new EventEmitter<any>();
+  @Output() onSkipToDS = new EventEmitter<void>();
   
   wellnessSubForm: FormGroup = new FormGroup({
     items: new FormArray([ ]),
@@ -67,10 +71,15 @@ export class WellnessSubscriptionComponent implements OnInit, AfterViewChecked {
   }
 
   setInitialItems() {
-    this.items.push(this.addItemAsFormGroup('Mask',1,'Adult/M',5.24));
-    this.items.push(this.addItemAsFormGroup('Sanitizer',1,'1 OZ (30 mL)',2.3));
-    this.items.push(this.addItemAsFormGroup('Gloves',1,'Adult/M',1.2));
-    this.items.push(this.addItemAsFormGroup('Boxed Meal',1,'Adult/Veg Sandwich',20));
+    // this.items.push(this.addItemAsFormGroup('Mask',1,'Adult/M',5.24));
+    // this.items.push(this.addItemAsFormGroup('Sanitizer',1,'1 OZ (30 mL)',2.3));
+    // this.items.push(this.addItemAsFormGroup('Gloves',1,'Adult/M',1.2));
+    // this.items.push(this.addItemAsFormGroup('Boxed Meal',1,'Adult/Veg Sandwich',20));
+    if(this.wellnessSub.length){
+      this.wellnessSub.forEach((item) => {
+        this.items.push(this.addItemAsFormGroup(item.item,item.quantity,item.size,item.price,item.subscription,item.self,item.pone,item.ptwo));
+      })
+    }
   }
 
   addItemAsFormGroup(item: string, quantity: number, size: string, price: number, 
@@ -140,15 +149,34 @@ export class WellnessSubscriptionComponent implements OnInit, AfterViewChecked {
     })
   }
 
-  onConfirm() {
+  filterEmptySubItems(itemGroup) {
+    const emptyItemSubIndexes = itemGroup.value.reduce(function(arr, item, index) {
+      if (!item.self && !item.pone && !item.ptwo)
+          arr.push(index);
+      return arr;
+    }, []);
+    emptyItemSubIndexes.forEach((subIndex) => {
+      itemGroup.removeAt(subIndex);
+    })
+  }
 
+  onConfirm() {
+    this.submitted = true;
+    //if all three checkboxes are false, remove sub
+    this.filterEmptySubItems(this.items);
+    this.filterEmptySubItems(this.additionalItems);
+
+    console.log('items',this.wellnessSub.value);
+
+    const finalItems = [...this.items.value, ...this.additionalItems.value];
+    this.onWSConfirm.emit(finalItems)
   }
 
   onEdit() {
-
+    this.submitted = false;
   }
 
   onSkipToDigitalIFE() {
-
+    this.onSkipToDS.emit();
   }
 }

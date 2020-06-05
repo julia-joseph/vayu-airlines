@@ -1,51 +1,12 @@
 import { Injectable } from '@angular/core';
-
+import { MOCK_WELLNESS_SUB, MOCK_DIGITAL_SUB } from '../../consts/subscription.consts';
 @Injectable({
   providedIn: 'root'
 })
 export class SubscriptionService {
-  wellnessKitSubscription: any[] = [
-    {
-      item: "Mask",
-      pone: true,
-      price: 5.24,
-      ptwo: true,
-      quantity: 2,
-      self: false,
-      size: "Adult/M",
-      subscription: true
-    },
-    {
-      item: "Boxed Meal",
-      pone: false,
-      price: 20,
-      ptwo: false,
-      quantity: 1,
-      self: true,
-      size: "Adult/Muffin",
-      subscription: true
-    }
-  ]
-  digitalIfeSubscription: any[] = [
-    {
-      packageType: "Basic",
-      pone: true,
-      price: 0.00,
-      ptwo: true,
-      screens: 2,
-      self: false,
-      subscription: true
-    },
-    {
-      packageType: "Premium",
-      pone: false,
-      price: 1.50,
-      ptwo: false,
-      screens: 2,
-      self: true,
-      subscription: true
-    }
-  ]
+  wellnessKitSubscription: any[] = []; // MOCK_WELLNESS_SUB;
+  digitalIfeSubscription: any[] = []; // MOCK_DIGITAL_SUB;
+
   adjacentSeatSubscription: any[];
 
   constructor() { }

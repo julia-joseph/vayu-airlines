@@ -1,1 +1,173 @@
-<p>digital-subscription works!</p>
+<form [formGroup]="digitalSubForm">
+    <div>
+      <div class="d-flex flex-row justify-content-end pt-3 pb-3 pl-4 pr-4 border-bottom">
+        <div class="font-size1-2 add-items-link mr-4" (click)="addAdditionalItems()">Add additional items</div>
+        <!-- <div (click)="openExpandedAncDialog()">
+            <svg class="bi bi-arrows-fullscreen cursor-pointer" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M1.464 10.536a.5.5 0 01.5.5v3h3a.5.5 0 010 1h-3.5a.5.5 0 01-.5-.5v-3.5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+                <path fill-rule="evenodd" d="M5.964 10a.5.5 0 010 .707l-4.146 4.147a.5.5 0 01-.707-.708L5.257 10a.5.5 0 01.707 0zm8.854-8.854a.5.5 0 010 .708L10.672 6a.5.5 0 01-.708-.707l4.147-4.147a.5.5 0 01.707 0z" clip-rule="evenodd"/>
+                <path fill-rule="evenodd" d="M10.5 1.5A.5.5 0 0111 1h3.5a.5.5 0 01.5.5V5a.5.5 0 01-1 0V2h-3a.5.5 0 01-.5-.5zm4 9a.5.5 0 00-.5.5v3h-3a.5.5 0 000 1h3.5a.5.5 0 00.5-.5V11a.5.5 0 00-.5-.5z" clip-rule="evenodd"/>
+                <path fill-rule="evenodd" d="M10 9.964a.5.5 0 000 .708l4.146 4.146a.5.5 0 00.708-.707l-4.147-4.147a.5.5 0 00-.707 0zM1.182 1.146a.5.5 0 000 .708L5.328 6a.5.5 0 00.708-.707L1.889 1.146a.5.5 0 00-.707 0z" clip-rule="evenodd"/>
+                <path fill-rule="evenodd" d="M5.5 1.5A.5.5 0 005 1H1.5a.5.5 0 00-.5.5V5a.5.5 0 001 0V2h3a.5.5 0 00.5-.5z" clip-rule="evenodd"/>
+            </svg>
+        </div> -->
+      </div>
+
+      <div class="row w-100">
+        <div class="col-8">
+          <div class="row pt-3 pl-2 pr-2 pl-4">
+            <div class="col-4">
+              Package Type
+            </div>
+            <div class="col-4">
+              Devices
+            </div>
+            <div class="col-4">
+              Price
+            </div>
+          </div>
+
+          <div class="overflow-items" #scrollMe (scroll)="onScroll()">
+            <div>
+              <div *ngFor="let itemGroup of items.controls; let i = index">
+                <div class="row pt-3 pb-3 pl-3 border-bottom" [formGroup]="itemGroup">
+                    <div class="col-12">
+                      <div class="row">
+                        <div class="col-4">
+                          <mat-select
+                            class="form-control"
+                            [disabled]="submitted"
+                            formControlName="packageType"
+                            (selectionChange)="setPriceOfNewItem(itemGroup)"
+                          >
+                            <mat-option *ngFor="let packageType of packageTypeOptions" [value]="packageType">
+                              {{ packageType }}
+                            </mat-option>
+                          </mat-select>
+                        </div>
+                        <div class="col-4">
+                          <mat-select
+                            class="form-control"
+                            [disabled]="submitted"
+                            formControlName="screens"
+                          >
+                            <mat-option
+                              *ngFor="let screens of screenOptions"
+                              [value]="screens"
+                            >
+                              {{ screens }}
+                            </mat-option>
+                          </mat-select>
+                        </div>
+                        <div class="col-4 pt-2">
+                          $
+                          <span class="font-size1-2">
+                            {{ itemGroup.get('screens').value * itemGroup.get('price').value | number: ".2" }}
+                          </span>
+                        </div>
+                      </div>
+                      <div class="row d-flex flex-row mt-3 ml-2">
+                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted" class="ml-3">Self</mat-checkbox>
+                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted" class="ml-3">Passenger 1</mat-checkbox>
+                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted" class="ml-3">Passenger 2</mat-checkbox>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
+              <ng-container *ngIf="digitalSubForm.get('additionalItems')">
+  
+              <ng-container  
+                *ngFor="let itemGroup of additionalItems.controls; let i = index"
+              >
+                <div class="row pt-3 pb-3 pl-3 border-bottom" [formGroup]="itemGroup">
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="col-4">
+                        <button *ngIf="!submitted"
+                                class="btn btn-sm p-0 remove-button rounded-circle" 
+                                (click)="removeAdditionalItem(i)">
+                          <svg class="bi bi-x remove-icon" width="1.4em" height="1.4em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z" clip-rule="evenodd"/>
+                          </svg>
+                        </button>
+                        <mat-select
+                          class="form-control"
+                          [disabled]="submitted"
+                          formControlName="packageType"
+                          [ngClass]="{'w-100':submitted, 'w-75':!submitted}"
+                          (selectionChange)="setPriceOfNewItem(itemGroup)"
+                        >
+                          <mat-option *ngIf="itemGroup.get('packageType').value === 'Select'" value='Select'>Select</mat-option>
+                          <mat-option *ngFor="let packageType of packageTypeOptions" [value]="packageType">
+                            {{ packageType }}
+                          </mat-option>
+                        </mat-select>
+                      </div>
+                      <div class="col-4">
+                        <mat-select
+                          class="form-control"
+                          [disabled]="submitted"
+                          formControlName="screens"
+                        >
+                          <mat-option *ngIf="itemGroup.get('screens').value === 'Select'" value='Select'>Select</mat-option>
+                          <mat-option *ngFor="let screen of screenOptions" [value]="screen">
+                            {{ screen }}
+                          </mat-option>
+                        </mat-select>
+                      </div>
+                      <div class="col-4 mt-2">
+                        $
+                        <span class="font-size1-2" *ngIf="itemGroup.get('packageType').value === 'Select'">
+                          {{ itemGroup.get('price').value | number: ".2" }}
+                        </span>
+                        <span class="font-size1-2 mt-2" *ngIf="itemGroup.get('packageType').value !== 'Select'">
+                          {{ itemGroup.get('screens').value * itemGroup.get('price').value | number: ".2" }}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="row d-flex flex-row mt-3 ml-2">
+                      <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted" class="ml-3">Self</mat-checkbox>
+                      <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted" class="ml-3">Passenger 1</mat-checkbox>
+                      <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted" class="ml-3">Passenger 2</mat-checkbox>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+  
+              </ng-container>
+            </div>   
+          </div>
+
+          <div class="row pl-4 pt-4">
+            <div class="col-8 pl-0 pr-0">
+              <button class="blue-button mr-3" (click)="onConfirm()" *ngIf="!submitted">Save</button>
+              <button class="blue-button mr-3" (click)="onEdit()"  *ngIf="submitted">Edit</button>
+              <button class="grey-button" (click)="onSkipToSeatRegrouping()">
+                <span *ngIf="!submitted">Skip to Seat Regrouping</span>
+                <span *ngIf="submitted">Next: Seat Regrouping</span>
+              </button>
+            </div>
+            <!-- <div class="col-4 pl-0 d-flex justify-content-end">
+              <div class="d-flex mr-3 pt-3">
+                <div class="mr-2 font-size1-2">Total:</div>
+                <div class="">
+                  $
+                  <span class="font-size1-2">
+                    {{ totalPrice | number: ".2" }}
+                  </span>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+        <div class="col-4 pl-4 pt-4">
+          <img
+            src="../../../../assets/images/img_promo_digital_ife.jpg"
+            class="w-100 h-75"
+          />
+        </div>
+      </div>
+    </div>
+</form>

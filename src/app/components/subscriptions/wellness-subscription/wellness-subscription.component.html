@@ -1,7 +1,7 @@
 <form [formGroup]="wellnessSubForm">
     <div>
       <div class="d-flex flex-row justify-content-end pt-3 pb-3 pl-4 pr-4 border-bottom">
-        <div class="add-items-link mr-4" (click)="addAdditionalItems()">Add additional items</div>
+        <div class="font-size1-2 add-items-link mr-4" (click)="addAdditionalItems()">Add additional items</div>
         <!-- <div (click)="openExpandedAncDialog()">
             <svg class="bi bi-arrows-fullscreen cursor-pointer" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M1.464 10.536a.5.5 0 01.5.5v3h3a.5.5 0 010 1h-3.5a.5.5 0 01-.5-.5v-3.5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
@@ -116,7 +116,7 @@
                             <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted" class="ml-3">Self</mat-checkbox>
                             <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted" class="ml-3">Passenger 1</mat-checkbox>
                             <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted" class="ml-3">Passenger 2</mat-checkbox>
-                         </div>
+                        </div>
                     </div>   
                 </div>
               </div>
@@ -254,7 +254,7 @@
 
           <div class="row p-4">
             <div class="col-8 pl-0 pr-0" >
-              <button class="blue-button mr-3" (click)="onConfirm()" *ngIf="!submitted">Confirm</button>
+              <button class="blue-button mr-3" (click)="onConfirm()" *ngIf="!submitted">Save</button>
               <button class="blue-button mr-3" (click)="onEdit()" *ngIf="submitted">Edit</button>
               <button class="grey-button" (click)="onSkipToDigitalIFE()">
                 <span *ngIf="!submitted">Skip To Digital IFE</span>
