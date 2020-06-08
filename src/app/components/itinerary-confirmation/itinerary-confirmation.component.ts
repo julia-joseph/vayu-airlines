@@ -5,6 +5,8 @@ import * as moment from 'moment';
 import { DigitalIfeDetailsService } from 'src/app/services/digital-ife-details/digital-ife-details.service';
 import { AdjacentSeatDetailsService } from 'src/app/services/adjacent-seat-details/adjacent-seat-details.service';
 import { Router } from '@angular/router';
+import { DonationDialogComponent } from '../donation-dialog/donation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-itinerary-confirmation',
   templateUrl: './itinerary-confirmation.component.html',
@@ -45,7 +47,8 @@ export class ItineraryConfirmationComponent implements OnInit {
     private flightDetailsService: FlightDetailsService,
     private digitalIfeService: DigitalIfeDetailsService,
     private adjacentSeatService: AdjacentSeatDetailsService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -75,5 +78,20 @@ export class ItineraryConfirmationComponent implements OnInit {
 
   onDonate() {
     this.router.navigate(['/donations']);
+  }
+
+  onDonateDialog(): void {
+    const dialogRef = this.dialog.open(DonationDialogComponent, {
+      panelClass: 'regulation-dialog-container',
+      height: '80vh',
+      width: '200vh',
+      data: { }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.router.navigate(['/donations']);
+      }
+    });
   }
 }

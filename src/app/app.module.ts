@@ -39,6 +39,7 @@ import { AdjacentSubscriptionComponent } from './components/subscriptions/adjace
 import { WellnessDonationComponent } from './components/donations/wellness-donation/wellness-donation.component';
 import { ReliefFundsComponent } from './components/donations/relief-funds/relief-funds.component';
 import { PaymentDonationComponent } from './components/donations/payment-donation/payment-donation.component';
+import { DonationDialogComponent } from './components/donation-dialog/donation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { PaymentDonationComponent } from './components/donations/payment-donatio
     AdjacentSubscriptionComponent,
     WellnessDonationComponent,
     ReliefFundsComponent,
-    PaymentDonationComponent
+    PaymentDonationComponent,
+    DonationDialogComponent
   ],
   imports: [
     BrowserModule,
