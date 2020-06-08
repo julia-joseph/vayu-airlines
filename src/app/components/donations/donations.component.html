@@ -13,20 +13,24 @@
                   <h5 class="font-weight-bold w-100 pt-2 mt-1">Wellness Kit & Food Packages</h5>
                   <mat-icon></mat-icon>
                 </mat-expansion-panel-header>
-                <app-wellness-donation>
+                <app-wellness-donation
+                 [wellnessDon]="wellnessDon"
+                 [firstDonation]="firstDonation"
+                 (onWDConfirm)="setWellnessDonation($event)">
                 </app-wellness-donation>
               </mat-expansion-panel>
 
               <mat-expansion-panel class="mb-3 shadow-sm" hideToggle>
                 <mat-expansion-panel-header>
-                  <h5 class="font-weight-bold w-100 pt-2 mt-1">Funds for reflief measures</h5>
+                  <h5 class="font-weight-bold w-100 pt-2 mt-1">Funds for relief measures</h5>
                   <mat-icon></mat-icon>
                 </mat-expansion-panel-header>
-                <app-relief-funds>
+                <app-relief-funds
+                  (onRFSkip)="onSkipToPayment()">
                 </app-relief-funds>
               </mat-expansion-panel>
 
-              <mat-expansion-panel class="mb-3 shadow-sm" hideToggle>
+              <mat-expansion-panel class="mb-3 shadow-sm" hideToggle disabled="true">
                 <mat-expansion-panel-header>
                   <h5 class="font-weight-bold w-100 pt-2 mt-1">Payment</h5>
                   <mat-icon></mat-icon>

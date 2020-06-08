@@ -116,6 +116,10 @@
                             <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted" class="ml-3">Annie</mat-checkbox>
                             <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted" class="ml-3">Pax 1</mat-checkbox>
                             <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted" class="ml-3">A B</mat-checkbox>
+                            <div class="cursor-pointer violet font-weight-bold ml-3" 
+                                  (click)="removeItem(i)">
+                                  <u>Cancel Subscription</u>
+                            </div>
                         </div>
                     </div>   
                 </div>

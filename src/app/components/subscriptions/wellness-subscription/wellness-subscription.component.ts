@@ -115,6 +115,10 @@ export class WellnessSubscriptionComponent implements OnInit, AfterViewChecked {
     }))
   }
 
+  removeItem(i: number): void { 
+    this.items.removeAt(i);
+  }
+
   removeAdditionalItem(i: number): void { 
     this.additionalItems.removeAt(i);
   }

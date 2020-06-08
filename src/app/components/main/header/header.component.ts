@@ -22,4 +22,8 @@ export class HeaderComponent implements OnInit {
   onMySubscriptions() {
     this.router.navigate(['/subscriptions']);
   }
+
+  onMyDonations() {
+    this.router.navigate(['/donations']);
+  }
 }
