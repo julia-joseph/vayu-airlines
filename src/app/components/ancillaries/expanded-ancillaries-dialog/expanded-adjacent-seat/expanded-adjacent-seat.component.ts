@@ -21,16 +21,18 @@ export class ExpandedAdjacentSeatComponent implements OnInit {
   seatOptions: number[] = [0, 1, 2];
 
   totalQuantity: number = 1;
+  isSubscriptionAdded: boolean = false;
 
-  applySubForm: FormGroup;
+  // applySubForm: FormGroup;
 
   constructor(
     private adjacentSeatService: AdjacentSeatDetailsService
   ) { }
 
   ngOnInit(): void {
-    this.applySubForm = this.adjacentSeatService.getAdjacentApplySubFormGroup();
-    
+    // this.applySubForm = this.adjacentSeatService.getAdjacentApplySubFormGroup();
+    this.isSubscriptionAdded = this.adjacentSeatService.getSubscriptionAdded();
+
     this.submitted = this.adjacentSeatService.submitted;
     this.calculateTotalPrice();
     this.adjacentSeatForm.valueChanges.subscribe(() => {
@@ -60,5 +62,10 @@ export class ExpandedAdjacentSeatComponent implements OnInit {
   onSkip() {
     this.adjacentSeatService.setSkipMiniViewAdjacentSeat();
     this.onSRConfirm.emit();
+  }
+
+  checkSubscriptionAdded() {
+    this.isSubscriptionAdded = true;
+    this.adjacentSeatService.setSubscriptionAddedMini();
   }
 }

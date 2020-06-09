@@ -109,7 +109,7 @@
 }
 
 .bg-violet {
-  background-color: #865e9a;
+  background-color: #8c468b;
 }
 
 .blue {
@@ -117,7 +117,8 @@
 }
 
 .violet {
-  color: #865e9a;
+  color: #8c468b;
+  //  #865e9a;
 }
 
 .symbol {
@@ -168,4 +169,13 @@
 
 .remove-icon:hover {
   transform: rotate(180deg);
+}
+
+.pt-50 {
+  padding-top: 50px !important;
+}
+
+.ptb-130 {
+  padding-top: 130px !important;
+  padding-bottom: 130px !important;
 }

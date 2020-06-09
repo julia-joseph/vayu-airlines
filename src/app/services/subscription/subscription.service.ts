@@ -7,7 +7,7 @@ export class SubscriptionService {
   wellnessKitSubscription: any[] = []; // MOCK_WELLNESS_SUB;
   digitalIfeSubscription: any[] = []; // MOCK_DIGITAL_SUB;
 
-  adjacentSeatSubscription: any[];
+  adjacentSeatSubscription: any = null;
 
   constructor() { }
 

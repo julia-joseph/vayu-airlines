@@ -16,12 +16,12 @@
             </mat-select>
             </div>
             <div class=""
-              [ngClass]="{'col-5':isFirstBooking, 'col-3':!isFirstBooking}">
+              [ngClass]="{'col-5':isFirstBooking || (!isFirstBooking && !isSubscriptionAvailable), 'col-3':!isFirstBooking && isSubscriptionAvailable}">
 
             </div>
-            <div class="col-3 pt-2" *ngIf="!isFirstBooking">
+            <div class="col-3 pt-2" *ngIf="!isFirstBooking && isSubscriptionAvailable">
                 <div class="violet font-weight-bold cursor-pointer">
-                  <span [matMenuTriggerFor]="subscriptionMenu" (click)="checkSubscriptionAdded()">
+                  <!-- <span [matMenuTriggerFor]="subscriptionMenu" (click)="checkSubscriptionAdded()">
                     Apply Subscription
                     <img src="assets/images/ico_chevron.png" class="symbol">  
                   </span>
@@ -30,9 +30,10 @@
                     <div class="d-flex flex-column justify-content-between p-2">
                       <mat-checkbox (click) = "$event.stopPropagation()">Annie</mat-checkbox>
                       <mat-checkbox (click) = "$event.stopPropagation()">Pax 1</mat-checkbox>
-                      <mat-checkbox (click) = "$event.stopPropagation()">A B</mat-checkbox>
+                      <mat-checkbox (click) = "$event.stopPropagation()">AB</mat-checkbox>
                     </div>
-                  </mat-menu>
+                  </mat-menu> -->
+                  <span (click)="checkSubscriptionAdded()">Apply Subscription</span>
                 </div>
             </div>
             <div class="pr-0"
@@ -54,7 +55,7 @@
         <div class="row w-100 font-size1-2">
             <div class="col-8">
                 <div class="overflow-items">
-                    <div *ngIf="isFirstBooking || !isFirstBooking && isSubscriptionAdded">
+                    <div *ngIf="isFirstBooking || !isFirstBooking && isSubscriptionAdded || !isFirstBooking && !isSubscriptionAvailable && !isSubscriptionAdded">
                         <div class="row mt-4 pr-2">
                             <div class="col-4 d-flex justify-content-center">
                                 <img src="assets/images/ico_checkin.png" class="seat-image">
@@ -72,7 +73,7 @@
                                     <div class="col-6">
                                         <mat-select
                                             class="form-control"
-                                            [disabled]="submitted"
+                                            [disabled]="submitted || isSubscriptionAdded"
                                             formControlName="seats"
                                         >
                                             <mat-option *ngFor="let seat of seatOptions" [value]="seat">
@@ -89,7 +90,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row d-flex flex-row mt-3 ml-4">
+                        <div class="row d-flex flex-row mt-3 ml-4" *ngIf="isFirstBooking || (!isFirstBooking && !isSubscriptionAdded)">
                             <mat-radio-group formControlName="subscription" [disabled]="submitted" class="p-1">
                                 <mat-radio-button [value]="false" class="ml-3 mr-3">
                                     One-time Purchase
@@ -101,7 +102,7 @@
                             <div class="font-size-0-6 cursor-pointer font-weight-bold p-1" (click)="openDetails()"><u>Details</u></div>
                             <div class="violet font-size-0-9 cursor-pointer  ml-3 border p-2"
                             *ngIf="adjacentSeatForm.get('subscription').value">
-                                <span [matMenuTriggerFor]="passengerMenu">
+                                <!-- <span [matMenuTriggerFor]="passengerMenu">
                                 Select Passenger
                                 <img src="assets/images/ico_chevron.png" class="symbol">  
                                 </span>
@@ -110,9 +111,18 @@
                                     <div class="d-flex flex-column justify-content-between p-2">
                                         <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted">Annie</mat-checkbox>
                                         <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted">Pax 1</mat-checkbox>
-                                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted">A B</mat-checkbox>
+                                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted">AB</mat-checkbox>
                                     </div>
-                                </mat-menu>
+                                </mat-menu> -->
+                                <span>Annie</span>
+                            </div>
+                        </div>
+                        <div class="row mt-3" *ngIf="!isFirstBooking && isSubscriptionAdded">
+                            <div class="col-4">
+
+                            </div>
+                            <div class="col-8">
+                                <span class="bg-violet text-white p-1 font-size-0-9">Existing Subscription/Annie</span>
                             </div>
                         </div>
                         <div class="row mt-4 pl-4 pr-2 ml-4">
@@ -120,11 +130,10 @@
                             <p>Adjacent seat selection is currently unavailable now. We will assign it to you on the day of travel.</p>
                         </div>
                     </div>
-                    <div *ngIf="!isFirstBooking && !isSubscriptionAdded">
-                        <div class="violet p-4">
+                    <div *ngIf="!isFirstBooking && !isSubscriptionAdded && isSubscriptionAvailable">
+                        <div class="violet p-4 mt-4">
                             Click on the <span class="font-weight-bold">Apply Subscriptions</span> link to include
-                            existing subscriptions at a discounted rate. If not, click on 
-                            <span class="font-weight-bold">Add additional items</span> to make new selections.
+                            existing subscriptions at a discounted rate. 
                         </div>
                     </div>
                     <!-- <div *ngIf="!isFirstBooking && isSubscriptionAdded">

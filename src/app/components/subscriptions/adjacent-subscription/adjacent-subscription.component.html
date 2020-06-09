@@ -1,1 +1,97 @@
-<p>adjacent-subscription works!</p>
+<form [formGroup]="adjacentSubForm">
+    <div>
+        <div class="row font-size1-2 pt-3 pb-4 pl-4 pr-4 mr-1 border-bottom">
+        </div>
+
+        <div class="row w-100 font-size1-2">
+            <div class="col-8">
+                <div class="overflow-items">
+                    <div>
+                        <div class="row mt-4 pr-2">
+                            <div class="col-4 d-flex justify-content-center">
+                                <img src="assets/images/ico_checkin.png" class="seat-image">
+                            </div>
+                            <div class="col-8">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <b>Adjacent seats needed</b>
+                                    </div>
+                                    <div class="col-6">
+                                        Price
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-6">
+                                        <mat-select
+                                            class="form-control"
+                                            [disabled]="submitted"
+                                            formControlName="seats"
+                                        >
+                                            <mat-option *ngFor="let seat of seatOptions" [value]="seat">
+                                            {{ seat }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </div>
+                                    <div class="col-6 mt-2">
+                                        $
+                                        <span class="font-size1-5">
+                                            {{ adjacentSubForm.get('seats').value * adjacentSubForm.get('price').value | number: ".2" }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row d-flex flex-row mt-3 ml-2">
+                            <div class="col-4">
+
+                            </div>
+                            <div class="col-8 pl-0">
+                                <mat-checkbox (click) = "$event.stopPropagation()" formControlName="subscription" [disabled]="submitted" class="">Annie</mat-checkbox>
+                            </div>
+                            <!-- <div class="cursor-pointer violet font-weight-bold ml-3" 
+                                  (click)="removeItem(i)">
+                                  <u>Cancel Subscription</u>
+                            </div> -->
+                        </div>
+                        <!-- <div class="row mt-4 pl-4 pr-2 ml-4">
+                            <p><b>Heads-up</b></p>
+                            <p>Adjacent seat selection is currently unavailable now. We will assign it to you on the day of travel.</p>
+                        </div> -->
+                    </div>
+                </div>
+
+                <div class="row pl-4">
+                    <div class="col-8 pl-0 pr-0" *ngIf="!submitted">
+                        <button class="blue-button mr-3" (click)="onConfirm()">Save</button>
+                        <!-- <button class="grey-button" (click)= "onSkip()">
+                            Skip to Payment
+                        </button> -->
+                    </div>
+                    <div class="col-8 pl-0 pr-0" *ngIf="submitted">
+                        <button class="blue-button mr-3" (click)="onEdit()">Edit</button>
+                        <!-- <button class="grey-button" (click)= "onSkip()">
+                            Next: Payment
+                        </button> -->
+                    </div>
+                    <!-- <div class="col-4 pl-0 d-flex justify-content-end">
+                        <div class="d-flex mr-3 pt-3">
+                        <div class="mr-2 font-size1-5">Total:</div>
+                        <div class="">
+                            $
+                            <span class="font-size1-5">
+                            {{ totalPrice | number: ".2" }}
+                            </span>
+                        </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="col-4 pl-4 pt-4">
+                <img
+                src="assets/images/img_promo_seat_regrouping.jpg"
+                class="w-100 h-75"
+                />
+            </div>
+        </div>
+    </div>
+</form>

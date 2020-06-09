@@ -30,6 +30,100 @@
 
           <div class="overflow-items" #scrollMe (scroll)="onScroll()">
             <div>
+              <div *ngFor="let itemGroup of cancelItems.controls; let i = index">
+                <div class="row pt-3 pb-3 border-bottom text-muted" [formGroup]="itemGroup">
+                    <div class="col-12">
+                        <div class="row" >
+                            <div class="col-3 item-name mt-2">
+                                {{ itemGroup.get('item').value }}
+                            </div>
+                            <div class="col-3">
+                                <mat-select
+                                class="form-control"
+                                [disabled]="true"
+                                formControlName="quantity"
+                                >
+                                <mat-option *ngFor="let qty of [0, 1, 2]" [value]="qty">
+                                    {{ qty }}
+                                </mat-option>
+                                </mat-select>
+                            </div>
+                            <div class="col-3">
+                                <mat-select
+                                class="form-control"
+                                [disabled]="true"
+                                formControlName="size"
+                                *ngIf="itemGroup.get('item').value === 'Mask'"
+                                >
+                                <mat-option
+                                    *ngFor="let size of itemSizeOptions[0]"
+                                    [value]="size"
+                                >
+                                    {{ size }}
+                                </mat-option>
+                                </mat-select>
+                
+                                <mat-select
+                                class="form-control"
+                                [disabled]="true"
+                                formControlName="size"
+                                *ngIf="itemGroup.get('item').value === 'Sanitizer'"
+                                >
+                                <mat-option
+                                    *ngFor="let size of itemSizeOptions[1]"
+                                    [value]="size"
+                                >
+                                    {{ size }}
+                                </mat-option>
+                                </mat-select>
+                
+                                <mat-select
+                                class="form-control"
+                                [disabled]="true"
+                                formControlName="size"
+                                *ngIf="itemGroup.get('item').value === 'Gloves'"
+                                >
+                                <mat-option
+                                    *ngFor="let size of itemSizeOptions[2]"
+                                    [value]="size"
+                                >
+                                    {{ size }}
+                                </mat-option>
+                                </mat-select>
+            
+                                <mat-select
+                                class="form-control"
+                                [disabled]="true"
+                                formControlName="size"
+                                *ngIf="itemGroup.get('item').value === 'Boxed Meal'"
+                                >
+                                <mat-option
+                                    *ngFor="let size of itemSizeOptions[3]"
+                                    [value]="size"
+                                >
+                                    {{ size }}
+                                </mat-option>
+                                </mat-select>
+                            </div>
+                            <div class="col-2 d-flex justify-content-end mt-2">
+                                $
+                                <span class="font-size1-2">
+                                {{ itemGroup.get('quantity').value * itemGroup.get('price').value | number: ".2" }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row d-flex flex-row mt-3 ml-2">
+                            <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="true" class="ml-3">Annie</mat-checkbox>
+                            <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="true" class="ml-3">Pax 1</mat-checkbox>
+                            <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="true" class="ml-3">AB</mat-checkbox>
+                            <div class="ml-3">
+                                  <span>Cancelled Subscription</span>
+                            </div>
+                        </div>
+                    </div>   
+                </div>
+              </div>
+
               <div *ngFor="let itemGroup of items.controls; let i = index">
                 <div class="row pt-3 pb-3 border-bottom" [formGroup]="itemGroup">
                     <div class="col-12">
@@ -115,7 +209,7 @@
                         <div class="row d-flex flex-row mt-3 ml-2">
                             <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted" class="ml-3">Annie</mat-checkbox>
                             <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted" class="ml-3">Pax 1</mat-checkbox>
-                            <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted" class="ml-3">A B</mat-checkbox>
+                            <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted" class="ml-3">AB</mat-checkbox>
                             <div class="cursor-pointer violet font-weight-bold ml-3" 
                                   (click)="removeItem(i)">
                                   <u>Cancel Subscription</u>
@@ -246,7 +340,7 @@
                     <div class="row d-flex flex-row mt-3 ml-2" *ngIf="itemGroup.get('item').value !== 'Select'">
                         <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted" class="ml-3">Annie</mat-checkbox>
                         <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted" class="ml-3">Pax 1</mat-checkbox>
-                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted" class="ml-3">A B</mat-checkbox>                      
+                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted" class="ml-3">AB</mat-checkbox>                      
                     </div>
                   </div>
                 </div>

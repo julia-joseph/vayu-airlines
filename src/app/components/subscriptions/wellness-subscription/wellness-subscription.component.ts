@@ -35,6 +35,10 @@ export class WellnessSubscriptionComponent implements OnInit, AfterViewChecked {
     'Adult/Rice Cake','Kid/Rice Cake']
   ];
 
+  cancelledSubForm: FormGroup = new FormGroup({
+    items: new FormArray([ ])
+  });
+
   constructor() { }
 
   ngOnInit(): void {
@@ -115,7 +119,22 @@ export class WellnessSubscriptionComponent implements OnInit, AfterViewChecked {
     }))
   }
 
+  get cancelItems() {
+    return this.cancelledSubForm.get('items') as FormArray;
+  }
+
   removeItem(i: number): void { 
+    this.cancelItems.push(new FormGroup({
+      item: new FormControl(this.items.value[i].item),
+      quantity: new FormControl(this.items.value[i].quantity),
+      size: new FormControl(this.items.value[i].size),
+      price: new FormControl(this.items.value[i].price),
+      subscription: new FormControl(this.items.value[i].subscription),
+      self: new FormControl(this.items.value[i].self),
+      pone: new FormControl(this.items.value[i].pone),
+      ptwo: new FormControl(this.items.value[i].ptwo)
+    }));
+
     this.items.removeAt(i);
   }
 

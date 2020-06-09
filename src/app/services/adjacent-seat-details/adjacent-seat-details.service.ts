@@ -16,11 +16,13 @@ export class AdjacentSeatDetailsService {
     seats: 1,
     price: 65.32,
     subscription: false,
-    self: false,
-    pone: false,
-    ptwo: false,
+    // self: false,
+    // pone: false,
+    // ptwo: false,
     segment: 'JFK - BOS'
   }
+
+  subscriptionAdded: false;
 
   totalPriceChange: Subject<number> = new Subject<number>();
   public totalPriceObservable = this.totalPriceChange.asObservable();
@@ -39,6 +41,9 @@ export class AdjacentSeatDetailsService {
 
   performSkipSubject: Subject<boolean> = new Subject<boolean>();
   public performSkipObservable = this.performSkipSubject.asObservable();
+
+  performSubscriptionAdded: Subject<boolean> = new Subject<boolean>();
+  public performSubscriptionAddedObservable = this.performSubscriptionAdded.asObservable();
 
   constructor() { }
 
@@ -85,11 +90,23 @@ export class AdjacentSeatDetailsService {
     return this.adjacentSeatForm;
   }
 
-  setAdjacentApplySubFormGroup(form) {
-    this.adjacentApplySubForm = form;
+  // setAdjacentApplySubFormGroup(form) {
+  //   this.adjacentApplySubForm = form;
+  // }
+
+  // getAdjacentApplySubFormGroup() {
+  //   return this.adjacentApplySubForm;
+  // }
+
+  setSubscriptionAddedMini() {
+    this.performSubscriptionAdded.next();
   }
 
-  getAdjacentApplySubFormGroup() {
-    return this.adjacentApplySubForm;
+  setSubscriptionAdded(subAdded){
+    this.subscriptionAdded = subAdded;
+  }
+
+  getSubscriptionAdded() {
+    return this.subscriptionAdded;
   }
 }

@@ -15,52 +15,71 @@
                 </mat-option>
             </mat-select>
             </div>
-            <div class="col-5 d-flex pl-0">
-            <!-- delivery -->
+            <div class=""
+              [ngClass]="{'col-5':isFirstBooking, 'col-3':!isFirstBooking}">
+
             </div>
-            <div class="col-4 pr-0">
-            <!-- additional details -->
+            <div class="col-3 pt-2" *ngIf="!isFirstBooking && adjacentSeatForm.get('subscription').value">
+                <div class="violet font-weight-bold cursor-pointer">
+                  <!-- <span [matMenuTriggerFor]="subscriptionMenu" (click)="checkSubscriptionAdded()">
+                    Apply Subscription
+                    <img src="assets/images/ico_chevron.png" class="symbol">  
+                  </span>
+      
+                  <mat-menu #subscriptionMenu="matMenu" yPosition="below" xPosition="after">
+                    <div class="d-flex flex-column justify-content-between p-2">
+                      <mat-checkbox (click) = "$event.stopPropagation()">Annie</mat-checkbox>
+                      <mat-checkbox (click) = "$event.stopPropagation()">Pax 1</mat-checkbox>
+                      <mat-checkbox (click) = "$event.stopPropagation()">AB</mat-checkbox>
+                    </div>
+                  </mat-menu> -->
+                  <span (click)="checkSubscriptionAdded()">Apply Subscription</span>
+                </div>
+            </div>
+            <div class="pr-0"
+                [ngClass]="{'col-4':isFirstBooking, 'col-3':!isFirstBooking}">
             </div>
         </div>
 
         <div class="row pl-4 pr-4">
             <div class="col-8">
                 <div class="overflow-items">
-                    <div class="row mt-4 pl-2 pr-2">
-                        <div class="col-4 d-flex justify-content-center">
-                            <img src="assets/images/ico_checkin.png" class="seat-image">
-                        </div>
-                        <div class="col-8">
-                            <div class="row">
-                                <div class="col-6">
-                                    <b>Adjacent seats needed</b>
+                    <div *ngIf="isFirstBooking || !isFirstBooking && isSubscriptionAdded || !isFirstBooking && !adjacentSeatForm.get('subscription').value && !isSubscriptionAdded">
+                        <div class="row mt-4 pl-2 pr-2">
+                            <div class="col-4 d-flex justify-content-center">
+                                <img src="assets/images/ico_checkin.png" class="seat-image">
+                            </div>
+                            <div class="col-8">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <b>Adjacent seats needed</b>
+                                    </div>
+                                    <div class="col-6">
+                                        Price
+                                    </div>
                                 </div>
-                                <div class="col-6">
-                                    Price
+                                <div class="row mt-3">
+                                    <div class="col-6">
+                                        <mat-select
+                                            class="form-control"
+                                            [disabled]="submitted"
+                                            formControlName="seats"
+                                        >
+                                            <mat-option *ngFor="let seat of seatOptions" [value]="seat">
+                                            {{ seat }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </div>
+                                    <div class="col-6 mt-2">
+                                        $
+                                        <span class="font-size1-2">
+                                            {{ adjacentSeatForm.get('seats').value * adjacentSeatForm.get('price').value | number: ".2" }}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row mt-3">
-                                <div class="col-6">
-                                    <mat-select
-                                        class="form-control"
-                                        [disabled]="submitted"
-                                        formControlName="seats"
-                                    >
-                                        <mat-option *ngFor="let seat of seatOptions" [value]="seat">
-                                        {{ seat }}
-                                        </mat-option>
-                                    </mat-select>
-                                </div>
-                                <div class="col-6 mt-2">
-                                    $
-                                    <span class="font-size1-2">
-                                        {{ adjacentSeatForm.get('seats').value * adjacentSeatForm.get('price').value | number: ".2" }}
-                                    </span>
-                                </div>
-                            </div>
                         </div>
-                        </div>
-                        <div class="row d-flex flex-row mt-3 ml-4">
+                        <div class="row d-flex flex-row mt-3 ml-4" *ngIf="isFirstBooking || (!isFirstBooking && !isSubscriptionAdded)">
                             <mat-radio-group formControlName="subscription" [disabled]="submitted" class="p-1">
                                 <mat-radio-button [value]="false" class="ml-3 mr-3">
                                     One-time Purchase
@@ -72,7 +91,7 @@
                             <div class="font-size-0-6 cursor-pointer font-weight-bold p-1" (click)="openDetails()"><u>Details</u></div>
                             <div class="violet font-size-0-9 cursor-pointer  ml-3 border p-2"
                                 *ngIf="adjacentSeatForm.get('subscription').value">
-                                <span [matMenuTriggerFor]="passengerMenu">
+                                <!-- <span [matMenuTriggerFor]="passengerMenu">
                                 Select Passenger
                                 <img src="assets/images/ico_chevron.png" class="symbol">  
                                 </span>
@@ -81,15 +100,31 @@
                                     <div class="d-flex flex-column justify-content-between p-2">
                                         <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted">Annie</mat-checkbox>
                                         <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted">Pax 1</mat-checkbox>
-                                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted">A B</mat-checkbox>
+                                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted">AB</mat-checkbox>
                                     </div>
-                                </mat-menu>
+                                </mat-menu> -->
+                                <span>Annie</span>
+                            </div>
+                        </div>
+                        <div class="row mt-3" *ngIf="!isFirstBooking && isSubscriptionAdded">
+                            <div class="col-4">
+
+                            </div>
+                            <div class="col-8">
+                                <span class="bg-violet text-white p-1 font-size-0-9">Existing Subscription/Annie</span>
                             </div>
                         </div>
                         <div class="row mt-4 pl-2 pr-2 ml-4">
                             <p><b>Heads-up</b></p>
                             <p>Adjacent seat selection is currently unavailable now. We will assign it to you on the day of travel.</p>
                         </div>
+                    </div>
+                    <div *ngIf="!isFirstBooking && !isSubscriptionAdded">
+                        <div class="violet p-4 mt-4">
+                            Click on the <span class="font-weight-bold">Apply Subscriptions</span> link to include
+                            existing subscriptions at a discounted rate. 
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="row p-4">

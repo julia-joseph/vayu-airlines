@@ -5,6 +5,7 @@ import { ExpandedAncillariesDialogComponent } from '../expanded-ancillaries-dial
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { FlightDetailsService } from 'src/app/services/flight-details/flight-details.service';
+import { SubscriptionService } from 'src/app/services/subscription/subscription.service';
 
 @Component({
   selector: 'app-adjacent-seat',
@@ -22,17 +23,17 @@ export class AdjacentSeatComponent implements OnInit, OnDestroy {
     seats: new FormControl(1),
     price: new FormControl(65.32),
     subscription: new FormControl(false),
-    self:  new FormControl(false),
-    pone:  new FormControl(false),
-    ptwo:  new FormControl(false),
+    // self:  new FormControl(false),
+    // pone:  new FormControl(false),
+    // ptwo:  new FormControl(false),
     segment: new FormControl('JFK - BOS')
   })
-
-  applySubForm: FormGroup = new FormGroup({
-    self: new FormControl(false),
-    pone: new FormControl(false),
-    ptwo: new FormControl(false)
-  });
+  adjacentSub;
+  // applySubForm: FormGroup = new FormGroup({
+  //   self: new FormControl(false),
+  //   pone: new FormControl(false),
+  //   ptwo: new FormControl(false)
+  // });
 
   segment: string = 'JFK - BOS';
   segmentOptions: string[] = ['JFK - BOS'];
@@ -48,27 +49,31 @@ export class AdjacentSeatComponent implements OnInit, OnDestroy {
   performSkipSubscription: Subscription;
 
   isFirstBooking: boolean = false;
-  //make false
-  isSubscriptionAdded: boolean = true;
+  isSubscriptionAdded: boolean = false;
+
+  isSubscriptionAvailable: boolean = false;
 
   constructor(
     public dialog: MatDialog,
     private adjacentSeatService: AdjacentSeatDetailsService,
-    private flightService: FlightDetailsService
+    private flightService: FlightDetailsService,
+    private subscriptionService: SubscriptionService
   ) { }
 
   ngOnInit(): void {
     this.isFirstBooking = this.flightService.isFirstBooking();
-    
+    this.adjacentSub = this.subscriptionService.getAdjacentSeatSubscription();
+    this.setInitialItems();
+
     this.segment = this.fromCode + ' - ' + this.toCode;
     this.segmentOptions = [this.segment];
 
     this.adjacentSeatService.setAdjacentSeatFormGroup(this.adjacentSeatForm);
-    this.adjacentSeatService.setAdjacentApplySubFormGroup(this.applySubForm);
-
+    // this.adjacentSeatService.setAdjacentApplySubFormGroup(this.applySubForm);
+    this.calculateTotalPrice();
     this.formValueChangesSubscription = this.adjacentSeatForm.valueChanges.subscribe(() => {
       console.log('adjseat form',this.adjacentSeatForm.value);
-      this.totalPrice =  this.adjacentSeatForm.get('seats').value * this.adjacentSeatForm.get('price').value;
+      this.calculateTotalPrice();
     });
 
     this.performConfirmSubscription = this.adjacentSeatService.performConfirmObservable.subscribe(adjacentSeat => {
@@ -85,6 +90,27 @@ export class AdjacentSeatComponent implements OnInit, OnDestroy {
     this.performSkipSubscription = this.adjacentSeatService.performSkipObservable.subscribe(() => {
       this.onSkip();
     })
+
+    this.adjacentSeatService.performSubscriptionAddedObservable.subscribe(() => {
+      this.checkSubscriptionAdded();
+    })
+  }
+
+  calculateTotalPrice() {
+    this.totalPrice =  this.adjacentSeatForm.get('seats').value * this.adjacentSeatForm.get('price').value;
+  }
+
+  setInitialItems() {
+    if(!this.isFirstBooking) {
+      console.log('setItems - adj sub',this.adjacentSub);
+      if(this.adjacentSub) {
+        this.isSubscriptionAvailable = true;
+        this.adjacentSeatForm.patchValue({
+          seats: this.adjacentSub.seats,
+          subscription: true,
+        });
+      }
+    }
   }
 
   openDetails() {
@@ -174,5 +200,6 @@ export class AdjacentSeatComponent implements OnInit, OnDestroy {
   checkSubscriptionAdded() {
     //check if any checkboxes are chosen. If yes, make the boolean true. For now its just set to true
     this.isSubscriptionAdded = true;
+    this.adjacentSeatService.setSubscriptionAdded(this.isSubscriptionAdded);
   }
 }

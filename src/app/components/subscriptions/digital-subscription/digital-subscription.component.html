@@ -29,6 +29,55 @@
 
           <div class="overflow-items" #scrollMe (scroll)="onScroll()">
             <div>
+              <div *ngFor="let itemGroup of cancelItems.controls; let i = index">
+                <div class="row pt-3 pb-3 pl-3 border-bottom text-muted" [formGroup]="itemGroup">
+                    <div class="col-12">
+                      <div class="row">
+                        <div class="col-4">
+                          <mat-select
+                            class="form-control"
+                            [disabled]="true"
+                            formControlName="packageType"
+                            (selectionChange)="setPriceOfNewItem(itemGroup)"
+                          >
+                            <mat-option *ngFor="let packageType of packageTypeOptions" [value]="packageType">
+                              {{ packageType }}
+                            </mat-option>
+                          </mat-select>
+                        </div>
+                        <div class="col-4">
+                          <mat-select
+                            class="form-control"
+                            [disabled]="true"
+                            formControlName="screens"
+                          >
+                            <mat-option
+                              *ngFor="let screens of screenOptions"
+                              [value]="screens"
+                            >
+                              {{ screens }}
+                            </mat-option>
+                          </mat-select>
+                        </div>
+                        <div class="col-4 pt-2">
+                          $
+                          <span class="font-size1-2">
+                            {{ itemGroup.get('screens').value * itemGroup.get('price').value | number: ".2" }}
+                          </span>
+                        </div>
+                      </div>
+                      <div class="row d-flex flex-row mt-3 ml-2">
+                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="true" class="ml-3">Annie</mat-checkbox>
+                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="true" class="ml-3">Pax 1</mat-checkbox>
+                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="true" class="ml-3">AB</mat-checkbox>
+                        <div class="ml-3">
+                            <span>Cancelled Subscription</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
               <div *ngFor="let itemGroup of items.controls; let i = index">
                 <div class="row pt-3 pb-3 pl-3 border-bottom" [formGroup]="itemGroup">
                     <div class="col-12">
@@ -69,7 +118,11 @@
                       <div class="row d-flex flex-row mt-3 ml-2">
                         <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted" class="ml-3">Annie</mat-checkbox>
                         <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted" class="ml-3">Pax 1</mat-checkbox>
-                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted" class="ml-3">A B</mat-checkbox>
+                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted" class="ml-3">AB</mat-checkbox>
+                        <div class="cursor-pointer violet font-weight-bold ml-3" 
+                                  (click)="removeItem(i)">
+                                  <u>Cancel Subscription</u>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -130,7 +183,7 @@
                     <div class="row d-flex flex-row mt-3 ml-2">
                       <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted" class="ml-3">Annie</mat-checkbox>
                       <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted" class="ml-3">Pax 1</mat-checkbox>
-                      <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted" class="ml-3">A B</mat-checkbox>
+                      <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted" class="ml-3">AB</mat-checkbox>
                     </div>
                   </div>
                 </div>

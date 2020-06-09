@@ -92,7 +92,7 @@ export class PaymentSummaryComponent implements OnInit {
 
     this.adjacentSeatService.getAdjacentSeatDetails().subscription ? 
       this.subscriptionService.setAdjacentSeatSubscription(this.adjacentSeatService.getAdjacentSeatDetails()) :
-      this.subscriptionService.setAdjacentSeatSubscription([]);
+      this.subscriptionService.setAdjacentSeatSubscription(this.subscriptionService.getAdjacentSeatSubscription() ? this.subscriptionService.getAdjacentSeatSubscription() : null);
 
     this.router.navigate(['/itinerary-confirmation']);
   }

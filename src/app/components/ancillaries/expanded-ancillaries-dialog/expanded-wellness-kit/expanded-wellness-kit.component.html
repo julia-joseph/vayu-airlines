@@ -42,7 +42,7 @@
                 <div class="d-flex flex-column justify-content-between p-2">
                   <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self">Annie</mat-checkbox>
                   <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone">Pax 1</mat-checkbox>
-                  <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo">A B</mat-checkbox>
+                  <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo">AB</mat-checkbox>
                 </div>
               </mat-menu>
             </div>
@@ -175,7 +175,7 @@
                               <div class="d-flex flex-column justify-content-between p-2">
                                 <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted">Annie</mat-checkbox>
                                 <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted">Pax 1</mat-checkbox>
-                                <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted">A B</mat-checkbox>
+                                <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted">AB</mat-checkbox>
                               </div>
                             </mat-menu>
                         </div>
@@ -279,10 +279,12 @@
   
                         </div>
                         <div class="col-9">
-                          Existing Subscription
-                          <span *ngIf="itemGroup.get('self').value">/Annie</span>
-                          <span *ngIf="itemGroup.get('pone').value">/Pax 1</span>
-                          <span *ngIf="itemGroup.get('ptwo').value">/A B</span>
+                          <span class="bg-violet text-white p-1 font-size-0-9">
+                            Existing Subscription
+                            <span *ngIf="itemGroup.get('self').value">/Annie</span>
+                            <span *ngIf="itemGroup.get('pone').value">/Pax 1</span>
+                            <span *ngIf="itemGroup.get('ptwo').value">/AB</span>
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -429,7 +431,7 @@
                             <div class="d-flex flex-column justify-content-between p-2">
                               <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted">Annie</mat-checkbox>
                               <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted">Pax 1</mat-checkbox>
-                              <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted">A B</mat-checkbox>
+                              <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted">AB</mat-checkbox>
                             </div>
                           </mat-menu>
                       </div>
@@ -443,7 +445,7 @@
 
             <div *ngIf="(!isFirstBooking && !isSubscriptionAdded && !additionalItems.length) ||
                         (!isFirstBooking && isSubscriptionAdded && !items.length && !additionalItems.length)">
-              <div class="violet p-4">
+              <div class="violet p-4 mt-4">
                 Click on the <span class="font-weight-bold">Apply Subscriptions</span> link to include
                 existing subscriptions at a discounted rate. If not, click on 
                 <span class="font-weight-bold">Add additional items</span> to make new selections.

@@ -23,6 +23,10 @@ export class DigitalSubscriptionComponent implements OnInit {
   packageTypeOptions: string[] = ['Basic', 'Premium', 'VIP', 'Kids Play'];
   screenOptions: number[] = [0, 1, 2];
 
+  cancelledSubForm: FormGroup = new FormGroup({
+    items: new FormArray([ ])
+  });
+
   constructor() { }
 
   ngOnInit(): void {
@@ -102,7 +106,21 @@ export class DigitalSubscriptionComponent implements OnInit {
 
   }
 
+  get cancelItems() {
+    return this.cancelledSubForm.get('items') as FormArray;
+  }
+
   removeItem(i: number): void { 
+    this.cancelItems.push(new FormGroup({
+      packageType: new FormControl(this.items.value[i].packageType),
+      screens: new FormControl(this.items.value[i].screens),
+      price: new FormControl(this.items.value[i].price),
+      subscription: new FormControl(this.items.value[i].subscription),
+      self: new FormControl(this.items.value[i].self),
+      pone: new FormControl(this.items.value[i].pone),
+      ptwo: new FormControl(this.items.value[i].ptwo)
+    }));
+    
     this.items.removeAt(i);
   }
 
