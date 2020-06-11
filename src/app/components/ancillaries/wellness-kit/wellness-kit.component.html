@@ -165,19 +165,20 @@
                           </span>
                         </div>
                       </div>
-                      <div class="row d-flex flex-row mt-3 ml-2">
+                      <div class="row d-flex flex-row ml-2">
                         <mat-radio-group formControlName="subscription" [disabled]="submitted" class="p-1">
                             <mat-radio-button [value]="false" class="ml-3 mr-3">
                                 One-time Purchase
                             </mat-radio-button>
-                            <mat-radio-button [value]="true" class="mr-2">
-                                Add to Subscription
+                            <mat-radio-button [value]="true" class="sub-radio mr-2">
+                                Add to Subscription <br>
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="assets/images/discount.png" class="discount-img">
                             </mat-radio-button>
                         </mat-radio-group>
-                        <div class="font-size-0-6 cursor-pointer font-weight-bold p-1" (click)="openDetails()"><u>Details</u></div>
-                        <div class="violet font-size-0-9 cursor-pointer  ml-3 border p-2"
+                        <div class="font-size-0-6 cursor-pointer font-weight-bold p-1 pt-4" (click)="openDetails()"><u>Details</u></div>
+                        <div class="violet font-size-0-9 cursor-pointer ml-3 pt-4"
                             *ngIf="itemGroup.get('subscription').value">
-                          <span [matMenuTriggerFor]="passengerMenu">
+                          <span [matMenuTriggerFor]="passengerMenu" class="border p-2">
                             Select Passenger
                             <img src="assets/images/ico_chevron.png" class="symbol">  
                           </span>
@@ -190,7 +191,15 @@
                             </div>
                           </mat-menu>
                         </div>
-                    </div>
+                      </div>
+                      <!-- <div class="row">
+                        <div class="col-3">
+
+                        </div>
+                        <div class="col-9">
+                          <img src="assets/images/discount.png" class="discount-img">
+                        </div>
+                      </div> -->
                     </div>
                     
                   </div>
@@ -423,19 +432,20 @@
                         </span>
                       </div>
                     </div>
-                    <div class="row d-flex flex-row mt-3 ml-2" *ngIf="itemGroup.get('item').value !== 'Select'">
+                    <div class="row d-flex flex-row ml-2" *ngIf="itemGroup.get('item').value !== 'Select'">
                       <mat-radio-group formControlName="subscription" [disabled]="submitted" class="p-1">
                           <mat-radio-button [value]="false" class="ml-3 mr-3">
                               One-time Purchase
                           </mat-radio-button>
-                          <mat-radio-button [value]="true" class="mr-2">
-                              Add to Subscription
+                          <mat-radio-button [value]="true" class="sub-radio mr-2">
+                              Add to Subscription <br>
+                              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="assets/images/discount.png" class="discount-img">
                           </mat-radio-button>
                       </mat-radio-group>
-                      <div class="font-size-0-6 cursor-pointer font-weight-bold p-1" (click)="openDetails()"><u>Details</u></div>
-                      <div class="violet font-size-0-9 cursor-pointer border ml-3 p-2"
+                      <div class="font-size-0-6 cursor-pointer font-weight-bold p-1 pt-4" (click)="openDetails()"><u>Details</u></div>
+                      <div class="violet font-size-0-9 cursor-pointer ml-3 pt-4"
                           *ngIf="itemGroup.get('subscription').value">
-                        <span [matMenuTriggerFor]="passengerMenu">
+                        <span [matMenuTriggerFor]="passengerMenu" class="border p-2">
                           Select Passenger
                           <img src="assets/images/ico_chevron.png" class="symbol">  
                         </span>

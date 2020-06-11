@@ -83,7 +83,7 @@ export class ItineraryConfirmationComponent implements OnInit {
   onDonateDialog(): void {
     const dialogRef = this.dialog.open(DonationDialogComponent, {
       panelClass: 'regulation-dialog-container',
-      height: '80vh',
+      // height: '80vh',
       width: '200vh',
       data: { }
     });

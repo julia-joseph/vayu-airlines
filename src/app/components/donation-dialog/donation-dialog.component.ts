@@ -19,8 +19,12 @@ export class DonationDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onClose() {
+    this.dialogRef.close(false)
+  }
+  
   onContinue() {
-    this.dialogRef.close();
+    this.dialogRef.close(true);
   }
 
 }

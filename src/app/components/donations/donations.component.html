@@ -8,7 +8,7 @@
         <div class="row">
           <div class="col-lg-9 col-md-12 col-sm-12 pb-4">
             <mat-accordion>
-              <mat-expansion-panel class="mb-3 shadow-sm" hideToggle>
+              <mat-expansion-panel class="mb-3 shadow-sm" hideToggle [expanded]="isWellnessOpen">
                 <mat-expansion-panel-header>
                   <h5 class="font-weight-bold w-100 pt-2 mt-1">Wellness Kit & Food Packages</h5>
                   <mat-icon></mat-icon>
@@ -16,11 +16,12 @@
                 <app-wellness-donation
                  [wellnessDon]="wellnessDon"
                  [firstDonation]="firstDonation"
-                 (onWDConfirm)="setWellnessDonation($event)">
+                 (onWDConfirm)="setWellnessDonation($event)"
+                 (onWDSkip)="onSkipToRelief()">
                 </app-wellness-donation>
               </mat-expansion-panel>
 
-              <mat-expansion-panel class="mb-3 shadow-sm" hideToggle>
+              <mat-expansion-panel class="mb-3 shadow-sm" hideToggle [expanded]="isReliefOpen">
                 <mat-expansion-panel-header>
                   <h5 class="font-weight-bold w-100 pt-2 mt-1">Funds for relief measures</h5>
                   <mat-icon></mat-icon>
@@ -30,7 +31,7 @@
                 </app-relief-funds>
               </mat-expansion-panel>
 
-              <mat-expansion-panel class="mb-3 shadow-sm" hideToggle disabled="true">
+              <mat-expansion-panel class="mb-3 shadow-sm" hideToggle disabled="true" [expanded]="isPaymentOpen">
                 <mat-expansion-panel-header>
                   <h5 class="font-weight-bold w-100 pt-2 mt-1">Payment</h5>
                   <mat-icon></mat-icon>

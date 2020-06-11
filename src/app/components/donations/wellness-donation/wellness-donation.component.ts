@@ -13,7 +13,8 @@ export class WellnessDonationComponent implements OnInit, AfterViewChecked {
   @Input() wellnessDon;
   @Input() firstDonation = true;
   @Output() onWDConfirm = new EventEmitter<any>();
-  
+  @Output() onWDSkip = new EventEmitter<void>();
+
   wellnessDonationForm: FormGroup = new FormGroup({
     items: new FormArray([ ]),
     additionalItems: new FormArray([ ])
@@ -165,7 +166,7 @@ export class WellnessDonationComponent implements OnInit, AfterViewChecked {
     this.submitted = false;
   }
 
-  onSkipToDigitalIFE() {
-
+  onSkip() {
+    this.onWDSkip.emit();
   }
 }

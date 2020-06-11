@@ -10,6 +10,10 @@ export class DonationsComponent implements OnInit {
   wellnessDon: any[];
   firstDonation: boolean = true;
 
+  isWellnessOpen: boolean = true;
+  isReliefOpen: boolean = false;
+  isPaymentOpen: boolean = false;
+
   constructor(
     private donation: DonationService
   ) { }
@@ -24,7 +28,14 @@ export class DonationsComponent implements OnInit {
     this.donation.setWellnessDonation(donation);
   }
 
+  onSkipToRelief() {
+    this.isWellnessOpen = false;
+    this.isReliefOpen = true;
+  }
+
   onSkipToPayment() {
     //change tab to payment
+    this.isReliefOpen = false;
+    this.isPaymentOpen = true;
   }
 }
