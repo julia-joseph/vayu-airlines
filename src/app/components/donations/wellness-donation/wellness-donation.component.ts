@@ -17,7 +17,8 @@ export class WellnessDonationComponent implements OnInit, AfterViewChecked {
 
   wellnessDonationForm: FormGroup = new FormGroup({
     items: new FormArray([ ]),
-    additionalItems: new FormArray([ ])
+    additionalItems: new FormArray([ ]),
+    support: new FormControl //service doesnt save support
   });
   
   submitted: boolean = false;
@@ -77,12 +78,15 @@ export class WellnessDonationComponent implements OnInit, AfterViewChecked {
       this.items.push(this.addItemAsFormGroup('Boxed Meal',1,'Adult/Veg Sandwich',20));
     }
     else {
-      if(this.wellnessDon.length){
-        this.wellnessDon.forEach((item) => {
+      if(this.wellnessDon.items.length){
+        this.wellnessDon.items.forEach((item) => {
           this.items.push(this.addItemAsFormGroup(item.item,item.quantity,item.size,item.price));
           //,item.subscription,item.self,item.pone,item.ptwo));
         })
       }
+      this.wellnessDonationForm.patchValue({
+        support: this.wellnessDon.support
+      })
     }
   }
 
@@ -159,7 +163,7 @@ export class WellnessDonationComponent implements OnInit, AfterViewChecked {
     const addItems = this.additionalItems.value;
     const finalItems = addItems.length ? items.concat(addItems) : items;
 
-    this.onWDConfirm.emit(finalItems);
+    this.onWDConfirm.emit({items: finalItems, support: this.wellnessDonationForm.get('support').value});
   }
 
   onEdit() {
