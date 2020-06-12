@@ -135,7 +135,7 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
       this.items.push(this.addItemAsFormGroup('Mask',1,'Adult/M',5.24));
       this.items.push(this.addItemAsFormGroup('Sanitizer',1,'1 OZ (30 mL)',2.3));
       this.items.push(this.addItemAsFormGroup('Gloves',1,'Adult/M',1.2));
-      this.items.push(this.addItemAsFormGroup('Boxed Meal',1,'Adult/Veg Sandwich',20));
+      this.items.push(this.addItemAsFormGroup('Boxed Meal',1,'Adult/Veg Sandwich',3.5));
     }
   }
 
@@ -199,7 +199,7 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
       price = 1.20;
     }
     else if(name === 'Boxed Meal') {
-      price = 20.00;
+      price = 3.50;
       size = 'Adult/Veg Sandwich';
     }
 

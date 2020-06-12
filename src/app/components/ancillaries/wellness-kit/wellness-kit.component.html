@@ -18,9 +18,9 @@
           <div class="d-flex pl-0"
               [ngClass]="{'col-5':isFirstBooking, 'col-3':!isFirstBooking}"
           >
-            <div class="pl-4 pt-2">Deliver to:</div>
+            <div class="pt-2">Deliver to:</div>
             <mat-select
-              class="form-control w-50 ml-4"
+              class="form-control w-50 ml-2"
               [disabled]="submitted"
               formControlName="delivery"
             >
@@ -172,7 +172,7 @@
                             </mat-radio-button>
                             <mat-radio-button [value]="true" class="sub-radio mr-2">
                                 Add to Subscription <br>
-                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="assets/images/discount.png" class="discount-img">
+                                &nbsp; &nbsp; &nbsp; &nbsp;<img src="assets/images/discount.png" class="discount-img">
                             </mat-radio-button>
                         </mat-radio-group>
                         <div class="font-size-0-6 cursor-pointer font-weight-bold p-1 pt-4" (click)="openDetails()"><u>Details</u></div>
@@ -439,7 +439,7 @@
                           </mat-radio-button>
                           <mat-radio-button [value]="true" class="sub-radio mr-2">
                               Add to Subscription <br>
-                              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="assets/images/discount.png" class="discount-img">
+                              &nbsp; &nbsp; &nbsp; &nbsp;<img src="assets/images/discount.png" class="discount-img">
                           </mat-radio-button>
                       </mat-radio-group>
                       <div class="font-size-0-6 cursor-pointer font-weight-bold p-1 pt-4" (click)="openDetails()"><u>Details</u></div>

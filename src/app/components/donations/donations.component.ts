@@ -10,7 +10,7 @@ export class DonationsComponent implements OnInit {
   wellnessDon: any[];
   firstDonation: boolean = true;
 
-  isWellnessOpen: boolean = true;
+  isWellnessOpen: boolean = false;
   isReliefOpen: boolean = false;
   isPaymentOpen: boolean = false;
 

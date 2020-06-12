@@ -2,9 +2,9 @@
     <div>
       <div class="row font-size-1-1 pt-3 pb-3 pl-4 border-bottom">
         <div class="col-6">
-          <mat-form-field>
-              <mat-label>I Want to Support</mat-label>
-              <mat-select formControlName="support">
+          <mat-form-field >
+              <mat-label class="font-size-1-1-5 font-weight-bold text-dark">I Want to Support</mat-label>
+              <mat-select formControlName="support" [disabled]="submitted">
                   <mat-option [value]="1">
                       Option 1
                   </mat-option>

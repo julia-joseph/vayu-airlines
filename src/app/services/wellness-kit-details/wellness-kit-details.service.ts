@@ -66,7 +66,7 @@ export class WellnessKitDetailsService {
       {
         item: 'Boxed Meals',
         quantity: 1,
-        price: 20,
+        price: 3.5,
         size: 'Adult/Veg Sandwich',
         subscription: false,
         self: false,

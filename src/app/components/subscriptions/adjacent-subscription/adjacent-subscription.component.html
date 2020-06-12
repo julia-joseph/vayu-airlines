@@ -1,18 +1,21 @@
 <form [formGroup]="adjacentSubForm">
     <div>
-        <div class="row font-size1-2 pt-3 pb-4 pl-4 pr-4 mr-1 border-bottom">
+        <div class="d-flex flex-row justify-content-end pt-3 pb-3 pl-4 pr-4 border-bottom">
+            <div class="font-size1-2 add-items-link mr-4" (click)="addItem()" *ngIf="!show">Add item</div>
+            <div class="font-size1-2 mr-4" *ngIf="show">&nbsp;</div>
         </div>
 
         <div class="row w-100 font-size1-2">
             <div class="col-8">
                 <div class="overflow-items">
-                    <div>
+                    <div *ngIf="show">
                         <div class="row mt-4 pr-2">
                             <div class="col-4 d-flex justify-content-center">
-                                <img src="assets/images/ico_checkin.png" class="seat-image">
+                                <img src="assets/images/ico_seat_regrouping_act.png">
                             </div>
                             <div class="col-8">
-                                <div class="row">
+                                <div class="row"
+                                    [ngClass]="{'text-muted': cancelledItem}">
                                     <div class="col-6">
                                         <b>Adjacent seats needed</b>
                                     </div>
@@ -24,7 +27,7 @@
                                     <div class="col-6">
                                         <mat-select
                                             class="form-control"
-                                            [disabled]="submitted"
+                                            [disabled]="submitted || cancelledItem"
                                             formControlName="seats"
                                         >
                                             <mat-option *ngFor="let seat of seatOptions" [value]="seat">
@@ -46,12 +49,18 @@
 
                             </div>
                             <div class="col-8 pl-0">
-                                <mat-checkbox (click) = "$event.stopPropagation()" formControlName="subscription" [disabled]="submitted" class="">Annie</mat-checkbox>
+                                <div class="row d-flex flex-row">
+                                    <mat-checkbox (click) = "$event.stopPropagation()" formControlName="subscription" [disabled]="submitted || cancelledItem" class="ml-3">Annie</mat-checkbox>
+                                    <div class="cursor-pointer violet font-weight-bold ml-3" 
+                                    (click)="cancelSub()" *ngIf="!cancelledItem && !submitted">
+                                    <u>Cancel Subscription</u>
+                                    </div>
+                                    <div class="cursor-pointer violet font-weight-bold ml-3" 
+                                        (click)="reinstateSub()" *ngIf="cancelledItem && !submitted">
+                                        <u>Reinstate Subscription</u>
+                                    </div>
+                                </div>
                             </div>
-                            <!-- <div class="cursor-pointer violet font-weight-bold ml-3" 
-                                  (click)="removeItem(i)">
-                                  <u>Cancel Subscription</u>
-                            </div> -->
                         </div>
                         <!-- <div class="row mt-4 pl-4 pr-2 ml-4">
                             <p><b>Heads-up</b></p>
@@ -63,15 +72,15 @@
                 <div class="row pl-4">
                     <div class="col-8 pl-0 pr-0" *ngIf="!submitted">
                         <button class="blue-button mr-3" (click)="onConfirm()">Save</button>
-                        <!-- <button class="grey-button" (click)= "onSkip()">
-                            Skip to Payment
-                        </button> -->
+                        <button class="grey-button" (click)= "onSkip()">
+                            Skip to Home Page
+                        </button>
                     </div>
                     <div class="col-8 pl-0 pr-0" *ngIf="submitted">
                         <button class="blue-button mr-3" (click)="onEdit()">Edit</button>
-                        <!-- <button class="grey-button" (click)= "onSkip()">
-                            Next: Payment
-                        </button> -->
+                        <button class="grey-button" (click)= "onSkip()">
+                            Go to Home Page
+                        </button>
                     </div>
                     <!-- <div class="col-4 pl-0 d-flex justify-content-end">
                         <div class="d-flex mr-3 pt-3">

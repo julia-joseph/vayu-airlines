@@ -102,7 +102,7 @@ export class ExpandedWellnessKitComponent implements OnInit {
       price = 1.20;
     }
     else if(name === 'Boxed Meal') {
-      price = 20.00;
+      price = 3.50;
       size = 'Adult/Veg Sandwich';
     }
 

@@ -12,7 +12,7 @@ export const MOCK_WELLNESS_SUB: any[] = [
     {
       item: "Boxed Meal",
       pone: false,
-      price: 20,
+      price: 3.5,
       ptwo: false,
       quantity: 1,
       self: true,

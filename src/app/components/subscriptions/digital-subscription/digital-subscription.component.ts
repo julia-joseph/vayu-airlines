@@ -77,7 +77,7 @@ export class DigitalSubscriptionComponent implements OnInit {
     // this.items.push(this.addItemAsFormGroup('Mask',1,'Adult/M',5.24));
     // this.items.push(this.addItemAsFormGroup('Sanitizer',1,'1 OZ (30 mL)',2.3));
     // this.items.push(this.addItemAsFormGroup('Gloves',1,'Adult/M',1.2));
-    // this.items.push(this.addItemAsFormGroup('Boxed Meal',1,'Adult/Veg Sandwich',20));
+    // this.items.push(this.addItemAsFormGroup('Boxed Meal',1,'Adult/Veg Sandwich',3.5));
     if(this.digitalSub.length){
       this.digitalSub.forEach((item) => {
         this.items.push(this.addItemAsFormGroup(item.packageType,item.screens,item.price,item.subscription,item.self,item.pone,item.ptwo));
