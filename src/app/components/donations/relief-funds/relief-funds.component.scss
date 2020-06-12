@@ -1,12 +1,40 @@
-:host ::ng-deep {
-    // .mat-select-panel .custom-select-panel .mat-optgroup-label, .mat-select-panel .custom-select-panel .mat-option {
-    //     height: 6em !important;
-    // }
-}
+// :host ::ng-deep {
+//     .mat-button-toggle-button {
+//         outline: none !important;
+//     }
 
-// #custom-select-panel{
-//     .mat-option {
-//         height: 6em !important;
+//     .mat-button-toggle-standalone.mat-button-toggle-appearance-standard, .mat-button-toggle-group-appearance-standard {
+//         border: none !important;
+//     }
+
+//     .mat-button-toggle-appearance-standard {
+//         margin-right: .5rem !important;
+//     }
+
+//     .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+//         line-height: 36px;
+//         font-size: 1.07rem;
+//         border: 1px solid;
+//         border-radius: 5px;
+//     }
+
+//     .mat-button-toggle {
+//         background-color: #fff;
+//         color: #07b9e5;
+//       }
+    
+//     .mat-button-toggle-checked {
+//         background-color: #07b9e5;
+//         color: #fff;
+//     }
+
+//     .mat-button-toggle:hover {
+//         background-color: #07b9e5;
+//         color: #fff;
+//     }
+
+//     .mat-button-toggle .mat-button-toggle-focus-overlay {
+//         background-color:none;
 //     }
 // }
 
@@ -26,3 +54,4 @@
     background-color: #07b9e5;
     border-color: #07b9e5;
 }
+

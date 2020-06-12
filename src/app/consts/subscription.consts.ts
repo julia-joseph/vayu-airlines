@@ -42,3 +42,10 @@ export const MOCK_WELLNESS_SUB: any[] = [
       subscription: true
     }
  ];
+
+ export const MOCK_ADJ_SEAT_SUB: any = {
+    price: 65.32,
+    seats: 2,
+    segment: "JFK - BOS",
+    subscription: true
+ }
