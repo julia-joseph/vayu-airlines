@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, Output, EventEmitter, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { CertificateDialogComponent } from '../certificate-dialog/certificate-dialog.component';
 
 @Component({
   selector: 'app-relief-funds',
@@ -21,12 +23,25 @@ export class ReliefFundsComponent implements OnInit {
   submitted: boolean = false;
   // selected = null;
 
-  constructor() { }
+  constructor(
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.donationForm.valueChanges.subscribe(() => {
       console.log('donationForm',this.donationForm.value);
     })
+  }
+
+  openConfirmationDialog(): void {
+    const dialogRef = this.dialog.open(CertificateDialogComponent, {
+      panelClass: 'regulation-dialog-container',
+      width: '855px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
   }
 
   // resetButtons() {
@@ -43,5 +58,6 @@ export class ReliefFundsComponent implements OnInit {
 
   onSkip() {
     this.onRFSkip.emit();
+    this.openConfirmationDialog();
   }
 }

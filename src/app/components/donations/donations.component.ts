@@ -36,6 +36,6 @@ export class DonationsComponent implements OnInit {
   onSkipToPayment() {
     //change tab to payment
     this.isReliefOpen = false;
-    this.isPaymentOpen = true;
+    //this.isPaymentOpen = true;
   }
 }

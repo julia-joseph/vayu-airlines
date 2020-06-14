@@ -40,6 +40,7 @@ import { WellnessDonationComponent } from './components/donations/wellness-donat
 import { ReliefFundsComponent } from './components/donations/relief-funds/relief-funds.component';
 import { PaymentDonationComponent } from './components/donations/payment-donation/payment-donation.component';
 import { DonationDialogComponent } from './components/donation-dialog/donation-dialog.component';
+import { CertificateDialogComponent } from './components/donations/certificate-dialog/certificate-dialog.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { DonationDialogComponent } from './components/donation-dialog/donation-d
     WellnessDonationComponent,
     ReliefFundsComponent,
     PaymentDonationComponent,
-    DonationDialogComponent
+    DonationDialogComponent,
+    CertificateDialogComponent
   ],
   imports: [
     BrowserModule,
