@@ -21,13 +21,13 @@
                 </app-wellness-donation>
               </mat-expansion-panel>
 
-              <mat-expansion-panel class="mb-3 shadow-sm" hideToggle [expanded]="isReliefOpen">
+              <mat-expansion-panel class="mb-3 shadow-sm" hideToggle [expanded]="isReliefOpen" #mep="matExpansionPanel">
                 <mat-expansion-panel-header>
                   <h5 class="font-weight-bold w-100 pt-2 mt-1">Funds for relief measures</h5>
                   <mat-icon></mat-icon>
                 </mat-expansion-panel-header>
                 <app-relief-funds
-                  (onRFSkip)="onSkipToPayment()">
+                  (onRFSkip)="onSkipToPayment(); mep.expanded = !mep.expanded">
                 </app-relief-funds>
               </mat-expansion-panel>
 
