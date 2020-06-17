@@ -172,8 +172,6 @@ export class DigitalSubscriptionComponent implements OnInit {
     this.filterEmptySubItems(this.items);
     this.filterEmptySubItems(this.additionalItems);
 
-    console.log('items',this.digitalSub.value);
-
     const finalItems = [...this.items.value, ...this.additionalItems.value];
     this.onDSConfirm.emit(finalItems);
   }

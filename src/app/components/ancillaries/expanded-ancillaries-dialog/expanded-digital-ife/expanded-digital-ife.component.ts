@@ -49,7 +49,6 @@ export class ExpandedDigitalIFEComponent implements OnInit, AfterViewChecked {
     this.submitted = this.digitalIfeService.submitted;
     this.calculateTotalPrice();
     this.digitalIfeForm.valueChanges.subscribe(() => {
-      console.log('form',this.digitalIfeForm.value);
       this.calculateTotalPrice();
     });
   }

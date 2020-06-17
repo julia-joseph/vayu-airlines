@@ -88,8 +88,6 @@ export class ExpandedWellnessKitComponent implements OnInit {
   }
 
   setPriceOfNewItem(itemGroup){
-    console.log('something');
-    console.log('itemGroup',itemGroup)
     const name = itemGroup.get('item').value;
     let price = 5.24;
     let size = 'Adult/M'
@@ -118,7 +116,7 @@ export class ExpandedWellnessKitComponent implements OnInit {
   }
 
   openDetails() {
-    console.log('open details');
+    
   }
 
   calculateTotalPrice() {

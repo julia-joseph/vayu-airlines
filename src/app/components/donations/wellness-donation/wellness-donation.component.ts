@@ -70,7 +70,6 @@ export class WellnessDonationComponent implements OnInit, AfterViewChecked {
   }
 
   setInitialItems() {
-    console.log('firstDonation - init',this.firstDonation)
     if(this.firstDonation) {
       this.items.push(this.addItemAsFormGroup('Mask',1,'Adult/M',5.24));
       this.items.push(this.addItemAsFormGroup('Sanitizer',1,'1 OZ (30 mL)',2.3));
@@ -127,8 +126,6 @@ export class WellnessDonationComponent implements OnInit, AfterViewChecked {
   }
 
   setPriceOfNewItem(itemGroup){
-    console.log('something');
-    console.log('itemGroup',itemGroup)
     const name = itemGroup.get('item').value;
     let price = 5.24;
     let size = 'Adult/M'

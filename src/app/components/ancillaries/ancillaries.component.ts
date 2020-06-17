@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { TravellerService } from 'src/app/services/traveller--details/traveller.service';
 @Component({
   selector: 'app-ancillaries',
   templateUrl: './ancillaries.component.html',
@@ -9,9 +10,22 @@ export class AncillariesComponent implements OnInit {
   @Input() toCode: string = 'BOS';
   @Output() onSubmit = new EventEmitter<void>();
   selectedTab = 0;
-  constructor() { }
+
+  travellerDetails: any;
+
+  constructor(
+    private travellerService: TravellerService
+  ) { }
 
   ngOnInit(): void {
+    this.travellerService.getTravellerDetailsPObservable().subscribe(details => {
+      if(details.firstName){
+        this.travellerDetails = details;
+      }
+      else {
+        this.travellerDetails = null;
+      }
+    })
   }
 
   onSubmitOfWellnessKit() {

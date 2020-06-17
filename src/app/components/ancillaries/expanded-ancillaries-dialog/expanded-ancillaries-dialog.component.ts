@@ -50,7 +50,6 @@ export class ExpandedAncillariesDialogComponent implements OnInit {
     }
     else{
       this.wellnessKit = this.wellnessKitService.getWellnessKitFormGroup();
-      console.log('expanded wellnesskit', this.wellnessKit);
       if(this.isFirstBooking){
         this.wellnessKit.setValue({
           ...this.wellnessKitService.getWellnessKitDetails()

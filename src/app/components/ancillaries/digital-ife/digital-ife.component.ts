@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild, SimpleChanges, AfterViewChecked, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { DigitalIfeDetailsService } from 'src/app/services/digital-ife-details/digital-ife-details.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,9 +11,10 @@ import { SubscriptionService } from 'src/app/services/subscription/subscription.
   templateUrl: './digital-ife.component.html',
   styleUrls: ['./digital-ife.component.scss']
 })
-export class DigitalIFEComponent implements OnInit {
+export class DigitalIFEComponent implements OnInit, AfterViewChecked, OnChanges {
   @Input() fromCode: string = 'JFK';
   @Input() toCode: string = 'BOS';
+  @Input() travellerDetails: any = null;
   @Output() onSubmit = new EventEmitter<void>();
   @Output() onSkipToSR = new EventEmitter<void>();
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
@@ -45,6 +46,8 @@ export class DigitalIFEComponent implements OnInit {
   isFirstBooking: boolean = false;
   isSubscriptionAdded: boolean = false;
 
+  subscriptionName: string = "Annie";
+
   constructor(
     public dialog: MatDialog,
     public digitalIfeService: DigitalIfeDetailsService,
@@ -64,7 +67,6 @@ export class DigitalIFEComponent implements OnInit {
     this.digitalIfeService.setDigitalApplySubFormGroup(this.applySubForm);
 
     this.digitalIfeForm.valueChanges.subscribe(() => {
-      console.log('ife form',this.digitalIfeForm.value);
       this.calculateTotalPrice();
     });
 
@@ -85,11 +87,26 @@ export class DigitalIFEComponent implements OnInit {
 
     this.applySubForm.valueChanges.subscribe(() => {
       this.checkSubscriptionAdded();
-    })
+    });
+
+    if(this.travellerDetails) {
+      this.subscriptionName = this.travellerDetails.firstName[0].toUpperCase() + this.travellerDetails.lastName[0].toUpperCase();
+    }
   }
 
   ngAfterViewChecked() {
       this.scrollToBottom();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes.travellerDetails.currentValue && (!changes.travellerDetails.previousValue || 
+      ((changes.travellerDetails.previousValue.firstName !== changes.travellerDetails.currentValue.firstName)
+      || (changes.travellerDetails.previousValue.lastName !== changes.travellerDetails.currentValue.lastName))
+      )) {
+      if(this.travellerDetails) {
+        this.subscriptionName = this.travellerDetails.firstName[0].toUpperCase() + this.travellerDetails.lastName[0].toUpperCase();
+      }
+    }
   }
 
   public onScroll() {
@@ -303,46 +320,35 @@ export class DigitalIFEComponent implements OnInit {
     //check if any checkboxes are chosen. If yes, make the boolean true. For now its just set to true
     //this.isSubscriptionAdded = true;
 
-    console.log('applysub',this.applySubForm.value);
     if(this.applySubForm.get('self').value || this.applySubForm.get('pone').value || this.applySubForm.get('ptwo').value) {
       this.isSubscriptionAdded = true;
-      console.log('chosen applysub',this.applySubForm.value);
       this.clearFormArray();
       let subbedItems = this.subscriptionService.getDigitalIfeSubscription();
       let finalItems = [];
 
       if(this.applySubForm.get('self').value) {
-        console.log('true-self',subbedItems.filter(item => item.self));
         const selfSubbed = subbedItems.filter(item => item.self);
         if(selfSubbed.length){
           subbedItems = subbedItems.filter(item => !item.self);
-          console.log('remaining subbed after self remove',subbedItems);
           finalItems = [...selfSubbed];   
         }     
       }
 
       if(this.applySubForm.get('pone').value) {
-        console.log('true-pone',subbedItems.filter(item => item.pone));
         const poneSubbed = subbedItems.filter(item => item.pone);
         if(poneSubbed.length){
           subbedItems = subbedItems.filter(item => !item.pone);
-          console.log('remaining subbed after self remove',subbedItems);
           finalItems = [...finalItems,...poneSubbed];   
         }    
       }
 
       if(this.applySubForm.get('ptwo').value) {
-        console.log('true-pttwo',subbedItems.filter(item => item.ptwo));
         const ptwoSubbed = subbedItems.filter(item => item.ptwo);
         if(ptwoSubbed.length){
           subbedItems = subbedItems.filter(item => !item.ptwo);
-          console.log('remaining subbed after self remove',subbedItems);
           finalItems = [...finalItems,...ptwoSubbed];   
         }            
       }
-
-      console.log('finalSubbedItems',subbedItems)
-      console.log('finalItems',finalItems)
 
       if(finalItems.length) {
         finalItems.forEach(item => {

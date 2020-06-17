@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AdjacentSeatDetailsService } from 'src/app/services/adjacent-seat-details/adjacent-seat-details.service';
 import { ExpandedAncillariesDialogComponent } from '../expanded-ancillaries-dialog/expanded-ancillaries-dialog.component';
@@ -12,9 +12,10 @@ import { SubscriptionService } from 'src/app/services/subscription/subscription.
   templateUrl: './adjacent-seat.component.html',
   styleUrls: ['./adjacent-seat.component.scss']
 })
-export class AdjacentSeatComponent implements OnInit, OnDestroy {
+export class AdjacentSeatComponent implements OnInit, OnDestroy, OnChanges {
   @Input() fromCode: string = 'JFK';
   @Input() toCode: string = 'BOS';
+  @Input() travellerDetails: any = null;
   @Output() onSubmit = new EventEmitter<void>();
 
   submitted: boolean = false;
@@ -53,6 +54,8 @@ export class AdjacentSeatComponent implements OnInit, OnDestroy {
 
   isSubscriptionAvailable: boolean = false;
 
+  subscriptionName: string = "Annie";
+
   constructor(
     public dialog: MatDialog,
     private adjacentSeatService: AdjacentSeatDetailsService,
@@ -72,7 +75,6 @@ export class AdjacentSeatComponent implements OnInit, OnDestroy {
     // this.adjacentSeatService.setAdjacentApplySubFormGroup(this.applySubForm);
     this.calculateTotalPrice();
     this.formValueChangesSubscription = this.adjacentSeatForm.valueChanges.subscribe(() => {
-      console.log('adjseat form',this.adjacentSeatForm.value);
       this.calculateTotalPrice();
     });
 
@@ -94,6 +96,21 @@ export class AdjacentSeatComponent implements OnInit, OnDestroy {
     this.adjacentSeatService.performSubscriptionAddedObservable.subscribe(() => {
       this.checkSubscriptionAdded();
     })
+
+    if(this.travellerDetails) {
+      this.subscriptionName = this.travellerDetails.firstName[0].toUpperCase() + this.travellerDetails.lastName[0].toUpperCase();
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes.travellerDetails.currentValue && (!changes.travellerDetails.previousValue || 
+      ((changes.travellerDetails.previousValue.firstName !== changes.travellerDetails.currentValue.firstName)
+      || (changes.travellerDetails.previousValue.lastName !== changes.travellerDetails.currentValue.lastName))
+      )) {
+      if(this.travellerDetails) {
+        this.subscriptionName = this.travellerDetails.firstName[0].toUpperCase() + this.travellerDetails.lastName[0].toUpperCase();
+      }
+    }
   }
 
   calculateTotalPrice() {
@@ -102,7 +119,6 @@ export class AdjacentSeatComponent implements OnInit, OnDestroy {
 
   setInitialItems() {
     if(!this.isFirstBooking) {
-      console.log('setItems - adj sub',this.adjacentSub);
       if(this.adjacentSub) {
         this.isSubscriptionAvailable = true;
         this.adjacentSeatForm.patchValue({

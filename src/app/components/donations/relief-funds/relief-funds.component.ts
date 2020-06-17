@@ -28,9 +28,7 @@ export class ReliefFundsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.donationForm.valueChanges.subscribe(() => {
-      console.log('donationForm',this.donationForm.value);
-    })
+    
   }
 
   openConfirmationDialog(): void {

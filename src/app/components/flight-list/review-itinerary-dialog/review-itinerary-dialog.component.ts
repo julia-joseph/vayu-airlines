@@ -33,7 +33,7 @@ export class ReviewItineraryDialogComponent implements OnInit {
   }
 
   onShare() {
-    console.log('share itinerary btn');
+
   }
 
   onChange() {

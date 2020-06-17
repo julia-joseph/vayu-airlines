@@ -28,7 +28,7 @@
       
                   <mat-menu #subscriptionMenu="matMenu" yPosition="below" xPosition="after">
                     <div class="d-flex flex-column justify-content-between p-2">
-                      <mat-checkbox (click) = "$event.stopPropagation()">Annie</mat-checkbox>
+                      <mat-checkbox (click) = "$event.stopPropagation()">{{ subscriptionName }}</mat-checkbox>
                       <mat-checkbox (click) = "$event.stopPropagation()">Pax 1</mat-checkbox>
                       <mat-checkbox (click) = "$event.stopPropagation()">AB</mat-checkbox>
                     </div>
@@ -110,12 +110,12 @@
                     
                                 <mat-menu #passengerMenu="matMenu" yPosition="below" xPosition="after">
                                     <div class="d-flex flex-column justify-content-between p-2">
-                                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted">Annie</mat-checkbox>
+                                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted">{{ subscriptionName }}</mat-checkbox>
                                         <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted">Pax 1</mat-checkbox>
                                         <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted">AB</mat-checkbox>
                                     </div>
                                 </mat-menu> -->
-                                <span class="border p-2">Annie</span>
+                                <span class="border p-2">{{ subscriptionName }}</span>
                             </div>
                         </div>
                         <div class="row mt-3" *ngIf="!isFirstBooking && isSubscriptionAdded">
@@ -123,7 +123,7 @@
 
                             </div>
                             <div class="col-8">
-                                <span class="bg-violet text-white p-1 font-size-0-9">Existing Subscription/Annie</span>
+                                <span class="bg-violet text-white p-1 font-size-0-9">Existing Subscription/{{ subscriptionName }}</span>
                             </div>
                         </div>
                         <div class="row mt-4 pl-4 pr-2 ml-4">

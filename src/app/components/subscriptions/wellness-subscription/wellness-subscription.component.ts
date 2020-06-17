@@ -143,8 +143,6 @@ export class WellnessSubscriptionComponent implements OnInit, AfterViewChecked {
   }
 
   setPriceOfNewItem(itemGroup){
-    console.log('something');
-    console.log('itemGroup',itemGroup)
     const name = itemGroup.get('item').value;
     let price = 5.24;
     let size = 'Adult/M'
@@ -188,8 +186,6 @@ export class WellnessSubscriptionComponent implements OnInit, AfterViewChecked {
     //if all three checkboxes are false, remove sub
     this.filterEmptySubItems(this.items);
     this.filterEmptySubItems(this.additionalItems);
-
-    console.log('items',this.wellnessSub.value);
 
     const finalItems = [...this.items.value, ...this.additionalItems.value];
     this.onWSConfirm.emit(finalItems)

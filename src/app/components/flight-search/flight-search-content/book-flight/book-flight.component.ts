@@ -63,12 +63,10 @@ export class BookFlightComponent implements OnInit {
 
     this.bookFlightsForm.valueChanges.subscribe(form => {
       this.totalPassengers = Number(this.adults) + Number(this.children) + Number(this.infants);
-      console.log('value',this.bookFlightsForm.value);
     })
   }
 
   onFlightSearch() {
-    console.log('search flights');
     const fromCode = this.bookFlightsForm.value.from;
     const toCode = this.bookFlightsForm.value.to;
 
@@ -91,7 +89,6 @@ export class BookFlightComponent implements OnInit {
   }
 
   onSelect(value): void {
-    console.log('selected')
     // fetches values from destination service
     this.destinations = this.destinationService.getDestination(value);
     this.bookFlightsForm.patchValue({

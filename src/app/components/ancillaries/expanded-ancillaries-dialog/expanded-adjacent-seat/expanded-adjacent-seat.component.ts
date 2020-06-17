@@ -36,7 +36,6 @@ export class ExpandedAdjacentSeatComponent implements OnInit {
     this.submitted = this.adjacentSeatService.submitted;
     this.calculateTotalPrice();
     this.adjacentSeatForm.valueChanges.subscribe(() => {
-      console.log('form',this.adjacentSeatForm.value);
       this.calculateTotalPrice();
     });
   }

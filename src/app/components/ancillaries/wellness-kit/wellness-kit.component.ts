@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter, AfterViewChecked, SimpleChanges, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -12,12 +12,13 @@ import { SubscriptionService } from 'src/app/services/subscription/subscription.
   templateUrl: './wellness-kit.component.html',
   styleUrls: ['./wellness-kit.component.scss']
 })
-export class WellnessKitComponent implements OnInit, AfterViewChecked {
+export class WellnessKitComponent implements OnInit, AfterViewChecked, OnChanges {
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   disableScrollDown = false;
   
   @Input() fromCode: string = 'JFK';
   @Input() toCode: string = 'BOS';
+  @Input() travellerDetails: any = null;
   @Output() onSubmit = new EventEmitter<void>();
   @Output() onSkipToIFE = new EventEmitter<void>();
 
@@ -61,6 +62,8 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
   isFirstBooking: boolean = false;
   isSubscriptionAdded: boolean = false;
 
+  subscriptionName: string = "Annie";
+
   constructor(
     public dialog: MatDialog,
     private router: Router,
@@ -80,8 +83,6 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
     this.wellnessKitService.setWellnessKitFormGroup(this.wellnessKitForm);
     this.wellnessKitService.setWellnessApplySubFormGroup(this.applySubForm);
     this.wellnessKitForm.valueChanges.subscribe(() => {
-      console.log('wellness form',this.wellnessKitForm.value);
-      console.log('wellness formGroup',this.wellnessKitForm);
       this.calculateTotalPrice();
     });
 
@@ -103,12 +104,27 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
     this.applySubForm.valueChanges.subscribe(() => {
       this.checkSubscriptionAdded();
     })
+
+    if(this.travellerDetails) {
+      this.subscriptionName = this.travellerDetails.firstName[0] + this.travellerDetails.lastName[0];
+    }
   }
 
   ngAfterViewChecked() {
       if(this.isNewItemsAdded) {
         this.scrollToBottom();
       }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes.travellerDetails.currentValue && (!changes.travellerDetails.previousValue || 
+      ((changes.travellerDetails.previousValue.firstName !== changes.travellerDetails.currentValue.firstName)
+      || (changes.travellerDetails.previousValue.lastName !== changes.travellerDetails.currentValue.lastName))
+      )) {
+      if(this.travellerDetails) {
+        this.subscriptionName = this.travellerDetails.firstName[0].toUpperCase() + this.travellerDetails.lastName[0].toUpperCase();
+      }
+    }
   }
 
   public onScroll() {
@@ -185,8 +201,6 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
   }
 
   setPriceOfNewItem(itemGroup){
-    console.log('something');
-    console.log('itemGroup',itemGroup)
     const name = itemGroup.get('item').value;
     let price = 5.24;
     let size = 'Adult/M'
@@ -316,7 +330,7 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
   }
 
   openDetails() {
-    console.log('open details');
+
   }
 
   clearFormArray() {
@@ -329,46 +343,35 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked {
     //check if any checkboxes are chosen. If yes, make the boolean true. For now its just set to true
     //this.isSubscriptionAdded = true;
 
-    console.log('applysub',this.applySubForm.value);
     if(this.applySubForm.get('self').value || this.applySubForm.get('pone').value || this.applySubForm.get('ptwo').value) {
       this.isSubscriptionAdded = true;
-      console.log('chosen applysub',this.applySubForm.value);
       this.clearFormArray();
       let subbedItems = this.subscriptionService.getWellnessKitSubscription();
       let finalItems = [];
 
       if(this.applySubForm.get('self').value) {
-        console.log('true-self',subbedItems.filter(item => item.self));
         const selfSubbed = subbedItems.filter(item => item.self);
         if(selfSubbed.length){
           subbedItems = subbedItems.filter(item => !item.self);
-          console.log('remaining subbed after self remove',subbedItems);
           finalItems = [...selfSubbed];   
         }     
       }
 
       if(this.applySubForm.get('pone').value) {
-        console.log('true-pone',subbedItems.filter(item => item.pone));
         const poneSubbed = subbedItems.filter(item => item.pone);
         if(poneSubbed.length){
           subbedItems = subbedItems.filter(item => !item.pone);
-          console.log('remaining subbed after self remove',subbedItems);
           finalItems = [...finalItems,...poneSubbed];   
         }    
       }
 
       if(this.applySubForm.get('ptwo').value) {
-        console.log('true-pttwo',subbedItems.filter(item => item.ptwo));
         const ptwoSubbed = subbedItems.filter(item => item.ptwo);
         if(ptwoSubbed.length){
           subbedItems = subbedItems.filter(item => !item.ptwo);
-          console.log('remaining subbed after self remove',subbedItems);
           finalItems = [...finalItems,...ptwoSubbed];   
         }            
       }
-
-      console.log('finalSubbedItems',subbedItems)
-      console.log('finalItems',finalItems)
 
       if(finalItems.length) {
         finalItems.forEach(item => {

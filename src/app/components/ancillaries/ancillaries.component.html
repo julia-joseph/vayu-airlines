@@ -14,7 +14,8 @@
       (onSubmit)="onSubmitOfWellnessKit()"
       (onSkipToIFE)="onSkipToDigitalIFE()"
       [fromCode]="fromCode"
-      [toCode]="toCode">
+      [toCode]="toCode"
+      [travellerDetails]="travellerDetails">
     </app-wellness-kit>
   </mat-tab>
 
@@ -33,7 +34,8 @@
         (onSubmit)="onSubmitOfDigitalIfe()"
         (onSkipToSR)="onSkipToSeatRegrouping()"
         [fromCode]="fromCode"
-        [toCode]="toCode">
+        [toCode]="toCode"
+        [travellerDetails]="travellerDetails">
     </app-digital-ife>
   </mat-tab>
 
@@ -51,7 +53,8 @@
     <app-adjacent-seat
         (onSubmit)="onSubmitOfAdjacentSeat()"
         [fromCode]="fromCode"
-        [toCode]="toCode">
+        [toCode]="toCode"
+        [travellerDetails]="travellerDetails">
     </app-adjacent-seat>
   </mat-tab>
 
