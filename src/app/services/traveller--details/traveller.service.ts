@@ -6,9 +6,16 @@ import { Subject } from 'rxjs';
 })
 export class TravellerService {
   travellerDetails = {
+    travllerType: '',
+    title: '',
     firstName: '',
     lastName: '',
-    iisNumber: ''
+    middleName: '',
+    suffix: '',
+    gender: false,
+    dob: '',
+    iisNumber: '',
+    iisStatus: ''
   }
 
   travellerDetailsSubject: Subject<any> = new Subject<any>();

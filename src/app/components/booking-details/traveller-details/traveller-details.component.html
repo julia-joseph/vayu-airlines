@@ -4,24 +4,137 @@
     </div>
     
     <form [formGroup]="travellerForm" class="pb-2">
-        <div class="form-group row">
-            <label for="firstName" class="col-sm-2 col-form-label ml-3">First Name</label>
-            <div class="col-sm-8">
-              <input type="text" class="form-control" id="firstName" pattern="[a-zA-Z ]*"  formControlName="firstName">
-            </div>
-          </div>
-        <div class="form-group row">
-          <label for="lastName" class="col-sm-2 col-form-label ml-3">Last Name</label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" id="lastName" pattern="[a-zA-Z ]*"  formControlName="lastName">
+      <div class="form-group row mx-3 pb-3 border-bottom">
+        <label for="travellerType" class="col-sm-2 col-form-label">Traveller Type</label>
+        <div class="col-sm-2">
+          <mat-select
+              id="travellerType"
+              class="form-control"
+              [disabled]="submitted"
+              formControlName="travellerType">
+              <mat-option value="Adult">Adult</mat-option>
+              <mat-option value="Child">Child</mat-option>
+              <mat-option value="Infant">Infant</mat-option>
+            </mat-select>
+        </div>
+      </div>
+
+      <div class="form-group row mx-3">
+        <div class="col-sm-2">
+            <label for="title" class="col-form-label">Title</label>
+        </div>
+        <div class="col-sm-4">
+          <mat-select
+            id="title"
+            class="form-control"
+            [disabled]="submitted"
+            formControlName="title">
+            <mat-option value="Title 1">Title 1</mat-option>
+            <mat-option value="Title 2">Title 2</mat-option>
+            <mat-option value="Title 3">Title 3</mat-option>
+          </mat-select>        
+        </div>
+      </div>
+
+      <div class="form-group row mx-3">
+        <div class="col-sm-2">
+            <label for="firstName" class="col-form-label">First Name</label>
+        </div>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="firstName" pattern="[a-zA-Z ]*"  [readonly]="submitted" formControlName="firstName">
+        </div>
+        <div class="col-sm-2">
+          <label for="lastName" class="col-form-label">Last Name</label>
+        </div>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="lastName" pattern="[a-zA-Z ]*"  [readonly]="submitted" formControlName="lastName">
+        </div>
+      </div>
+
+      <div class="form-group row mx-3">
+        <div class="col-sm-2">
+            <label for="middleName" class="col-form-label">Middle Name</label>
+        </div>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="middleName" pattern="[a-zA-Z ]*"  [readonly]="submitted" formControlName="middleName">
+        </div>
+        <div class="col-sm-2">
+          <label for="suffix" class="col-form-label">Suffix</label>
+        </div>
+        <div class="col-sm-4">
+          <mat-select
+            id="suffix"
+            class="form-control"
+            [disabled]="submitted"
+            formControlName="suffix">
+            <mat-option value="Mr">Mr</mat-option>
+            <mat-option value="Mrs">Mrs</mat-option>
+            <mat-option value="Miss">Miss</mat-option>
+          </mat-select>    
+        </div>
+      </div>
+
+      <div class="form-group row mx-3">
+        <div class="col-sm-2">
+            <label for="gender" class="col-form-label">Gender</label>
+        </div>
+        <div class="col-sm-4">
+          <div class="row d-flex flex-row">
+            <mat-radio-group formControlName="gender" [disabled]="submitted" class="p-1">
+                <mat-radio-button [value]="false" class="ml-3 mr-3">
+                    Male
+                </mat-radio-button>
+                <mat-radio-button [value]="true" class="mr-2">
+                    Female 
+                </mat-radio-button>
+            </mat-radio-group>
           </div>
         </div>
-        <div class="form-group row">
-            <label for="iisNumber" class="col-sm-2 col-form-label ml-3">IIS Number</label>
-            <div class="col-sm-8">
-              <input type="text" class="form-control" id="iisNumber" [pattern]="'^[a-zA-Z0-9]+$'"  formControlName="iisNumber">
-              <small>Only alphanumeric characters allowed. Maximum 15 characters.</small>
-            </div>
+        <div class="col-sm-2">
+          <label for="dob" class="col-form-label">Date of birth</label>
+        </div>
+        <div class="col-sm-4">
+          <input type="date"  class="form-control date" [readonly]="submitted" formControlName="dob">
+        </div>
+      </div>
+
+        <div class="form-group row mx-3">
+          <div class="col-sm-2">
+            <label for="iisNumber" class="col-form-label">IIS Number</label>
+          </div>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="iisNumber" [pattern]="'^[a-zA-Z0-9]+$'" [readonly]="submitted" minlength="15" maxlength="15" formControlName="iisNumber">
+            <!-- <small>Only alphanumeric characters allowed. Maximum 15 characters.</small> -->
+          </div>
+          <div class="col-sm-2">
+            <!-- <span class="material-icons font-size-0-9">help</span> -->
+            <button class="btn btn-outline-secondary d-flex" [disabled]="submitted">
+              <span class="material-icons mr-1">done</span>
+              Validate
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group row mx-3">
+          <div class="col-sm-2">
+            <label for="iisStatus" class="col-form-label">IIS Status</label>
+          </div>
+          <div class="col-sm-2">
+            <button class="btn btn-secondary d-flex" disabled="true">
+              Cleared
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group mx-3">
+          <mat-radio-group formControlName="gender" [disabled]="submitted">
+            <mat-radio-button [value]="false" class="ml-3 mt-1 d-block">
+                I agree to purchase the wellness kit here.
+            </mat-radio-button>
+            <mat-radio-button [value]="true" class="ml-3 mt-1 d-block">
+                No thanks, I will bring my own wellness kit for travel. 
+            </mat-radio-button>
+        </mat-radio-group>
         </div>
     </form>
 </div>

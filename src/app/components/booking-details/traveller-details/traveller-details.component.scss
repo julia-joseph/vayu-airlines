@@ -1,0 +1,65 @@
+input[type="date"] {
+    position: relative;
+}
+
+input[type="date"]:after {
+    content: url(../../../../assets/images/ico_calendar.jpg);
+    zoom: 0.6;
+    margin-left: 10px;
+    margin-right: -10px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    color: transparent;
+    background: transparent;
+}
+
+input[type="date"]::-webkit-inner-spin-button {
+    display: none;
+    -webkit-appearance: none;
+}
+
+ input[type="date"]::-webkit-clear-button {
+     display: none;
+ }
+
+ .mat-radio-label-content {
+    padding-top: 20px;
+  }
+
+  .mat-radio-button.mat-accent .mat-radio-inner-circle, .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+      background-color: #07b9e5;
+  }
+
+  .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
+    border-color: rgba(105, 103, 103, 0.5);
+  }
+
+  .mat-radio-container{
+      height: 15px;
+      width: 15px;
+  }
+
+  .mat-radio-outer-circle{
+      height: 15px;
+      width: 15px;
+  }
+
+  .mat-radio-inner-circle{
+      height: 15px;
+      width: 15px;
+  }
+
+  .mat-radio-button .mat-radio-ripple{
+      height: 30px; /*double of your required circle radius*/
+      width: 30px;  /*double of your required circle radius*/
+      left: calc(50% - 15px); /*'10px'-same as your required circle radius*/
+      top: calc(50% - 15px); /*'10px'-same as your required circle radius*/
+  }

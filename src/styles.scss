@@ -201,3 +201,13 @@
 .btn-outline-primary {
     @include button-outline-variant($blue-color, #222222, lighten($blue-color,5%), $blue-color);
 }
+
+button:disabled {
+  cursor: default;
+  pointer-events: all !important;
+}
+
+.form-control:disabled, .form-control[readonly] {
+ background-color: transparent;
+ color: rgba(0, 0, 0, 0.38);
+}
