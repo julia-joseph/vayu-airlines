@@ -12,15 +12,15 @@ export class TravellerDetailsComponent implements OnInit {
 
   travellerForm = new FormGroup({
     travellerType : new FormControl('Adult', Validators.required),
-    title: new FormControl('Title 1'),
+    title: new FormControl('Mr'),
     firstName : new FormControl('', Validators.required),
     lastName : new FormControl('', Validators.required),
     middleName : new FormControl(''),
-    suffix : new FormControl('Mrs'),
+    suffix : new FormControl(''),
     gender : new FormControl(false, Validators.required),
     dob : new FormControl('', Validators.required),
     iisNumber : new FormControl('', [ Validators.required, Validators.minLength(15), , Validators.maxLength(15) ]),
-    iisStatus: new FormControl('')
+    iisStatus: new FormControl(false)
   });
 
   submitted: boolean = false;
@@ -31,6 +31,12 @@ export class TravellerDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     
+  }
+
+  onValidate() {
+    this.travellerForm.patchValue({
+      iisStatus: !this.travellerForm.get('iisStatus').value
+    })
   }
 
   onSave() {

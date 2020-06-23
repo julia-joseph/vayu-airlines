@@ -29,9 +29,11 @@
             class="form-control"
             [disabled]="submitted"
             formControlName="title">
-            <mat-option value="Title 1">Title 1</mat-option>
-            <mat-option value="Title 2">Title 2</mat-option>
-            <mat-option value="Title 3">Title 3</mat-option>
+            <mat-option value="Dr">Dr</mat-option>
+            <mat-option value="Miss">Miss</mat-option>
+            <mat-option value="Mr">Mr</mat-option>
+            <mat-option value="Mrs">Mrs</mat-option>
+            <mat-option value="Ms">Ms</mat-option>
           </mat-select>        
         </div>
       </div>
@@ -67,9 +69,10 @@
             class="form-control"
             [disabled]="submitted"
             formControlName="suffix">
-            <mat-option value="Mr">Mr</mat-option>
-            <mat-option value="Mrs">Mrs</mat-option>
-            <mat-option value="Miss">Miss</mat-option>
+            <mat-option value="II">II</mat-option>
+            <mat-option value="III">III</mat-option>
+            <mat-option value="Jr">Jr</mat-option>
+            <mat-option value="Sr">Sr</mat-option>
           </mat-select>    
         </div>
       </div>
@@ -108,7 +111,7 @@
           </div>
           <div class="col-sm-2">
             <!-- <span class="material-icons font-size-0-9">help</span> -->
-            <button class="btn btn-outline-secondary d-flex" [disabled]="submitted">
+            <button class="btn btn-outline-secondary d-flex" [disabled]="submitted" (click)="onValidate()">
               <span class="material-icons mr-1">done</span>
               Validate
             </button>
@@ -119,9 +122,10 @@
           <div class="col-sm-2">
             <label for="iisStatus" class="col-form-label">IIS Status</label>
           </div>
-          <div class="col-sm-2">
+          <div class="col-sm-4">
             <button class="btn btn-secondary d-flex" disabled="true">
-              Cleared
+              <span *ngIf="!travellerForm.get('iisStatus').value">Not Cleared</span>
+              <span *ngIf="travellerForm.get('iisStatus').value">Cleared</span>
             </button>
           </div>
         </div>
