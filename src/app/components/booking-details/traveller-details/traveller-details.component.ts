@@ -20,7 +20,7 @@ export class TravellerDetailsComponent implements OnInit {
     gender : new FormControl(false, Validators.required),
     dob : new FormControl('', Validators.required),
     iisNumber : new FormControl('', [ Validators.required, Validators.minLength(15), , Validators.maxLength(15) ]),
-    iisStatus: new FormControl(false)
+    iisStatus: new FormControl('')
   });
 
   submitted: boolean = false;
@@ -36,23 +36,31 @@ export class TravellerDetailsComponent implements OnInit {
 
   onValidate() {
     this.isValidating = true;
-    this.travellerService.getIisValidity().subscribe((valid) => {
-      this.isValidating = false;
-      if(valid){
-        this.travellerForm.patchValue({
-          iisStatus: true
-        })
-      }
-      else {
+    
+    this.travellerService.postTravellerDetails({
+      firstName: this.travellerForm.get('firstName').value,
+      lastName: this.travellerForm.get('lastName').value,
+      iisNumber: this.travellerForm.get('iisNumber').value
+    })
+    .subscribe(() => {
+      this.travellerService.getIisValidity().subscribe((valid) => {
+        this.isValidating = false;
+        if(valid){
+          this.travellerForm.patchValue({
+            iisStatus: true
+          })
+        }
+        else {
+          this.travellerForm.patchValue({
+            iisStatus: false
+          })
+        }
+      }, 
+      (error) => {
+        console.log('fail');
         this.travellerForm.patchValue({
           iisStatus: false
         })
-      }
-    },
-    error => {
-      console.log('fail');
-      this.travellerForm.patchValue({
-        iisStatus: false
       })
     })
   }

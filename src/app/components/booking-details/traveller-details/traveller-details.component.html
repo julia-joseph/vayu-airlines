@@ -17,6 +17,10 @@
               <mat-option value="Infant">Infant</mat-option>
             </mat-select>
         </div>
+        <div class="col-8 text-danger font-weight-bold" *ngIf="travellerForm.get('iisStatus').value === false">
+          Health & Safety Precaution: Please ensure you carry the Wellness Kit for travel 
+          or place an order here and collect it at the airport.
+        </div>
       </div>
 
       <div class="form-group row mx-3">
@@ -111,7 +115,9 @@
           </div>
           <div class="col-sm-2">
             <!-- <span class="material-icons font-size-0-9">help</span> -->
-            <button class="btn btn-outline-secondary d-flex" [disabled]="submitted" (click)="onValidate()">
+            <button class="btn btn-outline-secondary d-flex" 
+                    [disabled]="submitted || !travellerForm.valid" 
+                    (click)="onValidate()">
               <span class="material-icons mr-1">done</span>
               Validate
             </button>

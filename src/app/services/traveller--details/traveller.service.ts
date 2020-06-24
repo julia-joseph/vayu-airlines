@@ -35,7 +35,7 @@ export class TravellerService {
   }
 
   postTravellerDetails(details) {
-    this.http.post('https://ng-vayu.firebaseio.com/traveller.json',details).subscribe();
+    return this.http.post('https://ng-vayu.firebaseio.com/traveller.json',details);
   }
 
   getIisValidity() {
