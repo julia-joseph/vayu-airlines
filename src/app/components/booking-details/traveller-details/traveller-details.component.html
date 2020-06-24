@@ -5,7 +5,7 @@
     
     <form [formGroup]="travellerForm" class="pb-2">
       <div class="form-group row mx-3 pb-3 border-bottom">
-        <label for="travellerType" class="col-sm-2 col-form-label">Traveller Type</label>
+        <label for="travellerType" class="col-sm-2 col-form-label">&nbsp; Traveller Type</label>
         <div class="col-sm-2">
           <mat-select
               id="travellerType"
@@ -21,7 +21,7 @@
 
       <div class="form-group row mx-3">
         <div class="col-sm-2">
-            <label for="title" class="col-form-label">Title</label>
+            <label for="title" class="col-form-label">* Title</label>
         </div>
         <div class="col-sm-4">
           <mat-select
@@ -40,13 +40,13 @@
 
       <div class="form-group row mx-3">
         <div class="col-sm-2">
-            <label for="firstName" class="col-form-label">First Name</label>
+            <label for="firstName" class="col-form-label">* First Name</label>
         </div>
         <div class="col-sm-4">
           <input type="text" class="form-control" id="firstName" pattern="[a-zA-Z ]*"  [readonly]="submitted" formControlName="firstName">
         </div>
         <div class="col-sm-2">
-          <label for="lastName" class="col-form-label">Last Name</label>
+          <label for="lastName" class="col-form-label">* Last Name</label>
         </div>
         <div class="col-sm-4">
           <input type="text" class="form-control" id="lastName" pattern="[a-zA-Z ]*"  [readonly]="submitted" formControlName="lastName">
@@ -55,13 +55,13 @@
 
       <div class="form-group row mx-3">
         <div class="col-sm-2">
-            <label for="middleName" class="col-form-label">Middle Name</label>
+            <label for="middleName" class="col-form-label">&nbsp; Middle Name</label>
         </div>
         <div class="col-sm-4">
           <input type="text" class="form-control" id="middleName" pattern="[a-zA-Z ]*"  [readonly]="submitted" formControlName="middleName">
         </div>
         <div class="col-sm-2">
-          <label for="suffix" class="col-form-label">Suffix</label>
+          <label for="suffix" class="col-form-label">&nbsp; Suffix</label>
         </div>
         <div class="col-sm-4">
           <mat-select
@@ -79,7 +79,7 @@
 
       <div class="form-group row mx-3">
         <div class="col-sm-2">
-            <label for="gender" class="col-form-label">Gender</label>
+            <label for="gender" class="col-form-label">* Gender</label>
         </div>
         <div class="col-sm-4">
           <div class="row d-flex flex-row">
@@ -94,7 +94,7 @@
           </div>
         </div>
         <div class="col-sm-2">
-          <label for="dob" class="col-form-label">Date of birth</label>
+          <label for="dob" class="col-form-label">* Date of birth</label>
         </div>
         <div class="col-sm-4">
           <input type="date"  class="form-control date" [readonly]="submitted" formControlName="dob">
@@ -103,7 +103,7 @@
 
         <div class="form-group row mx-3">
           <div class="col-sm-2">
-            <label for="iisNumber" class="col-form-label">IIS Number</label>
+            <label for="iisNumber" class="col-form-label">* IIS Number</label>
           </div>
           <div class="col-sm-4">
             <input type="text" class="form-control" id="iisNumber" [pattern]="'^[a-zA-Z0-9]+$'" [readonly]="submitted" minlength="15" maxlength="15" formControlName="iisNumber">
@@ -120,10 +120,11 @@
 
         <div class="form-group row mx-3">
           <div class="col-sm-2">
-            <label for="iisStatus" class="col-form-label">IIS Status</label>
+            <label for="iisStatus" class="col-form-label">&nbsp; IIS Status</label>
           </div>
           <div class="col-sm-4">
-            <button class="btn btn-secondary d-flex" disabled="true">
+            <mat-spinner diameter="40" *ngIf="isValidating"></mat-spinner>
+            <button *ngIf="!isValidating" class="btn btn-secondary d-flex" disabled="true">
               <span *ngIf="!travellerForm.get('iisStatus').value">Not Cleared</span>
               <span *ngIf="travellerForm.get('iisStatus').value">Cleared</span>
             </button>

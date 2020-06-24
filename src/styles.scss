@@ -211,3 +211,7 @@ button:disabled {
  background-color: transparent;
  color: rgba(0, 0, 0, 0.38);
 }
+
+.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: $blue-color;
+}

@@ -24,6 +24,7 @@ export class TravellerDetailsComponent implements OnInit {
   });
 
   submitted: boolean = false;
+  isValidating: boolean = false;
 
   constructor(
     private travellerService: TravellerService
@@ -34,8 +35,25 @@ export class TravellerDetailsComponent implements OnInit {
   }
 
   onValidate() {
-    this.travellerForm.patchValue({
-      iisStatus: !this.travellerForm.get('iisStatus').value
+    this.isValidating = true;
+    this.travellerService.getIisValidity().subscribe((valid) => {
+      this.isValidating = false;
+      if(valid){
+        this.travellerForm.patchValue({
+          iisStatus: true
+        })
+      }
+      else {
+        this.travellerForm.patchValue({
+          iisStatus: false
+        })
+      }
+    },
+    error => {
+      console.log('fail');
+      this.travellerForm.patchValue({
+        iisStatus: false
+      })
     })
   }
 

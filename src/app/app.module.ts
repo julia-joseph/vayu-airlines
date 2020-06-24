@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -9,6 +10,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -74,7 +76,8 @@ import { TravellerDetailsComponent } from './components/booking-details/travelle
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    AppRoutingModule, 
+    HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
     MainModule,
@@ -88,6 +91,7 @@ import { TravellerDetailsComponent } from './components/booking-details/travelle
     MatRadioModule,
     MatCheckboxModule,
     MatButtonToggleModule,
+    MatProgressSpinnerModule,
     NgbModule
   ],
   entryComponents: [

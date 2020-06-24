@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { HttpService } from '../http/http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,9 @@ export class TravellerService {
 
   travellerDetailsSubject: Subject<any> = new Subject<any>();
 
-  constructor() { }
+  constructor(
+    private http: HttpService
+  ) { }
 
   setTravellerDetails(details) {
     this.travellerDetails = details;
@@ -29,5 +32,13 @@ export class TravellerService {
 
   getTravellerDetailsPObservable() {
     return this.travellerDetailsSubject.asObservable();
+  }
+
+  postTravellerDetails(details) {
+    this.http.post('https://ng-vayu.firebaseio.com/traveller.json',details).subscribe();
+  }
+
+  getIisValidity() {
+    return this.http.get('https://ng-vayu.firebaseio.com/traveller.json');
   }
 }
