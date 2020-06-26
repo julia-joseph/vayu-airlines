@@ -116,11 +116,16 @@
           <div class="col-sm-2">
             <!-- <span class="material-icons font-size-0-9">help</span> -->
             <button class="btn btn-outline-secondary d-flex" 
-                    [disabled]="submitted || !travellerForm.valid" 
+                    [disabled]="submitted || travellerForm.get('iisNumber').errors || travellerForm.get('firstName').errors || travellerForm.get('lastName').errors || travellerForm.get('dob').errors"
                     (click)="onValidate()">
               <span class="material-icons mr-1">done</span>
               Validate
             </button>
+          </div>
+          <div class="col-sm-4" *ngIf="error">
+            <div class="text-danger font-weight-bold">
+              Error during validation. Please try again.
+            </div>
           </div>
         </div>
 
@@ -137,7 +142,7 @@
           </div>
         </div>
 
-        <div class="form-group mx-3">
+        <div class="form-group mx-3" *ngIf="travellerForm.get('iisStatus').value === false">
           <mat-radio-group formControlName="gender" [disabled]="submitted">
             <mat-radio-button [value]="false" class="ml-3 mt-1 d-block">
                 I agree to purchase the wellness kit here.

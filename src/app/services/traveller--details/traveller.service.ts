@@ -35,10 +35,7 @@ export class TravellerService {
   }
 
   postTravellerDetails(details) {
-    return this.http.post('https://ng-vayu.firebaseio.com/traveller.json',details);
-  }
-
-  getIisValidity() {
-    return this.http.get('https://ng-vayu.firebaseio.com/traveller.json');
+    // http://vayu-airlines.azurewebsites.net/v2/api-docs?group=Vayu airlines/covid/vayu/passenger/iis
+    return this.http.post('/covid/vayu/passenger/iis',details);
   }
 }

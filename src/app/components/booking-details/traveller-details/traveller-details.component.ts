@@ -20,11 +20,12 @@ export class TravellerDetailsComponent implements OnInit {
     gender : new FormControl(false, Validators.required),
     dob : new FormControl('', Validators.required),
     iisNumber : new FormControl('', [ Validators.required, Validators.minLength(15), , Validators.maxLength(15) ]),
-    iisStatus: new FormControl('')
+    iisStatus: new FormControl('', Validators.required)
   });
 
   submitted: boolean = false;
   isValidating: boolean = false;
+  error: boolean = false;
 
   constructor(
     private travellerService: TravellerService
@@ -38,29 +39,33 @@ export class TravellerDetailsComponent implements OnInit {
     this.isValidating = true;
     
     this.travellerService.postTravellerDetails({
-      firstName: this.travellerForm.get('firstName').value,
-      lastName: this.travellerForm.get('lastName').value,
-      iisNumber: this.travellerForm.get('iisNumber').value
+      dob: this.travellerForm.get('dob').value,
+      gender: this.travellerForm.get('gender').value ? 'Female' : 'Male',
+      iis: this.travellerForm.get('iisNumber').value,
+      paxFirstName: this.travellerForm.get('firstName').value,
+      paxLastName: this.travellerForm.get('lastName').value
     })
-    .subscribe(() => {
-      this.travellerService.getIisValidity().subscribe((valid) => {
-        this.isValidating = false;
-        if(valid){
-          this.travellerForm.patchValue({
-            iisStatus: true
-          })
-        }
-        else {
-          this.travellerForm.patchValue({
-            iisStatus: false
-          })
-        }
-      }, 
-      (error) => {
-        console.log('fail');
+    .subscribe((data) => {
+      const valid = data.iisStatus;
+      this.error = false;
+      this.isValidating = false;
+      if(valid){
+        this.travellerForm.patchValue({
+          iisStatus: true
+        })
+      }
+      else {
         this.travellerForm.patchValue({
           iisStatus: false
         })
+      }
+    }, 
+    (error) => {
+      console.log('fail');
+      this.isValidating = false;
+      this.error = true;
+      this.travellerForm.patchValue({
+        iisStatus: false
       })
     })
   }
