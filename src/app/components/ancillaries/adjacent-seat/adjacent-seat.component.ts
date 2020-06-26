@@ -187,7 +187,8 @@ export class AdjacentSeatComponent implements OnInit, OnDestroy, OnChanges {
         digitalIfeTotalPrice: null,
         adjacentSeatForm: this.adjacentSeatForm,
         adjacentSeatTotalPrice: this.totalPrice,
-        selectedTab: 2
+        selectedTab: 2,
+        subscriptionName: this.subscriptionName
       }
     });
 

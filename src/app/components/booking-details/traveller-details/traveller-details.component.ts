@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { TravellerService } from 'src/app/services/traveller--details/traveller.service';
@@ -9,6 +9,7 @@ import { TravellerService } from 'src/app/services/traveller--details/traveller.
   styleUrls: ['./traveller-details.component.scss']
 })
 export class TravellerDetailsComponent implements OnInit {
+  @Output() onTDContinue = new EventEmitter<void>();
 
   travellerForm = new FormGroup({
     travellerType : new FormControl('Adult', Validators.required),
@@ -82,6 +83,8 @@ export class TravellerDetailsComponent implements OnInit {
 
   onContinue() {
     //close tab and go to next one
+    console.log('continuebtn')
+    this.onTDContinue.emit();
   }
 
 }

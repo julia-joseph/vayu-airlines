@@ -180,7 +180,8 @@ export class DigitalIFEComponent implements OnInit, AfterViewChecked, OnChanges 
         digitalIfeTotalPrice: this.totalPrice,
         adjacentSeatForm: null,
         adjacentSeatTotalPrice: null,
-        selectedTab: 1
+        selectedTab: 1,
+        subscriptionName: this.subscriptionName
       }
     });
 

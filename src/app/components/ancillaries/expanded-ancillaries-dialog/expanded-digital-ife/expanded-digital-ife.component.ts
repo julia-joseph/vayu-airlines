@@ -11,6 +11,7 @@ export class ExpandedDigitalIFEComponent implements OnInit, AfterViewChecked {
   @Input() isFirstBooking = true;
   @Input() digitalIfeForm: FormGroup;
   @Input() totalPrice;
+  @Input() subscriptionName: string = "Annie";
   @Output() onDIFESkip = new EventEmitter<void>();
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   disableScrollDown = false;
@@ -26,12 +27,16 @@ export class ExpandedDigitalIFEComponent implements OnInit, AfterViewChecked {
 
   applySubForm: FormGroup;
   isSubscriptionAdded: boolean = false;
-  
+
   constructor(
     private digitalIfeService: DigitalIfeDetailsService
   ) { }
 
   ngOnInit(): void {
+    if(!this.subscriptionName){
+      this.subscriptionName = "Annie";
+    }
+
     this.applySubForm = this.digitalIfeService.getDigitalApplySubFormGroup();
     if(this.applySubForm.get('self').value || this.applySubForm.get('pone').value || this.applySubForm.get('ptwo').value) {
       this.isSubscriptionAdded = true;

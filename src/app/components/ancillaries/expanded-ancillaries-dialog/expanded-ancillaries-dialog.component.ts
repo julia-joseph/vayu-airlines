@@ -5,6 +5,7 @@ import { DigitalIfeDetailsService } from 'src/app/services/digital-ife-details/d
 import { WellnessKitDetailsService } from 'src/app/services/wellness-kit-details/wellness-kit-details.service';
 import { AdjacentSeatDetailsService } from 'src/app/services/adjacent-seat-details/adjacent-seat-details.service';
 import { FlightDetailsService } from 'src/app/services/flight-details/flight-details.service';
+import { TravellerService } from 'src/app/services/traveller--details/traveller.service';
 
 export interface DialogData {
   wellnessKitForm?: FormGroup;
@@ -14,6 +15,7 @@ export interface DialogData {
   adjacentSeatForm?: FormGroup;
   adjacentSeatTotalPrice?: number;
   selectedTab: number;
+  subscriptionName: any;
 }
 
 @Component({
@@ -32,6 +34,8 @@ export class ExpandedAncillariesDialogComponent implements OnInit {
 
   isFirstBooking: boolean = true;
 
+  subscriptionName: any;
+
   constructor(
     public dialogRef: MatDialogRef<ExpandedAncillariesDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -43,7 +47,8 @@ export class ExpandedAncillariesDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.isFirstBooking = this.flightService.isFirstBooking();
-    
+    this.subscriptionName = this.data.subscriptionName;
+
     if(this.data.wellnessKitForm) {
       this.wellnessKit = this.data.wellnessKitForm;
       this.wellnessKitTotalPrice = this.data.wellnessKitTotalPrice;

@@ -324,7 +324,8 @@ export class WellnessKitComponent implements OnInit, AfterViewChecked, OnChanges
         digitalIfeTotalPrice: null,
         adjacentSeatForm: null,
         adjacentSeatTotalPrice: null,
-        selectedTab: 0
+        selectedTab: 0,
+        subscriptionName: this.subscriptionName
       }
     });
   }

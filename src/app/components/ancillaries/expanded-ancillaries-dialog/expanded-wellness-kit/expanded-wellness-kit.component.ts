@@ -11,6 +11,7 @@ export class ExpandedWellnessKitComponent implements OnInit {
   @Input() isFirstBooking = true;
   @Input() wellnessKit = null;
   @Input() totalPrice = 0;
+  @Input() subscriptionName: string = "Annie";
   @Output() onWSkip = new EventEmitter<void>();
 
   itemNameOptions: string[] = ['Mask','Sanitizer','Gloves','Boxed Meal'];
@@ -36,6 +37,10 @@ export class ExpandedWellnessKitComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(!this.subscriptionName){
+      this.subscriptionName = "Annie";
+    }
+    
     this.applySubForm = this.wellnessKitServices.getWellnessApplySubFormGroup();
     if(this.applySubForm.get('self').value || this.applySubForm.get('pone').value || this.applySubForm.get('ptwo').value) {
       this.isSubscriptionAdded = true;

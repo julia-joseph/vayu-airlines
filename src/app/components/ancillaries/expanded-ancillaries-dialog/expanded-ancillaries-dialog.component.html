@@ -18,7 +18,8 @@
           [isFirstBooking]="isFirstBooking"
           [wellnessKit]="wellnessKit"
           [totalPrice]="wellnessKitTotalPrice"
-          (onWSkip)="onSkipToDigitalIFE()">
+          (onWSkip)="onSkipToDigitalIFE()"
+          [subscriptionName]="subscriptionName">
         </app-expanded-wellness-kit>
       </mat-tab>
 
@@ -38,6 +39,7 @@
           [digitalIfeForm]="digitalIfeForm"
           [totalPrice]="digitalIfeTotalPrice"
           (onDIFESkip)="onSkipToSeatRegrouping()"
+          [subscriptionName]="subscriptionName"
         >
         </app-expanded-digital-ife>
       </mat-tab>
@@ -58,6 +60,7 @@
           [adjacentSeatForm] = "adjacentSeatForm"
           [totalPrice] = "adjacentSeatTotalPrice"
           (onSRConfirm) = "onSeatRegroupingConfirm()"
+          [subscriptionName]="subscriptionName"
         >
         </app-expanded-adjacent-seat>
       </mat-tab>

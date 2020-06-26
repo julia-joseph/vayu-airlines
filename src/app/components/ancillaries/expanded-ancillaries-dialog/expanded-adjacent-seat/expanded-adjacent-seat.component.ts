@@ -11,6 +11,7 @@ export class ExpandedAdjacentSeatComponent implements OnInit {
   @Input() isFirstBooking = true;
   @Input() adjacentSeatForm: FormGroup;
   @Input() totalPrice;
+  @Input() subscriptionName: string = "Annie";
   @Output() onSRConfirm = new EventEmitter<void>();
 
   submitted: boolean = false;
@@ -30,6 +31,10 @@ export class ExpandedAdjacentSeatComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(!this.subscriptionName){
+      this.subscriptionName = "Annie";
+    }
+
     // this.applySubForm = this.adjacentSeatService.getAdjacentApplySubFormGroup();
     this.isSubscriptionAdded = this.adjacentSeatService.getSubscriptionAdded();
 
