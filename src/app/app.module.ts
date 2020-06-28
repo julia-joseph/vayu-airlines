@@ -44,6 +44,7 @@ import { PaymentDonationComponent } from './components/donations/payment-donatio
 import { DonationDialogComponent } from './components/donation-dialog/donation-dialog.component';
 import { CertificateDialogComponent } from './components/donations/certificate-dialog/certificate-dialog.component';
 import { TravellerDetailsComponent } from './components/booking-details/traveller-details/traveller-details.component';
+import { TravellerChecklistDialogComponent } from './components/booking-details/traveller-details/traveller-checklist-dialog/traveller-checklist-dialog.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { TravellerDetailsComponent } from './components/booking-details/travelle
     PaymentDonationComponent,
     DonationDialogComponent,
     CertificateDialogComponent,
-    TravellerDetailsComponent
+    TravellerDetailsComponent,
+    TravellerChecklistDialogComponent
   ],
   imports: [
     BrowserModule,

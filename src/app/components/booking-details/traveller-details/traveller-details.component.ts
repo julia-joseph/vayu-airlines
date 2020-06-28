@@ -2,6 +2,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { TravellerService } from 'src/app/services/traveller--details/traveller.service';
+import { MatDialog } from '@angular/material/dialog';
+import { TravellerChecklistDialogComponent } from './traveller-checklist-dialog/traveller-checklist-dialog.component';
 
 @Component({
   selector: 'app-traveller-details',
@@ -29,11 +31,11 @@ export class TravellerDetailsComponent implements OnInit {
   error: boolean = false;
 
   constructor(
-    private travellerService: TravellerService
+    private travellerService: TravellerService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
-    
   }
 
   onValidate() {
@@ -59,6 +61,7 @@ export class TravellerDetailsComponent implements OnInit {
         this.travellerForm.patchValue({
           iisStatus: false
         })
+        this.openChecklistDialog();
       }
     }, 
     (error) => {
@@ -68,6 +71,7 @@ export class TravellerDetailsComponent implements OnInit {
       this.travellerForm.patchValue({
         iisStatus: false
       })
+      this.openChecklistDialog();
     })
   }
 
@@ -87,4 +91,10 @@ export class TravellerDetailsComponent implements OnInit {
     this.onTDContinue.emit();
   }
 
+  openChecklistDialog() {
+    const dialogRef = this.dialog.open(TravellerChecklistDialogComponent, {
+      width: '855px',
+      data: { }
+    });
+  }
 }
