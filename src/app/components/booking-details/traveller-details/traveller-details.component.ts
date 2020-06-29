@@ -22,8 +22,12 @@ export class TravellerDetailsComponent implements OnInit {
     suffix : new FormControl(''),
     gender : new FormControl(false, Validators.required),
     dob : new FormControl('', Validators.required),
-    iisNumber : new FormControl('', [ Validators.required, Validators.minLength(15), , Validators.maxLength(15) ]),
+    iisNumber : new FormControl('', [ Validators.required, Validators.minLength(9), , Validators.maxLength(9) ]),
     iisStatus: new FormControl('', Validators.required)
+  });
+
+  optionsForm = new FormGroup({
+    option: new FormControl(true)
   });
 
   submitted: boolean = false;
@@ -36,23 +40,20 @@ export class TravellerDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.optionsForm.valueChanges.subscribe(() => {
+      if(!this.optionsForm.get('option').value) {
+        this.openChecklistDialog();
+      }
+    })
   }
 
   onValidate() {
     this.isValidating = true;
-    
-    this.travellerService.postTravellerDetails({
-      dob: this.travellerForm.get('dob').value,
-      gender: this.travellerForm.get('gender').value ? 'Female' : 'Male',
-      iis: this.travellerForm.get('iisNumber').value,
-      paxFirstName: this.travellerForm.get('firstName').value,
-      paxLastName: this.travellerForm.get('lastName').value
-    })
-    .subscribe((data) => {
-      const valid = data.iisStatus;
-      this.error = false;
+    const iisNumber = this.travellerForm.get('iisNumber').value;
+
+    setTimeout(()=> {
       this.isValidating = false;
-      if(valid){
+      if(iisNumber === 'V83724912' || iisNumber === 'A15798243'){
         this.travellerForm.patchValue({
           iisStatus: true
         })
@@ -61,18 +62,39 @@ export class TravellerDetailsComponent implements OnInit {
         this.travellerForm.patchValue({
           iisStatus: false
         })
-        this.openChecklistDialog();
       }
-    }, 
-    (error) => {
-      console.log('fail');
-      this.isValidating = false;
-      this.error = true;
-      this.travellerForm.patchValue({
-        iisStatus: false
-      })
-      this.openChecklistDialog();
-    })
+    },1500)
+    
+    // this.travellerService.postTravellerDetails({
+    //   dob: this.travellerForm.get('dob').value,
+    //   gender: this.travellerForm.get('gender').value ? 'Female' : 'Male',
+    //   iis: this.travellerForm.get('iisNumber').value,
+    //   paxFirstName: this.travellerForm.get('firstName').value,
+    //   paxLastName: this.travellerForm.get('lastName').value
+    // })
+    // .subscribe((data) => {
+    //   const valid = data.iisStatus;
+    //   this.error = false;
+    //   this.isValidating = false;
+    //   if(valid){
+    //     this.travellerForm.patchValue({
+    //       iisStatus: true
+    //     })
+    //   }
+    //   else {
+    //     this.travellerForm.patchValue({
+    //       iisStatus: false
+    //     })
+    //   }
+    // }, 
+    // (error) => {
+    //   console.log('fail');
+    //   this.isValidating = false;
+    //   this.error = true;
+    //   this.travellerForm.patchValue({
+    //     iisStatus: false
+    //   })
+    // })
   }
 
   onSave() {
@@ -93,7 +115,7 @@ export class TravellerDetailsComponent implements OnInit {
 
   openChecklistDialog() {
     const dialogRef = this.dialog.open(TravellerChecklistDialogComponent, {
-      width: '855px',
+      width: '735px',
       data: { }
     });
   }

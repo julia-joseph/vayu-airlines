@@ -110,7 +110,7 @@
             <label for="iisNumber" class="col-form-label">* IIS Number</label>
           </div>
           <div class="col-sm-4">
-            <input type="text" class="form-control" id="iisNumber" [pattern]="'^[a-zA-Z0-9]+$'" [readonly]="submitted" minlength="15" maxlength="15" formControlName="iisNumber">
+            <input type="text" class="form-control" id="iisNumber" [pattern]="'^[a-zA-Z0-9]+$'" [readonly]="submitted" minlength="9" maxlength="9" formControlName="iisNumber">
             <!-- <small>Only alphanumeric characters allowed. Maximum 15 characters.</small> -->
           </div>
           <div class="col-sm-2">
@@ -136,18 +136,19 @@
           <div class="col-sm-4">
             <mat-spinner diameter="40" *ngIf="isValidating"></mat-spinner>
             <button *ngIf="!isValidating" class="btn btn-secondary d-flex" disabled="true">
-              <span *ngIf="!travellerForm.get('iisStatus').value">Not Cleared</span>
+              <span *ngIf="travellerForm.get('iisStatus').value === ''">No Status</span>
+              <span *ngIf="travellerForm.get('iisStatus').value === false">Not Cleared</span>
               <span *ngIf="travellerForm.get('iisStatus').value">Cleared</span>
             </button>
           </div>
         </div>
 
-        <div class="form-group mx-3" *ngIf="travellerForm.get('iisStatus').value === false">
-          <mat-radio-group formControlName="gender" [disabled]="submitted">
-            <mat-radio-button [value]="false" class="ml-3 mt-1 d-block">
+        <div class="form-group mx-3" *ngIf="travellerForm.get('iisStatus').value === false" [formGroup]="optionsForm">
+          <mat-radio-group formControlName="option" [disabled]="submitted">
+            <mat-radio-button [value]="true" class="ml-3 mt-1 d-block">
                 I agree to purchase the wellness kit here.
             </mat-radio-button>
-            <mat-radio-button [value]="true" class="ml-3 mt-1 d-block">
+            <mat-radio-button [value]="false" class="ml-3 mt-1 d-block">
                 No thanks, I will bring my own wellness kit for travel. 
             </mat-radio-button>
         </mat-radio-group>
