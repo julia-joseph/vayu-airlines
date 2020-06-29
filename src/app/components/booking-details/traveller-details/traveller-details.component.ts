@@ -14,7 +14,7 @@ export class TravellerDetailsComponent implements OnInit {
   @Output() onTDContinue = new EventEmitter<void>();
 
   travellerForm = new FormGroup({
-    travellerType : new FormControl('Adult', Validators.required),
+    travellerType : new FormControl('', Validators.required),
     title: new FormControl('Mr'),
     firstName : new FormControl('', Validators.required),
     lastName : new FormControl('', Validators.required),
