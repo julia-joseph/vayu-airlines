@@ -29,8 +29,8 @@
               <mat-menu #subscriptionMenu="matMenu" yPosition="below" xPosition="after">
                 <div class="d-flex flex-column justify-content-between p-2">
                   <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self">{{ subscriptionName }}</mat-checkbox>
-                  <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone">Pax 1</mat-checkbox>
-                  <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo">AB</mat-checkbox>
+                  <!-- <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone">Pax 1</mat-checkbox>
+                  <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo">AB</mat-checkbox> -->
                 </div>
               </mat-menu>
             </div>
@@ -127,8 +127,8 @@
                           <mat-menu #passengerMenu="matMenu" yPosition="below" xPosition="after">
                             <div class="d-flex flex-column justify-content-between p-2">
                               <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted">{{ subscriptionName }}</mat-checkbox>
-                              <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted">Pax 1</mat-checkbox>
-                              <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted">AB</mat-checkbox>
+                              <!-- <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted">Pax 1</mat-checkbox>
+                              <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted">AB</mat-checkbox> -->
                             </div>
                           </mat-menu>
                         </div>
@@ -274,8 +274,8 @@
                           <mat-menu #passengerMenu="matMenu" yPosition="below" xPosition="after">
                             <div class="d-flex flex-column justify-content-between p-2">
                               <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted">{{ subscriptionName }}</mat-checkbox>
-                              <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted">Pax 1</mat-checkbox>
-                              <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted">AB</mat-checkbox>
+                              <!-- <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted">Pax 1</mat-checkbox>
+                              <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted">AB</mat-checkbox> -->
                             </div>
                           </mat-menu>
                         </div>

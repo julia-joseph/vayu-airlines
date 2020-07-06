@@ -45,9 +45,12 @@
             <img src="assets/images/snacks.jpeg">
             <div class="align-self-center ml-3">Snacks <small>as per travel guidelines</small></div>
         </div>
+        <div>
+            <br/><br>
+        </div>
     </div>
 </div>
 
-<div class="d-flex flex-row justify-content-end mb-2">
+<div class="d-flex flex-row justify-content-end my-2" *ngIf="!data.disableAgree">
     <button (click)="onContinue()" class="blue-button mr-3">I Agree</button>
 </div>

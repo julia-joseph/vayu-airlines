@@ -6,7 +6,8 @@ import { Injectable } from '@angular/core';
 export class UserService {
   userDetails : any = {
     firstName: 'Annie',
-    lastName: ''
+    lastName: '',
+    email: 'annie@gmail.com'
   }
 
   constructor() { }
@@ -19,4 +20,11 @@ export class UserService {
     return this.userDetails.firstName;
   }
 
+  setEmail(email: string): void {
+    this.userDetails.email = email;
+  }
+
+  getEmail(): string {
+    return this.userDetails.email;
+  }
 }

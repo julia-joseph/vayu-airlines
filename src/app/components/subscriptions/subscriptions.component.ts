@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SubscriptionService } from 'src/app/services/subscription/subscription.service';
+import { UserService } from 'src/app/services/user-details/user.service';
+import { TravellerService } from 'src/app/services/traveller--details/traveller.service';
 
 @Component({
   selector: 'app-subscriptions',
@@ -11,15 +13,21 @@ export class SubscriptionsComponent implements OnInit {
   wellnessSub: any;
   digitalSub: any;
   adjacentSub: any;
+  firstName: string;
+  travellerName: string;
 
   constructor(
-    private subscription: SubscriptionService
+    private subscription: SubscriptionService,
+    private userService: UserService,
+    private travellerService: TravellerService
   ) { }
 
   ngOnInit(): void {
     this.wellnessSub = this.subscription.getWellnessKitSubscription();
     this.digitalSub = this.subscription.getDigitalIfeSubscription();
     this.adjacentSub = this.subscription.getAdjacentSeatSubscription();
+    this.firstName = this.userService.getFirstName();
+    this.travellerName = this.travellerService.getTravellerInitials();
   }
 
   setWellness(wellnessSub) {

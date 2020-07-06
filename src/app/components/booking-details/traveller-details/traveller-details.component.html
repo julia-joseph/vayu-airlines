@@ -19,8 +19,8 @@
             </mat-select>
         </div>
         <div class="col-8 text-danger font-weight-bold" *ngIf="travellerForm.get('iisStatus').value === false">
-          Health & Safety Precaution: Please ensure you carry the Wellness Kit for travel 
-          or place an order here and collect it at the airport.
+          Health & Safety Precaution: Please ensure you carry the Wellness Kit, other travel
+          essentials <a class="link text-danger cursor-pointer" (click)="openChecklistDialog(true)">(as per your checklist here)</a> for travel or place an order here and collect it at the airport.
         </div>
       </div>
 
@@ -112,7 +112,7 @@
             <label for="iisNumber" class="col-form-label">* IIS Number</label>
           </div>
           <div class="col-sm-4">
-            <input type="text" class="form-control" id="iisNumber" [pattern]="'^[a-zA-Z0-9]+$'" [readonly]="submitted" minlength="9" maxlength="9" formControlName="iisNumber">
+            <input type="text" class="form-control" id="iisNumber" (change)="changeValidateLabel()" (keyup)="changeValidateLabel()" [pattern]="'^[a-zA-Z0-9]+$'" [readonly]="submitted" minlength="9" maxlength="9" formControlName="iisNumber">
             <!-- <small>Only alphanumeric characters allowed. Maximum 15 characters.</small> -->
           </div>
           <div class="col-sm-2">
@@ -121,7 +121,8 @@
                     [disabled]="submitted || travellerForm.get('iisNumber').errors || travellerForm.get('firstName').errors || travellerForm.get('lastName').errors || travellerForm.get('dob').errors"
                     (click)="onValidate()">
               <span class="material-icons mr-1">done</span>
-              Validate
+              <span *ngIf="validateLabel">Validate</span>
+              <span *ngIf="!validateLabel">Validated</span>
             </button>
           </div>
           <!-- <div class="col-sm-4" *ngIf="error">

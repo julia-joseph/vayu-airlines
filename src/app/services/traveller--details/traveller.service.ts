@@ -9,8 +9,8 @@ export class TravellerService {
   travellerDetails = {
     travllerType: '',
     title: '',
-    firstName: '',
-    lastName: '',
+    firstName: 'Annie',
+    lastName: 'Frank',
     middleName: '',
     suffix: '',
     gender: false,
@@ -32,6 +32,10 @@ export class TravellerService {
 
   getTravellerDetailsPObservable() {
     return this.travellerDetailsSubject.asObservable();
+  }
+
+  getTravellerInitials() {
+    return this.travellerDetails.firstName[0].toUpperCase() + this.travellerDetails.lastName[0].toUpperCase();
   }
 
   postTravellerDetails(details) {

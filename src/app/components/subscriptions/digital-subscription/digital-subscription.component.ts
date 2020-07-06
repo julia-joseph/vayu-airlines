@@ -8,6 +8,8 @@ import { FormGroup, FormArray, FormControl } from '@angular/forms';
 })
 export class DigitalSubscriptionComponent implements OnInit {
   @Input() digitalSub;
+  @Input() firstName;
+  @Input() travellerName;
   @Output() onDSConfirm = new EventEmitter<any>();
   @Output() onSkipToAS = new EventEmitter<void>();
 

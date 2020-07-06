@@ -21,9 +21,14 @@
         <span class="float-right font-weight-600">15000pts</span>
       </div>
       <div class="font-weight-normal line-height1-7">
-        ({{ flightDetails.passengers.adults }} Adults
-        {{ flightDetails.passengers.children }} Child
-        {{ flightDetails.passengers.infants }} Lap Infant)
+        (
+        <span *ngIf="flightDetails.passengers.adults">
+          {{ flightDetails.passengers.adults }} 
+          <span *ngIf="flightDetails.passengers.adults === 1">Adult</span>
+          <span *ngIf="flightDetails.passengers.adults > 1">Adults</span>
+        </span>
+        <span *ngIf="flightDetails.passengers.children">{{ flightDetails.passengers.children }} Child</span>
+        <span *ngIf="flightDetails.passengers.infants">{{ flightDetails.passengers.infants }} Lap Infant</span> )
       </div>
       <a href="#" class="font-weight-600 text-dark">Fare Restrictions</a>
     </div>

@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 })
 export class AdjacentSubscriptionComponent implements OnInit {
   @Input() adjacentSub;
+  @Input() firstName;
+  @Input() travellerName;
   @Output() onASConfirm = new EventEmitter<any>();
 
   adjacentSubForm: FormGroup = new FormGroup({

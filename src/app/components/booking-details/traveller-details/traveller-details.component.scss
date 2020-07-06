@@ -63,3 +63,13 @@ input[type="date"]::-webkit-inner-spin-button {
       left: calc(50% - 15px); /*'10px'-same as your required circle radius*/
       top: calc(50% - 15px); /*'10px'-same as your required circle radius*/
   }
+
+.link {
+    font-size: 1.1rem;
+    color: #a71d2a !important;
+}
+
+.link:hover {
+    font-size: 1.12rem;
+    color: #7c1824 !important;
+}

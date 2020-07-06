@@ -20,6 +20,8 @@
                           </ng-template>
                           <app-wellness-subscription
                             [wellnessSub] = "wellnessSub"
+                            [firstName]="firstName"
+                            [travellerName]="travellerName"
                             (onWSConfirm) = "setWellness($event)"
                             (onSkipToDS) = "skipToDigitalTab()">
                           </app-wellness-subscription>
@@ -38,6 +40,8 @@
                           </ng-template>
                           <app-digital-subscription
                             [digitalSub]="digitalSub"
+                            [firstName]="firstName"
+                            [travellerName]="travellerName"
                             (onDSConfirm) = "setDigital($event)"
                             (onSkipToAS)="skipToAdjacentTab()">
                           </app-digital-subscription>
@@ -56,6 +60,8 @@
                           </ng-template>
                           <app-adjacent-subscription
                             [adjacentSub]="adjacentSub"
+                            [firstName]="firstName"
+                            [travellerName]="travellerName"
                             (onASConfirm) = "setAdjacent($event)"
                           >
                           </app-adjacent-subscription>

@@ -11,6 +11,8 @@ export class WellnessSubscriptionComponent implements OnInit, AfterViewChecked {
   disableScrollDown = false
 
   @Input() wellnessSub;
+  @Input() firstName;
+  @Input() travellerName;
   @Output() onWSConfirm = new EventEmitter<any>();
   @Output() onSkipToDS = new EventEmitter<void>();
   

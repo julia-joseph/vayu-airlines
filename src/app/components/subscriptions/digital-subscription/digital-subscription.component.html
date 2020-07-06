@@ -67,9 +67,9 @@
                         </div>
                       </div>
                       <div class="row d-flex flex-row mt-3 ml-2">
-                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted" class="ml-3">Annie</mat-checkbox>
+                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted" class="ml-3">{{travellerName}}</mat-checkbox>
                         <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted" class="ml-3">Pax 1</mat-checkbox>
-                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted" class="ml-3">AB</mat-checkbox>
+                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted" class="ml-3">{{firstName}}</mat-checkbox>
                         <div class="cursor-pointer violet font-weight-bold ml-3" 
                                   (click)="removeItem(i)" *ngIf="!submitted">
                                   <u>Cancel Subscription</u>
@@ -132,9 +132,9 @@
                       </div>
                     </div>
                     <div class="row d-flex flex-row mt-3 ml-2">
-                      <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted" class="ml-3">Annie</mat-checkbox>
+                      <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="submitted" class="ml-3">{{travellerName}}</mat-checkbox>
                       <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="submitted" class="ml-3">Pax 1</mat-checkbox>
-                      <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted" class="ml-3">AB</mat-checkbox>
+                      <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="submitted" class="ml-3">{{firstName}}</mat-checkbox>
                     </div>
                   </div>
                 </div>
@@ -180,9 +180,9 @@
                         </div>
                       </div>
                       <div class="row d-flex flex-row mt-3 ml-2">
-                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="true" class="ml-3">Annie</mat-checkbox>
+                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="self" [disabled]="true" class="ml-3">{{travellerName}}</mat-checkbox>
                         <mat-checkbox (click) = "$event.stopPropagation()" formControlName="pone" [disabled]="true" class="ml-3">Pax 1</mat-checkbox>
-                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="true" class="ml-3">AB</mat-checkbox>
+                        <mat-checkbox (click) = "$event.stopPropagation()" formControlName="ptwo" [disabled]="true" class="ml-3">{{firstName}}</mat-checkbox>
                         <div class="ml-3">
                             <span>Cancelled Subscription</span>
                         </div>

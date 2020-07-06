@@ -50,7 +50,7 @@
                             </div>
                             <div class="col-8 pl-0">
                                 <div class="row d-flex flex-row">
-                                    <mat-checkbox (click) = "$event.stopPropagation()" formControlName="subscription" [disabled]="submitted || cancelledItem" class="ml-3">Annie</mat-checkbox>
+                                    <mat-checkbox (click) = "$event.stopPropagation()" formControlName="subscription" [disabled]="submitted || cancelledItem" class="ml-3">{{travellerName}}</mat-checkbox>
                                     <div class="cursor-pointer violet font-weight-bold ml-3" 
                                     (click)="cancelSub()" *ngIf="!cancelledItem && !submitted">
                                     <u>Cancel Subscription</u>

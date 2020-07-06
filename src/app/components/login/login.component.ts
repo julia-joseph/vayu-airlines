@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
     this.username = this.loginForm.get('email').value.substring(0, endingIndex);
     this.username = this.username[0].toUpperCase() + this.username.slice(1);
     this.userService.setFirstName(this.username);
+    this.userService.setEmail(this.loginForm.get('email').value);
   }
 
   onSubmit() {

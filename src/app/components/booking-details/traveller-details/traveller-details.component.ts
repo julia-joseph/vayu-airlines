@@ -14,7 +14,7 @@ export class TravellerDetailsComponent implements OnInit {
   @Output() onTDContinue = new EventEmitter<void>();
 
   travellerForm = new FormGroup({
-    travellerType : new FormControl('', Validators.required),
+    travellerType : new FormControl(''),
     title: new FormControl('Mr'),
     firstName : new FormControl('', Validators.required),
     lastName : new FormControl('', Validators.required),
@@ -33,6 +33,7 @@ export class TravellerDetailsComponent implements OnInit {
   submitted: boolean = false;
   isValidating: boolean = false;
   error: boolean = false;
+  validateLabel: boolean = true;
 
   constructor(
     private travellerService: TravellerService,
@@ -53,6 +54,7 @@ export class TravellerDetailsComponent implements OnInit {
 
     setTimeout(()=> {
       this.isValidating = false;
+      this.validateLabel = false;
       if(iisNumber === 'V83724912' || iisNumber === 'A15798243'){
         this.travellerForm.patchValue({
           iisStatus: true
@@ -113,10 +115,16 @@ export class TravellerDetailsComponent implements OnInit {
     this.onTDContinue.emit();
   }
 
-  openChecklistDialog() {
+  openChecklistDialog(disableAgree: boolean = false) {
     const dialogRef = this.dialog.open(TravellerChecklistDialogComponent, {
       width: '735px',
-      data: { }
+      data: { 
+        disableAgree: disableAgree
+      }
     });
+  }
+
+  changeValidateLabel() {
+    this.validateLabel = true;
   }
 }

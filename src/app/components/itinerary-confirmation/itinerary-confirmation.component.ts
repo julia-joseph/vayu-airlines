@@ -7,6 +7,7 @@ import { AdjacentSeatDetailsService } from 'src/app/services/adjacent-seat-detai
 import { Router } from '@angular/router';
 import { DonationDialogComponent } from '../donation-dialog/donation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { UserService } from 'src/app/services/user-details/user.service';
 @Component({
   selector: 'app-itinerary-confirmation',
   templateUrl: './itinerary-confirmation.component.html',
@@ -18,11 +19,6 @@ export class ItineraryConfirmationComponent implements OnInit {
   from: string = 'Toronto';
   to: string = 'New York';
   flightDuration: string = '4 hr 55 min';
-
-  mask: number;
-  sanitizer: number;
-  gloves: number;
-  delivery: string;
 
   wellnessKit: any;
   totalWellnessKitPrice: number = 0;
@@ -42,13 +38,16 @@ export class ItineraryConfirmationComponent implements OnInit {
   adjacentSeat: any;
   totalAdjacentSeat: number = 0;
 
+  email: string;
+
   constructor(
     private wellnessKitService: WellnessKitDetailsService,
     private flightDetailsService: FlightDetailsService,
     private digitalIfeService: DigitalIfeDetailsService,
     private adjacentSeatService: AdjacentSeatDetailsService,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -74,6 +73,8 @@ export class ItineraryConfirmationComponent implements OnInit {
     this.departDateFormat1 = moment(details.depart).format('MMM D YYYY');
     this.departDateFormat2 = moment(details.depart).format('dddd, MMM D');
     this.totalPassengers = details.passengers.adults + details.passengers.children + details.passengers.infants;
+
+    this.email = this.userService.getEmail();
   }
 
   onDonate() {
